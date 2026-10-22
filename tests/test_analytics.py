@@ -28,6 +28,18 @@ def test_beta_recovers_known_exposure():
     assert stats.correlation > 0.95
 
 
+def test_alpha_is_measured_over_the_risk_free_rate():
+    # asset = rf + 1.5 (market - rf) + 2.5% a year. CAPM alpha is 2.5%; an intercept on raw returns
+    # would report 2.5% - rf x (1.5 - 1) = 0.5% at a 4% rate.
+    rng = np.random.default_rng(4)
+    idx = pd.bdate_range("2020-01-01", periods=3000)
+    rf = 0.04 / 252
+    market = pd.Series(rng.normal(0.0004, 0.01, 3000), index=idx)
+    asset = rf + 1.5 * (market - rf) + 0.025 / 252 + pd.Series(rng.normal(0, 0.0002, 3000), index=idx)
+    assert an.benchmark_stats(asset, market, 0.04).alpha_annual == pytest.approx(0.025, abs=0.003)
+    assert an.benchmark_stats(asset, market).alpha_annual == pytest.approx(0.005, abs=0.003)
+
+
 def test_historical_var_of_normal_returns():
     rng = np.random.default_rng(2)
     returns = pd.Series(rng.normal(0, 0.01, 200_000))

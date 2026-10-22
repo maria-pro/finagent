@@ -1,5 +1,7 @@
 """Data-source parsing from canned payloads, configuration, and the dense-retrieval path."""
 
+import copy
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -45,6 +47,21 @@ def test_price_history_parses_adjusted_closes(monkeypatch, settings):
     assert list(series) == [99.0, 100.0, 101.0] and series.name == "BRK-B"
     assert series.attrs["meta"]["name"] == "NVIDIA Corporation"
     assert "BRK-B" in fake.urls[0]
+
+
+def test_missing_adjusted_closes_are_recorded(monkeypatch, settings):
+    payload = copy.deepcopy(YAHOO)
+    del payload["chart"]["result"][0]["indicators"]["adjclose"]
+    monkeypatch.setattr(prices, "http_for", lambda s: FakeHTTP(json_payload=payload))
+    series = prices.adjusted_close(settings, "KO")
+    assert list(series) == [100.0, 101.0, 102.0] and series.attrs["meta"]["adjusted"] is False
+    assert "dividends are not included" in prices.price_basis(series)
+
+
+def test_closing_prices_are_the_unadjusted_series(monkeypatch, settings):
+    monkeypatch.setattr(prices, "http_for", lambda s: FakeHTTP(json_payload=YAHOO))
+    assert list(prices.closing_price(settings, "NVDA")) == [100.0, 101.0, 102.0]
+    assert prices.price_basis(prices.adjusted_close(settings, "NVDA")) == "returns from dividend- and split-adjusted closes"
 
 
 def test_price_history_errors_are_explicit(monkeypatch, settings):

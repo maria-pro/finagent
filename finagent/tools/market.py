@@ -3,7 +3,7 @@ from __future__ import annotations
 import pandas as pd
 
 from .. import analytics as an
-from ..data.prices import adjusted_close, risk_free_series
+from ..data.prices import adjusted_close, closing_price, price_basis, risk_free_series
 from . import TICKER, Tool, ToolContext, parse_tickers, pct, rnd
 
 _PERIOD_DAYS = {"1y": 365, "3y": 3 * 365, "5y": 5 * 365}
@@ -22,20 +22,24 @@ def _window(series, period: str):
 def price_performance(ctx: ToolContext, ticker: str, period: str = "1y") -> dict:
     ticker = parse_tickers(ticker)[0]
     period = _period(period, "1y")
+    # Returns, volatility and drawdown use adjusted closes (dividends included); price
+    # levels use actual closes, the prices the stock really traded at.
     full = adjusted_close(ctx.settings, ticker)
+    closes = closing_price(ctx.settings, ticker)
     prices = _window(full, period)
     returns = an.daily_returns(prices)
     rf = risk_free_series(ctx.settings, prices.index[0])
     rf_in_window = rf[rf.index >= prices.index[0]] if len(rf) else rf
     dd = an.max_drawdown(prices)
-    last_year = _window(full, "1y")
-    sma200 = full.rolling(200).mean().iloc[-1]
+    last_year = _window(closes, "1y")
+    last_close = closes.iloc[-1]
+    sma200 = closes.rolling(200).mean().iloc[-1]
     out = {
         "ticker": ticker,
         "company": full.attrs.get("meta", {}).get("name", ticker),
-        "as_of": prices.index[-1].date().isoformat(),
+        "as_of": closes.index[-1].date().isoformat(),
         "period": period,
-        "last_price": rnd(prices.iloc[-1]),
+        "last_price": rnd(last_close),
         "total_return_pct": pct(an.total_return(prices)),
     }
     if period != "1y":
@@ -51,10 +55,11 @@ def price_performance(ctx: ToolContext, ticker: str, period: str = "1y") -> dict
             "drawdown_peak_date": dd.peak.date().isoformat(),
             "drawdown_trough_date": dd.trough.date().isoformat(),
             "high_52w": rnd(last_year.max()),
-            "pct_below_52w_high": pct(1 - prices.iloc[-1] / last_year.max()),
+            "pct_below_52w_high": pct(1 - last_close / last_year.max()),
             "sma_200": rnd(sma200),
-            "price_vs_sma_200": "above" if prices.iloc[-1] > sma200 else "below",
-            "rsi_14": rnd(an.rsi(full), 1),
+            "price_vs_sma_200": "above" if last_close > sma200 else "below",
+            "rsi_14": rnd(an.rsi(closes), 1),
+            "price_basis": price_basis(full) + "; price levels from actual closes",
         }
     )
     facts = [f"{ticker} {period} total return: {out['total_return_pct']}%"]
@@ -64,9 +69,11 @@ def price_performance(ctx: ToolContext, ticker: str, period: str = "1y") -> dict
         f"{ticker} {period} annualized volatility: {out['volatility_pct']}%",
         f"{ticker} {period} Sharpe ratio: {out['sharpe_ratio']}",
         f"{ticker} {period} max drawdown: {out['max_drawdown_pct']}% ({out['drawdown_peak_date']} to {out['drawdown_trough_date']})",
-        f"{ticker} price: ${out['last_price']} on {out['as_of']}, {out['pct_below_52w_high']}% below the 52-week high of ${out['high_52w']}",
-        f"{ticker} price is {out['price_vs_sma_200']} its 200-day average of ${out['sma_200']}",
+        f"{ticker} closing price: ${out['last_price']} on {out['as_of']}, {out['pct_below_52w_high']}% below the 52-week closing high of ${out['high_52w']}",
+        f"{ticker} closing price is {out['price_vs_sma_200']} its 200-day average of ${out['sma_200']}",
     ]
+    if not full.attrs.get("meta", {}).get("adjusted", True):
+        facts.append(f"{ticker} returns exclude dividends: the price provider sent no adjusted closes")
     out["facts"] = facts
     return out
 
@@ -77,7 +84,8 @@ def benchmark_comparison(ctx: ToolContext, ticker: str, benchmark: str = "SPY", 
     period = _period(period, "3y")
     asset = _window(adjusted_close(ctx.settings, ticker), period)
     bench = _window(adjusted_close(ctx.settings, benchmark), period)
-    stats = an.benchmark_stats(an.daily_returns(asset), an.daily_returns(bench))
+    rf = risk_free_series(ctx.settings, asset.index[0])
+    stats = an.benchmark_stats(an.daily_returns(asset), an.daily_returns(bench), rf)
     asset_ret, bench_ret = an.total_return(asset), an.total_return(bench)
     out = {
         "ticker": ticker,
@@ -91,13 +99,16 @@ def benchmark_comparison(ctx: ToolContext, ticker: str, benchmark: str = "SPY", 
         "ticker_return_pct": pct(asset_ret),
         "benchmark_return_pct": pct(bench_ret),
         "excess_return_pct": pct(asset_ret - bench_ret),
+        "method": "CAPM regression of daily returns in excess of the 13-week T-bill rate",
+        "risk_free_source": rf.attrs.get("source", "unavailable (0% used)"),
+        "price_basis": price_basis(asset),
     }
     out["facts"] = [
         f"{ticker} {period} beta vs {benchmark}: {out['beta']}",
         f"{ticker} {period} correlation with {benchmark}: {out['correlation']}",
         f"{period} return: {ticker} {out['ticker_return_pct']}% vs {benchmark} {out['benchmark_return_pct']}% "
         f"(excess {out['excess_return_pct']}%)",
-        f"{ticker} {period} annualized alpha vs {benchmark}: {out['alpha_pct_per_year']}%",
+        f"{ticker} {period} annualized alpha vs {benchmark} (CAPM, over the T-bill rate): {out['alpha_pct_per_year']}%",
     ]
     return out
 

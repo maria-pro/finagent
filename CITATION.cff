@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use FinAgent in teaching or research, please cite it as below."
+type: software
+title: "FinAgent: multi-agent equity research on a small NVIDIA Nemotron model"
+abstract: >-
+  A teaching project for agentic AI that runs on a CPU. A team of LangGraph agents on NVIDIA
+  Nemotron 3 Nano 4B researches public companies with deterministic data tools (SEC EDGAR XBRL
+  filings, market prices, US Treasury rates and 10-K passages). A rule-based fact-checker traces
+  every number to the tool output it came from and checks that each cited claim keeps its
+  source's company, period and metric, and an evaluation harness measures the system with
+  ablations. It comes with a two-hour hands-on lab, including exercises on what the checks miss.
+authors:
+  - family-names: Prokofieva
+    given-names: Maria
+    affiliation: Victoria University
+version: 0.3.0
+date-released: 2026-10-22
+license: MIT
+repository-code: "https://github.com/maria-pro/finagent"
+keywords:
+  - agentic AI
+  - small language models
+  - LangGraph
+  - NVIDIA Nemotron
+  - fact-checking
+  - evaluation
+  - equity research
+  - teaching

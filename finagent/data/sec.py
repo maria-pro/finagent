@@ -35,8 +35,10 @@ class Metric:
 CONCEPTS: dict[str, Metric] = {
     "revenue": Metric(
         (
-            "RevenueFromContractWithCustomerExcludingAssessedTax",
+            # Total revenues first: when a filer reports both for the latest year, contract revenue
+            # alone leaves out insurance premiums, leasing and investment income (Berkshire Hathaway).
             "Revenues",
+            "RevenueFromContractWithCustomerExcludingAssessedTax",
             "SalesRevenueNet",
             "RevenueFromContractWithCustomerIncludingAssessedTax",
             "SalesRevenueGoodsNet",
@@ -138,6 +140,24 @@ def company_facts(settings: Settings, cik: int) -> dict:
     return http_for(settings).get_json(f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik:010d}.json", _DAY)
 
 
+def submissions(settings: Settings, cik: int) -> dict:
+    return http_for(settings).get_json(f"https://data.sec.gov/submissions/CIK{cik:010d}.json", _DAY)
+
+
+def company_profile(settings: Settings, cik: int) -> dict:
+    """The filer's SEC industry code (SIC), which decides which valuation measures apply."""
+    subs = submissions(settings, cik)
+    sic = int(subs["sic"]) if str(subs.get("sic") or "").isdigit() else None
+    return {"sic": sic, "sic_description": subs.get("sicDescription") or ""}
+
+
+def is_financial(sic: int | None) -> bool:
+    """Banks, lenders, brokers and insurers (SIC 6000-6499). Their debt and cash flows are
+    part of operations - deposits, customer funds, trading assets - so enterprise value,
+    free cash flow and price-to-sales do not mean for them what they mean for other firms."""
+    return sic is not None and 6000 <= sic < 6500
+
+
 # --------------------------------------------------------------------------- XBRL facts
 
 
@@ -184,15 +204,17 @@ def annual_facts(facts: dict, metric: str, fiscal_year_ends: list[date] | None =
     rows = metric_facts(facts, metric)
     if CONCEPTS[metric].kind == "duration":
         return {f.end: f for f in rows if f.form in _ANNUAL_FORMS and 340 <= f.days <= 390}
-    values = {f.end: f for f in rows if f.form in _ANNUAL_FORMS}
     if fiscal_year_ends:
+        # A year-end balance reappears in the next 10-Qs' comparison column, and the most recently
+        # filed copy is often one of those: align by date, whichever periodic filing reports it.
+        values = {f.end: f for f in rows}
         aligned = {}
         for fy_end in fiscal_year_ends:
             near = [d for d in values if abs((d - fy_end).days) <= 7]
             if near:
                 aligned[fy_end] = values[min(near, key=lambda d: abs((d - fy_end).days))]
         return aligned
-    return values
+    return {f.end: f for f in rows if f.form in _ANNUAL_FORMS}
 
 
 def annual_values(facts: dict, metric: str, fiscal_year_ends: list[date] | None = None) -> dict[date, float]:
@@ -258,7 +280,8 @@ def balance_sheet(facts: dict) -> dict:
     assembled explicitly because filers tag it differently: noncurrent long-term
     debt plus whichever current-debt tags exist, or ``LongTermDebt`` (which by the
     taxonomy's definition already includes the current portion) plus short-term
-    borrowings. Lease liabilities are not included.
+    borrowings. Lease liabilities are not included. When no debt tag is reported, debt
+    is None, not zero: a missing tag says nothing about whether the company borrows.
     """
     cash = latest_instant(facts, "cash")
     if cash is None:
@@ -283,7 +306,7 @@ def balance_sheet(facts: dict) -> dict:
         debt = sum(p.value for p in parts)
         method = " + ".join(p.concept for p in parts) + f" as of {on}"
     else:
-        debt, method = 0.0, f"no debt tags reported as of {on}"
+        debt, method = None, f"no debt tags reported as of {on}"
     used = [cash] + ([securities] if securities else []) + parts
     return {
         "as_of": on.isoformat(),
@@ -341,8 +364,7 @@ SECTIONS_OF_INTEREST = ("business", "risk_factors", "mda", "market_risk")
 
 
 def latest_annual_filing(settings: Settings, cik: int) -> dict:
-    subs = http_for(settings).get_json(f"https://data.sec.gov/submissions/CIK{cik:010d}.json", _DAY)
-    recent = subs["filings"]["recent"]
+    recent = submissions(settings, cik)["filings"]["recent"]
     for form in ("10-K", "20-F", "40-F"):
         for i, f in enumerate(recent["form"]):
             if f == form:

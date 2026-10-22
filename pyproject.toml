@@ -1,15 +1,17 @@
 [project]
 name = "finagent"
-version = "0.2.3"
-description = "Grounded multi-agent equity research on NVIDIA NIM, built with LangGraph"
+version = "0.3.0"
+description = "Multi-agent equity research on a small NVIDIA Nemotron model, CPU only: a LangGraph teaching project with deterministic fact-checks and an evaluation harness"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
+authors = [{ name = "Maria Prokofieva" }]
+keywords = ["agentic AI", "small language models", "LangGraph", "NVIDIA Nemotron", "fact-checking", "equity research", "teaching"]
 dependencies = [
-    "openai>=1.40",
-    "langgraph>=0.6",
-    "numpy>=1.26",
-    "pandas>=2.1",
+    "openai>=1.40,<4",
+    "langgraph>=0.6,<2",
+    "numpy>=1.26,<3",
+    "pandas>=2.1,<4",
     "requests>=2.31",
     "beautifulsoup4>=4.12",
     "lxml>=5.0",
@@ -21,6 +23,9 @@ dependencies = [
 ui = ["streamlit>=1.38", "plotly>=5.22"]
 gpu = ["cupy-cuda12x>=13.0"]
 dev = ["pytest>=8.0", "pytest-cov>=5.0"]
+
+[project.urls]
+Repository = "https://github.com/maria-pro/finagent"
 
 [project.scripts]
 finagent = "finagent.cli:main"

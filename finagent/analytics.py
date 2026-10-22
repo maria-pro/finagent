@@ -96,10 +96,12 @@ class BenchmarkStats:
     information_ratio: float
 
 
-def benchmark_stats(asset: pd.Series, bench: pd.Series) -> BenchmarkStats:
-    """CAPM-style statistics from aligned daily returns."""
+def benchmark_stats(asset: pd.Series, bench: pd.Series, risk_free_annual: pd.Series | float = 0.0) -> BenchmarkStats:
+    """CAPM statistics from aligned daily returns. Beta and alpha come from excess returns
+    over the risk-free rate: an intercept on raw returns is off by rf x (beta - 1)."""
     frame = pd.concat([asset, bench], axis=1, join="inner").dropna()
-    a, b = frame.iloc[:, 0], frame.iloc[:, 1]
+    rf = daily_risk_free(risk_free_annual, frame.index)
+    a, b = frame.iloc[:, 0] - rf, frame.iloc[:, 1] - rf
     beta = float(np.cov(a, b, ddof=1)[0, 1] / np.var(b, ddof=1))
     alpha_daily = a.mean() - beta * b.mean()
     active = a - b

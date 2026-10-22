@@ -497,7 +497,7 @@ wheels = [
 
 [[package]]
 name = "finagent"
-version = "0.1.0"
+version = "0.3.0"
 source = { editable = "." }
 dependencies = [
     { name = "beautifulsoup4" },
@@ -532,11 +532,11 @@ ui = [
 requires-dist = [
     { name = "beautifulsoup4", specifier = ">=4.12" },
     { name = "cupy-cuda12x", marker = "extra == 'gpu'", specifier = ">=13.0" },
-    { name = "langgraph", specifier = ">=0.6" },
+    { name = "langgraph", specifier = ">=0.6,<2" },
     { name = "lxml", specifier = ">=5.0" },
-    { name = "numpy", specifier = ">=1.26" },
-    { name = "openai", specifier = ">=1.40" },
-    { name = "pandas", specifier = ">=2.1" },
+    { name = "numpy", specifier = ">=1.26,<3" },
+    { name = "openai", specifier = ">=1.40,<4" },
+    { name = "pandas", specifier = ">=2.1,<4" },
     { name = "plotly", marker = "extra == 'ui'", specifier = ">=5.22" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0" },

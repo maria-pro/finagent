@@ -1,4 +1,4 @@
-"""Daily price history (dividend- and split-adjusted) and risk-free rates."""
+"""Daily price history (actual and dividend- and split-adjusted closes) and risk-free rates."""
 
 from __future__ import annotations
 
@@ -38,7 +38,10 @@ def price_history(settings: Settings, ticker: str, range_: str = "10y") -> pd.Da
     if not timestamps:
         raise DataSourceError(f"empty price history for {ticker}")
     bars = result["indicators"]["quote"][0]
-    adj = (result["indicators"].get("adjclose") or [{}])[0].get("adjclose") or bars["close"]
+    adj = (result["indicators"].get("adjclose") or [{}])[0].get("adjclose")
+    # Without adjusted closes, returns would silently drop dividends: fall back, but say so.
+    adjusted = bool(adj)
+    adj = adj or bars["close"]
     tz = result["meta"].get("exchangeTimezoneName", "America/New_York")
 
     index = pd.to_datetime(timestamps, unit="s", utc=True).tz_convert(tz).normalize().tz_localize(None)
@@ -50,15 +53,34 @@ def price_history(settings: Settings, ticker: str, range_: str = "10y") -> pd.Da
         "name": result["meta"].get("longName") or result["meta"].get("shortName") or ticker,
         "currency": result["meta"].get("currency", "USD"),
         "exchange": result["meta"].get("fullExchangeName", ""),
+        "adjusted": adjusted,
     }
     return frame
 
 
 def adjusted_close(settings: Settings, ticker: str, range_: str = "10y") -> pd.Series:
+    """Dividend- and split-adjusted closes, for returns. ``attrs["meta"]["adjusted"]`` is
+    False when the provider sent no adjusted series and actual closes were used instead."""
     frame = price_history(settings, ticker, range_)
     series = frame["adj_close"].rename(normalize_ticker(ticker))
     series.attrs = frame.attrs
     return series
+
+
+def closing_price(settings: Settings, ticker: str, range_: str = "10y") -> pd.Series:
+    """Actual closing prices, for price levels (last price, 52-week high, moving averages):
+    adjusted closes lower past prices by later dividends, so they are not prices anyone traded at."""
+    frame = price_history(settings, ticker, range_)
+    series = frame["close"].rename(normalize_ticker(ticker))
+    series.attrs = frame.attrs
+    return series
+
+
+def price_basis(series: pd.Series) -> str:
+    """How returns computed from ``series`` treat dividends, for the evidence ledger."""
+    if series.attrs.get("meta", {}).get("adjusted", True):
+        return "returns from dividend- and split-adjusted closes"
+    return "returns from actual closes: the provider sent no adjusted closes, so dividends are not included"
 
 
 def risk_free_series(settings: Settings, start) -> pd.Series:

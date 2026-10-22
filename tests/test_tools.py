@@ -1,12 +1,19 @@
-import pytest
+import copy
 
+import numpy as np
+import pandas as pd
+import pytest
+from conftest import SYNTHETIC_FACTS, synthetic_prices
+
+from finagent import analytics as an
 from finagent.agents import guard
+from finagent.data import sec
 from finagent.tools import parse_tickers, parse_weights
 from finagent.tools.calculator import evaluate
 from finagent.tools.filings import search_10k
 from finagent.tools.fundamentals import financial_statements, valuation_snapshot
 from finagent.tools.market import price_performance
-from finagent.tools.risk import value_at_risk
+from finagent.tools.risk import stress_test, value_at_risk
 
 
 def test_forgiving_ticker_parsing():
@@ -132,3 +139,75 @@ def test_broker_dealer_net_revenue_is_recognised():
     gs_like = {"facts": {"us-gaap": {"RevenuesNetOfInterestExpense": {"units": {"USD": [
         {"start": "2025-01-01", "end": "2025-12-31", "val": 53.5e9, "form": "10-K", "filed": "2026-02-20", "accn": "g"}]}}}}}
     assert sec.annual_values(gs_like, "revenue") == {date(2025, 12, 31): 53.5e9}
+
+
+def test_financials_get_price_to_book_and_roe_instead_of_ev_and_fcf(offline, monkeypatch):
+    facts = copy.deepcopy(SYNTHETIC_FACTS)
+    facts["facts"]["us-gaap"]["StockholdersEquity"] = {"units": {"USD": [
+        {"end": "2025-01-26", "val": 300e9, "form": "10-K", "filed": "2025-02-26", "accn": "a"},
+        {"end": "2026-01-25", "val": 340e9, "form": "10-K", "filed": "2026-02-25", "accn": "b"},
+        {"end": "2026-07-26", "val": 360e9, "form": "10-Q", "filed": "2026-08-26", "accn": "c"},
+    ]}}
+    monkeypatch.setattr(sec, "company_facts", lambda _s, _cik: facts)
+    monkeypatch.setattr(sec, "company_profile", lambda _s, _cik: {"sic": 6211, "sic_description": "SECURITY BROKERS"})
+    val = valuation_snapshot(offline, "GS")
+    assert val["price_to_book"] == pytest.approx(val["market_cap_bn"] / 360.0, abs=0.01)
+    for absent in ("enterprise_value_bn", "ev_to_sales_ttm", "price_to_sales_ttm", "fcf_yield_pct"):
+        assert absent not in val
+    assert "price-to-book" in " ".join(val["facts"]) and "SIC 6000-6499" in val["note"]
+    statements = financial_statements(offline, "GS")
+    latest = statements["fiscal_years"][-1]
+    assert latest["roe_pct"] == pytest.approx(120 / 320 * 100, abs=0.01)  # net income over average equity
+    assert "free_cash_flow_bn" not in latest and "free cash flow" not in " ".join(statements["facts"])
+
+
+def test_missing_debt_gives_no_enterprise_value(offline, monkeypatch):
+    facts = copy.deepcopy(SYNTHETIC_FACTS)
+    del facts["facts"]["us-gaap"]["LongTermDebt"]
+    monkeypatch.setattr(sec, "company_facts", lambda _s, _cik: facts)
+    val = valuation_snapshot(offline, "NVDA")
+    assert val["total_debt_bn"] is None and val["enterprise_value_bn"] is None and val["ev_to_sales_ttm"] is None
+    assert "EV-to-sales" not in " ".join(val["facts"]) and "enterprise value is not computed" in val["facts"][-1]
+
+
+def test_price_levels_use_actual_closes(offline, monkeypatch):
+    from finagent.tools import market
+
+    adjusted = synthetic_prices(2, drift=0.0008)
+    # dividends lower past adjusted prices, so actual closes sit above them, more so further back
+    actual = adjusted * np.linspace(1.10, 1.0, len(adjusted))
+    monkeypatch.setattr(market, "adjusted_close", lambda _s, _t, _r="10y": adjusted)
+    monkeypatch.setattr(market, "closing_price", lambda _s, _t, _r="10y": actual)
+    out = price_performance(offline, "KO", "1y")
+    last_year = actual[actual.index >= actual.index[-1] - pd.Timedelta(days=365)]
+    assert out["high_52w"] == pytest.approx(round(last_year.max(), 2))
+    assert out["sma_200"] == pytest.approx(round(actual.iloc[-200:].mean(), 2))
+    window = adjusted[adjusted.index >= adjusted.index[-1] - pd.Timedelta(days=365)]
+    assert out["total_return_pct"] == pytest.approx(round((window.iloc[-1] / window.iloc[0] - 1) * 100, 2))
+
+
+def test_missing_adjusted_closes_show_in_the_tool_output(offline, monkeypatch):
+    from finagent.tools import market
+
+    unadjusted = synthetic_prices(2)
+    unadjusted.attrs["meta"] = {"name": "Synthetic Corp", "adjusted": False}
+    monkeypatch.setattr(market, "adjusted_close", lambda _s, _t, _r="10y": unadjusted)
+    out = price_performance(offline, "KO", "1y")
+    assert "dividends are not included" in out["price_basis"]
+    assert out["facts"][-1] == "KO returns exclude dividends: the price provider sent no adjusted closes"
+
+
+def test_stress_test_rebalances_the_portfolio_daily(offline):
+    out = stress_test(offline, "NVDA, AMD")
+    prices = pd.concat([synthetic_prices(2, drift=0.0008), synthetic_prices(3, drift=0.0008)], axis=1, join="inner")
+    weights = np.array([0.5, 0.5])
+    daily = prices.pct_change().dropna() @ weights
+    drifted = []
+    for episode in out["episodes"]:
+        start, end = an.STRESS_WINDOWS[episode["episode"]]
+        compounded = (1 + daily.loc[start:end].iloc[1:]).prod() - 1
+        assert episode["portfolio_return_pct"] == pytest.approx(compounded * 100, abs=0.01)
+        held = prices / prices.iloc[0] @ weights  # buy-and-hold from ten years ago
+        drifted.append(abs(held.loc[start:end].iloc[-1] / held.loc[start:end].iloc[0] - 1 - compounded))
+    assert max(drifted) > 0.001  # the two definitions differ: the test can tell them apart
+    assert "rebalanced daily" in out["method"]

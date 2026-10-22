@@ -36,6 +36,7 @@ _KEY_FIGURES = [
     ("Market cap ($bn)", "valuation_snapshot", "market_cap_bn", ""),
     ("P/E (TTM)", "valuation_snapshot", "pe_ratio_ttm", "x"),
     ("Price / sales (TTM)", "valuation_snapshot", "price_to_sales_ttm", "x"),
+    ("Price / book", "valuation_snapshot", "price_to_book", "x"),
     ("FCF yield", "valuation_snapshot", "fcf_yield_pct", "%"),
 ]
 

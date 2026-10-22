@@ -47,7 +47,7 @@ _CONFLICT_GROUPS = [
     {"historical", "filtered"},
     {"total return", "annualized return", "excess"},
     {"revenue", "net income", "free cash flow", "eps"},
-    {"p/e", "price-to-sales", "ev-to-sales"},
+    {"p/e", "price-to-sales", "ev-to-sales", "p/b"},
 ]
 # Regex aliases for each label (matched on lower-cased text).
 _SYNONYMS = {
@@ -58,6 +58,7 @@ _SYNONYMS = {
     "p/e": (r"\bp/e\b", r"price[- ]to[- ]earnings", r"\bpe\b"),
     "price-to-sales": (r"price[- ]to[- ]sales", r"\bp/s\b"),
     "ev-to-sales": (r"\bev[- ]to[- ]sales\b", r"\bev/sales\b"),
+    "p/b": (r"\bp/b\b", r"price[- ]to[- ]book"),
     "free cash flow": (r"free[- ]cash[- ]flow", r"\bfcf\b"),
     "eps": (r"\beps\b", r"earnings per share"),
     "annualized return": (r"annuali[sz]ed return", r"\bcagr\b", r"per year"),

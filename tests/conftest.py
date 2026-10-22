@@ -94,8 +94,11 @@ def offline(monkeypatch, settings):
     def fake_close(_settings, ticker, range_="10y"):
         return synthetic_prices(seeds.get(ticker, 9), drift=0.0003 if ticker == "SPY" else 0.0008).rename(ticker)
 
-    for module in (market, risk, fundamentals):
+    for module in (market, risk):
         monkeypatch.setattr(module, "adjusted_close", fake_close)
+    for module in (market, fundamentals):
+        monkeypatch.setattr(module, "closing_price", fake_close)
+    monkeypatch.setattr(sec, "company_profile", lambda _s, _cik: {"sic": 3674, "sic_description": "SEMICONDUCTORS & RELATED DEVICES"})
     monkeypatch.setattr(market, "risk_free_series", lambda _s, start: pd.Series(0.04, index=pd.bdate_range(start, "2026-10-21")))
     monkeypatch.setattr(sec, "ticker_to_cik", lambda _s, t: (1, f"{t} CORP"))
     monkeypatch.setattr(sec, "company_facts", lambda _s, _cik: SYNTHETIC_FACTS)

@@ -13,9 +13,18 @@ LOOKBACK = "5y"
 
 
 def _returns(ctx: ToolContext, tickers: list[str], range_: str = LOOKBACK) -> pd.DataFrame:
-    frame = pd.concat([adjusted_close(ctx.settings, t, range_) for t in tickers], axis=1, join="inner")
+    series = [adjusted_close(ctx.settings, t, range_) for t in tickers]
+    frame = pd.concat(series, axis=1, join="inner")
     frame.columns = tickers
-    return frame.pct_change().dropna()
+    returns = frame.pct_change().dropna()
+    unadjusted = [t for t, s in zip(tickers, series) if not s.attrs.get("meta", {}).get("adjusted", True)]
+    returns.attrs["price_basis"] = (
+        f"returns from actual closes for {', '.join(unadjusted)} (no adjusted closes from the provider, so dividends are "
+        "not included); dividend- and split-adjusted closes otherwise"
+        if unadjusted
+        else "returns from dividend- and split-adjusted closes"
+    )
+    return returns
 
 
 def _label(portfolio: dict) -> str:
@@ -56,6 +65,7 @@ def value_at_risk(ctx: ToolContext, tickers, weights=None, confidence: float = 0
         "average_vol_pct": pct(fhs.average_vol_annual),
         "simulated_paths": fhs.n_paths,
         "method": f"historical VaR (overlapping {horizon_days}-day returns) and {fhs.method}",
+        "price_basis": returns.attrs["price_basis"],
         "compute_backend": fhs.backend,
         "compute_ms": rnd(fhs.runtime_ms, 1),
     }
@@ -75,12 +85,14 @@ def value_at_risk(ctx: ToolContext, tickers, weights=None, confidence: float = 0
 def stress_test(ctx: ToolContext, tickers, weights=None) -> dict:
     tickers = parse_tickers(tickers)
     w = np.array(parse_weights(weights, len(tickers)))
-    prices = pd.concat([adjusted_close(ctx.settings, t, "10y") for t in tickers], axis=1, join="inner")
-    prices.columns = tickers
-    portfolio = (prices / prices.iloc[0] @ w).rename("portfolio")
+    returns = _returns(ctx, tickers, "10y")
+    # Compound the weighted daily returns, i.e. rebalance to the stated weights every day. A
+    # buy-and-hold index started ten years ago would have drifted far from them by any crash.
+    portfolio_returns = an.portfolio_returns(returns, w)
+    portfolio = (1 + portfolio_returns).cumprod().rename("portfolio")
     spy = adjusted_close(ctx.settings, "SPY", "10y")
     episodes = an.stress_test(portfolio, spy)
-    beta = an.benchmark_stats(an.daily_returns(portfolio.iloc[-756:]), an.daily_returns(spy.iloc[-756:])).beta
+    beta = an.benchmark_stats(portfolio_returns.iloc[-756:], an.daily_returns(spy)).beta
     out = {
         "portfolio": {t: rnd(x, 3) for t, x in zip(tickers, w)},
         "episodes": [
@@ -89,6 +101,8 @@ def stress_test(ctx: ToolContext, tickers, weights=None) -> dict:
         ],
         "beta_vs_spy_3y": rnd(beta),
         "beta_implied_move_if_spy_falls_20pct": pct(-0.20 * beta),
+        "method": "daily returns compounded over each window" + (", rebalanced daily to the stated weights" if len(tickers) > 1 else ""),
+        "price_basis": returns.attrs["price_basis"],
     }
     who = _label(out["portfolio"])
     out["facts"] = [

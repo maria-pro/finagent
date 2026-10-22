@@ -75,7 +75,7 @@ def _bs(**concepts):
         ({"LongTermDebtNoncurrent": 90.0, "LongTermDebtCurrent": 10.0, "ShortTermBorrowings": 5.0}, 105.0, "LongTermDebtNoncurrent + LongTermDebtCurrent + ShortTermBorrowings"),
         # LongTermDebt already includes the current portion by definition; only add short-term borrowings
         ({"LongTermDebt": 100.0, "CommercialPaper": 5.0}, 105.0, "LongTermDebt + CommercialPaper"),
-        ({}, 0.0, "no debt tags"),
+        ({}, None, "no debt tags"),  # unknown, not zero: no enterprise value is computed from it
     ],
 )
 def test_balance_sheet_debt_is_composed_explicitly(concepts, debt, method):
@@ -93,3 +93,33 @@ def test_net_income_prefers_the_parent_over_profit_including_minorities():
     only_total = {"facts": {"us-gaap": {"ProfitLoss": annual(110.0)}}}
     fact = sec.annual_facts(only_total, "net_income")[date(2025, 12, 31)]
     assert fact.value == 110.0 and fact.concept == "ProfitLoss"
+
+
+def test_total_revenues_win_over_contract_revenue_in_the_same_year():
+    # Berkshire Hathaway reports both; contract revenue alone leaves out insurance premiums and leasing
+    def annual(value):
+        return {"units": {"USD": [{"start": "2025-01-01", "end": "2025-12-31", "val": value, "form": "10-K", "filed": "2026-02-01", "accn": "a"}]}}
+
+    facts = {"facts": {"us-gaap": {"RevenueFromContractWithCustomerExcludingAssessedTax": annual(247.0), "Revenues": annual(371.0)}}}
+    fact = sec.annual_facts(facts, "revenue")[date(2025, 12, 31)]
+    assert fact.value == 371.0 and fact.concept == "Revenues"
+
+
+@pytest.mark.parametrize("sic, financial", [(6021, True), (6211, True), (6331, True), (3674, False), (6798, False), (None, False)])
+def test_financials_are_recognised_by_sic_code(sic, financial):
+    assert sec.is_financial(sic) is financial
+
+
+def test_company_profile_reads_the_sic_code(monkeypatch, settings):
+    monkeypatch.setattr(sec, "submissions", lambda _s, _cik: {"sic": "6211", "sicDescription": "Security Brokers, Dealers & Flotation Companies"})
+    assert sec.company_profile(settings, 886982) == {"sic": 6211, "sic_description": "Security Brokers, Dealers & Flotation Companies"}
+
+
+def test_year_end_balance_is_found_when_a_later_10q_repeats_it():
+    # the 10-Q filed after the 10-K shows the same year-end balance as its comparison column
+    facts = {"facts": {"us-gaap": {"StockholdersEquity": {"units": {"USD": [
+        {"end": "2025-12-31", "val": 120.0, "form": "10-K", "filed": "2026-02-25", "accn": "k"},
+        {"end": "2025-12-31", "val": 120.0, "form": "10-Q", "filed": "2026-05-01", "accn": "q"},
+        {"end": "2026-03-31", "val": 123.0, "form": "10-Q", "filed": "2026-05-01", "accn": "q"},
+    ]}}}}}
+    assert sec.annual_values(facts, "equity", [date(2025, 12, 31)]) == {date(2025, 12, 31): 120.0}
