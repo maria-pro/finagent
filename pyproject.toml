@@ -1,0 +1,36 @@
+[project]
+name = "finagent"
+version = "0.1.0"
+description = "Grounded multi-agent equity research on NVIDIA NIM, built with LangGraph"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "openai>=1.40",
+    "langgraph>=0.6",
+    "numpy>=1.26",
+    "pandas>=2.1",
+    "requests>=2.31",
+    "beautifulsoup4>=4.12",
+    "lxml>=5.0",
+    "python-dotenv>=1.0",
+    "rich>=13.7",
+]
+
+[project.optional-dependencies]
+ui = ["streamlit>=1.38", "plotly>=5.22"]
+gpu = ["cupy-cuda12x>=13.0"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+finagent = "finagent.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["finagent"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,14 @@
+# macOS / exFAT metadata
+._*
+.DS_Store
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.egg-info/
+# Local config and caches
+.env
+.finagent_cache/
+reports/
+.ruff_cache/
