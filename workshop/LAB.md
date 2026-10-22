@@ -59,7 +59,7 @@ that each agent sees only two or three tools.
 
 **Discuss.** What would go wrong if one agent had all eight tools and a single long prompt?
 
-**Look at real failures.** The README's *What small models got wrong* table lists
+**Look at real failures.** The README's *What small models get wrong* table lists
 failures seen while building FinAgent with a 4B model: invented answers when the
 output format came before any data, copied prompt examples, right numbers with wrong
 labels. Keep them in mind for the rest of the lab: each later module shows the system
@@ -90,8 +90,9 @@ XBRL concept `CommonStockDividendsPerShareDeclared`. Register it with the
 fundamentals specialist and write one offline test using the `offline` fixture in
 `tests/conftest.py`.
 
-*Hint:* follow `financial_statements`. Use `sec.annual_values(facts, ...)` after
-adding the concept to `CONCEPTS` in `finagent/data/sec.py`.
+*Hint:* follow `financial_statements`. Add a `Metric` for the concept to `CONCEPTS` in
+`finagent/data/sec.py` (unit `USD/shares`, like `eps_diluted`), then read it with
+`sec.annual_values(facts, ...)`.
 
 ---
 
@@ -158,9 +159,11 @@ periods, and check both are caught and repaired:
 pytest -q tests/test_graph.py -k "hallucinated or drops_periods"
 ```
 
-**Exercise 4.1.** Run `attribution.check` over the findings in one of the saved runs in
-`examples/`. Every flag in the v0.1 notes is a real mislabel the original checker
-missed. Find one, and explain which rule caught it.
+**Exercise 4.1.** The notes in `examples/v0.1/` were written before claim attribution
+existed, when only numbers were checked. Run `attribution.check` over their findings and
+summaries (each specialist against its own evidence, the summary against all of it).
+Every flag is a real mislabel the number check passed. Pick one, find the fact it should
+have copied, and explain which rule caught it.
 
 **Exercise 4.2.** The number extractor ignores years, dates and small counts. Find a
 sentence where that heuristic is wrong, write a failing test for it in
@@ -204,9 +207,9 @@ finagent doctor --profile nim
 finagent analyze NVDA AMD -q "Compare growth and downside risk" --profile nim
 ```
 
-The `nim` profile routes specialists to a small Nemotron model, orchestration to
-Nemotron 3 Super, adds NeMo Retriever embeddings to the 10-K search (fused with
-BM25), and enables parallel agents.
+The `nim` profile routes specialists to `nemotron-3.5-lightning-30b-a3b` and
+orchestration to Nemotron 3 Super, adds NeMo Retriever embeddings to the 10-K search
+(fused with BM25), and runs the specialists in parallel.
 
 Then look at the risk engine:
 
@@ -216,13 +219,16 @@ finagent bench-risk --paths 1000000
 
 The risk engine is a filtered historical simulation: it rescales history to today's
 volatility, so it gives a second, conditional view next to plain historical VaR. On a
-CPU a million paths take well under two seconds. On a machine with an NVIDIA GPU,
+laptop CPU, a million 10-day paths for a five-asset portfolio take about a third of a
+second. On a machine with an NVIDIA GPU,
 `pip install -e ".[gpu]"` adds a CuPy row with no code change, because
-`filtered_historical_simulation` receives the array module (`numpy` or `cupy`) as a parameter.
+`filtered_historical_simulation` receives the array module (`numpy` or `cupy`) as a
+parameter.
 
-**Discuss.** Compare the run statistics (wall time, tokens, provenance score) for
-the `local` and `nim` runs - or run the evaluation harness on both (Module 7). Where did the bigger models change the *quality* of the
-note, and where did the system design already guarantee it?
+**Discuss.** Compare the run statistics (wall time, tokens, provenance and claim
+scores) for the `local` and `nim` runs - or run the evaluation harness on both
+(Module 7). Where did the bigger models change the *quality* of the note, and where
+did the system design already guarantee it?
 
 ---
 
@@ -231,8 +237,8 @@ note, and where did the system design already guarantee it?
 **Concept.** Every mechanism above can be switched off for an ablation run
 (`FINAGENT_ABLATE=facts,coverage`, or `--variants` in the harness), and every run is
 scored by the same yardstick: number provenance, claim attribution (draft and final),
-whether the note's opening addresses each part of the question, tool calls chosen by
-the model, and cost.
+whether the summary addresses each part of the question with cited evidence, tool
+calls chosen by the model, and cost.
 
 **Do.** Start a small study and keep working while it runs (about 2 minutes per run on
 a laptop CPU):

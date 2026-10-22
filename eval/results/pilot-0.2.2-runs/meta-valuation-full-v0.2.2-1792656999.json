@@ -1,0 +1,1109 @@
+{
+  "tickers": [
+    "META"
+  ],
+  "question": "Is META's valuation justified by its fundamentals, and what are the main risks?",
+  "guard": {
+    "allowed": true,
+    "personal_advice": false,
+    "rail": "rules"
+  },
+  "plan": [
+    {
+      "agent": "fundamentals",
+      "focus": "META's revenue growth and margins versus its current P/E and price-to-sales multiples"
+    },
+    {
+      "agent": "market",
+      "focus": "how much of META's growth is already priced in through its stock price and volatility"
+    },
+    {
+      "agent": "risk",
+      "focus": "Value at Risk and expected shortfall under downside scenarios"
+    },
+    {
+      "agent": "filings",
+      "focus": "key risks and business challenges highlighted in META's latest 10-K"
+    }
+  ],
+  "plan_source": "model",
+  "findings": {
+    "fundamentals": {
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "META's revenue growth and margins versus its current P/E and price-to-sales multiples",
+      "text": "META revenue $200.97bn, up 22.17% year on year [F1]  \nMETA operating margin 41.44% [F1]  \nMETA P/E (trailing 12 months): 26.16 [F2]  \nMETA price-to-sales (trailing 12 months): 7.8 [F2]  \nMETA free-cash-flow yield: 2.59% [F2]  \n\nMETA's strong revenue growth and high margins suggest a justified valuation.",
+      "draft": "META revenue $200.97bn, up 22.17% year on year [F1]  \nMETA operating margin 41.44% [F1]  \nMETA P/E (trailing 12 months): 26.16 [F2]  \nMETA price-to-sales (trailing 12 months): 7.8 [F2]  \nMETA free-cash-flow yield: 2.59% [F2]  \n\nMETA's strong revenue growth and high margins suggest a justified valuation.",
+      "seconds": 37.7,
+      "provenance": {
+        "checked": 6,
+        "verified": 6,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "market": {
+      "agent": "market",
+      "title": "Market Analyst",
+      "focus": "how much of META's growth is already priced in through its stock price and volatility",
+      "text": "META 5y total return: 105.01% [M1]  \nMETA 5y annualized volatility: 45.38% [M1]  \nMETA 5y beta vs SPY: 1.6 [M2]  \nMETA 5y return: 105.01% vs SPY 81.28% [M2]  \nMETA 5y annualized alpha vs SPY: 3.34% [M2]  \n\nThe stock's high volatility and elevated beta suggest significant growth is already priced in.",
+      "draft": "META 5y total return: 105.01% [M1]  \nMETA 5y annualized volatility: 45.38% [M1]  \nMETA 5y beta vs SPY: 1.6 [M2]  \nMETA 5y return: 105.01% vs SPY 81.28% [M2]  \nMETA 5y annualized alpha vs SPY: 3.34% [M2]  \n\nThe stock's high volatility and elevated beta suggest significant growth is already priced in.",
+      "seconds": 49.7,
+      "provenance": {
+        "checked": 6,
+        "verified": 6,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "risk": {
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall under downside scenarios",
+      "text": "META 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 12.21% of value [R1]  \nMETA 95% 10-day expected shortfall, historical: 19.24% [R1]  \nMETA in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -25.27% vs SPY -19.35% [R2]  \nMETA in the 2020 COVID crash (2020-02-19 to 2020-03-23): -31.9% vs SPY -33.72% [R2]  \nMETA 3-year beta vs SPY: 1.43; a 20% SPY fall implies about -28.7% [R2]  \n\nThese risks suggest META's valuation may be sensitive to broader market stress and its elevated beta.",
+      "draft": "META 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 12.21% of value [R1]  \nMETA 95% 10-day expected shortfall, historical: 19.24% [R1]  \nMETA in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -25.27% vs SPY -19.35% [R2]  \nMETA in the 2020 COVID crash (2020-02-19 to 2020-03-23): -31.9% vs SPY -33.72% [R2]  \nMETA 3-year beta vs SPY: 1.43; a 20% SPY fall implies about -28.7% [R2]  \n\nThese risks suggest META's valuation may be sensitive to broader market stress and its elevated beta.",
+      "seconds": 66.5,
+      "provenance": {
+        "checked": 11,
+        "verified": 11,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "filings": {
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "key risks and business challenges highlighted in META's latest 10-K",
+      "text": "- META recorded a $15.93 billion charge in Q3 2025, with $14.03 billion as a valuation allowance against U.S. federal deferred tax assets [D1]  \n- The valuation allowance reflects the expected impact of future CAMT on the realizability of deferred tax assets [D1]  \n- Tax law changes or IRS examination outcomes could materially affect META\u2019s effective tax rate [D1]  \n- Currency fluctuations and foreign revenue/expense ratios pose significant financial risks [D1]",
+      "draft": "- META recorded a $15.93 billion charge in Q3 2025, with $14.03 billion as a valuation allowance against U.S. federal deferred tax assets [D1]  \n- The valuation allowance reflects the expected impact of future CAMT on the realizability of deferred tax assets [D1]  \n- Tax law changes or IRS examination outcomes could materially affect META\u2019s effective tax rate [D1]  \n- Currency fluctuations and foreign revenue/expense ratios pose significant financial risks [D1]",
+      "seconds": 76.8,
+      "provenance": {
+        "checked": 2,
+        "verified": 2,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 4,
+        "supported": 4,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    }
+  },
+  "evidence": [
+    {
+      "id": "F1",
+      "agent": "fundamentals",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "META",
+        "years": 3
+      },
+      "result": {
+        "ticker": "META",
+        "company": "Meta Platforms, Inc.",
+        "source": "SEC XBRL company facts (10-K)",
+        "fiscal_years": [
+          {
+            "fiscal_year_end": "2023-12-31",
+            "revenue_bn": 134.9,
+            "revenue_growth_pct": 15.69,
+            "gross_margin_pct": null,
+            "operating_margin_pct": 34.66,
+            "net_income_bn": 39.1,
+            "net_margin_pct": 28.98,
+            "eps_diluted": 14.87,
+            "free_cash_flow_bn": 44.07,
+            "rnd_pct_of_revenue": 28.53
+          },
+          {
+            "fiscal_year_end": "2024-12-31",
+            "revenue_bn": 164.5,
+            "revenue_growth_pct": 21.94,
+            "gross_margin_pct": null,
+            "operating_margin_pct": 42.18,
+            "net_income_bn": 62.36,
+            "net_margin_pct": 37.91,
+            "eps_diluted": 23.86,
+            "free_cash_flow_bn": 54.07,
+            "rnd_pct_of_revenue": 26.67
+          },
+          {
+            "fiscal_year_end": "2025-12-31",
+            "revenue_bn": 200.97,
+            "revenue_growth_pct": 22.17,
+            "gross_margin_pct": null,
+            "operating_margin_pct": 41.44,
+            "net_income_bn": 60.46,
+            "net_margin_pct": 30.08,
+            "eps_diluted": 23.49,
+            "free_cash_flow_bn": 46.11,
+            "rnd_pct_of_revenue": 28.55
+          }
+        ],
+        "revenue_cagr_pct": 22.04,
+        "net_income_includes_nci": false,
+        "xbrl_sources": {
+          "revenue": "RevenueFromContractWithCustomerExcludingAssessedTax (10-K 0001628280-26-003942, filed 2026-01-29)",
+          "operating_income": "OperatingIncomeLoss (10-K 0001628280-26-003942, filed 2026-01-29)",
+          "net_income": "NetIncomeLoss (10-K 0001628280-26-003942, filed 2026-01-29)",
+          "eps_diluted": "EarningsPerShareDiluted (10-K 0001628280-26-003942, filed 2026-01-29)",
+          "rnd": "ResearchAndDevelopmentExpense (10-K 0001628280-26-003942, filed 2026-01-29)",
+          "operating_cash_flow": "NetCashProvidedByUsedInOperatingActivities (10-K 0001628280-26-003942, filed 2026-01-29)",
+          "capex": "PaymentsToAcquirePropertyPlantAndEquipment (10-K 0001628280-26-003942, filed 2026-01-29)"
+        },
+        "filing_urls": [
+          "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/"
+        ],
+        "facts": [
+          "META FY ending 2025-12-31: revenue $200.97bn, up 22.17% year on year",
+          "META FY ending 2025-12-31: operating margin 41.44%, net margin 30.08%",
+          "META FY ending 2025-12-31: net income $60.46bn, diluted EPS $23.49, free cash flow $46.11bn",
+          "META FY ending 2024-12-31: revenue $164.5bn (growth 21.94%), operating margin 42.18%",
+          "META FY ending 2023-12-31: revenue $134.9bn (growth 15.69%), operating margin 34.66%",
+          "META revenue CAGR from FY 2023 to FY 2025: 22.04%"
+        ]
+      },
+      "seconds": 0.1,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json",
+          "fetched_at": "2026-10-22T06:11:07Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F2",
+      "agent": "fundamentals",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "META"
+      },
+      "result": {
+        "ticker": "META",
+        "company": "Meta Platforms, Inc.",
+        "price": 694.25,
+        "price_date": "2026-10-20",
+        "shares_outstanding_bn": 2.566,
+        "market_cap_bn": 1781.45,
+        "ttm_revenue_bn": 228.25,
+        "ttm_net_income_bn": 68.1,
+        "ttm_period_end": "2026-06-30",
+        "pe_ratio_ttm": 26.16,
+        "price_to_sales_ttm": 7.8,
+        "balance_sheet_date": "2026-06-30",
+        "cash_and_securities_bn": 90.26,
+        "total_debt_bn": 83.66,
+        "enterprise_value_bn": 1774.85,
+        "ev_to_sales_ttm": 7.78,
+        "free_cash_flow_last_fy_bn": 46.11,
+        "fcf_yield_pct": 2.59,
+        "net_income_includes_nci": false,
+        "method": "market cap = price x WeightedAverageNumberOfDilutedSharesOutstanding shares; TTM = FY to 2025-12-31 + YTD to 2026-06-30 - prior-year YTD; debt = LongTermDebt as of 2026-06-30; leases excluded",
+        "xbrl_sources": {
+          "revenue_ttm": "RevenueFromContractWithCustomerExcludingAssessedTax ['0001628280-26-003942', '0001628280-26-050705']",
+          "net_income_ttm": "NetIncomeLoss ['0001628280-26-003942', '0001628280-26-050705']",
+          "balance_sheet": [
+            "CashAndCashEquivalentsAtCarryingValue (10-Q 0001628280-26-050705, filed 2026-07-30)",
+            "MarketableSecuritiesCurrent (10-Q 0001628280-26-050705, filed 2026-07-30)",
+            "LongTermDebt (10-Q 0001628280-26-050705, filed 2026-07-30)"
+          ]
+        },
+        "facts": [
+          "META market cap: $1781.45bn at $694.25 per share (2026-10-20)",
+          "META P/E (trailing 12 months): 26.16",
+          "META price-to-sales (trailing 12 months): 7.8; EV-to-sales: 7.78",
+          "META trailing-12-month revenue $228.25bn and net income $68.1bn (to 2026-06-30)",
+          "META free-cash-flow yield: 2.59% (last fiscal year FCF $46.11bn)",
+          "META cash and current securities $90.26bn vs total debt $83.66bn (balance sheet 2026-06-30); enterprise value $1774.85bn"
+        ]
+      },
+      "seconds": 0.12,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json",
+          "fetched_at": "2026-10-22T06:11:07Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/META?range=1y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:11:08Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "M1",
+      "agent": "market",
+      "tool": "price_performance",
+      "args": {
+        "ticker": "META",
+        "period": "5y"
+      },
+      "result": {
+        "ticker": "META",
+        "company": "Meta Platforms, Inc.",
+        "as_of": "2026-10-20",
+        "period": "5y",
+        "last_price": 694.25,
+        "total_return_pct": 105.01,
+        "annualized_return_pct": 15.45,
+        "volatility_pct": 45.38,
+        "sharpe_ratio": 0.46,
+        "avg_risk_free_rate_pct": 3.92,
+        "risk_free_source": "US Treasury daily bill rates (13-week, coupon equivalent)",
+        "max_drawdown_pct": -74.42,
+        "drawdown_peak_date": "2021-11-15",
+        "drawdown_trough_date": "2022-11-03",
+        "high_52w": 777.59,
+        "pct_below_52w_high": 10.72,
+        "sma_200": 631.53,
+        "price_vs_sma_200": "above",
+        "rsi_14": 46.4,
+        "facts": [
+          "META 5y total return: 105.01%",
+          "META 5y annualized return: 15.45%",
+          "META 5y annualized volatility: 45.38%",
+          "META 5y Sharpe ratio: 0.46",
+          "META 5y max drawdown: -74.42% (2021-11-15 to 2022-11-03)",
+          "META price: $694.25 on 2026-10-20, 10.72% below the 52-week high of $777.59",
+          "META price is above its 200-day average of $631.53"
+        ]
+      },
+      "seconds": 0.04,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/META?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:11:14Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2021/all?type=daily_treasury_bill_rates&field_tdr_date_value=2021&_format=csv",
+          "fetched_at": "2026-10-22T05:55:40Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2022/all?type=daily_treasury_bill_rates&field_tdr_date_value=2022&_format=csv",
+          "fetched_at": "2026-10-22T05:55:41Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2023/all?type=daily_treasury_bill_rates&field_tdr_date_value=2023&_format=csv",
+          "fetched_at": "2026-10-22T05:55:42Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2024/all?type=daily_treasury_bill_rates&field_tdr_date_value=2024&_format=csv",
+          "fetched_at": "2026-10-22T05:55:43Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2025/all?type=daily_treasury_bill_rates&field_tdr_date_value=2025&_format=csv",
+          "fetched_at": "2026-10-22T05:55:43Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_bill_rates&field_tdr_date_value=2026&_format=csv",
+          "fetched_at": "2026-10-21T21:17:11Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "M2",
+      "agent": "market",
+      "tool": "benchmark_comparison",
+      "args": {
+        "ticker": "META",
+        "benchmark": "SPY",
+        "period": "5y"
+      },
+      "result": {
+        "ticker": "META",
+        "benchmark": "SPY",
+        "period": "5y",
+        "beta": 1.6,
+        "correlation": 0.6,
+        "alpha_pct_per_year": 3.34,
+        "tracking_error_pct": 37.58,
+        "information_ratio": 0.3,
+        "ticker_return_pct": 105.01,
+        "benchmark_return_pct": 81.28,
+        "excess_return_pct": 23.74,
+        "facts": [
+          "META 5y beta vs SPY: 1.6",
+          "META 5y correlation with SPY: 0.6",
+          "5y return: META 105.01% vs SPY 81.28% (excess 23.74%)",
+          "META 5y annualized alpha vs SPY: 3.34%"
+        ]
+      },
+      "seconds": 0.01,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/META?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:11:14Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:29Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R1",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "META"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "result": {
+        "portfolio": {
+          "META": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 12.21,
+        "historical_cvar_pct": 19.24,
+        "fhs_var_pct": 11.09,
+        "fhs_cvar_pct": 17.62,
+        "fhs_prob_loss_over_10pct": 6.3,
+        "current_vol_pct": 43.81,
+        "average_vol_pct": 45.34,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 23.9,
+        "facts": [
+          "META 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 12.21% of value",
+          "META 95% 10-day expected shortfall, historical: 19.24%",
+          "META 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 11.09%",
+          "META 95% 10-day expected shortfall, filtered historical simulation: 17.62%",
+          "META current volatility 43.81% vs 5-year average 45.34% (annualized)",
+          "META probability of losing more than 10% over 10 days (filtered historical simulation): 6.3%"
+        ]
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/META?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:11:22Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R2",
+      "agent": "risk",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "META"
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "META": 1.0
+        },
+        "episodes": [
+          {
+            "episode": "2018 Q4 sell-off",
+            "portfolio_return_pct": -25.27,
+            "spy_return_pct": -19.35
+          },
+          {
+            "episode": "2020 COVID crash",
+            "portfolio_return_pct": -31.9,
+            "spy_return_pct": -33.72
+          },
+          {
+            "episode": "2022 rate-hike bear market",
+            "portfolio_return_pct": -62.34,
+            "spy_return_pct": -24.5
+          }
+        ],
+        "beta_vs_spy_3y": 1.43,
+        "beta_implied_move_if_spy_falls_20pct": -28.7,
+        "facts": [
+          "META in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -25.27% vs SPY -19.35%",
+          "META in the 2020 COVID crash (2020-02-19 to 2020-03-23): -31.9% vs SPY -33.72%",
+          "META in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -62.34% vs SPY -24.5%",
+          "META 3-year beta vs SPY: 1.43; a 20% SPY fall implies about -28.7%"
+        ]
+      },
+      "seconds": 0.01,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/META?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:11:14Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:29Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D1",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "META",
+        "query": "valuation fundamentals risks"
+      },
+      "result": {
+        "ticker": "META",
+        "filing": "10-K filed 2026-01-29 (period 2025-12-31)",
+        "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "mda#38",
+            "text": "... As a result, we recorded a $15.93 billion charge in the third quarter of 2025, of which $14.03 billion was a valuation allowance against our U.S. federal deferred tax assets as of the enactment date of OBBBA, and the remaining was mostly related to the reduction of the benefit of the foreign-derived intangible income deduction. In determining the valuation allowance, our accounting policy incorporates the expected impact of future years\u2019 CAMT in assessing the realizability of our deferred tax assets"
+          },
+          {
+            "ref": "risk_factors#1",
+            "text": "Summary Risk Factors Our business is subject to a number of risks, including risks that may prevent us from achieving our business objectives or may adversely affect our business, financial condition, results of operations, cash flows, and prospects. ..."
+          },
+          {
+            "ref": "risk_factors#52",
+            "text": "\u2022 the impact of changes in tax laws or judicial or regulatory interpretations of tax laws, which are recorded in the period such laws are enacted or interpretations are issued, and may significantly affect the effective tax rate of that period; \u2022 tax obligations that may arise from resolutions of tax examinations, including the examination we are currently under by the Internal Revenue Service (IRS), that materially differ from the amounts we have anticipated; \u2022 fluctuations in currency exchange rates and changes in the proportion of our revenue and expenses denominated in foreign currencies;"
+          }
+        ]
+      },
+      "seconds": 0.45,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001326801.json",
+          "fetched_at": "2026-10-22T06:11:25Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm",
+          "fetched_at": "2026-10-22T06:11:26Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    }
+  ],
+  "llm_calls": [
+    {
+      "agent": "planner",
+      "role": "planner",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 256,
+      "completion_tokens": 142,
+      "latency_s": 6.71
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 659,
+      "completion_tokens": 63,
+      "latency_s": 6.47
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1307,
+      "completion_tokens": 129,
+      "latency_s": 12.8
+    },
+    {
+      "agent": "market",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 621,
+      "completion_tokens": 86,
+      "latency_s": 7.17
+    },
+    {
+      "agent": "market",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1112,
+      "completion_tokens": 136,
+      "latency_s": 12.02
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 667,
+      "completion_tokens": 81,
+      "latency_s": 7.12
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1263,
+      "completion_tokens": 247,
+      "latency_s": 16.76
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 452,
+      "completion_tokens": 42,
+      "latency_s": 4.15
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1015,
+      "completion_tokens": 117,
+      "latency_s": 10.31
+    },
+    {
+      "agent": "writer",
+      "role": "writer",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 907,
+      "completion_tokens": 313,
+      "latency_s": 16.87
+    }
+  ],
+  "narrative": "## Answer  \nMETA's valuation is supported by strong fundamentals, including revenue of $200.97bn up 22.17% year on year [F1] and an operating margin of 41.44% [F1], which justify a P/E of 26.16 [F2] and price-to-sales of 7.8 [F2]. However, the stock's high volatility and elevated beta suggest significant growth is already priced in [M1, M2].  \n\n## Strengths  \n- META revenue $200.97bn, up 22.17% year on year [F1]  \n- META operating margin 41.44% [F1]  \n\n## Risks  \n- META 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 12.21% of value [R1]  \n- META 95% 10-day expected shortfall, historical: 19.24% [R1]  \n\n## What to watch  \n- META 3-year beta vs SPY: 1.43; a 20% SPY fall implies about -28.7% [R2]  \n- Tax law changes or IRS examination outcomes could materially affect META\u2019s effective tax rate [D1]",
+  "narrative_draft": "## Answer  \nMETA's valuation is supported by strong fundamentals, including revenue of $200.97bn up 22.17% year on year [F1] and an operating margin of 41.44% [F1], which justify a P/E of 26.16 [F2] and price-to-sales of 7.8 [F2]. However, the stock's high volatility and elevated beta suggest significant growth is already priced in [M1, M2].  \n\n## Strengths  \n- META revenue $200.97bn, up 22.17% year on year [F1]  \n- META operating margin 41.44% [F1]  \n\n## Risks  \n- META 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 12.21% of value [R1]  \n- META 95% 10-day expected shortfall, historical: 19.24% [R1]  \n\n## What to watch  \n- META 3-year beta vs SPY: 1.43; a 20% SPY fall implies about -28.7% [R2]  \n- Tax law changes or IRS examination outcomes could materially affect META\u2019s effective tax rate [D1]",
+  "writer_check": {
+    "provenance": {
+      "checked": 15,
+      "verified": 15,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": []
+    },
+    "attribution": {
+      "claims": 7,
+      "supported": 7,
+      "score": 1.0,
+      "issues": []
+    },
+    "problems": []
+  },
+  "revisions": [],
+  "report": "# Research note: META\n**Question:** Is META's valuation justified by its fundamentals, and what are the main risks?\n\n*Generated 2026-10-22 19:18 by FinAgent \u00b7 4 specialist agents \u00b7 models `nemotron-3-nano:4b-cpu` / `nemotron-3-nano:4b-cpu`*\n\n> This note was generated by AI agents for educational purposes. It is general information, not personal financial advice or a recommendation to buy or sell any security. Figures come from public data (SEC EDGAR, US Treasury, Yahoo Finance) and may contain errors; verify before relying on them.\n\n## Answer  \nMETA's valuation is supported by strong fundamentals, including revenue of $200.97bn up 22.17% year on year [F1] and an operating margin of 41.44% [F1], which justify a P/E of 26.16 [F2] and price-to-sales of 7.8 [F2]. However, the stock's high volatility and elevated beta suggest significant growth is already priced in [M1, M2].  \n\n## Strengths  \n- META revenue $200.97bn, up 22.17% year on year [F1]  \n- META operating margin 41.44% [F1]  \n\n## Risks  \n- META 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 12.21% of value [R1]  \n- META 95% 10-day expected shortfall, historical: 19.24% [R1]  \n\n## What to watch  \n- META 3-year beta vs SPY: 1.43; a 20% SPY fall implies about -28.7% [R2]  \n- Tax law changes or IRS examination outcomes could materially affect META\u2019s effective tax rate [D1]\n\n## Specialist findings\n### Fundamentals Analyst\n*Focus: META's revenue growth and margins versus its current P/E and price-to-sales multiples*\n\nMETA revenue $200.97bn, up 22.17% year on year [F1]  \nMETA operating margin 41.44% [F1]  \nMETA P/E (trailing 12 months): 26.16 [F2]  \nMETA price-to-sales (trailing 12 months): 7.8 [F2]  \nMETA free-cash-flow yield: 2.59% [F2]  \n\nMETA's strong revenue growth and high margins suggest a justified valuation.\n\n### Market Analyst\n*Focus: how much of META's growth is already priced in through its stock price and volatility*\n\nMETA 5y total return: 105.01% [M1]  \nMETA 5y annualized volatility: 45.38% [M1]  \nMETA 5y beta vs SPY: 1.6 [M2]  \nMETA 5y return: 105.01% vs SPY 81.28% [M2]  \nMETA 5y annualized alpha vs SPY: 3.34% [M2]  \n\nThe stock's high volatility and elevated beta suggest significant growth is already priced in.\n\n### Risk Analyst\n*Focus: Value at Risk and expected shortfall under downside scenarios*\n\nMETA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 12.21% of value [R1]  \nMETA 95% 10-day expected shortfall, historical: 19.24% [R1]  \nMETA in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -25.27% vs SPY -19.35% [R2]  \nMETA in the 2020 COVID crash (2020-02-19 to 2020-03-23): -31.9% vs SPY -33.72% [R2]  \nMETA 3-year beta vs SPY: 1.43; a 20% SPY fall implies about -28.7% [R2]  \n\nThese risks suggest META's valuation may be sensitive to broader market stress and its elevated beta.\n\n### Filings Analyst\n*Focus: key risks and business challenges highlighted in META's latest 10-K*\n\n- META recorded a $15.93 billion charge in Q3 2025, with $14.03 billion as a valuation allowance against U.S. federal deferred tax assets [D1]  \n- The valuation allowance reflects the expected impact of future CAMT on the realizability of deferred tax assets [D1]  \n- Tax law changes or IRS examination outcomes could materially affect META\u2019s effective tax rate [D1]  \n- Currency fluctuations and foreign revenue/expense ratios pose significant financial risks [D1]\n\n## Key figures (generated from tool outputs, not by a model)\n\n| Metric | META |\n|---|---|\n| Price | 694.25 [M1] |\n| Total return (5y) | 105.01% [M1] |\n| Volatility, annualised (5y) | 45.38% [M1] |\n| Max drawdown (5y) | -74.42% [M1] |\n| Beta vs SPY (5y) | 1.60 [M2] |\n| Market cap ($bn) | 1,781.45 [F2] |\n| P/E (TTM) | 26.16x [F2] |\n| Price / sales (TTM) | 7.80x [F2] |\n| FCF yield | 2.59% [F2] |\n| Revenue, latest FY ($bn) | 200.97 [F1] |\n| Revenue growth, latest FY | 22.17% [F1] |\n| Operating margin, latest FY | 41.44% [F1] |\n| 10-day VaR 95% (historical) | 12.21% [R1] |\n| 10-day VaR 95% (filtered historical simulation) | 11.09% [R1] |\n\n## Evidence ledger\n\n| ID | Agent | Tool call | Chosen by | Source | Data retrieved |\n|---|---|---|---|---|---|\n| F1 | fundamentals | `financial_statements(ticker=META, years=3)` | model | SEC EDGAR XBRL company facts | 2026-10-21 21:15:59 UTC |\n| F2 | fundamentals | `valuation_snapshot(ticker=META)` | model | SEC EDGAR XBRL + Yahoo Finance price | 2026-10-21 21:15:59 UTC |\n| M1 | market | `price_performance(ticker=META, period=5y)` | model | Yahoo Finance daily prices; US Treasury bill rates | 2026-10-21 21:17:11 UTC |\n| M2 | market | `benchmark_comparison(ticker=META, benchmark=SPY, period=5y)` | model | Yahoo Finance daily prices | 2026-10-22 03:37:29 UTC |\n| R1 | risk | `value_at_risk(tickers=['META'], confidence=0.95, horizon_days=10)` | model | computed from 5y daily prices | 2026-10-22 06:11:22 UTC |\n| R2 | risk | `stress_test(tickers=['META'])` | model | computed from 10y daily prices | 2026-10-22 03:37:29 UTC |\n| D1 | filings | `search_10k(ticker=META, query=valuation fundamentals risks)` | model | https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm | 2026-10-21 21:15:59 UTC |\n\n## How this note was produced\n\n- **Number provenance:** 40 of 40 numbers trace back to a tool result the agent received (100%).\n- **Claim attribution:** 26 of 26 cited claims match their source (company, period, metric, direction; 10-K points by wording) (100%).\n- **Agents:** planner \u2192 fundamentals, market, risk, filings \u2192 fact-check \u2192 lead analyst.\n- **Tool calls:** 7 (all chosen by the models).\n- **Data:** 14 sources, all fetched or cached within their freshness window. Retrieval times are in the evidence ledger.\n- **Language model:** 10 calls, 8,259 prompt + 1,356 completion tokens, 100.4 s of model time; 100.4 s end to end.\n- **Compute:** risk simulation on CPU (NumPy); 10-K retrieval: BM25; endpoint `http://127.0.0.1:11434/v1`.\n",
+  "stats": {
+    "llm_calls": 10,
+    "prompt_tokens": 8259,
+    "completion_tokens": 1356,
+    "model_seconds": 100.4,
+    "wall_seconds": 100.4,
+    "tool_calls": 7,
+    "tool_calls_chosen_by_model": 7,
+    "revisions": 0,
+    "risk_backend": "CPU (NumPy)",
+    "retrieval": "BM25",
+    "data_sources": 14,
+    "stale_sources": [],
+    "dropped_params": [],
+    "ablations": [],
+    "endpoint": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "quality": {
+      "numbers_checked": 40,
+      "numbers_traced": 40,
+      "number_provenance": 1.0,
+      "claims_checked": 26,
+      "claims_supported": 26,
+      "claim_attribution": 1.0,
+      "claim_issues": []
+    },
+    "provenance": {
+      "checked": 40,
+      "verified": 40,
+      "score": 1.0,
+      "unverified": []
+    },
+    "promissory_phrases": []
+  },
+  "eval": {
+    "ticker": "META",
+    "question": "valuation",
+    "variant": "full",
+    "version": "0.2.2"
+  },
+  "events": [
+    {
+      "t": 1792656999.52,
+      "event": "guard",
+      "allowed": true,
+      "personal_advice": false,
+      "rail": "rules"
+    },
+    {
+      "t": 1792657006.24,
+      "event": "plan",
+      "tasks": [
+        {
+          "agent": "fundamentals",
+          "focus": "META's revenue growth and margins versus its current P/E and price-to-sales multiples"
+        },
+        {
+          "agent": "market",
+          "focus": "how much of META's growth is already priced in through its stock price and volatility"
+        },
+        {
+          "agent": "risk",
+          "focus": "Value at Risk and expected shortfall under downside scenarios"
+        },
+        {
+          "agent": "filings",
+          "focus": "key risks and business challenges highlighted in META's latest 10-K"
+        }
+      ],
+      "source": "model"
+    },
+    {
+      "t": 1792657006.24,
+      "event": "agent_start",
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "META's revenue growth and margins versus its current P/E and price-to-sales multiples"
+    },
+    {
+      "t": 1792657006.24,
+      "event": "agent_start",
+      "agent": "market",
+      "title": "Market Analyst",
+      "focus": "how much of META's growth is already priced in through its stock price and volatility"
+    },
+    {
+      "t": 1792657006.24,
+      "event": "agent_start",
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall under downside scenarios"
+    },
+    {
+      "t": 1792657006.24,
+      "event": "agent_start",
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "key risks and business challenges highlighted in META's latest 10-K"
+    },
+    {
+      "t": 1792657012.71,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [
+        "financial_statements",
+        "valuation_snapshot"
+      ],
+      "latency_s": 6.47,
+      "prompt_tokens": 659,
+      "completion_tokens": 63
+    },
+    {
+      "t": 1792657012.81,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F1",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "META",
+        "years": 3
+      },
+      "seconds": 0.1,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792657012.94,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F2",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "META"
+      },
+      "seconds": 0.12,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792657019.88,
+      "event": "llm",
+      "agent": "market",
+      "tool_calls": [
+        "price_performance",
+        "benchmark_comparison"
+      ],
+      "latency_s": 7.17,
+      "prompt_tokens": 621,
+      "completion_tokens": 86
+    },
+    {
+      "t": 1792657019.92,
+      "event": "tool",
+      "agent": "market",
+      "id": "M1",
+      "tool": "price_performance",
+      "args": {
+        "ticker": "META",
+        "period": "5y"
+      },
+      "seconds": 0.04,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792657019.94,
+      "event": "tool",
+      "agent": "market",
+      "id": "M2",
+      "tool": "benchmark_comparison",
+      "args": {
+        "ticker": "META",
+        "benchmark": "SPY",
+        "period": "5y"
+      },
+      "seconds": 0.01,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792657027.0,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [
+        "value_at_risk",
+        "stress_test"
+      ],
+      "latency_s": 7.12,
+      "prompt_tokens": 667,
+      "completion_tokens": 81
+    },
+    {
+      "t": 1792657027.05,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R1",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "META"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792657027.06,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R2",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "META"
+        ]
+      },
+      "seconds": 0.01,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792657031.15,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [
+        "search_10k"
+      ],
+      "latency_s": 4.15,
+      "prompt_tokens": 452,
+      "completion_tokens": 42
+    },
+    {
+      "t": 1792657031.6,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D1",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "META",
+        "query": "valuation fundamentals risks"
+      },
+      "seconds": 0.45,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792657043.95,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 12.8,
+      "prompt_tokens": 1307,
+      "completion_tokens": 129
+    },
+    {
+      "t": 1792657043.95,
+      "event": "agent_done",
+      "agent": "fundamentals",
+      "seconds": 37.7
+    },
+    {
+      "t": 1792657055.97,
+      "event": "llm",
+      "agent": "market",
+      "tool_calls": [],
+      "latency_s": 12.02,
+      "prompt_tokens": 1112,
+      "completion_tokens": 136
+    },
+    {
+      "t": 1792657055.97,
+      "event": "agent_done",
+      "agent": "market",
+      "seconds": 49.7
+    },
+    {
+      "t": 1792657072.73,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 16.76,
+      "prompt_tokens": 1263,
+      "completion_tokens": 247
+    },
+    {
+      "t": 1792657072.73,
+      "event": "agent_done",
+      "agent": "risk",
+      "seconds": 66.5
+    },
+    {
+      "t": 1792657083.04,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [],
+      "latency_s": 10.31,
+      "prompt_tokens": 1015,
+      "completion_tokens": 117
+    },
+    {
+      "t": 1792657083.04,
+      "event": "agent_done",
+      "agent": "filings",
+      "seconds": 76.8
+    },
+    {
+      "t": 1792657083.05,
+      "event": "verify",
+      "agent": "fundamentals",
+      "checked": 6,
+      "verified": 6,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792657083.05,
+      "event": "verify",
+      "agent": "market",
+      "checked": 6,
+      "verified": 6,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792657083.05,
+      "event": "verify",
+      "agent": "risk",
+      "checked": 11,
+      "verified": 11,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792657083.06,
+      "event": "verify",
+      "agent": "filings",
+      "checked": 2,
+      "verified": 2,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 4,
+      "claims_supported": 4,
+      "claim_issues": []
+    },
+    {
+      "t": 1792657083.06,
+      "event": "agent_start",
+      "agent": "writer",
+      "title": "Lead Analyst",
+      "focus": "summary"
+    },
+    {
+      "t": 1792657099.93,
+      "event": "llm",
+      "agent": "writer",
+      "tool_calls": [],
+      "latency_s": 16.87,
+      "prompt_tokens": 907,
+      "completion_tokens": 313
+    },
+    {
+      "t": 1792657099.94,
+      "event": "verify",
+      "agent": "writer",
+      "checked": 15,
+      "verified": 15,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 7,
+      "claims_supported": 7,
+      "claim_issues": []
+    },
+    {
+      "t": 1792657099.99,
+      "event": "done",
+      "stats": {
+        "llm_calls": 10,
+        "prompt_tokens": 8259,
+        "completion_tokens": 1356,
+        "model_seconds": 100.4,
+        "wall_seconds": 100.4,
+        "tool_calls": 7,
+        "tool_calls_chosen_by_model": 7,
+        "revisions": 0,
+        "risk_backend": "CPU (NumPy)",
+        "retrieval": "BM25",
+        "data_sources": 14,
+        "stale_sources": [],
+        "dropped_params": [],
+        "ablations": [],
+        "endpoint": "http://127.0.0.1:11434/v1",
+        "orchestrator_model": "nemotron-3-nano:4b-cpu",
+        "specialist_model": "nemotron-3-nano:4b-cpu",
+        "quality": {
+          "numbers_checked": 40,
+          "numbers_traced": 40,
+          "number_provenance": 1.0,
+          "claims_checked": 26,
+          "claims_supported": 26,
+          "claim_attribution": 1.0,
+          "claim_issues": []
+        },
+        "provenance": {
+          "checked": 40,
+          "verified": 40,
+          "score": 1.0,
+          "unverified": []
+        },
+        "promissory_phrases": []
+      }
+    }
+  ],
+  "settings": {
+    "profile": "local",
+    "base_url": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "temperature": 0.0,
+    "reasoning": false,
+    "ablate": []
+  }
+}

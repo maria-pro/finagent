@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.2.3 — 2026-10-22
+
+Two false alarms in the claim checker, found in the pilot's 0.2.2 runs, and the pilot
+results.
+
+- A benchmark named in another clause no longer counts against a figure: in "a 14.55%
+  10-day VaR and a 20% SPY fall implying -46.13%", the VaR is not a claim about SPY.
+- "32.81% net" reads as a net margin, so "margins of 32.03% operating and 32.81% net"
+  is no longer flagged.
+- `finagent eval --rescore` records which version scored each run (`scored_with`) next
+  to the version that produced it (`version`).
+- Pilot evaluation results in `eval/results/` and the README: 24 full-system runs
+  (12 companies, two questions) produced with 0.2.2 and re-scored with 0.2.3, with every
+  run's full record, and the ablation study.
+- Example runs refreshed on 0.2.3. The 0.1 notes are kept in `examples/v0.1/` for the
+  lab's claim-checking exercise.
+- 121 offline tests.
+
 ## 0.2.2 — 2026-10-22
 
 Claim checking, sharpened on the pilot's risk-question runs, where summaries combine
@@ -56,7 +74,7 @@ Stronger verification, a better risk model, auditable data, and an evaluation ha
 
 ### Evaluation
 - `finagent eval`: tickers × questions × ablation variants, scored on number
-  provenance, claim attribution (draft and final), facet coverage (does the opening
+  provenance, claim attribution (draft and final), facet coverage (does the summary
   address each part of the question with cited evidence), autonomy and cost. Results
   stream to JSON lines; `--summarize` renders a table.
 - Every design choice can be switched off (`FINAGENT_ABLATE=facts,phases,coverage,
@@ -104,7 +122,7 @@ Stronger verification, a better risk model, auditable data, and an evaluation ha
   checks when configured, and parameters the endpoint rejected.
 
 ### Tests
-- 108 offline tests (113 in 0.2.1), 93% line coverage. New: the LLM client through the real OpenAI SDK
+- 108 offline tests, 93% line coverage. New: the LLM client through the real OpenAI SDK
   over a mocked HTTP transport (probing, reasoning toggles, the fallback loop, tool-call
   parsing, concurrency limit), attribution rules, CLI commands, run records, data
   freshness, filtered historical simulation, dated Sharpe, debt composition.

@@ -1,0 +1,995 @@
+{
+  "tickers": [
+    "MSFT"
+  ],
+  "question": "How risky is MSFT for a long-term investor, and what does its 10-K flag?",
+  "guard": {
+    "allowed": true,
+    "personal_advice": false,
+    "rail": "rules"
+  },
+  "plan": [
+    {
+      "agent": "risk",
+      "focus": "Value at Risk and expected shortfall to assess downside potential"
+    },
+    {
+      "agent": "fundamentals",
+      "focus": "cash flow stability and margin resilience over the long term"
+    },
+    {
+      "agent": "filings",
+      "focus": "any explicit risk disclosures or contingent liabilities in the 10-K"
+    }
+  ],
+  "plan_source": "model",
+  "findings": {
+    "risk": {
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall to assess downside potential",
+      "text": "MSFT in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -16.76% vs SPY -19.35% [R3]  \nMSFT in the 2020 COVID crash (2020-02-19 to 2020-03-23): -27.39% vs SPY -33.72% [R3]  \nMSFT in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -32.12% vs SPY -24.5% [R3]  \nMSFT 3-year beta vs SPY: 0.97; a 20% SPY fall implies about -19.41% [R3]  \nMSFT current volatility 24.2% vs 5-year average 28.21% (annualized) [R1]  \n\nThese historical stress tests show MSFT has weathered significant market downturns with resilience relative to the broader market.",
+      "draft": "MSFT in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -16.76% vs SPY -19.35% [R3]  \nMSFT in the 2020 COVID crash (2020-02-19 to 2020-03-23): -27.39% vs SPY -33.72% [R3]  \nMSFT in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -32.12% vs SPY -24.5% [R3]  \nMSFT 3-year beta vs SPY: 0.97; a 20% SPY fall implies about -19.41% [R3]  \nMSFT current volatility 24.2% vs 5-year average 28.21% (annualized) [R1]  \n\nThese historical stress tests show MSFT has weathered significant market downturns with resilience relative to the broader market.",
+      "seconds": 79.9,
+      "provenance": {
+        "checked": 11,
+        "verified": 11,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "fundamentals": {
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "cash flow stability and margin resilience over the long term",
+      "text": "- MSFT FY ending 2026-06-30: revenue $331.84bn, up 17.79% year on year [F1]  \n- MSFT FY ending 2026-06-30: gross margin 67.94%, operating margin 46.78%, net margin 40.31% [F1]  \n- MSFT FY ending 2026-06-30: net income $133.75bn, diluted EPS $17.95, free cash flow $66.99bn [F1]  \n- MSFT cash and current securities $76.84bn vs total debt $40.29bn (balance sheet 2026-06-30) [F2]  \n- MSFT free-cash-flow yield: 1.7% (last fiscal year FCF $66.99bn) [F2]  \n\nThe company demonstrates strong cash flow generation and a robust balance sheet, indicating low financial risk for long-term investors.",
+      "draft": "- MSFT FY ending 2026-06-30: revenue $331.84bn, up 17.79% year on year [F1]  \n- MSFT FY ending 2026-06-30: gross margin 67.94%, operating margin 46.78%, net margin 40.31% [F1]  \n- MSFT FY ending 2026-06-30: net income $133.75bn, diluted EPS $17.95, free cash flow $66.99bn [F1]  \n- MSFT cash and current securities $76.84bn vs total debt $40.29bn (balance sheet 2026-06-30) [F2]  \n- MSFT free-cash-flow yield: 1.7% (last fiscal year FCF $66.99bn) [F2]  \n\nThe company demonstrates strong cash flow generation and a robust balance sheet, indicating low financial risk for long-term investors.",
+      "seconds": 95.3,
+      "provenance": {
+        "checked": 12,
+        "verified": 12,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "filings": {
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "any explicit risk disclosures or contingent liabilities in the 10-K",
+      "text": "- The 10-K references risk factors in Part I, Item 1A of the filing [D1]  \n- Estimates for fair value changes are based on operating results, market conditions, and other factors [D1]  \n- Fixed-income investments are exposed to interest rate risk and credit risk [D1]  \n- The average maturity of the fixed-income portfolio is managed to achieve economic returns [D1]",
+      "draft": "- The 10-K references risk factors in Part I, Item 1A of the filing [D1]  \n- Estimates for fair value changes are based on operating results, market conditions, and other factors [D1]  \n- Fixed-income investments are exposed to interest rate risk and credit risk [D1]  \n- The average maturity of the fixed-income portfolio is managed to achieve economic returns [D1]",
+      "seconds": 59.1,
+      "provenance": {
+        "checked": 0,
+        "verified": 0,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 4,
+        "supported": 4,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    }
+  },
+  "evidence": [
+    {
+      "id": "R1",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "MSFT"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "result": {
+        "portfolio": {
+          "MSFT": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 7.98,
+        "historical_cvar_pct": 9.97,
+        "fhs_var_pct": 7.1,
+        "fhs_cvar_pct": 9.81,
+        "fhs_prob_loss_over_10pct": 1.67,
+        "current_vol_pct": 24.2,
+        "average_vol_pct": 28.21,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 23.8,
+        "facts": [
+          "MSFT 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 7.98% of value",
+          "MSFT 95% 10-day expected shortfall, historical: 9.97%",
+          "MSFT 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.1%",
+          "MSFT 95% 10-day expected shortfall, filtered historical simulation: 9.81%",
+          "MSFT current volatility 24.2% vs 5-year average 28.21% (annualized)",
+          "MSFT probability of losing more than 10% over 10 days (filtered historical simulation): 1.67%"
+        ]
+      },
+      "seconds": 0.04,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:07:08Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R2",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "MSFT"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10,
+        "weights": [
+          1
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "MSFT": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 7.98,
+        "historical_cvar_pct": 9.97,
+        "fhs_var_pct": 7.1,
+        "fhs_cvar_pct": 9.81,
+        "fhs_prob_loss_over_10pct": 1.67,
+        "current_vol_pct": 24.2,
+        "average_vol_pct": 28.21,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 21.4,
+        "facts": [
+          "MSFT 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 7.98% of value",
+          "MSFT 95% 10-day expected shortfall, historical: 9.97%",
+          "MSFT 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.1%",
+          "MSFT 95% 10-day expected shortfall, filtered historical simulation: 9.81%",
+          "MSFT current volatility 24.2% vs 5-year average 28.21% (annualized)",
+          "MSFT probability of losing more than 10% over 10 days (filtered historical simulation): 1.67%"
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:07:08Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R3",
+      "agent": "risk",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "MSFT"
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "MSFT": 1.0
+        },
+        "episodes": [
+          {
+            "episode": "2018 Q4 sell-off",
+            "portfolio_return_pct": -16.76,
+            "spy_return_pct": -19.35
+          },
+          {
+            "episode": "2020 COVID crash",
+            "portfolio_return_pct": -27.39,
+            "spy_return_pct": -33.72
+          },
+          {
+            "episode": "2022 rate-hike bear market",
+            "portfolio_return_pct": -32.12,
+            "spy_return_pct": -24.5
+          }
+        ],
+        "beta_vs_spy_3y": 0.97,
+        "beta_implied_move_if_spy_falls_20pct": -19.41,
+        "facts": [
+          "MSFT in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -16.76% vs SPY -19.35%",
+          "MSFT in the 2020 COVID crash (2020-02-19 to 2020-03-23): -27.39% vs SPY -33.72%",
+          "MSFT in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -32.12% vs SPY -24.5%",
+          "MSFT 3-year beta vs SPY: 0.97; a 20% SPY fall implies about -19.41%"
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:07:01Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:29Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F1",
+      "agent": "fundamentals",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "MSFT",
+        "years": 5
+      },
+      "result": {
+        "ticker": "MSFT",
+        "company": "MICROSOFT CORP",
+        "source": "SEC XBRL company facts (10-K)",
+        "fiscal_years": [
+          {
+            "fiscal_year_end": "2022-06-30",
+            "revenue_bn": 198.27,
+            "revenue_growth_pct": 17.96,
+            "gross_margin_pct": 68.4,
+            "operating_margin_pct": 42.06,
+            "net_income_bn": 72.74,
+            "net_margin_pct": 36.69,
+            "eps_diluted": 9.65,
+            "free_cash_flow_bn": 65.15,
+            "rnd_pct_of_revenue": 12.36
+          },
+          {
+            "fiscal_year_end": "2023-06-30",
+            "revenue_bn": 211.91,
+            "revenue_growth_pct": 6.88,
+            "gross_margin_pct": 68.92,
+            "operating_margin_pct": 41.77,
+            "net_income_bn": 72.36,
+            "net_margin_pct": 34.15,
+            "eps_diluted": 9.68,
+            "free_cash_flow_bn": 59.48,
+            "rnd_pct_of_revenue": 12.83
+          },
+          {
+            "fiscal_year_end": "2024-06-30",
+            "revenue_bn": 245.12,
+            "revenue_growth_pct": 15.67,
+            "gross_margin_pct": 69.76,
+            "operating_margin_pct": 44.64,
+            "net_income_bn": 88.14,
+            "net_margin_pct": 35.96,
+            "eps_diluted": 11.8,
+            "free_cash_flow_bn": 74.07,
+            "rnd_pct_of_revenue": 12.04
+          },
+          {
+            "fiscal_year_end": "2025-06-30",
+            "revenue_bn": 281.72,
+            "revenue_growth_pct": 14.93,
+            "gross_margin_pct": 68.82,
+            "operating_margin_pct": 45.62,
+            "net_income_bn": 101.83,
+            "net_margin_pct": 36.15,
+            "eps_diluted": 13.64,
+            "free_cash_flow_bn": 71.61,
+            "rnd_pct_of_revenue": 11.53
+          },
+          {
+            "fiscal_year_end": "2026-06-30",
+            "revenue_bn": 331.84,
+            "revenue_growth_pct": 17.79,
+            "gross_margin_pct": 67.94,
+            "operating_margin_pct": 46.78,
+            "net_income_bn": 133.75,
+            "net_margin_pct": 40.31,
+            "eps_diluted": 17.95,
+            "free_cash_flow_bn": 66.99,
+            "rnd_pct_of_revenue": 10.72
+          }
+        ],
+        "revenue_cagr_pct": 13.74,
+        "net_income_includes_nci": false,
+        "xbrl_sources": {
+          "revenue": "RevenueFromContractWithCustomerExcludingAssessedTax (10-K 0001193125-26-323660, filed 2026-07-29)",
+          "gross_profit": "GrossProfit (10-K 0001193125-26-323660, filed 2026-07-29)",
+          "operating_income": "OperatingIncomeLoss (10-K 0001193125-26-323660, filed 2026-07-29)",
+          "net_income": "NetIncomeLoss (10-K 0001193125-26-323660, filed 2026-07-29)",
+          "eps_diluted": "EarningsPerShareDiluted (10-K 0001193125-26-323660, filed 2026-07-29)",
+          "rnd": "ResearchAndDevelopmentExpense (10-K 0001193125-26-323660, filed 2026-07-29)",
+          "operating_cash_flow": "NetCashProvidedByUsedInOperatingActivities (10-K 0001193125-26-323660, filed 2026-07-29)",
+          "capex": "PaymentsToAcquirePropertyPlantAndEquipment (10-K 0001193125-26-323660, filed 2026-07-29)"
+        },
+        "filing_urls": [
+          "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/"
+        ],
+        "facts": [
+          "MSFT FY ending 2026-06-30: revenue $331.84bn, up 17.79% year on year",
+          "MSFT FY ending 2026-06-30: gross margin 67.94%, operating margin 46.78%, net margin 40.31%",
+          "MSFT FY ending 2026-06-30: net income $133.75bn, diluted EPS $17.95, free cash flow $66.99bn",
+          "MSFT FY ending 2025-06-30: revenue $281.72bn (growth 14.93%), operating margin 45.62%",
+          "MSFT FY ending 2024-06-30: revenue $245.12bn (growth 15.67%), operating margin 44.64%",
+          "MSFT FY ending 2023-06-30: revenue $211.91bn (growth 6.88%), operating margin 41.77%",
+          "MSFT FY ending 2022-06-30: revenue $198.27bn (growth 17.96%), operating margin 42.06%",
+          "MSFT revenue CAGR from FY 2022 to FY 2026: 13.74%"
+        ]
+      },
+      "seconds": 0.06,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+          "fetched_at": "2026-10-22T06:06:53Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F2",
+      "agent": "fundamentals",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "MSFT"
+      },
+      "result": {
+        "ticker": "MSFT",
+        "company": "MICROSOFT CORP",
+        "price": 531.87,
+        "price_date": "2026-10-20",
+        "shares_outstanding_bn": 7.426,
+        "market_cap_bn": 3949.42,
+        "ttm_revenue_bn": 331.84,
+        "ttm_net_income_bn": 133.75,
+        "ttm_period_end": "2026-06-30",
+        "pe_ratio_ttm": 29.53,
+        "price_to_sales_ttm": 11.9,
+        "balance_sheet_date": "2026-06-30",
+        "cash_and_securities_bn": 76.84,
+        "total_debt_bn": 40.29,
+        "enterprise_value_bn": 3912.88,
+        "ev_to_sales_ttm": 11.79,
+        "free_cash_flow_last_fy_bn": 66.99,
+        "fcf_yield_pct": 1.7,
+        "net_income_includes_nci": false,
+        "method": "market cap = price x EntityCommonStockSharesOutstanding shares; TTM = latest fiscal year; debt = LongTermDebtNoncurrent + LongTermDebtCurrent as of 2026-06-30; leases excluded",
+        "xbrl_sources": {
+          "revenue_ttm": "RevenueFromContractWithCustomerExcludingAssessedTax ['0001193125-26-323660']",
+          "net_income_ttm": "NetIncomeLoss ['0001193125-26-323660']",
+          "balance_sheet": [
+            "CashAndCashEquivalentsAtCarryingValue (10-K 0001193125-26-323660, filed 2026-07-29)",
+            "ShortTermInvestments (10-K 0001193125-26-323660, filed 2026-07-29)",
+            "LongTermDebtNoncurrent (10-K 0001193125-26-323660, filed 2026-07-29)",
+            "LongTermDebtCurrent (10-K 0001193125-26-323660, filed 2026-07-29)"
+          ]
+        },
+        "facts": [
+          "MSFT market cap: $3949.42bn at $531.87 per share (2026-10-20)",
+          "MSFT P/E (trailing 12 months): 29.53",
+          "MSFT price-to-sales (trailing 12 months): 11.9; EV-to-sales: 11.79",
+          "MSFT trailing-12-month revenue $331.84bn and net income $133.75bn (to 2026-06-30)",
+          "MSFT free-cash-flow yield: 1.7% (last fiscal year FCF $66.99bn)",
+          "MSFT cash and current securities $76.84bn vs total debt $40.29bn (balance sheet 2026-06-30); enterprise value $3912.88bn"
+        ]
+      },
+      "seconds": 0.08,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+          "fetched_at": "2026-10-22T06:06:53Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:06:54Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D1",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "MSFT",
+        "query": "risk factors"
+      },
+      "result": {
+        "ticker": "MSFT",
+        "filing": "10-K filed 2026-07-29 (period 2026-06-30)",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "mda#6",
+            "text": "Refer to Risk Factors (Part I, Item 1A of this Form 10-K) for a discussion of these factors and other risks. ..."
+          },
+          {
+            "ref": "mda#40",
+            "text": "The estimates used to calculate the fair value of a reporting unit change from year to year based on operating results, market conditions, and other factors. ..."
+          },
+          {
+            "ref": "mda#26",
+            "text": "... The investments are predominantly U.S. dollar-denominated securities, but also include foreign currency-denominated securities to diversify risk. Our fixed-income investments are exposed to interest rate risk and credit risk. The credit risk and average maturity of our fixed-income portfolio are managed to achieve economic returns that correlate to certain fixed-income indices. The settlement risk related to these investments is insignificant given that the short-term investments held are primarily highly liquid investment-grade fixed-income securities."
+          }
+        ]
+      },
+      "seconds": 1.19,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000789019.json",
+          "fetched_at": "2026-10-22T06:07:15Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+          "fetched_at": "2026-10-22T06:07:15Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    }
+  ],
+  "llm_calls": [
+    {
+      "agent": "planner",
+      "role": "planner",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 259,
+      "completion_tokens": 80,
+      "latency_s": 4.7
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 671,
+      "completion_tokens": 121,
+      "latency_s": 8.77
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1295,
+      "completion_tokens": 191,
+      "latency_s": 15.5
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1114,
+      "completion_tokens": 274,
+      "latency_s": 20.73
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 654,
+      "completion_tokens": 38,
+      "latency_s": 5.72
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1174,
+      "completion_tokens": 233,
+      "latency_s": 16.24
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 997,
+      "completion_tokens": 249,
+      "latency_s": 15.46
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 455,
+      "completion_tokens": 40,
+      "latency_s": 4.14
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 889,
+      "completion_tokens": 90,
+      "latency_s": 8.76
+    },
+    {
+      "agent": "writer",
+      "role": "writer",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 890,
+      "completion_tokens": 429,
+      "latency_s": 21.05
+    }
+  ],
+  "narrative": "## Answer  \nMSFT has shown resilience in past market downturns, with a 3-year beta of 0.97 meaning it typically underperforms the broader market by about 20% when SPY falls 20% [R3]. Its current volatility of 24.2% is below the 5-year average of 28.21%, suggesting lower risk than peers [R1]. The 10-K flags risk factors in Part I, Item 1A [D1], including fixed-income investment risks [D1].  \n\n## Strengths  \n- MSFT in the 2020 COVID crash (2020-02-19 to 2020-03-23): -27.39% vs SPY -33.72% [R3]  \n- MSFT 3-year beta vs SPY: 0.97; a 20% SPY fall implies about -19.41% [R3]  \n- MSFT current volatility 24.2% vs 5-year average 28.21% (annualized) [R1]  \n\n## Risks  \n- MSFT in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -32.12% vs SPY -24.5% [R3]  \n- The 10-K references risk factors in Part I, Item 1A of the filing [D1]  \n- Fixed-income investments are exposed to interest rate risk and credit risk [D1]  \n\n## What to watch  \n- MSFT free-cash-flow yield: 1.7% (last fiscal year FCF $66.99bn) [F2]  \n- The average maturity of the fixed-income portfolio is managed to achieve economic returns [D1]",
+  "narrative_draft": "## Answer  \nMSFT has shown resilience in past market downturns, with a 3-year beta of 0.97 meaning it typically underperforms the broader market by about 20% when SPY falls 20% [R3]. Its current volatility of 24.2% is below the 5-year average of 28.21%, suggesting lower risk than peers [R1]. The 10-K flags risk factors in Part I, Item 1A [D1], including fixed-income investment risks [D1].  \n\n## Strengths  \n- MSFT in the 2020 COVID crash (2020-02-19 to 2020-03-23): -27.39% vs SPY -33.72% [R3]  \n- MSFT 3-year beta vs SPY: 0.97; a 20% SPY fall implies about -19.41% [R3]  \n- MSFT current volatility 24.2% vs 5-year average 28.21% (annualized) [R1]  \n\n## Risks  \n- MSFT in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -32.12% vs SPY -24.5% [R3]  \n- The 10-K references risk factors in Part I, Item 1A of the filing [D1]  \n- Fixed-income investments are exposed to interest rate risk and credit risk [D1]  \n\n## What to watch  \n- MSFT free-cash-flow yield: 1.7% (last fiscal year FCF $66.99bn) [F2]  \n- The average maturity of the fixed-income portfolio is managed to achieve economic returns [D1]",
+  "writer_check": {
+    "provenance": {
+      "checked": 16,
+      "verified": 16,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": []
+    },
+    "attribution": {
+      "claims": 11,
+      "supported": 11,
+      "score": 1.0,
+      "issues": []
+    },
+    "problems": []
+  },
+  "revisions": [],
+  "report": "# Research note: MSFT\n**Question:** How risky is MSFT for a long-term investor, and what does its 10-K flag?\n\n*Generated 2026-10-22 19:12 by FinAgent \u00b7 3 specialist agents \u00b7 models `nemotron-3-nano:4b-cpu` / `nemotron-3-nano:4b-cpu`*\n\n> This note was generated by AI agents for educational purposes. It is general information, not personal financial advice or a recommendation to buy or sell any security. Figures come from public data (SEC EDGAR, US Treasury, Yahoo Finance) and may contain errors; verify before relying on them.\n\n## Answer  \nMSFT has shown resilience in past market downturns, with a 3-year beta of 0.97 meaning it typically underperforms the broader market by about 20% when SPY falls 20% [R3]. Its current volatility of 24.2% is below the 5-year average of 28.21%, suggesting lower risk than peers [R1]. The 10-K flags risk factors in Part I, Item 1A [D1], including fixed-income investment risks [D1].  \n\n## Strengths  \n- MSFT in the 2020 COVID crash (2020-02-19 to 2020-03-23): -27.39% vs SPY -33.72% [R3]  \n- MSFT 3-year beta vs SPY: 0.97; a 20% SPY fall implies about -19.41% [R3]  \n- MSFT current volatility 24.2% vs 5-year average 28.21% (annualized) [R1]  \n\n## Risks  \n- MSFT in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -32.12% vs SPY -24.5% [R3]  \n- The 10-K references risk factors in Part I, Item 1A of the filing [D1]  \n- Fixed-income investments are exposed to interest rate risk and credit risk [D1]  \n\n## What to watch  \n- MSFT free-cash-flow yield: 1.7% (last fiscal year FCF $66.99bn) [F2]  \n- The average maturity of the fixed-income portfolio is managed to achieve economic returns [D1]\n\n## Specialist findings\n### Risk Analyst\n*Focus: Value at Risk and expected shortfall to assess downside potential*\n\nMSFT in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -16.76% vs SPY -19.35% [R3]  \nMSFT in the 2020 COVID crash (2020-02-19 to 2020-03-23): -27.39% vs SPY -33.72% [R3]  \nMSFT in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -32.12% vs SPY -24.5% [R3]  \nMSFT 3-year beta vs SPY: 0.97; a 20% SPY fall implies about -19.41% [R3]  \nMSFT current volatility 24.2% vs 5-year average 28.21% (annualized) [R1]  \n\nThese historical stress tests show MSFT has weathered significant market downturns with resilience relative to the broader market.\n\n### Fundamentals Analyst\n*Focus: cash flow stability and margin resilience over the long term*\n\n- MSFT FY ending 2026-06-30: revenue $331.84bn, up 17.79% year on year [F1]  \n- MSFT FY ending 2026-06-30: gross margin 67.94%, operating margin 46.78%, net margin 40.31% [F1]  \n- MSFT FY ending 2026-06-30: net income $133.75bn, diluted EPS $17.95, free cash flow $66.99bn [F1]  \n- MSFT cash and current securities $76.84bn vs total debt $40.29bn (balance sheet 2026-06-30) [F2]  \n- MSFT free-cash-flow yield: 1.7% (last fiscal year FCF $66.99bn) [F2]  \n\nThe company demonstrates strong cash flow generation and a robust balance sheet, indicating low financial risk for long-term investors.\n\n### Filings Analyst\n*Focus: any explicit risk disclosures or contingent liabilities in the 10-K*\n\n- The 10-K references risk factors in Part I, Item 1A of the filing [D1]  \n- Estimates for fair value changes are based on operating results, market conditions, and other factors [D1]  \n- Fixed-income investments are exposed to interest rate risk and credit risk [D1]  \n- The average maturity of the fixed-income portfolio is managed to achieve economic returns [D1]\n\n## Key figures (generated from tool outputs, not by a model)\n\n| Metric | MSFT |\n|---|---|\n| Market cap ($bn) | 3,949.42 [F2] |\n| P/E (TTM) | 29.53x [F2] |\n| Price / sales (TTM) | 11.90x [F2] |\n| FCF yield | 1.70% [F2] |\n| 10-day VaR 95% (historical) | 7.98% [R2] |\n| 10-day VaR 95% (filtered historical simulation) | 7.10% [R2] |\n| Revenue, latest FY ($bn) | 331.84 [F1] |\n| Revenue growth, latest FY | 17.79% [F1] |\n| Operating margin, latest FY | 46.78% [F1] |\n\n## Evidence ledger\n\n| ID | Agent | Tool call | Chosen by | Source | Data retrieved |\n|---|---|---|---|---|---|\n| R1 | risk | `value_at_risk(tickers=['MSFT'], confidence=0.95, horizon_days=10)` | model | computed from 5y daily prices | 2026-10-22 06:07:08 UTC |\n| R2 | risk | `value_at_risk(tickers=['MSFT'], confidence=0.95, horizon_days=10, weights=[1])` | model | computed from 5y daily prices | 2026-10-22 06:07:08 UTC |\n| R3 | risk | `stress_test(tickers=['MSFT'])` | coverage check | computed from 10y daily prices | 2026-10-22 03:37:29 UTC |\n| F1 | fundamentals | `financial_statements(ticker=MSFT, years=5)` | model | SEC EDGAR XBRL company facts | 2026-10-21 21:15:59 UTC |\n| F2 | fundamentals | `valuation_snapshot(ticker=MSFT)` | coverage check | SEC EDGAR XBRL + Yahoo Finance price | 2026-10-21 21:15:59 UTC |\n| D1 | filings | `search_10k(ticker=MSFT, query=risk factors)` | model | https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm | 2026-10-21 21:15:59 UTC |\n\n## How this note was produced\n\n- **Number provenance:** 39 of 39 numbers trace back to a tool result the agent received (100%).\n- **Claim attribution:** 25 of 25 cited claims match their source (company, period, metric, direction; 10-K points by wording) (100%).\n- **Agents:** planner \u2192 risk, fundamentals, filings \u2192 fact-check \u2192 lead analyst.\n- **Tool calls:** 6 (4 chosen by the models, 2 added by coverage checks).\n- **Data:** 8 sources, all fetched or cached within their freshness window. Retrieval times are in the evidence ledger.\n- **Language model:** 10 calls, 8,398 prompt + 1,745 completion tokens, 121.1 s of model time; 121.1 s end to end.\n- **Compute:** risk simulation on CPU (NumPy); 10-K retrieval: BM25; endpoint `http://127.0.0.1:11434/v1`.\n",
+  "stats": {
+    "llm_calls": 10,
+    "prompt_tokens": 8398,
+    "completion_tokens": 1745,
+    "model_seconds": 121.1,
+    "wall_seconds": 121.1,
+    "tool_calls": 6,
+    "tool_calls_chosen_by_model": 4,
+    "revisions": 0,
+    "risk_backend": "CPU (NumPy)",
+    "retrieval": "BM25",
+    "data_sources": 8,
+    "stale_sources": [],
+    "dropped_params": [],
+    "ablations": [],
+    "endpoint": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "quality": {
+      "numbers_checked": 39,
+      "numbers_traced": 39,
+      "number_provenance": 1.0,
+      "claims_checked": 25,
+      "claims_supported": 25,
+      "claim_attribution": 1.0,
+      "claim_issues": []
+    },
+    "provenance": {
+      "checked": 39,
+      "verified": 39,
+      "score": 1.0,
+      "unverified": []
+    },
+    "promissory_phrases": []
+  },
+  "eval": {
+    "ticker": "MSFT",
+    "question": "risk",
+    "variant": "full",
+    "version": "0.2.2"
+  },
+  "events": [
+    {
+      "t": 1792656655.76,
+      "event": "guard",
+      "allowed": true,
+      "personal_advice": false,
+      "rail": "rules"
+    },
+    {
+      "t": 1792656660.47,
+      "event": "plan",
+      "tasks": [
+        {
+          "agent": "risk",
+          "focus": "Value at Risk and expected shortfall to assess downside potential"
+        },
+        {
+          "agent": "fundamentals",
+          "focus": "cash flow stability and margin resilience over the long term"
+        },
+        {
+          "agent": "filings",
+          "focus": "any explicit risk disclosures or contingent liabilities in the 10-K"
+        }
+      ],
+      "source": "model"
+    },
+    {
+      "t": 1792656660.48,
+      "event": "agent_start",
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall to assess downside potential"
+    },
+    {
+      "t": 1792656660.48,
+      "event": "agent_start",
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "cash flow stability and margin resilience over the long term"
+    },
+    {
+      "t": 1792656660.48,
+      "event": "agent_start",
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "any explicit risk disclosures or contingent liabilities in the 10-K"
+    },
+    {
+      "t": 1792656669.25,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [
+        "value_at_risk",
+        "value_at_risk"
+      ],
+      "latency_s": 8.77,
+      "prompt_tokens": 671,
+      "completion_tokens": 121
+    },
+    {
+      "t": 1792656669.29,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R1",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "MSFT"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "seconds": 0.04,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656669.32,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R2",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "MSFT"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10,
+        "weights": [
+          1
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656674.97,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [
+        "financial_statements"
+      ],
+      "latency_s": 5.72,
+      "prompt_tokens": 654,
+      "completion_tokens": 38
+    },
+    {
+      "t": 1792656675.03,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F1",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "MSFT",
+        "years": 5
+      },
+      "seconds": 0.06,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656679.11,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [
+        "search_10k"
+      ],
+      "latency_s": 4.14,
+      "prompt_tokens": 455,
+      "completion_tokens": 40
+    },
+    {
+      "t": 1792656680.31,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D1",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "MSFT",
+        "query": "risk factors"
+      },
+      "seconds": 1.19,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656694.62,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 15.5,
+      "prompt_tokens": 1295,
+      "completion_tokens": 191
+    },
+    {
+      "t": 1792656694.65,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R3",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "MSFT"
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656710.86,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 16.24,
+      "prompt_tokens": 1174,
+      "completion_tokens": 233
+    },
+    {
+      "t": 1792656710.94,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F2",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "MSFT"
+      },
+      "seconds": 0.08,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656719.62,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [],
+      "latency_s": 8.76,
+      "prompt_tokens": 889,
+      "completion_tokens": 90
+    },
+    {
+      "t": 1792656719.62,
+      "event": "agent_done",
+      "agent": "filings",
+      "seconds": 59.1
+    },
+    {
+      "t": 1792656740.35,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 20.73,
+      "prompt_tokens": 1114,
+      "completion_tokens": 274
+    },
+    {
+      "t": 1792656740.35,
+      "event": "agent_done",
+      "agent": "risk",
+      "seconds": 79.9
+    },
+    {
+      "t": 1792656755.82,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 15.46,
+      "prompt_tokens": 997,
+      "completion_tokens": 249
+    },
+    {
+      "t": 1792656755.82,
+      "event": "agent_done",
+      "agent": "fundamentals",
+      "seconds": 95.3
+    },
+    {
+      "t": 1792656755.83,
+      "event": "verify",
+      "agent": "risk",
+      "checked": 11,
+      "verified": 11,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792656755.83,
+      "event": "verify",
+      "agent": "fundamentals",
+      "checked": 12,
+      "verified": 12,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792656755.83,
+      "event": "verify",
+      "agent": "filings",
+      "checked": 0,
+      "verified": 0,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 4,
+      "claims_supported": 4,
+      "claim_issues": []
+    },
+    {
+      "t": 1792656755.83,
+      "event": "agent_start",
+      "agent": "writer",
+      "title": "Lead Analyst",
+      "focus": "summary"
+    },
+    {
+      "t": 1792656776.89,
+      "event": "llm",
+      "agent": "writer",
+      "tool_calls": [],
+      "latency_s": 21.05,
+      "prompt_tokens": 890,
+      "completion_tokens": 429
+    },
+    {
+      "t": 1792656776.89,
+      "event": "verify",
+      "agent": "writer",
+      "checked": 16,
+      "verified": 16,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 11,
+      "claims_supported": 11,
+      "claim_issues": []
+    },
+    {
+      "t": 1792656776.94,
+      "event": "done",
+      "stats": {
+        "llm_calls": 10,
+        "prompt_tokens": 8398,
+        "completion_tokens": 1745,
+        "model_seconds": 121.1,
+        "wall_seconds": 121.1,
+        "tool_calls": 6,
+        "tool_calls_chosen_by_model": 4,
+        "revisions": 0,
+        "risk_backend": "CPU (NumPy)",
+        "retrieval": "BM25",
+        "data_sources": 8,
+        "stale_sources": [],
+        "dropped_params": [],
+        "ablations": [],
+        "endpoint": "http://127.0.0.1:11434/v1",
+        "orchestrator_model": "nemotron-3-nano:4b-cpu",
+        "specialist_model": "nemotron-3-nano:4b-cpu",
+        "quality": {
+          "numbers_checked": 39,
+          "numbers_traced": 39,
+          "number_provenance": 1.0,
+          "claims_checked": 25,
+          "claims_supported": 25,
+          "claim_attribution": 1.0,
+          "claim_issues": []
+        },
+        "provenance": {
+          "checked": 39,
+          "verified": 39,
+          "score": 1.0,
+          "unverified": []
+        },
+        "promissory_phrases": []
+      }
+    }
+  ],
+  "settings": {
+    "profile": "local",
+    "base_url": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "temperature": 0.0,
+    "reasoning": false,
+    "ablate": []
+  }
+}

@@ -1,0 +1,1112 @@
+{
+  "tickers": [
+    "AAPL"
+  ],
+  "question": "Is AAPL's valuation justified by its fundamentals, and what are the main risks?",
+  "guard": {
+    "allowed": true,
+    "personal_advice": false,
+    "rail": "rules"
+  },
+  "plan": [
+    {
+      "agent": "fundamentals",
+      "focus": "AAPL's revenue growth and margins versus its current P/E and price-to-sales multiples"
+    },
+    {
+      "agent": "market",
+      "focus": "how much of AAPL's growth is already priced in through its stock price performance"
+    },
+    {
+      "agent": "risk",
+      "focus": "Value at Risk and expected shortfall under downside scenarios"
+    },
+    {
+      "agent": "filings",
+      "focus": "key risks and business challenges highlighted in AAPL's latest 10-K"
+    }
+  ],
+  "plan_source": "model",
+  "findings": {
+    "fundamentals": {
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "AAPL's revenue growth and margins versus its current P/E and price-to-sales multiples",
+      "text": "AAPL revenue $416.16bn, up 6.43% year on year [F1]  \nAAPL gross margin 46.91% [F1]  \nAAPL operating margin 31.97% [F1]  \nAAPL net margin 26.92% [F1]  \nAAPL market cap $4954.72bn at $339.5 per share [F2]  \n\nAAPL's valuation appears justified by its strong profitability and consistent revenue growth.",
+      "draft": "AAPL revenue $416.16bn, up 6.43% year on year [F1]  \nAAPL gross margin 46.91% [F1]  \nAAPL operating margin 31.97% [F1]  \nAAPL net margin 26.92% [F1]  \nAAPL market cap $4954.72bn at $339.5 per share [F2]  \n\nAAPL's valuation appears justified by its strong profitability and consistent revenue growth.",
+      "seconds": 40.1,
+      "provenance": {
+        "checked": 7,
+        "verified": 7,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "market": {
+      "agent": "market",
+      "title": "Market Analyst",
+      "focus": "how much of AAPL's growth is already priced in through its stock price performance",
+      "text": "AAPL 5y total return: 132.86% [M1]  \nAAPL 5y annualized return: 18.43% [M1]  \nAAPL 5y annualized volatility: 28.03% [M1]  \nAAPL 5y Sharpe ratio: 0.61 [M1]  \nAAPL 5y max drawdown: -33.36% [M1]  \n\nAAPL 5y beta vs SPY: 1.16 [M2]  \nAAPL 5y correlation with SPY: 0.71 [M2]  \nAAPL 5y return: 132.86% vs SPY 81.28% [M2]  \nAAPL 5y annualized alpha vs SPY: 5.27% [M2]  \n\nAAPL's growth is already priced in through its stock price performance.",
+      "draft": "AAPL 5y total return: 132.86% [M1]  \nAAPL 5y annualized return: 18.43% [M1]  \nAAPL 5y annualized volatility: 28.03% [M1]  \nAAPL 5y Sharpe ratio: 0.61 [M1]  \nAAPL 5y max drawdown: -33.36% [M1]  \n\nAAPL 5y beta vs SPY: 1.16 [M2]  \nAAPL 5y correlation with SPY: 0.71 [M2]  \nAAPL 5y return: 132.86% vs SPY 81.28% [M2]  \nAAPL 5y annualized alpha vs SPY: 5.27% [M2]  \n\nAAPL's growth is already priced in through its stock price performance.",
+      "seconds": 56.5,
+      "provenance": {
+        "checked": 10,
+        "verified": 10,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 9,
+        "supported": 9,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "risk": {
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall under downside scenarios",
+      "text": "AAPL 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 8.19% of value [R1]  \nAAPL 95% 10-day expected shortfall, historical: 10.23% [R1]  \nAAPL 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 5.21% [R1]  \nAAPL 95% 10-day expected shortfall, filtered historical simulation: 7.13% [R1]  \nAAPL in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -33.04% vs SPY -19.35% [R2]  \n\nAAPL's downside risk is significant and historically severe.",
+      "draft": "AAPL 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 8.19% of value [R1]  \nAAPL 95% 10-day expected shortfall, historical: 10.23% [R1]  \nAAPL 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 5.21% [R1]  \nAAPL 95% 10-day expected shortfall, filtered historical simulation: 7.13% [R1]  \nAAPL in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -33.04% vs SPY -19.35% [R2]  \n\nAAPL's downside risk is significant and historically severe.",
+      "seconds": 72.5,
+      "provenance": {
+        "checked": 10,
+        "verified": 10,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "filings": {
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "key risks and business challenges highlighted in AAPL's latest 10-K",
+      "text": "- The Company\u2019s effective tax rate for 2025 was 15.6%, lower than the statutory federal income tax rate [D1]  \n- The effective tax rate is affected by changes in the mix of earnings in countries with differing statutory tax rates [D1]  \n- The Organisation for Economic Co-operation and Development continues to advance proposals for modernizing international tax rules [D1]  \n- The Company may not be able to accurately predict, control or mitigate these risks [D1]",
+      "draft": "- The Company\u2019s effective tax rate for 2025 was 15.6%, lower than the statutory federal income tax rate [D1]  \n- The effective tax rate is affected by changes in the mix of earnings in countries with differing statutory tax rates [D1]  \n- The Organisation for Economic Co-operation and Development continues to advance proposals for modernizing international tax rules [D1]  \n- The Company may not be able to accurately predict, control or mitigate these risks [D1]",
+      "seconds": 83.6,
+      "provenance": {
+        "checked": 1,
+        "verified": 1,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 4,
+        "supported": 4,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    }
+  },
+  "evidence": [
+    {
+      "id": "F1",
+      "agent": "fundamentals",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "AAPL",
+        "years": 3
+      },
+      "result": {
+        "ticker": "AAPL",
+        "company": "Apple Inc.",
+        "source": "SEC XBRL company facts (10-K)",
+        "fiscal_years": [
+          {
+            "fiscal_year_end": "2023-09-30",
+            "revenue_bn": 383.29,
+            "revenue_growth_pct": -2.8,
+            "gross_margin_pct": 44.13,
+            "operating_margin_pct": 29.82,
+            "net_income_bn": 97.0,
+            "net_margin_pct": 25.31,
+            "eps_diluted": 6.13,
+            "free_cash_flow_bn": 99.58,
+            "rnd_pct_of_revenue": 7.8
+          },
+          {
+            "fiscal_year_end": "2024-09-28",
+            "revenue_bn": 391.04,
+            "revenue_growth_pct": 2.02,
+            "gross_margin_pct": 46.21,
+            "operating_margin_pct": 31.51,
+            "net_income_bn": 93.74,
+            "net_margin_pct": 23.97,
+            "eps_diluted": 6.08,
+            "free_cash_flow_bn": 108.81,
+            "rnd_pct_of_revenue": 8.02
+          },
+          {
+            "fiscal_year_end": "2025-09-27",
+            "revenue_bn": 416.16,
+            "revenue_growth_pct": 6.43,
+            "gross_margin_pct": 46.91,
+            "operating_margin_pct": 31.97,
+            "net_income_bn": 112.01,
+            "net_margin_pct": 26.92,
+            "eps_diluted": 7.46,
+            "free_cash_flow_bn": 98.77,
+            "rnd_pct_of_revenue": 8.3
+          }
+        ],
+        "revenue_cagr_pct": 4.22,
+        "net_income_includes_nci": false,
+        "xbrl_sources": {
+          "revenue": "RevenueFromContractWithCustomerExcludingAssessedTax (10-K 0000320193-25-000079, filed 2025-10-31)",
+          "gross_profit": "GrossProfit (10-K 0000320193-25-000079, filed 2025-10-31)",
+          "operating_income": "OperatingIncomeLoss (10-K 0000320193-25-000079, filed 2025-10-31)",
+          "net_income": "NetIncomeLoss (10-K 0000320193-25-000079, filed 2025-10-31)",
+          "eps_diluted": "EarningsPerShareDiluted (10-K 0000320193-25-000079, filed 2025-10-31)",
+          "rnd": "ResearchAndDevelopmentExpense (10-K 0000320193-25-000079, filed 2025-10-31)",
+          "operating_cash_flow": "NetCashProvidedByUsedInOperatingActivities (10-K 0000320193-25-000079, filed 2025-10-31)",
+          "capex": "PaymentsToAcquirePropertyPlantAndEquipment (10-K 0000320193-25-000079, filed 2025-10-31)"
+        },
+        "filing_urls": [
+          "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/"
+        ],
+        "facts": [
+          "AAPL FY ending 2025-09-27: revenue $416.16bn, up 6.43% year on year",
+          "AAPL FY ending 2025-09-27: gross margin 46.91%, operating margin 31.97%, net margin 26.92%",
+          "AAPL FY ending 2025-09-27: net income $112.01bn, diluted EPS $7.46, free cash flow $98.77bn",
+          "AAPL FY ending 2024-09-28: revenue $391.04bn (growth 2.02%), operating margin 31.51%",
+          "AAPL FY ending 2023-09-30: revenue $383.29bn (growth -2.8%), operating margin 29.82%",
+          "AAPL revenue CAGR from FY 2023 to FY 2025: 4.22%"
+        ]
+      },
+      "seconds": 0.11,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+          "fetched_at": "2026-10-21T21:16:01Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F2",
+      "agent": "fundamentals",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "AAPL"
+      },
+      "result": {
+        "ticker": "AAPL",
+        "company": "Apple Inc.",
+        "price": 339.5,
+        "price_date": "2026-10-20",
+        "shares_outstanding_bn": 14.594,
+        "market_cap_bn": 4954.72,
+        "ttm_revenue_bn": 466.82,
+        "ttm_net_income_bn": 128.93,
+        "ttm_period_end": "2026-06-27",
+        "pe_ratio_ttm": 38.43,
+        "price_to_sales_ttm": 10.61,
+        "balance_sheet_date": "2026-06-27",
+        "cash_and_securities_bn": 62.4,
+        "total_debt_bn": 84.34,
+        "enterprise_value_bn": 4976.67,
+        "ev_to_sales_ttm": 10.66,
+        "free_cash_flow_last_fy_bn": 98.77,
+        "fcf_yield_pct": 1.99,
+        "net_income_includes_nci": false,
+        "method": "market cap = price x EntityCommonStockSharesOutstanding shares; TTM = FY to 2025-09-27 + YTD to 2026-06-27 - prior-year YTD; debt = LongTermDebtNoncurrent + LongTermDebtCurrent + CommercialPaper as of 2026-06-27; leases excluded",
+        "xbrl_sources": {
+          "revenue_ttm": "RevenueFromContractWithCustomerExcludingAssessedTax ['0000320193-25-000079', '0000320193-26-000020']",
+          "net_income_ttm": "NetIncomeLoss ['0000320193-25-000079', '0000320193-26-000020']",
+          "balance_sheet": [
+            "CashAndCashEquivalentsAtCarryingValue (10-Q 0000320193-26-000020, filed 2026-07-31)",
+            "MarketableSecuritiesCurrent (10-Q 0000320193-26-000020, filed 2026-07-31)",
+            "LongTermDebtNoncurrent (10-Q 0000320193-26-000020, filed 2026-07-31)",
+            "LongTermDebtCurrent (10-Q 0000320193-26-000020, filed 2026-07-31)",
+            "CommercialPaper (10-Q 0000320193-26-000020, filed 2026-07-31)"
+          ]
+        },
+        "facts": [
+          "AAPL market cap: $4954.72bn at $339.5 per share (2026-10-20)",
+          "AAPL P/E (trailing 12 months): 38.43",
+          "AAPL price-to-sales (trailing 12 months): 10.61; EV-to-sales: 10.66",
+          "AAPL trailing-12-month revenue $466.82bn and net income $128.93bn (to 2026-06-27)",
+          "AAPL free-cash-flow yield: 1.99% (last fiscal year FCF $98.77bn)",
+          "AAPL cash and current securities $62.4bn vs total debt $84.34bn (balance sheet 2026-06-27); enterprise value $4976.67bn"
+        ]
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+          "fetched_at": "2026-10-21T21:16:01Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?range=1y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:04:46Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "M1",
+      "agent": "market",
+      "tool": "price_performance",
+      "args": {
+        "ticker": "AAPL",
+        "period": "5y"
+      },
+      "result": {
+        "ticker": "AAPL",
+        "company": "Apple Inc.",
+        "as_of": "2026-10-20",
+        "period": "5y",
+        "last_price": 339.5,
+        "total_return_pct": 132.86,
+        "annualized_return_pct": 18.43,
+        "volatility_pct": 28.03,
+        "sharpe_ratio": 0.61,
+        "avg_risk_free_rate_pct": 3.92,
+        "risk_free_source": "US Treasury daily bill rates (13-week, coupon equivalent)",
+        "max_drawdown_pct": -33.36,
+        "drawdown_peak_date": "2024-12-26",
+        "drawdown_trough_date": "2025-04-08",
+        "high_52w": 343.46,
+        "pct_below_52w_high": 1.15,
+        "sma_200": 292.85,
+        "price_vs_sma_200": "above",
+        "rsi_14": 55.5,
+        "facts": [
+          "AAPL 5y total return: 132.86%",
+          "AAPL 5y annualized return: 18.43%",
+          "AAPL 5y annualized volatility: 28.03%",
+          "AAPL 5y Sharpe ratio: 0.61",
+          "AAPL 5y max drawdown: -33.36% (2024-12-26 to 2025-04-08)",
+          "AAPL price: $339.5 on 2026-10-20, 1.15% below the 52-week high of $343.46",
+          "AAPL price is above its 200-day average of $292.85"
+        ]
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:04:53Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2021/all?type=daily_treasury_bill_rates&field_tdr_date_value=2021&_format=csv",
+          "fetched_at": "2026-10-22T05:55:40Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2022/all?type=daily_treasury_bill_rates&field_tdr_date_value=2022&_format=csv",
+          "fetched_at": "2026-10-22T05:55:41Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2023/all?type=daily_treasury_bill_rates&field_tdr_date_value=2023&_format=csv",
+          "fetched_at": "2026-10-22T05:55:42Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2024/all?type=daily_treasury_bill_rates&field_tdr_date_value=2024&_format=csv",
+          "fetched_at": "2026-10-22T05:55:43Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2025/all?type=daily_treasury_bill_rates&field_tdr_date_value=2025&_format=csv",
+          "fetched_at": "2026-10-22T05:55:43Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_bill_rates&field_tdr_date_value=2026&_format=csv",
+          "fetched_at": "2026-10-21T21:17:11Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "M2",
+      "agent": "market",
+      "tool": "benchmark_comparison",
+      "args": {
+        "ticker": "AAPL",
+        "benchmark": "SPY",
+        "period": "5y"
+      },
+      "result": {
+        "ticker": "AAPL",
+        "benchmark": "SPY",
+        "period": "5y",
+        "beta": 1.16,
+        "correlation": 0.71,
+        "alpha_pct_per_year": 5.27,
+        "tracking_error_pct": 19.87,
+        "information_ratio": 0.38,
+        "ticker_return_pct": 132.86,
+        "benchmark_return_pct": 81.28,
+        "excess_return_pct": 51.58,
+        "facts": [
+          "AAPL 5y beta vs SPY: 1.16",
+          "AAPL 5y correlation with SPY: 0.71",
+          "5y return: AAPL 132.86% vs SPY 81.28% (excess 51.58%)",
+          "AAPL 5y annualized alpha vs SPY: 5.27%"
+        ]
+      },
+      "seconds": 0.02,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:04:53Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:29Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R1",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "AAPL"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "result": {
+        "portfolio": {
+          "AAPL": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 8.19,
+        "historical_cvar_pct": 10.23,
+        "fhs_var_pct": 5.21,
+        "fhs_cvar_pct": 7.13,
+        "fhs_prob_loss_over_10pct": 0.4,
+        "current_vol_pct": 17.8,
+        "average_vol_pct": 28.04,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 22.8,
+        "facts": [
+          "AAPL 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 8.19% of value",
+          "AAPL 95% 10-day expected shortfall, historical: 10.23%",
+          "AAPL 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 5.21%",
+          "AAPL 95% 10-day expected shortfall, filtered historical simulation: 7.13%",
+          "AAPL current volatility 17.8% vs 5-year average 28.04% (annualized)",
+          "AAPL probability of losing more than 10% over 10 days (filtered historical simulation): 0.4%"
+        ]
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:05:00Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R2",
+      "agent": "risk",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "AAPL"
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "AAPL": 1.0
+        },
+        "episodes": [
+          {
+            "episode": "2018 Q4 sell-off",
+            "portfolio_return_pct": -33.04,
+            "spy_return_pct": -19.35
+          },
+          {
+            "episode": "2020 COVID crash",
+            "portfolio_return_pct": -30.67,
+            "spy_return_pct": -33.72
+          },
+          {
+            "episode": "2022 rate-hike bear market",
+            "portfolio_return_pct": -23.68,
+            "spy_return_pct": -24.5
+          }
+        ],
+        "beta_vs_spy_3y": 1.05,
+        "beta_implied_move_if_spy_falls_20pct": -21.04,
+        "facts": [
+          "AAPL in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -33.04% vs SPY -19.35%",
+          "AAPL in the 2020 COVID crash (2020-02-19 to 2020-03-23): -30.67% vs SPY -33.72%",
+          "AAPL in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -23.68% vs SPY -24.5%",
+          "AAPL 3-year beta vs SPY: 1.05; a 20% SPY fall implies about -21.04%"
+        ]
+      },
+      "seconds": 0.01,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:04:53Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:29Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D1",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "AAPL",
+        "query": "valuation fundamentals risks"
+      },
+      "result": {
+        "ticker": "AAPL",
+        "filing": "10-K filed 2025-10-31 (period 2025-09-27)",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "mda#8",
+            "text": "2025 2024 2023 Provision for income taxes $ 20,719 $ 29,749 $ 16,741 Effective tax rate 15.6 % 24.1 % 14.7 % Statutory federal income tax rate % % % The Company\u2019s effective tax rate for 2025 was lower than the statutory federal income tax rate primarily due to a lower effective tax rate on foreign earnings, including the impact of changes in unrecognized tax benefits, the impact of the U.S. federal R&D credit, and tax benefits from share-based compensation, partially offset by a change in valuation allowance and state income taxes. ..."
+          },
+          {
+            "ref": "risk_factors#49",
+            "text": "... For example, the Organisation for Economic Co-operation and Development continues to advance proposals for modernizing international tax rules, including the introduction of global minimum tax standards. The Company\u2019s effective tax rates are affected by changes in the mix of earnings in countries with differing statutory tax rates, changes in the valuation of deferred tax assets and liabilities, the introduction of new taxes, and changes in tax laws or their interpretation. ..."
+          },
+          {
+            "ref": "risk_factors#0",
+            "text": "... The Company may not be able to accurately predict, control or mitigate these risks. Statements in this section are based on the Company\u2019s beliefs and opinions regarding matters that could materially adversely affect the Company in the future and are not representations as to whether such matters have or have not occurred previously. The risks and uncertainties described below are not exhaustive and should not be considered a complete statement of all potential risks or uncertainties that the Company faces or may face in the future. ..."
+          }
+        ]
+      },
+      "seconds": 0.43,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000320193.json",
+          "fetched_at": "2026-10-22T06:05:04Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+          "fetched_at": "2026-10-22T06:05:05Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    }
+  ],
+  "llm_calls": [
+    {
+      "agent": "planner",
+      "role": "planner",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 258,
+      "completion_tokens": 144,
+      "latency_s": 7.23
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 662,
+      "completion_tokens": 65,
+      "latency_s": 6.66
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1333,
+      "completion_tokens": 129,
+      "latency_s": 13.32
+    },
+    {
+      "agent": "market",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 623,
+      "completion_tokens": 88,
+      "latency_s": 7.39
+    },
+    {
+      "agent": "market",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1127,
+      "completion_tokens": 230,
+      "latency_s": 16.39
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 669,
+      "completion_tokens": 83,
+      "latency_s": 7.33
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1275,
+      "completion_tokens": 214,
+      "latency_s": 16.04
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 455,
+      "completion_tokens": 43,
+      "latency_s": 5.37
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1086,
+      "completion_tokens": 107,
+      "latency_s": 11.09
+    },
+    {
+      "agent": "writer",
+      "role": "writer",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 960,
+      "completion_tokens": 298,
+      "latency_s": 16.7
+    }
+  ],
+  "narrative": "## Answer  \nAAPL's valuation appears justified by its strong profitability and consistent revenue growth [F1]. AAPL's net margin is 26.92% [F1] and gross margin is 46.91% [F1], supporting a high valuation relative to fundamentals.  \n\n## Strengths  \n- AAPL's net margin is 26.92% [F1]  \n- AAPL's gross margin is 46.91% [F1]  \n- AAPL's operating margin is 31.97% [F1]  \n\n## Risks  \n- AAPL's downside risk is significant and historically severe [R2]  \n- AAPL 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 8.19% of value [R1]  \n- AAPL 95% 10-day expected shortfall, historical: 10.23% [R1]  \n\n## What to watch  \n- The Company\u2019s effective tax rate for 2025 was 15.6%, lower than the statutory federal income tax rate [D1]  \n- The Organisation for Economic Co-operation and Development continues to advance proposals for modernizing international tax rules [D1]",
+  "narrative_draft": "## Answer  \nAAPL's valuation appears justified by its strong profitability and consistent revenue growth [F1]. AAPL's net margin is 26.92% [F1] and gross margin is 46.91% [F1], supporting a high valuation relative to fundamentals.  \n\n## Strengths  \n- AAPL's net margin is 26.92% [F1]  \n- AAPL's gross margin is 46.91% [F1]  \n- AAPL's operating margin is 31.97% [F1]  \n\n## Risks  \n- AAPL's downside risk is significant and historically severe [R2]  \n- AAPL 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 8.19% of value [R1]  \n- AAPL 95% 10-day expected shortfall, historical: 10.23% [R1]  \n\n## What to watch  \n- The Company\u2019s effective tax rate for 2025 was 15.6%, lower than the statutory federal income tax rate [D1]  \n- The Organisation for Economic Co-operation and Development continues to advance proposals for modernizing international tax rules [D1]",
+  "writer_check": {
+    "provenance": {
+      "checked": 10,
+      "verified": 10,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": []
+    },
+    "attribution": {
+      "claims": 8,
+      "supported": 8,
+      "score": 1.0,
+      "issues": []
+    },
+    "problems": []
+  },
+  "revisions": [],
+  "report": "# Research note: AAPL\n**Question:** Is AAPL's valuation justified by its fundamentals, and what are the main risks?\n\n*Generated 2026-10-22 19:06 by FinAgent \u00b7 4 specialist agents \u00b7 models `nemotron-3-nano:4b-cpu` / `nemotron-3-nano:4b-cpu`*\n\n> This note was generated by AI agents for educational purposes. It is general information, not personal financial advice or a recommendation to buy or sell any security. Figures come from public data (SEC EDGAR, US Treasury, Yahoo Finance) and may contain errors; verify before relying on them.\n\n## Answer  \nAAPL's valuation appears justified by its strong profitability and consistent revenue growth [F1]. AAPL's net margin is 26.92% [F1] and gross margin is 46.91% [F1], supporting a high valuation relative to fundamentals.  \n\n## Strengths  \n- AAPL's net margin is 26.92% [F1]  \n- AAPL's gross margin is 46.91% [F1]  \n- AAPL's operating margin is 31.97% [F1]  \n\n## Risks  \n- AAPL's downside risk is significant and historically severe [R2]  \n- AAPL 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 8.19% of value [R1]  \n- AAPL 95% 10-day expected shortfall, historical: 10.23% [R1]  \n\n## What to watch  \n- The Company\u2019s effective tax rate for 2025 was 15.6%, lower than the statutory federal income tax rate [D1]  \n- The Organisation for Economic Co-operation and Development continues to advance proposals for modernizing international tax rules [D1]\n\n## Specialist findings\n### Fundamentals Analyst\n*Focus: AAPL's revenue growth and margins versus its current P/E and price-to-sales multiples*\n\nAAPL revenue $416.16bn, up 6.43% year on year [F1]  \nAAPL gross margin 46.91% [F1]  \nAAPL operating margin 31.97% [F1]  \nAAPL net margin 26.92% [F1]  \nAAPL market cap $4954.72bn at $339.5 per share [F2]  \n\nAAPL's valuation appears justified by its strong profitability and consistent revenue growth.\n\n### Market Analyst\n*Focus: how much of AAPL's growth is already priced in through its stock price performance*\n\nAAPL 5y total return: 132.86% [M1]  \nAAPL 5y annualized return: 18.43% [M1]  \nAAPL 5y annualized volatility: 28.03% [M1]  \nAAPL 5y Sharpe ratio: 0.61 [M1]  \nAAPL 5y max drawdown: -33.36% [M1]  \n\nAAPL 5y beta vs SPY: 1.16 [M2]  \nAAPL 5y correlation with SPY: 0.71 [M2]  \nAAPL 5y return: 132.86% vs SPY 81.28% [M2]  \nAAPL 5y annualized alpha vs SPY: 5.27% [M2]  \n\nAAPL's growth is already priced in through its stock price performance.\n\n### Risk Analyst\n*Focus: Value at Risk and expected shortfall under downside scenarios*\n\nAAPL 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 8.19% of value [R1]  \nAAPL 95% 10-day expected shortfall, historical: 10.23% [R1]  \nAAPL 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 5.21% [R1]  \nAAPL 95% 10-day expected shortfall, filtered historical simulation: 7.13% [R1]  \nAAPL in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -33.04% vs SPY -19.35% [R2]  \n\nAAPL's downside risk is significant and historically severe.\n\n### Filings Analyst\n*Focus: key risks and business challenges highlighted in AAPL's latest 10-K*\n\n- The Company\u2019s effective tax rate for 2025 was 15.6%, lower than the statutory federal income tax rate [D1]  \n- The effective tax rate is affected by changes in the mix of earnings in countries with differing statutory tax rates [D1]  \n- The Organisation for Economic Co-operation and Development continues to advance proposals for modernizing international tax rules [D1]  \n- The Company may not be able to accurately predict, control or mitigate these risks [D1]\n\n## Key figures (generated from tool outputs, not by a model)\n\n| Metric | AAPL |\n|---|---|\n| Price | 339.50 [M1] |\n| Total return (5y) | 132.86% [M1] |\n| Volatility, annualised (5y) | 28.03% [M1] |\n| Max drawdown (5y) | -33.36% [M1] |\n| Beta vs SPY (5y) | 1.16 [M2] |\n| Market cap ($bn) | 4,954.72 [F2] |\n| P/E (TTM) | 38.43x [F2] |\n| Price / sales (TTM) | 10.61x [F2] |\n| FCF yield | 1.99% [F2] |\n| Revenue, latest FY ($bn) | 416.16 [F1] |\n| Revenue growth, latest FY | 6.43% [F1] |\n| Operating margin, latest FY | 31.97% [F1] |\n| 10-day VaR 95% (historical) | 8.19% [R1] |\n| 10-day VaR 95% (filtered historical simulation) | 5.21% [R1] |\n\n## Evidence ledger\n\n| ID | Agent | Tool call | Chosen by | Source | Data retrieved |\n|---|---|---|---|---|---|\n| F1 | fundamentals | `financial_statements(ticker=AAPL, years=3)` | model | SEC EDGAR XBRL company facts | 2026-10-21 21:15:59 UTC |\n| F2 | fundamentals | `valuation_snapshot(ticker=AAPL)` | model | SEC EDGAR XBRL + Yahoo Finance price | 2026-10-21 21:15:59 UTC |\n| M1 | market | `price_performance(ticker=AAPL, period=5y)` | model | Yahoo Finance daily prices; US Treasury bill rates | 2026-10-21 21:17:11 UTC |\n| M2 | market | `benchmark_comparison(ticker=AAPL, benchmark=SPY, period=5y)` | model | Yahoo Finance daily prices | 2026-10-22 03:37:29 UTC |\n| R1 | risk | `value_at_risk(tickers=['AAPL'], confidence=0.95, horizon_days=10)` | model | computed from 5y daily prices | 2026-10-22 06:05:00 UTC |\n| R2 | risk | `stress_test(tickers=['AAPL'])` | model | computed from 10y daily prices | 2026-10-22 03:37:29 UTC |\n| D1 | filings | `search_10k(ticker=AAPL, query=valuation fundamentals risks)` | model | https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm | 2026-10-21 21:15:59 UTC |\n\n## How this note was produced\n\n- **Number provenance:** 38 of 38 numbers trace back to a tool result the agent received (100%).\n- **Claim attribution:** 31 of 31 cited claims match their source (company, period, metric, direction; 10-K points by wording) (100%).\n- **Agents:** planner \u2192 fundamentals, market, risk, filings \u2192 fact-check \u2192 lead analyst.\n- **Tool calls:** 7 (all chosen by the models).\n- **Data:** 14 sources, all fetched or cached within their freshness window. Retrieval times are in the evidence ledger.\n- **Language model:** 10 calls, 8,448 prompt + 1,401 completion tokens, 107.5 s of model time; 107.6 s end to end.\n- **Compute:** risk simulation on CPU (NumPy); 10-K retrieval: BM25; endpoint `http://127.0.0.1:11434/v1`.\n",
+  "stats": {
+    "llm_calls": 10,
+    "prompt_tokens": 8448,
+    "completion_tokens": 1401,
+    "model_seconds": 107.5,
+    "wall_seconds": 107.6,
+    "tool_calls": 7,
+    "tool_calls_chosen_by_model": 7,
+    "revisions": 0,
+    "risk_backend": "CPU (NumPy)",
+    "retrieval": "BM25",
+    "data_sources": 14,
+    "stale_sources": [],
+    "dropped_params": [],
+    "ablations": [],
+    "endpoint": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "quality": {
+      "numbers_checked": 38,
+      "numbers_traced": 38,
+      "number_provenance": 1.0,
+      "claims_checked": 31,
+      "claims_supported": 31,
+      "claim_attribution": 1.0,
+      "claim_issues": []
+    },
+    "provenance": {
+      "checked": 38,
+      "verified": 38,
+      "score": 1.0,
+      "unverified": []
+    },
+    "promissory_phrases": []
+  },
+  "eval": {
+    "ticker": "AAPL",
+    "question": "valuation",
+    "variant": "full",
+    "version": "0.2.2"
+  },
+  "events": [
+    {
+      "t": 1792656286.9,
+      "event": "guard",
+      "allowed": true,
+      "personal_advice": false,
+      "rail": "rules"
+    },
+    {
+      "t": 1792656294.14,
+      "event": "plan",
+      "tasks": [
+        {
+          "agent": "fundamentals",
+          "focus": "AAPL's revenue growth and margins versus its current P/E and price-to-sales multiples"
+        },
+        {
+          "agent": "market",
+          "focus": "how much of AAPL's growth is already priced in through its stock price performance"
+        },
+        {
+          "agent": "risk",
+          "focus": "Value at Risk and expected shortfall under downside scenarios"
+        },
+        {
+          "agent": "filings",
+          "focus": "key risks and business challenges highlighted in AAPL's latest 10-K"
+        }
+      ],
+      "source": "model"
+    },
+    {
+      "t": 1792656294.14,
+      "event": "agent_start",
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "AAPL's revenue growth and margins versus its current P/E and price-to-sales multiples"
+    },
+    {
+      "t": 1792656294.14,
+      "event": "agent_start",
+      "agent": "market",
+      "title": "Market Analyst",
+      "focus": "how much of AAPL's growth is already priced in through its stock price performance"
+    },
+    {
+      "t": 1792656294.14,
+      "event": "agent_start",
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall under downside scenarios"
+    },
+    {
+      "t": 1792656294.14,
+      "event": "agent_start",
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "key risks and business challenges highlighted in AAPL's latest 10-K"
+    },
+    {
+      "t": 1792656300.8,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [
+        "financial_statements",
+        "valuation_snapshot"
+      ],
+      "latency_s": 6.66,
+      "prompt_tokens": 662,
+      "completion_tokens": 65
+    },
+    {
+      "t": 1792656300.91,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F1",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "AAPL",
+        "years": 3
+      },
+      "seconds": 0.11,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656300.96,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F2",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "AAPL"
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656308.19,
+      "event": "llm",
+      "agent": "market",
+      "tool_calls": [
+        "price_performance",
+        "benchmark_comparison"
+      ],
+      "latency_s": 7.39,
+      "prompt_tokens": 623,
+      "completion_tokens": 88
+    },
+    {
+      "t": 1792656308.24,
+      "event": "tool",
+      "agent": "market",
+      "id": "M1",
+      "tool": "price_performance",
+      "args": {
+        "ticker": "AAPL",
+        "period": "5y"
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656308.26,
+      "event": "tool",
+      "agent": "market",
+      "id": "M2",
+      "tool": "benchmark_comparison",
+      "args": {
+        "ticker": "AAPL",
+        "benchmark": "SPY",
+        "period": "5y"
+      },
+      "seconds": 0.02,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656315.52,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [
+        "value_at_risk",
+        "stress_test"
+      ],
+      "latency_s": 7.33,
+      "prompt_tokens": 669,
+      "completion_tokens": 83
+    },
+    {
+      "t": 1792656315.57,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R1",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "AAPL"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656315.58,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R2",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "AAPL"
+        ]
+      },
+      "seconds": 0.01,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656320.9,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [
+        "search_10k"
+      ],
+      "latency_s": 5.37,
+      "prompt_tokens": 455,
+      "completion_tokens": 43
+    },
+    {
+      "t": 1792656321.32,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D1",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "AAPL",
+        "query": "valuation fundamentals risks"
+      },
+      "seconds": 0.43,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656334.22,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 13.32,
+      "prompt_tokens": 1333,
+      "completion_tokens": 129
+    },
+    {
+      "t": 1792656334.22,
+      "event": "agent_done",
+      "agent": "fundamentals",
+      "seconds": 40.1
+    },
+    {
+      "t": 1792656350.61,
+      "event": "llm",
+      "agent": "market",
+      "tool_calls": [],
+      "latency_s": 16.39,
+      "prompt_tokens": 1127,
+      "completion_tokens": 230
+    },
+    {
+      "t": 1792656350.61,
+      "event": "agent_done",
+      "agent": "market",
+      "seconds": 56.5
+    },
+    {
+      "t": 1792656366.65,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 16.04,
+      "prompt_tokens": 1275,
+      "completion_tokens": 214
+    },
+    {
+      "t": 1792656366.65,
+      "event": "agent_done",
+      "agent": "risk",
+      "seconds": 72.5
+    },
+    {
+      "t": 1792656377.75,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [],
+      "latency_s": 11.09,
+      "prompt_tokens": 1086,
+      "completion_tokens": 107
+    },
+    {
+      "t": 1792656377.75,
+      "event": "agent_done",
+      "agent": "filings",
+      "seconds": 83.6
+    },
+    {
+      "t": 1792656377.75,
+      "event": "verify",
+      "agent": "fundamentals",
+      "checked": 7,
+      "verified": 7,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792656377.76,
+      "event": "verify",
+      "agent": "market",
+      "checked": 10,
+      "verified": 10,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 9,
+      "claims_supported": 9,
+      "claim_issues": []
+    },
+    {
+      "t": 1792656377.76,
+      "event": "verify",
+      "agent": "risk",
+      "checked": 10,
+      "verified": 10,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792656377.76,
+      "event": "verify",
+      "agent": "filings",
+      "checked": 1,
+      "verified": 1,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 4,
+      "claims_supported": 4,
+      "claim_issues": []
+    },
+    {
+      "t": 1792656377.77,
+      "event": "agent_start",
+      "agent": "writer",
+      "title": "Lead Analyst",
+      "focus": "summary"
+    },
+    {
+      "t": 1792656394.47,
+      "event": "llm",
+      "agent": "writer",
+      "tool_calls": [],
+      "latency_s": 16.7,
+      "prompt_tokens": 960,
+      "completion_tokens": 298
+    },
+    {
+      "t": 1792656394.48,
+      "event": "verify",
+      "agent": "writer",
+      "checked": 10,
+      "verified": 10,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 8,
+      "claims_supported": 8,
+      "claim_issues": []
+    },
+    {
+      "t": 1792656394.53,
+      "event": "done",
+      "stats": {
+        "llm_calls": 10,
+        "prompt_tokens": 8448,
+        "completion_tokens": 1401,
+        "model_seconds": 107.5,
+        "wall_seconds": 107.6,
+        "tool_calls": 7,
+        "tool_calls_chosen_by_model": 7,
+        "revisions": 0,
+        "risk_backend": "CPU (NumPy)",
+        "retrieval": "BM25",
+        "data_sources": 14,
+        "stale_sources": [],
+        "dropped_params": [],
+        "ablations": [],
+        "endpoint": "http://127.0.0.1:11434/v1",
+        "orchestrator_model": "nemotron-3-nano:4b-cpu",
+        "specialist_model": "nemotron-3-nano:4b-cpu",
+        "quality": {
+          "numbers_checked": 38,
+          "numbers_traced": 38,
+          "number_provenance": 1.0,
+          "claims_checked": 31,
+          "claims_supported": 31,
+          "claim_attribution": 1.0,
+          "claim_issues": []
+        },
+        "provenance": {
+          "checked": 38,
+          "verified": 38,
+          "score": 1.0,
+          "unverified": []
+        },
+        "promissory_phrases": []
+      }
+    }
+  ],
+  "settings": {
+    "profile": "local",
+    "base_url": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "temperature": 0.0,
+    "reasoning": false,
+    "ablate": []
+  }
+}

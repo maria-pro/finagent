@@ -1,0 +1,1051 @@
+{
+  "tickers": [
+    "AMD"
+  ],
+  "question": "How risky is AMD for a long-term investor, and what does its 10-K flag?",
+  "guard": {
+    "allowed": true,
+    "personal_advice": false,
+    "rail": "rules"
+  },
+  "plan": [
+    {
+      "agent": "risk",
+      "focus": "Value at Risk and expected shortfall to assess downside potential"
+    },
+    {
+      "agent": "fundamentals",
+      "focus": "sustainable revenue growth and margin stability over time"
+    },
+    {
+      "agent": "filings",
+      "focus": "management's disclosed risks and mitigation strategies in the 10-K"
+    }
+  ],
+  "plan_source": "model",
+  "findings": {
+    "risk": {
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall to assess downside potential",
+      "text": "AMD in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -46.6% vs SPY -19.35% [R3]  \nAMD 3-year beta vs SPY: 2.31; a 20% SPY fall implies about -46.13% [R3]  \nAMD 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.55% of value [R1]  \nAMD 95% 10-day expected shortfall, historical: 18.35% [R1]  \nAMD current volatility 52.89% vs 5-year average 57.61% (annualized) [R1]  \n\nAMD exhibits significant downside risk with historical stress events and elevated volatility.",
+      "draft": "AMD in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -46.6% vs SPY -19.35% [R3]  \nAMD 3-year beta vs SPY: 2.31; a 20% SPY fall implies about -46.13% [R3]  \nAMD 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.55% of value [R1]  \nAMD 95% 10-day expected shortfall, historical: 18.35% [R1]  \nAMD current volatility 52.89% vs 5-year average 57.61% (annualized) [R1]  \n\nAMD exhibits significant downside risk with historical stress events and elevated volatility.",
+      "seconds": 76.7,
+      "provenance": {
+        "checked": 11,
+        "verified": 11,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "fundamentals": {
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "sustainable revenue growth and margin stability over time",
+      "text": "AMD FY ending 2025-12-27: revenue $34.64bn, up 34.34% year on year [F1]  \nAMD FY ending 2025-12-27: gross margin 49.52%, operating margin 10.66%, net margin 12.51% [F1]  \nAMD FY ending 2025-12-27: net income $4.33bn, diluted EPS $2.65, free cash flow $6.74bn [F1]  \nAMD cash and current securities $13.11bn vs total debt $3.23bn (balance sheet 2026-06-27) [F2]  \nAMD free-cash-flow yield: 0.77% (last fiscal year FCF $6.74bn) [F2]  \n\nAMD demonstrates strong revenue growth and improving margins with a stable balance sheet and consistent cash generation.",
+      "draft": "AMD FY ending 2025-12-27: revenue $34.64bn, up 34.34% year on year [F1]  \nAMD FY ending 2025-12-27: gross margin 49.52%, operating margin 10.66%, net margin 12.51% [F1]  \nAMD FY ending 2025-12-27: net income $4.33bn, diluted EPS $2.65, free cash flow $6.74bn [F1]  \nAMD cash and current securities $13.11bn vs total debt $3.23bn (balance sheet 2026-06-27) [F2]  \nAMD free-cash-flow yield: 0.77% (last fiscal year FCF $6.74bn) [F2]  \n\nAMD demonstrates strong revenue growth and improving margins with a stable balance sheet and consistent cash generation.",
+      "seconds": 91.6,
+      "provenance": {
+        "checked": 12,
+        "verified": 12,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "filings": {
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "management's disclosed risks and mitigation strategies in the 10-K",
+      "text": "- The 10-K identifies that risks could materially affect AMD\u2019s business, financial condition, and results of operations, with interrelationships and compounding effects possible [D1]  \n- The filing includes a summary of principal risks that could adversely impact AMD\u2019s operations [D1]  \n- A risk of loss of uninsured funds or delays in accessing them could affect short-term liquidity and operating expenses [D1]  \n- The risks are not the only ones AMD faces, and additional risks may be disclosed in other SEC filings [D1]",
+      "draft": "- The 10-K identifies that risks could materially affect AMD\u2019s business, financial condition, and results of operations, with interrelationships and compounding effects possible [D1]  \n- The filing includes a summary of principal risks that could adversely impact AMD\u2019s operations [D1]  \n- A risk of loss of uninsured funds or delays in accessing them could affect short-term liquidity and operating expenses [D1]  \n- The risks are not the only ones AMD faces, and additional risks may be disclosed in other SEC filings [D1]",
+      "seconds": 61.0,
+      "provenance": {
+        "checked": 0,
+        "verified": 0,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 4,
+        "supported": 4,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    }
+  },
+  "evidence": [
+    {
+      "id": "R1",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "AMD"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "result": {
+        "portfolio": {
+          "AMD": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 14.55,
+        "historical_cvar_pct": 18.35,
+        "fhs_var_pct": 14.32,
+        "fhs_cvar_pct": 18.92,
+        "fhs_prob_loss_over_10pct": 11.51,
+        "current_vol_pct": 52.89,
+        "average_vol_pct": 57.61,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 28.7,
+        "facts": [
+          "AMD 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.55% of value",
+          "AMD 95% 10-day expected shortfall, historical: 18.35%",
+          "AMD 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 14.32%",
+          "AMD 95% 10-day expected shortfall, filtered historical simulation: 18.92%",
+          "AMD current volatility 52.89% vs 5-year average 57.61% (annualized)",
+          "AMD probability of losing more than 10% over 10 days (filtered historical simulation): 11.51%"
+        ]
+      },
+      "seconds": 0.04,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AMD?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:03:12Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R2",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "AMD"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10,
+        "weights": [
+          0.5
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "AMD": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 14.55,
+        "historical_cvar_pct": 18.35,
+        "fhs_var_pct": 14.32,
+        "fhs_cvar_pct": 18.92,
+        "fhs_prob_loss_over_10pct": 11.51,
+        "current_vol_pct": 52.89,
+        "average_vol_pct": 57.61,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 21.5,
+        "facts": [
+          "AMD 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.55% of value",
+          "AMD 95% 10-day expected shortfall, historical: 18.35%",
+          "AMD 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 14.32%",
+          "AMD 95% 10-day expected shortfall, filtered historical simulation: 18.92%",
+          "AMD current volatility 52.89% vs 5-year average 57.61% (annualized)",
+          "AMD probability of losing more than 10% over 10 days (filtered historical simulation): 11.51%"
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AMD?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:03:12Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R3",
+      "agent": "risk",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "AMD"
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "AMD": 1.0
+        },
+        "episodes": [
+          {
+            "episode": "2018 Q4 sell-off",
+            "portfolio_return_pct": -46.6,
+            "spy_return_pct": -19.35
+          },
+          {
+            "episode": "2020 COVID crash",
+            "portfolio_return_pct": -29.3,
+            "spy_return_pct": -33.72
+          },
+          {
+            "episode": "2022 rate-hike bear market",
+            "portfolio_return_pct": -61.49,
+            "spy_return_pct": -24.5
+          }
+        ],
+        "beta_vs_spy_3y": 2.31,
+        "beta_implied_move_if_spy_falls_20pct": -46.13,
+        "facts": [
+          "AMD in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -46.6% vs SPY -19.35%",
+          "AMD in the 2020 COVID crash (2020-02-19 to 2020-03-23): -29.3% vs SPY -33.72%",
+          "AMD in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.49% vs SPY -24.5%",
+          "AMD 3-year beta vs SPY: 2.31; a 20% SPY fall implies about -46.13%"
+        ]
+      },
+      "seconds": 0.04,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AMD?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:03:04Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:29Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F1",
+      "agent": "fundamentals",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "AMD",
+        "years": 5
+      },
+      "result": {
+        "ticker": "AMD",
+        "company": "ADVANCED MICRO DEVICES INC",
+        "source": "SEC XBRL company facts (10-K)",
+        "fiscal_years": [
+          {
+            "fiscal_year_end": "2021-12-25",
+            "revenue_bn": 16.43,
+            "revenue_growth_pct": 68.33,
+            "gross_margin_pct": 48.25,
+            "operating_margin_pct": 22.2,
+            "net_income_bn": 3.16,
+            "net_margin_pct": 19.24,
+            "eps_diluted": 2.57,
+            "free_cash_flow_bn": 3.22,
+            "rnd_pct_of_revenue": 17.31
+          },
+          {
+            "fiscal_year_end": "2022-12-31",
+            "revenue_bn": 23.6,
+            "revenue_growth_pct": 43.61,
+            "gross_margin_pct": 44.93,
+            "operating_margin_pct": 5.36,
+            "net_income_bn": 1.32,
+            "net_margin_pct": 5.59,
+            "eps_diluted": 0.84,
+            "free_cash_flow_bn": 3.12,
+            "rnd_pct_of_revenue": 21.21
+          },
+          {
+            "fiscal_year_end": "2023-12-30",
+            "revenue_bn": 22.68,
+            "revenue_growth_pct": -3.9,
+            "gross_margin_pct": 46.12,
+            "operating_margin_pct": 1.77,
+            "net_income_bn": 0.85,
+            "net_margin_pct": 3.77,
+            "eps_diluted": 0.53,
+            "free_cash_flow_bn": 1.12,
+            "rnd_pct_of_revenue": 25.89
+          },
+          {
+            "fiscal_year_end": "2024-12-28",
+            "revenue_bn": 25.79,
+            "revenue_growth_pct": 13.69,
+            "gross_margin_pct": 49.35,
+            "operating_margin_pct": 7.37,
+            "net_income_bn": 1.64,
+            "net_margin_pct": 6.36,
+            "eps_diluted": 1.0,
+            "free_cash_flow_bn": 2.4,
+            "rnd_pct_of_revenue": 25.04
+          },
+          {
+            "fiscal_year_end": "2025-12-27",
+            "revenue_bn": 34.64,
+            "revenue_growth_pct": 34.34,
+            "gross_margin_pct": 49.52,
+            "operating_margin_pct": 10.66,
+            "net_income_bn": 4.33,
+            "net_margin_pct": 12.51,
+            "eps_diluted": 2.65,
+            "free_cash_flow_bn": 6.74,
+            "rnd_pct_of_revenue": 23.36
+          }
+        ],
+        "revenue_cagr_pct": 20.46,
+        "net_income_includes_nci": false,
+        "xbrl_sources": {
+          "revenue": "RevenueFromContractWithCustomerExcludingAssessedTax (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "gross_profit": "GrossProfit (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "operating_income": "OperatingIncomeLoss (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "net_income": "NetIncomeLoss (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "eps_diluted": "EarningsPerShareDiluted (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "rnd": "ResearchAndDevelopmentExpense (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "operating_cash_flow": "NetCashProvidedByUsedInOperatingActivities (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "capex": "PaymentsToAcquirePropertyPlantAndEquipment (10-K 0000002488-26-000018, filed 2026-02-04)"
+        },
+        "filing_urls": [
+          "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/"
+        ],
+        "facts": [
+          "AMD FY ending 2025-12-27: revenue $34.64bn, up 34.34% year on year",
+          "AMD FY ending 2025-12-27: gross margin 49.52%, operating margin 10.66%, net margin 12.51%",
+          "AMD FY ending 2025-12-27: net income $4.33bn, diluted EPS $2.65, free cash flow $6.74bn",
+          "AMD FY ending 2024-12-28: revenue $25.79bn (growth 13.69%), operating margin 7.37%",
+          "AMD FY ending 2023-12-30: revenue $22.68bn (growth -3.9%), operating margin 1.77%",
+          "AMD FY ending 2022-12-31: revenue $23.6bn (growth 43.61%), operating margin 5.36%",
+          "AMD FY ending 2021-12-25: revenue $16.43bn (growth 68.33%), operating margin 22.2%",
+          "AMD revenue CAGR from FY 2021 to FY 2025: 20.46%"
+        ]
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+          "fetched_at": "2026-10-21T21:22:49Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F2",
+      "agent": "fundamentals",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "AMD"
+      },
+      "result": {
+        "ticker": "AMD",
+        "company": "ADVANCED MICRO DEVICES INC",
+        "price": 534.74,
+        "price_date": "2026-10-20",
+        "shares_outstanding_bn": 1.632,
+        "market_cap_bn": 872.95,
+        "ttm_revenue_bn": 41.3,
+        "ttm_net_income_bn": 6.43,
+        "ttm_period_end": "2026-06-27",
+        "pe_ratio_ttm": 135.68,
+        "price_to_sales_ttm": 21.13,
+        "balance_sheet_date": "2026-06-27",
+        "cash_and_securities_bn": 13.11,
+        "total_debt_bn": 3.23,
+        "enterprise_value_bn": 863.06,
+        "ev_to_sales_ttm": 20.89,
+        "free_cash_flow_last_fy_bn": 6.74,
+        "fcf_yield_pct": 0.77,
+        "net_income_includes_nci": false,
+        "method": "market cap = price x EntityCommonStockSharesOutstanding shares; TTM = FY to 2025-12-27 + YTD to 2026-06-27 - prior-year YTD; debt = LongTermDebtNoncurrent + LongTermDebtCurrent as of 2026-06-27; leases excluded",
+        "xbrl_sources": {
+          "revenue_ttm": "RevenueFromContractWithCustomerExcludingAssessedTax ['0000002488-26-000018', '0000002488-26-000123']",
+          "net_income_ttm": "NetIncomeLoss ['0000002488-26-000018', '0000002488-26-000123']",
+          "balance_sheet": [
+            "CashAndCashEquivalentsAtCarryingValue (10-Q 0000002488-26-000123, filed 2026-08-05)",
+            "ShortTermInvestments (10-Q 0000002488-26-000123, filed 2026-08-05)",
+            "LongTermDebtNoncurrent (10-Q 0000002488-26-000123, filed 2026-08-05)",
+            "LongTermDebtCurrent (10-Q 0000002488-26-000123, filed 2026-08-05)"
+          ]
+        },
+        "facts": [
+          "AMD market cap: $872.95bn at $534.74 per share (2026-10-20)",
+          "AMD P/E (trailing 12 months): 135.68",
+          "AMD price-to-sales (trailing 12 months): 21.13; EV-to-sales: 20.89",
+          "AMD trailing-12-month revenue $41.3bn and net income $6.43bn (to 2026-06-27)",
+          "AMD free-cash-flow yield: 0.77% (last fiscal year FCF $6.74bn)",
+          "AMD cash and current securities $13.11bn vs total debt $3.23bn (balance sheet 2026-06-27); enterprise value $863.06bn"
+        ]
+      },
+      "seconds": 0.05,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+          "fetched_at": "2026-10-21T21:22:49Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AMD?range=1y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:02:57Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D1",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "AMD",
+        "query": "risk factors"
+      },
+      "result": {
+        "ticker": "AMD",
+        "filing": "10-K filed 2026-02-04 (period 2025-12-27)",
+        "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "risk_factors#0",
+            "text": "ITEM 1A. RISK FACTORS The risks and uncertainties described below are not the only ones we face. If any of the following risks actually occurs, our business, financial condition or results of operations could be materially adversely affected. In addition, you should consider the interrelationship and compounding effects of two or more risks occurring simultaneously. Risk Factors Summary The following is a summary of the principal risks that could adversely affect our business, financial condition and results of operations. ..."
+          },
+          {
+            "ref": "business#2",
+            "text": "... For a discussion of the factors that could cause actual results to differ materially from the forward-looking statements, see \u201cPart I, Item 1A\u2014Risk Factors\u201d and the \u201cFinancial Condition\u201d section set forth in \u201cPart II, Item 7-Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations,\u201d or MD&A, and such other risks and uncertainties as set forth below in this report or detailed in our other Securities and Exchange Commission (SEC) reports and filings. ..."
+          },
+          {
+            "ref": "risk_factors#19",
+            "text": "... If a banking institution in which we hold funds fails or is subject to significant adverse conditions in the financial or credit markets, we could be subject to a risk of loss of all or a portion of such uninsured funds or be subject to a delay in accessing all or a portion of such uninsured funds, which in turn could adversely impact our short-term liquidity and ability to meet our operating expense obligations. ..."
+          }
+        ]
+      },
+      "seconds": 0.36,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000002488.json",
+          "fetched_at": "2026-10-21T21:22:48Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+          "fetched_at": "2026-10-21T21:22:50Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    }
+  ],
+  "llm_calls": [
+    {
+      "agent": "planner",
+      "role": "planner",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 257,
+      "completion_tokens": 77,
+      "latency_s": 4.57
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 669,
+      "completion_tokens": 123,
+      "latency_s": 8.8
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1309,
+      "completion_tokens": 192,
+      "latency_s": 16.07
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1126,
+      "completion_tokens": 220,
+      "latency_s": 15.65
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 650,
+      "completion_tokens": 38,
+      "latency_s": 5.66
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1155,
+      "completion_tokens": 204,
+      "latency_s": 15.09
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 973,
+      "completion_tokens": 235,
+      "latency_s": 14.92
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 451,
+      "completion_tokens": 40,
+      "latency_s": 4.16
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1050,
+      "completion_tokens": 119,
+      "latency_s": 11.24
+    },
+    {
+      "agent": "writer",
+      "role": "writer",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 849,
+      "completion_tokens": 397,
+      "latency_s": 20.18
+    },
+    {
+      "agent": "writer",
+      "role": "writer",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1385,
+      "completion_tokens": 355,
+      "latency_s": 20.11
+    }
+  ],
+  "narrative": "## Answer  \nAMD is relatively risky for a long-term investor due to its high beta of 2.31 [R3] and significant downside risk during historical stress events [R3]. The 10-K flags risks that could materially affect AMD\u2019s business, financial condition, and results of operations, including the risk of loss of uninsured funds or delays in accessing them [D1].  \n\n## Strengths  \n- AMD 3-year beta vs SPY: 2.31; a 20% SPY fall implies about -46.13% [R3]  \n- AMD current volatility 52.89% vs 5-year average 57.61% (annualized) [R1]  \n- AMD exhibits significant downside risk with historical stress events and elevated volatility [R3]  \n\n## Risks  \n- The 10-K identifies that risks could materially affect AMD\u2019s business, financial condition, and results of operations, with interrelationships and compounding effects possible [D1]  \n- The filing includes a summary of principal risks that could adversely impact AMD\u2019s operations [D1]  \n- A risk of loss of uninsured funds or delays in accessing them could affect short-term liquidity and operating expenses [D1]  \n\n## What to watch  \n- The 10-K identifies that risks could materially affect AMD\u2019s business, financial condition, and results of operations, with interrelationships and compounding effects possible [D1]  \n- The risks are not the only ones AMD faces, and additional risks may be disclosed in other SEC filings [D1]",
+  "narrative_draft": "## Answer  \nAMD is relatively risky for a long-term investor due to its high beta of 2.31 and significant downside risk during historical stress events, with a 95% 10-day Value at Risk of 14.55% [R3] and 95% 10-day expected shortfall of 18.35% [R1]. The 10-K flags risks that could materially affect AMD\u2019s business, financial condition, and results of operations, including the risk of loss of uninsured funds or delays in accessing them [D1].  \n\n## Strengths  \n- AMD exhibits significant downside risk with historical stress events and elevated volatility [R3]  \n- AMD 3-year beta vs SPY: 2.31; a 20% SPY fall implies about -46.13% [R3]  \n- AMD current volatility 52.89% vs 5-year average 57.61% (annualized) [R1]  \n\n## Risks  \n- The 10-K identifies that risks could materially affect AMD\u2019s business, financial condition, and results of operations, with interrelationships and compounding effects possible [D1]  \n- The filing includes a summary of principal risks that could adversely impact AMD\u2019s operations [D1]  \n- A risk of loss of uninsured funds or delays in accessing them could affect short-term liquidity and operating expenses [D1]  \n\n## What to watch  \n- The 10-K identifies that risks could materially affect AMD\u2019s business, financial condition, and results of operations, with interrelationships and compounding effects possible [D1]  \n- The risks are not the only ones AMD faces, and additional risks may be disclosed in other SEC filings [D1]",
+  "writer_check": {
+    "provenance": {
+      "checked": 6,
+      "verified": 6,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": []
+    },
+    "attribution": {
+      "claims": 9,
+      "supported": 8,
+      "score": 0.889,
+      "issues": [
+        "AMD is relatively risky for a long-term investor due to its high beta of 2.31  a -> 2.31: period '3y' missing"
+      ]
+    },
+    "problems": [
+      "\"AMD is relatively risky for a long-term investor due to its high beta of 2.31  and significant downside risk d\": 2.31: period '3y' missing. Source says: \"AMD 3-year beta vs SPY: 2.31; a 20% SPY fall implies about -46.13%\""
+    ]
+  },
+  "revisions": [
+    "writer"
+  ],
+  "report": "# Research note: AMD\n**Question:** How risky is AMD for a long-term investor, and what does its 10-K flag?\n\n*Generated 2026-10-22 19:04 by FinAgent \u00b7 3 specialist agents \u00b7 models `nemotron-3-nano:4b-cpu` / `nemotron-3-nano:4b-cpu`*\n\n> This note was generated by AI agents for educational purposes. It is general information, not personal financial advice or a recommendation to buy or sell any security. Figures come from public data (SEC EDGAR, US Treasury, Yahoo Finance) and may contain errors; verify before relying on them.\n\n*(revised after fact-check)*\n\n## Answer  \nAMD is relatively risky for a long-term investor due to its high beta of 2.31 [R3] and significant downside risk during historical stress events [R3]. \u26a0 2.31: period '3y' missing The 10-K flags risks that could materially affect AMD\u2019s business, financial condition, and results of operations, including the risk of loss of uninsured funds or delays in accessing them [D1].  \n\n## Strengths  \n- AMD 3-year beta vs SPY: 2.31; a 20% SPY fall implies about -46.13% [R3]  \n- AMD current volatility 52.89% vs 5-year average 57.61% (annualized) [R1]  \n- AMD exhibits significant downside risk with historical stress events and elevated volatility [R3]  \n\n## Risks  \n- The 10-K identifies that risks could materially affect AMD\u2019s business, financial condition, and results of operations, with interrelationships and compounding effects possible [D1]  \n- The filing includes a summary of principal risks that could adversely impact AMD\u2019s operations [D1]  \n- A risk of loss of uninsured funds or delays in accessing them could affect short-term liquidity and operating expenses [D1]  \n\n## What to watch  \n- The 10-K identifies that risks could materially affect AMD\u2019s business, financial condition, and results of operations, with interrelationships and compounding effects possible [D1]  \n- The risks are not the only ones AMD faces, and additional risks may be disclosed in other SEC filings [D1]\n\n## Specialist findings\n### Risk Analyst\n*Focus: Value at Risk and expected shortfall to assess downside potential*\n\nAMD in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -46.6% vs SPY -19.35% [R3]  \nAMD 3-year beta vs SPY: 2.31; a 20% SPY fall implies about -46.13% [R3]  \nAMD 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.55% of value [R1]  \nAMD 95% 10-day expected shortfall, historical: 18.35% [R1]  \nAMD current volatility 52.89% vs 5-year average 57.61% (annualized) [R1]  \n\nAMD exhibits significant downside risk with historical stress events and elevated volatility.\n\n### Fundamentals Analyst\n*Focus: sustainable revenue growth and margin stability over time*\n\nAMD FY ending 2025-12-27: revenue $34.64bn, up 34.34% year on year [F1]  \nAMD FY ending 2025-12-27: gross margin 49.52%, operating margin 10.66%, net margin 12.51% [F1]  \nAMD FY ending 2025-12-27: net income $4.33bn, diluted EPS $2.65, free cash flow $6.74bn [F1]  \nAMD cash and current securities $13.11bn vs total debt $3.23bn (balance sheet 2026-06-27) [F2]  \nAMD free-cash-flow yield: 0.77% (last fiscal year FCF $6.74bn) [F2]  \n\nAMD demonstrates strong revenue growth and improving margins with a stable balance sheet and consistent cash generation.\n\n### Filings Analyst\n*Focus: management's disclosed risks and mitigation strategies in the 10-K*\n\n- The 10-K identifies that risks could materially affect AMD\u2019s business, financial condition, and results of operations, with interrelationships and compounding effects possible [D1]  \n- The filing includes a summary of principal risks that could adversely impact AMD\u2019s operations [D1]  \n- A risk of loss of uninsured funds or delays in accessing them could affect short-term liquidity and operating expenses [D1]  \n- The risks are not the only ones AMD faces, and additional risks may be disclosed in other SEC filings [D1]\n\n## Key figures (generated from tool outputs, not by a model)\n\n| Metric | AMD |\n|---|---|\n| Market cap ($bn) | 872.95 [F2] |\n| P/E (TTM) | 135.68x [F2] |\n| Price / sales (TTM) | 21.13x [F2] |\n| FCF yield | 0.77% [F2] |\n| 10-day VaR 95% (historical) | 14.55% [R2] |\n| 10-day VaR 95% (filtered historical simulation) | 14.32% [R2] |\n| Revenue, latest FY ($bn) | 34.64 [F1] |\n| Revenue growth, latest FY | 34.34% [F1] |\n| Operating margin, latest FY | 10.66% [F1] |\n\n## Evidence ledger\n\n| ID | Agent | Tool call | Chosen by | Source | Data retrieved |\n|---|---|---|---|---|---|\n| R1 | risk | `value_at_risk(tickers=['AMD'], confidence=0.95, horizon_days=10)` | model | computed from 5y daily prices | 2026-10-22 06:03:12 UTC |\n| R2 | risk | `value_at_risk(tickers=['AMD'], confidence=0.95, horizon_days=10, weights=[0.5])` | model | computed from 5y daily prices | 2026-10-22 06:03:12 UTC |\n| R3 | risk | `stress_test(tickers=['AMD'])` | coverage check | computed from 10y daily prices | 2026-10-22 03:37:29 UTC |\n| F1 | fundamentals | `financial_statements(ticker=AMD, years=5)` | model | SEC EDGAR XBRL company facts | 2026-10-21 21:15:59 UTC |\n| F2 | fundamentals | `valuation_snapshot(ticker=AMD)` | coverage check | SEC EDGAR XBRL + Yahoo Finance price | 2026-10-21 21:15:59 UTC |\n| D1 | filings | `search_10k(ticker=AMD, query=risk factors)` | model | https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm | 2026-10-21 21:15:59 UTC |\n\n## How this note was produced\n\n- **Number provenance:** 29 of 29 numbers trace back to a tool result the agent received (100%).\n- **Claim attribution:** 22 of 23 cited claims match their source (company, period, metric, direction; 10-K points by wording) (96%); 1 flagged \u26a0.\n- **Agents:** planner \u2192 risk, fundamentals, filings \u2192 fact-check \u2192 1 revision(s) \u2192 lead analyst.\n- **Tool calls:** 6 (4 chosen by the models, 2 added by coverage checks).\n- **Data:** 8 sources, all fetched or cached within their freshness window. Retrieval times are in the evidence ledger.\n- **Language model:** 11 calls, 9,874 prompt + 2,000 completion tokens, 136.4 s of model time; 136.5 s end to end.\n- **Compute:** risk simulation on CPU (NumPy); 10-K retrieval: BM25; endpoint `http://127.0.0.1:11434/v1`.\n",
+  "stats": {
+    "llm_calls": 11,
+    "prompt_tokens": 9874,
+    "completion_tokens": 2000,
+    "model_seconds": 136.4,
+    "wall_seconds": 136.5,
+    "tool_calls": 6,
+    "tool_calls_chosen_by_model": 4,
+    "revisions": 1,
+    "risk_backend": "CPU (NumPy)",
+    "retrieval": "BM25",
+    "data_sources": 8,
+    "stale_sources": [],
+    "dropped_params": [],
+    "ablations": [],
+    "endpoint": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "quality": {
+      "numbers_checked": 29,
+      "numbers_traced": 29,
+      "number_provenance": 1.0,
+      "claims_checked": 23,
+      "claims_supported": 22,
+      "claim_attribution": 0.957,
+      "claim_issues": [
+        "writer: AMD is relatively risky for a long-term investor due to its high beta of 2.31  a -> 2.31: period '3y' missing"
+      ]
+    },
+    "provenance": {
+      "checked": 29,
+      "verified": 29,
+      "score": 1.0,
+      "unverified": []
+    },
+    "promissory_phrases": []
+  },
+  "eval": {
+    "ticker": "AMD",
+    "question": "risk",
+    "variant": "full",
+    "version": "0.2.2"
+  },
+  "events": [
+    {
+      "t": 1792656150.25,
+      "event": "guard",
+      "allowed": true,
+      "personal_advice": false,
+      "rail": "rules"
+    },
+    {
+      "t": 1792656154.83,
+      "event": "plan",
+      "tasks": [
+        {
+          "agent": "risk",
+          "focus": "Value at Risk and expected shortfall to assess downside potential"
+        },
+        {
+          "agent": "fundamentals",
+          "focus": "sustainable revenue growth and margin stability over time"
+        },
+        {
+          "agent": "filings",
+          "focus": "management's disclosed risks and mitigation strategies in the 10-K"
+        }
+      ],
+      "source": "model"
+    },
+    {
+      "t": 1792656154.83,
+      "event": "agent_start",
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall to assess downside potential"
+    },
+    {
+      "t": 1792656154.83,
+      "event": "agent_start",
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "sustainable revenue growth and margin stability over time"
+    },
+    {
+      "t": 1792656154.84,
+      "event": "agent_start",
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "management's disclosed risks and mitigation strategies in the 10-K"
+    },
+    {
+      "t": 1792656163.63,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [
+        "value_at_risk",
+        "value_at_risk"
+      ],
+      "latency_s": 8.8,
+      "prompt_tokens": 669,
+      "completion_tokens": 123
+    },
+    {
+      "t": 1792656163.68,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R1",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "AMD"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "seconds": 0.04,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656163.7,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R2",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "AMD"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10,
+        "weights": [
+          0.5
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656169.29,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [
+        "financial_statements"
+      ],
+      "latency_s": 5.66,
+      "prompt_tokens": 650,
+      "completion_tokens": 38
+    },
+    {
+      "t": 1792656169.34,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F1",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "AMD",
+        "years": 5
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656173.45,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [
+        "search_10k"
+      ],
+      "latency_s": 4.16,
+      "prompt_tokens": 451,
+      "completion_tokens": 40
+    },
+    {
+      "t": 1792656173.82,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D1",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "AMD",
+        "query": "risk factors"
+      },
+      "seconds": 0.36,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656189.52,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 16.07,
+      "prompt_tokens": 1309,
+      "completion_tokens": 192
+    },
+    {
+      "t": 1792656189.56,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R3",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "AMD"
+        ]
+      },
+      "seconds": 0.04,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656204.61,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 15.09,
+      "prompt_tokens": 1155,
+      "completion_tokens": 204
+    },
+    {
+      "t": 1792656204.66,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F2",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "AMD"
+      },
+      "seconds": 0.05,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792656215.85,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [],
+      "latency_s": 11.24,
+      "prompt_tokens": 1050,
+      "completion_tokens": 119
+    },
+    {
+      "t": 1792656215.85,
+      "event": "agent_done",
+      "agent": "filings",
+      "seconds": 61.0
+    },
+    {
+      "t": 1792656231.5,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 15.65,
+      "prompt_tokens": 1126,
+      "completion_tokens": 220
+    },
+    {
+      "t": 1792656231.5,
+      "event": "agent_done",
+      "agent": "risk",
+      "seconds": 76.7
+    },
+    {
+      "t": 1792656246.42,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 14.92,
+      "prompt_tokens": 973,
+      "completion_tokens": 235
+    },
+    {
+      "t": 1792656246.42,
+      "event": "agent_done",
+      "agent": "fundamentals",
+      "seconds": 91.6
+    },
+    {
+      "t": 1792656246.43,
+      "event": "verify",
+      "agent": "risk",
+      "checked": 11,
+      "verified": 11,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792656246.43,
+      "event": "verify",
+      "agent": "fundamentals",
+      "checked": 12,
+      "verified": 12,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792656246.43,
+      "event": "verify",
+      "agent": "filings",
+      "checked": 0,
+      "verified": 0,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 4,
+      "claims_supported": 4,
+      "claim_issues": []
+    },
+    {
+      "t": 1792656246.44,
+      "event": "agent_start",
+      "agent": "writer",
+      "title": "Lead Analyst",
+      "focus": "summary"
+    },
+    {
+      "t": 1792656266.61,
+      "event": "llm",
+      "agent": "writer",
+      "tool_calls": [],
+      "latency_s": 20.18,
+      "prompt_tokens": 849,
+      "completion_tokens": 397
+    },
+    {
+      "t": 1792656266.62,
+      "event": "verify",
+      "agent": "writer",
+      "checked": 10,
+      "verified": 10,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [
+        "14.55%"
+      ],
+      "claims_checked": 9,
+      "claims_supported": 8,
+      "claim_issues": [
+        "AMD is relatively risky for a long-term investor due to its high beta of 2.31 an -> 2.31: period '3y' missing"
+      ]
+    },
+    {
+      "t": 1792656266.62,
+      "event": "revise",
+      "agent": "writer",
+      "problems": [
+        "\"AMD is relatively risky for a long-term investor due to its high beta of 2.31 and significant downside risk du\": 2.31: period '3y' missing. Source says: \"AMD 3-year beta vs SPY: 2.31; a 20% SPY fall implies about -46.13%\""
+      ]
+    },
+    {
+      "t": 1792656286.73,
+      "event": "llm",
+      "agent": "writer",
+      "tool_calls": [],
+      "revision": true,
+      "latency_s": 20.11,
+      "prompt_tokens": 1385,
+      "completion_tokens": 355
+    },
+    {
+      "t": 1792656286.74,
+      "event": "verify",
+      "agent": "writer",
+      "checked": 6,
+      "verified": 6,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 9,
+      "claims_supported": 8,
+      "claim_issues": [
+        "AMD is relatively risky for a long-term investor due to its high beta of 2.31  a -> 2.31: period '3y' missing"
+      ],
+      "after_revision": true
+    },
+    {
+      "t": 1792656286.78,
+      "event": "done",
+      "stats": {
+        "llm_calls": 11,
+        "prompt_tokens": 9874,
+        "completion_tokens": 2000,
+        "model_seconds": 136.4,
+        "wall_seconds": 136.5,
+        "tool_calls": 6,
+        "tool_calls_chosen_by_model": 4,
+        "revisions": 1,
+        "risk_backend": "CPU (NumPy)",
+        "retrieval": "BM25",
+        "data_sources": 8,
+        "stale_sources": [],
+        "dropped_params": [],
+        "ablations": [],
+        "endpoint": "http://127.0.0.1:11434/v1",
+        "orchestrator_model": "nemotron-3-nano:4b-cpu",
+        "specialist_model": "nemotron-3-nano:4b-cpu",
+        "quality": {
+          "numbers_checked": 29,
+          "numbers_traced": 29,
+          "number_provenance": 1.0,
+          "claims_checked": 23,
+          "claims_supported": 22,
+          "claim_attribution": 0.957,
+          "claim_issues": [
+            "writer: AMD is relatively risky for a long-term investor due to its high beta of 2.31  a -> 2.31: period '3y' missing"
+          ]
+        },
+        "provenance": {
+          "checked": 29,
+          "verified": 29,
+          "score": 1.0,
+          "unverified": []
+        },
+        "promissory_phrases": []
+      }
+    }
+  ],
+  "settings": {
+    "profile": "local",
+    "base_url": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "temperature": 0.0,
+    "reasoning": false,
+    "ablate": []
+  }
+}

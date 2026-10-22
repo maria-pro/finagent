@@ -1,0 +1,1797 @@
+{
+  "tickers": [
+    "NVDA",
+    "AMD"
+  ],
+  "question": "Compare NVIDIA and AMD on growth, valuation and downside risk.",
+  "guard": {
+    "allowed": true,
+    "personal_advice": false,
+    "rail": "rules"
+  },
+  "plan": [
+    {
+      "agent": "fundamentals",
+      "focus": "revenue growth rates and margin trends for both NVDA and AMD"
+    },
+    {
+      "agent": "market",
+      "focus": "current price-to-sales and price-to-earnings multiples relative to growth"
+    },
+    {
+      "agent": "risk",
+      "focus": "downside risk measures such as Value at Risk and expected shortfall for each stock"
+    },
+    {
+      "agent": "filings",
+      "focus": "key risks and competitive threats highlighted in the latest 10-K filings"
+    }
+  ],
+  "plan_source": "model",
+  "findings": {
+    "fundamentals": {
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "revenue growth rates and margin trends for both NVDA and AMD",
+      "text": "NVDA revenue $215.94bn, up 65.47% year on year [F1]  \nNVDA gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \nAMD revenue $34.64bn, up 34.34% year on year [F2]  \nAMD gross margin 49.52%, operating margin 10.66%, net margin 12.51% [F2]  \nNVDA market cap: $5216.93bn at $216.47 per share [F3]  \n\nNVDA demonstrates significantly stronger growth and profitability than AMD.",
+      "draft": "NVDA revenue $215.94bn, up 65.47% year on year [F1]  \nNVDA gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \nAMD revenue $34.64bn, up 34.34% year on year [F2]  \nAMD gross margin 49.52%, operating margin 10.66%, net margin 12.51% [F2]  \nNVDA market cap: $5216.93bn at $216.47 per share [F3]  \n\nNVDA demonstrates significantly stronger growth and profitability than AMD.",
+      "seconds": 105.2,
+      "provenance": {
+        "checked": 12,
+        "verified": 12,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "market": {
+      "agent": "market",
+      "title": "Market Analyst",
+      "focus": "current price-to-sales and price-to-earnings multiples relative to growth",
+      "text": "NVDA 1y total return: 18.81% [M1]  \nAMD 1y total return: 122.29% [M2]  \nNVDA 1y beta vs SPY: 1.92 [M3]  \nAMD 1y beta vs SPY: 3.22 [M4]  \nNVDA 1y max drawdown: -20.21% [M1]  \n\nBoth stocks exhibit high growth but NVDA shows lower downside risk.",
+      "draft": "NVDA 1y total return: 18.81% [M1]  \nAMD 1y total return: 122.29% [M2]  \nNVDA 1y beta vs SPY: 1.92 [M3]  \nAMD 1y beta vs SPY: 3.22 [M4]  \nNVDA 1y max drawdown: -20.21% [M1]  \n\nBoth stocks exhibit high growth but NVDA shows lower downside risk.",
+      "seconds": 60.7,
+      "provenance": {
+        "checked": 5,
+        "verified": 5,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "risk": {
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "downside risk measures such as Value at Risk and expected shortfall for each stock",
+      "text": "NVDA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R3]  \nNVDA 95% 10-day expected shortfall, historical: 17.91% [R3]  \nNVDA 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.27% [R3]  \nNVDA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R3]  \nAMD 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.55% of value [R5]  \n\nThe downside risk profiles differ significantly between the two companies.",
+      "draft": "NVDA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R3]  \nNVDA 95% 10-day expected shortfall, historical: 17.91% [R3]  \nNVDA 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.27% [R3]  \nNVDA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R3]  \nAMD 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.55% of value [R5]  \n\nThe downside risk profiles differ significantly between the two companies.",
+      "seconds": 124.7,
+      "provenance": {
+        "checked": 10,
+        "verified": 10,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "filings": {
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "key risks and competitive threats highlighted in the latest 10-K filings",
+      "text": "- Cybersecurity threats from AI and geopolitical conflicts may disrupt NVIDIA\u2019s services [D1]  \n- Cybersecurity risks include zero-day attacks and supply chain vulnerabilities [D2]  \n- NVIDIA\u2019s competitive factors include pricing, system costs, and manufacturing capabilities [D1]  \n- Licensing restrictions in China could limit AMD\u2019s competitive position [D2]",
+      "draft": "- Cybersecurity threats from AI and geopolitical conflicts may disrupt NVIDIA\u2019s services [D1]  \n- Cybersecurity risks include zero-day attacks and supply chain vulnerabilities [D2]  \n- NVIDIA\u2019s competitive factors include pricing, system costs, and manufacturing capabilities [D1]  \n- Licensing restrictions in China could limit AMD\u2019s competitive position [D2]",
+      "seconds": 90.1,
+      "provenance": {
+        "checked": 0,
+        "verified": 0,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 4,
+        "supported": 4,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    }
+  },
+  "evidence": [
+    {
+      "id": "F1",
+      "agent": "fundamentals",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "NVDA",
+        "years": 3
+      },
+      "result": {
+        "ticker": "NVDA",
+        "company": "NVIDIA CORP",
+        "source": "SEC XBRL company facts (10-K)",
+        "fiscal_years": [
+          {
+            "fiscal_year_end": "2024-01-28",
+            "revenue_bn": 60.92,
+            "revenue_growth_pct": 125.85,
+            "gross_margin_pct": 72.72,
+            "operating_margin_pct": 54.12,
+            "net_income_bn": 29.76,
+            "net_margin_pct": 48.85,
+            "eps_diluted": 1.19,
+            "free_cash_flow_bn": 27.02,
+            "rnd_pct_of_revenue": 14.24
+          },
+          {
+            "fiscal_year_end": "2025-01-26",
+            "revenue_bn": 130.5,
+            "revenue_growth_pct": 114.2,
+            "gross_margin_pct": 74.99,
+            "operating_margin_pct": 62.42,
+            "net_income_bn": 72.88,
+            "net_margin_pct": 55.85,
+            "eps_diluted": 2.94,
+            "free_cash_flow_bn": 60.85,
+            "rnd_pct_of_revenue": 9.9
+          },
+          {
+            "fiscal_year_end": "2026-01-25",
+            "revenue_bn": 215.94,
+            "revenue_growth_pct": 65.47,
+            "gross_margin_pct": 71.07,
+            "operating_margin_pct": 60.38,
+            "net_income_bn": 120.07,
+            "net_margin_pct": 55.6,
+            "eps_diluted": 4.9,
+            "free_cash_flow_bn": 96.68,
+            "rnd_pct_of_revenue": 8.57
+          }
+        ],
+        "revenue_cagr_pct": 88.68,
+        "net_income_includes_nci": false,
+        "xbrl_sources": {
+          "revenue": "Revenues (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "gross_profit": "GrossProfit (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "operating_income": "OperatingIncomeLoss (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "net_income": "NetIncomeLoss (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "eps_diluted": "EarningsPerShareDiluted (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "rnd": "ResearchAndDevelopmentExpense (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "operating_cash_flow": "NetCashProvidedByUsedInOperatingActivities (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "capex": "PaymentsToAcquireProductiveAssets (10-K 0001045810-26-000021, filed 2026-02-25)"
+        },
+        "filing_urls": [
+          "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/"
+        ],
+        "facts": [
+          "NVDA FY ending 2026-01-25: revenue $215.94bn, up 65.47% year on year",
+          "NVDA FY ending 2026-01-25: gross margin 71.07%, operating margin 60.38%, net margin 55.6%",
+          "NVDA FY ending 2026-01-25: net income $120.07bn, diluted EPS $4.9, free cash flow $96.68bn",
+          "NVDA FY ending 2025-01-26: revenue $130.5bn (growth 114.2%), operating margin 62.42%",
+          "NVDA FY ending 2024-01-28: revenue $60.92bn (growth 125.85%), operating margin 54.12%",
+          "NVDA revenue CAGR from FY 2024 to FY 2026: 88.68%"
+        ]
+      },
+      "seconds": 0.07,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+          "fetched_at": "2026-10-21T21:16:00Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F2",
+      "agent": "fundamentals",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "AMD",
+        "years": 3
+      },
+      "result": {
+        "ticker": "AMD",
+        "company": "ADVANCED MICRO DEVICES INC",
+        "source": "SEC XBRL company facts (10-K)",
+        "fiscal_years": [
+          {
+            "fiscal_year_end": "2023-12-30",
+            "revenue_bn": 22.68,
+            "revenue_growth_pct": -3.9,
+            "gross_margin_pct": 46.12,
+            "operating_margin_pct": 1.77,
+            "net_income_bn": 0.85,
+            "net_margin_pct": 3.77,
+            "eps_diluted": 0.53,
+            "free_cash_flow_bn": 1.12,
+            "rnd_pct_of_revenue": 25.89
+          },
+          {
+            "fiscal_year_end": "2024-12-28",
+            "revenue_bn": 25.79,
+            "revenue_growth_pct": 13.69,
+            "gross_margin_pct": 49.35,
+            "operating_margin_pct": 7.37,
+            "net_income_bn": 1.64,
+            "net_margin_pct": 6.36,
+            "eps_diluted": 1.0,
+            "free_cash_flow_bn": 2.4,
+            "rnd_pct_of_revenue": 25.04
+          },
+          {
+            "fiscal_year_end": "2025-12-27",
+            "revenue_bn": 34.64,
+            "revenue_growth_pct": 34.34,
+            "gross_margin_pct": 49.52,
+            "operating_margin_pct": 10.66,
+            "net_income_bn": 4.33,
+            "net_margin_pct": 12.51,
+            "eps_diluted": 2.65,
+            "free_cash_flow_bn": 6.74,
+            "rnd_pct_of_revenue": 23.36
+          }
+        ],
+        "revenue_cagr_pct": 23.67,
+        "net_income_includes_nci": false,
+        "xbrl_sources": {
+          "revenue": "RevenueFromContractWithCustomerExcludingAssessedTax (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "gross_profit": "GrossProfit (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "operating_income": "OperatingIncomeLoss (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "net_income": "NetIncomeLoss (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "eps_diluted": "EarningsPerShareDiluted (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "rnd": "ResearchAndDevelopmentExpense (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "operating_cash_flow": "NetCashProvidedByUsedInOperatingActivities (10-K 0000002488-26-000018, filed 2026-02-04)",
+          "capex": "PaymentsToAcquirePropertyPlantAndEquipment (10-K 0000002488-26-000018, filed 2026-02-04)"
+        },
+        "filing_urls": [
+          "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/"
+        ],
+        "facts": [
+          "AMD FY ending 2025-12-27: revenue $34.64bn, up 34.34% year on year",
+          "AMD FY ending 2025-12-27: gross margin 49.52%, operating margin 10.66%, net margin 12.51%",
+          "AMD FY ending 2025-12-27: net income $4.33bn, diluted EPS $2.65, free cash flow $6.74bn",
+          "AMD FY ending 2024-12-28: revenue $25.79bn (growth 13.69%), operating margin 7.37%",
+          "AMD FY ending 2023-12-30: revenue $22.68bn (growth -3.9%), operating margin 1.77%",
+          "AMD revenue CAGR from FY 2023 to FY 2025: 23.67%"
+        ]
+      },
+      "seconds": 0.18,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+          "fetched_at": "2026-10-21T21:22:49Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F3",
+      "agent": "fundamentals",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "NVDA"
+      },
+      "result": {
+        "ticker": "NVDA",
+        "company": "NVIDIA CORP",
+        "price": 216.47,
+        "price_date": "2026-10-20",
+        "shares_outstanding_bn": 24.1,
+        "market_cap_bn": 5216.93,
+        "ttm_revenue_bn": 302.97,
+        "ttm_net_income_bn": 192.88,
+        "ttm_period_end": "2026-07-26",
+        "pe_ratio_ttm": 27.05,
+        "price_to_sales_ttm": 17.22,
+        "balance_sheet_date": "2026-07-26",
+        "cash_and_securities_bn": 22.44,
+        "total_debt_bn": 33.37,
+        "enterprise_value_bn": 5227.85,
+        "ev_to_sales_ttm": 17.26,
+        "free_cash_flow_last_fy_bn": 96.68,
+        "fcf_yield_pct": 1.85,
+        "net_income_includes_nci": false,
+        "method": "market cap = price x EntityCommonStockSharesOutstanding shares; TTM = FY to 2026-01-25 + YTD to 2026-07-26 - prior-year YTD; debt = LongTermDebtNoncurrent + DebtCurrent as of 2026-07-26; leases excluded",
+        "xbrl_sources": {
+          "revenue_ttm": "Revenues ['0001045810-26-000021', '0001045810-26-000075']",
+          "net_income_ttm": "NetIncomeLoss ['0001045810-26-000021', '0001045810-26-000075']",
+          "balance_sheet": [
+            "CashAndCashEquivalentsAtCarryingValue (10-Q 0001045810-26-000075, filed 2026-08-26)",
+            "LongTermDebtNoncurrent (10-Q 0001045810-26-000075, filed 2026-08-26)",
+            "DebtCurrent (10-Q 0001045810-26-000075, filed 2026-08-26)"
+          ]
+        },
+        "facts": [
+          "NVDA market cap: $5216.93bn at $216.47 per share (2026-10-20)",
+          "NVDA P/E (trailing 12 months): 27.05",
+          "NVDA price-to-sales (trailing 12 months): 17.22; EV-to-sales: 17.26",
+          "NVDA trailing-12-month revenue $302.97bn and net income $192.88bn (to 2026-07-26)",
+          "NVDA free-cash-flow yield: 1.85% (last fiscal year FCF $96.68bn)",
+          "NVDA cash and current securities $22.44bn vs total debt $33.37bn (balance sheet 2026-07-26); enterprise value $5227.85bn"
+        ]
+      },
+      "seconds": 0.07,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+          "fetched_at": "2026-10-21T21:16:00Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=1y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:20Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F4",
+      "agent": "fundamentals",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "AMD"
+      },
+      "result": {
+        "ticker": "AMD",
+        "company": "ADVANCED MICRO DEVICES INC",
+        "price": 534.74,
+        "price_date": "2026-10-20",
+        "shares_outstanding_bn": 1.632,
+        "market_cap_bn": 872.95,
+        "ttm_revenue_bn": 41.3,
+        "ttm_net_income_bn": 6.43,
+        "ttm_period_end": "2026-06-27",
+        "pe_ratio_ttm": 135.68,
+        "price_to_sales_ttm": 21.13,
+        "balance_sheet_date": "2026-06-27",
+        "cash_and_securities_bn": 13.11,
+        "total_debt_bn": 3.23,
+        "enterprise_value_bn": 863.06,
+        "ev_to_sales_ttm": 20.89,
+        "free_cash_flow_last_fy_bn": 6.74,
+        "fcf_yield_pct": 0.77,
+        "net_income_includes_nci": false,
+        "method": "market cap = price x EntityCommonStockSharesOutstanding shares; TTM = FY to 2025-12-27 + YTD to 2026-06-27 - prior-year YTD; debt = LongTermDebtNoncurrent + LongTermDebtCurrent as of 2026-06-27; leases excluded",
+        "xbrl_sources": {
+          "revenue_ttm": "RevenueFromContractWithCustomerExcludingAssessedTax ['0000002488-26-000018', '0000002488-26-000123']",
+          "net_income_ttm": "NetIncomeLoss ['0000002488-26-000018', '0000002488-26-000123']",
+          "balance_sheet": [
+            "CashAndCashEquivalentsAtCarryingValue (10-Q 0000002488-26-000123, filed 2026-08-05)",
+            "ShortTermInvestments (10-Q 0000002488-26-000123, filed 2026-08-05)",
+            "LongTermDebtNoncurrent (10-Q 0000002488-26-000123, filed 2026-08-05)",
+            "LongTermDebtCurrent (10-Q 0000002488-26-000123, filed 2026-08-05)"
+          ]
+        },
+        "facts": [
+          "AMD market cap: $872.95bn at $534.74 per share (2026-10-20)",
+          "AMD P/E (trailing 12 months): 135.68",
+          "AMD price-to-sales (trailing 12 months): 21.13; EV-to-sales: 20.89",
+          "AMD trailing-12-month revenue $41.3bn and net income $6.43bn (to 2026-06-27)",
+          "AMD free-cash-flow yield: 0.77% (last fiscal year FCF $6.74bn)",
+          "AMD cash and current securities $13.11bn vs total debt $3.23bn (balance sheet 2026-06-27); enterprise value $863.06bn"
+        ]
+      },
+      "seconds": 0.1,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+          "fetched_at": "2026-10-21T21:22:49Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AMD?range=1y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:02:57Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "M1",
+      "agent": "market",
+      "tool": "price_performance",
+      "args": {
+        "ticker": "NVDA",
+        "period": "1y"
+      },
+      "result": {
+        "ticker": "NVDA",
+        "company": "NVIDIA Corporation",
+        "as_of": "2026-10-20",
+        "period": "1y",
+        "last_price": 216.47,
+        "total_return_pct": 18.81,
+        "volatility_pct": 37.34,
+        "sharpe_ratio": 0.55,
+        "avg_risk_free_rate_pct": 3.78,
+        "risk_free_source": "US Treasury daily bill rates (13-week, coupon equivalent)",
+        "max_drawdown_pct": -20.21,
+        "drawdown_peak_date": "2025-10-29",
+        "drawdown_trough_date": "2026-03-30",
+        "high_52w": 239.24,
+        "pct_below_52w_high": 9.52,
+        "sma_200": 202.95,
+        "price_vs_sma_200": "above",
+        "rsi_14": 40.9,
+        "facts": [
+          "NVDA 1y total return: 18.81%",
+          "NVDA 1y annualized volatility: 37.34%",
+          "NVDA 1y Sharpe ratio: 0.55",
+          "NVDA 1y max drawdown: -20.21% (2025-10-29 to 2026-03-30)",
+          "NVDA price: $216.47 on 2026-10-20, 9.52% below the 52-week high of $239.24",
+          "NVDA price is above its 200-day average of $202.95"
+        ]
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:27Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2025/all?type=daily_treasury_bill_rates&field_tdr_date_value=2025&_format=csv",
+          "fetched_at": "2026-10-22T05:55:43Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_bill_rates&field_tdr_date_value=2026&_format=csv",
+          "fetched_at": "2026-10-21T21:17:11Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "M2",
+      "agent": "market",
+      "tool": "price_performance",
+      "args": {
+        "ticker": "AMD",
+        "period": "1y"
+      },
+      "result": {
+        "ticker": "AMD",
+        "company": "Advanced Micro Devices, Inc.",
+        "as_of": "2026-10-20",
+        "period": "1y",
+        "last_price": 534.74,
+        "total_return_pct": 122.29,
+        "volatility_pct": 67.87,
+        "sharpe_ratio": 1.46,
+        "avg_risk_free_rate_pct": 3.78,
+        "risk_free_source": "US Treasury daily bill rates (13-week, coupon equivalent)",
+        "max_drawdown_pct": -27.76,
+        "drawdown_peak_date": "2025-10-29",
+        "drawdown_trough_date": "2026-03-03",
+        "high_52w": 649.42,
+        "pct_below_52w_high": 17.66,
+        "sma_200": 397.42,
+        "price_vs_sma_200": "above",
+        "rsi_14": 39.8,
+        "facts": [
+          "AMD 1y total return: 122.29%",
+          "AMD 1y annualized volatility: 67.87%",
+          "AMD 1y Sharpe ratio: 1.46",
+          "AMD 1y max drawdown: -27.76% (2025-10-29 to 2026-03-03)",
+          "AMD price: $534.74 on 2026-10-20, 17.66% below the 52-week high of $649.42",
+          "AMD price is above its 200-day average of $397.42"
+        ]
+      },
+      "seconds": 0.06,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AMD?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:03:04Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2025/all?type=daily_treasury_bill_rates&field_tdr_date_value=2025&_format=csv",
+          "fetched_at": "2026-10-22T05:55:43Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_bill_rates&field_tdr_date_value=2026&_format=csv",
+          "fetched_at": "2026-10-21T21:17:11Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "M3",
+      "agent": "market",
+      "tool": "benchmark_comparison",
+      "args": {
+        "ticker": "NVDA",
+        "benchmark": "SPY",
+        "period": "1y"
+      },
+      "result": {
+        "ticker": "NVDA",
+        "benchmark": "SPY",
+        "period": "1y",
+        "beta": 1.92,
+        "correlation": 0.65,
+        "alpha_pct_per_year": -5.53,
+        "tracking_error_pct": 30.64,
+        "information_ratio": 0.28,
+        "ticker_return_pct": 18.81,
+        "benchmark_return_pct": 15.8,
+        "excess_return_pct": 3.01,
+        "facts": [
+          "NVDA 1y beta vs SPY: 1.92",
+          "NVDA 1y correlation with SPY: 0.65",
+          "1y return: NVDA 18.81% vs SPY 15.8% (excess 3.01%)",
+          "NVDA 1y annualized alpha vs SPY: -5.53%"
+        ]
+      },
+      "seconds": 0.02,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:27Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:29Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "M4",
+      "agent": "market",
+      "tool": "benchmark_comparison",
+      "args": {
+        "ticker": "AMD",
+        "benchmark": "SPY",
+        "period": "1y"
+      },
+      "result": {
+        "ticker": "AMD",
+        "benchmark": "SPY",
+        "period": "1y",
+        "beta": 3.22,
+        "correlation": 0.6,
+        "alpha_pct_per_year": 53.04,
+        "tracking_error_pct": 61.07,
+        "information_ratio": 1.43,
+        "ticker_return_pct": 122.29,
+        "benchmark_return_pct": 15.8,
+        "excess_return_pct": 106.49,
+        "facts": [
+          "AMD 1y beta vs SPY: 3.22",
+          "AMD 1y correlation with SPY: 0.6",
+          "1y return: AMD 122.29% vs SPY 15.8% (excess 106.49%)",
+          "AMD 1y annualized alpha vs SPY: 53.04%"
+        ]
+      },
+      "seconds": 0.01,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AMD?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:03:04Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:29Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R1",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "NVDA",
+          "AMD"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "result": {
+        "portfolio": {
+          "NVDA": 0.5,
+          "AMD": 0.5
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 13.61,
+        "historical_cvar_pct": 16.94,
+        "fhs_var_pct": 9.95,
+        "fhs_cvar_pct": 13.19,
+        "fhs_prob_loss_over_10pct": 4.95,
+        "current_vol_pct": 36.95,
+        "average_vol_pct": 49.83,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 56.2,
+        "facts": [
+          "Portfolio (50% NVDA, 50% AMD) 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 13.61% of value",
+          "Portfolio (50% NVDA, 50% AMD) 95% 10-day expected shortfall, historical: 16.94%",
+          "Portfolio (50% NVDA, 50% AMD) 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 9.95%",
+          "Portfolio (50% NVDA, 50% AMD) 95% 10-day expected shortfall, filtered historical simulation: 13.19%",
+          "Portfolio (50% NVDA, 50% AMD) current volatility 36.95% vs 5-year average 49.83% (annualized)",
+          "Portfolio (50% NVDA, 50% AMD) probability of losing more than 10% over 10 days (filtered historical simulation): 4.95%"
+        ]
+      },
+      "seconds": 0.13,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:34Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AMD?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:03:12Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R2",
+      "agent": "risk",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "NVDA",
+          "AMD"
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "NVDA": 0.5,
+          "AMD": 0.5
+        },
+        "episodes": [
+          {
+            "episode": "2018 Q4 sell-off",
+            "portfolio_return_pct": -49.19,
+            "spy_return_pct": -19.35
+          },
+          {
+            "episode": "2020 COVID crash",
+            "portfolio_return_pct": -30.38,
+            "spy_return_pct": -33.72
+          },
+          {
+            "episode": "2022 rate-hike bear market",
+            "portfolio_return_pct": -61.63,
+            "spy_return_pct": -24.5
+          }
+        ],
+        "beta_vs_spy_3y": 2.13,
+        "beta_implied_move_if_spy_falls_20pct": -42.66,
+        "facts": [
+          "Portfolio (50% NVDA, 50% AMD) in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -49.19% vs SPY -19.35%",
+          "Portfolio (50% NVDA, 50% AMD) in the 2020 COVID crash (2020-02-19 to 2020-03-23): -30.38% vs SPY -33.72%",
+          "Portfolio (50% NVDA, 50% AMD) in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.63% vs SPY -24.5%",
+          "Portfolio (50% NVDA, 50% AMD) 3-year beta vs SPY: 2.13; a 20% SPY fall implies about -42.66%"
+        ]
+      },
+      "seconds": 0.02,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:27Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AMD?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:03:04Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:29Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R3",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "NVDA"
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "NVDA": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 14.27,
+        "historical_cvar_pct": 17.91,
+        "fhs_var_pct": 7.27,
+        "fhs_cvar_pct": 9.82,
+        "fhs_prob_loss_over_10pct": 1.66,
+        "current_vol_pct": 28.9,
+        "average_vol_pct": 51.96,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 25.7,
+        "facts": [
+          "NVDA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value",
+          "NVDA 95% 10-day expected shortfall, historical: 17.91%",
+          "NVDA 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.27%",
+          "NVDA 95% 10-day expected shortfall, filtered historical simulation: 9.82%",
+          "NVDA current volatility 28.9% vs 5-year average 51.96% (annualized)",
+          "NVDA probability of losing more than 10% over 10 days (filtered historical simulation): 1.66%"
+        ]
+      },
+      "seconds": 0.04,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:34Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R4",
+      "agent": "risk",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "NVDA"
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "NVDA": 1.0
+        },
+        "episodes": [
+          {
+            "episode": "2018 Q4 sell-off",
+            "portfolio_return_pct": -52.23,
+            "spy_return_pct": -19.35
+          },
+          {
+            "episode": "2020 COVID crash",
+            "portfolio_return_pct": -32.37,
+            "spy_return_pct": -33.72
+          },
+          {
+            "episode": "2022 rate-hike bear market",
+            "portfolio_return_pct": -61.79,
+            "spy_return_pct": -24.5
+          }
+        ],
+        "beta_vs_spy_3y": 2.05,
+        "beta_implied_move_if_spy_falls_20pct": -40.96,
+        "facts": [
+          "NVDA in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -52.23% vs SPY -19.35%",
+          "NVDA in the 2020 COVID crash (2020-02-19 to 2020-03-23): -32.37% vs SPY -33.72%",
+          "NVDA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5%",
+          "NVDA 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.96%"
+        ]
+      },
+      "seconds": 0.02,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:27Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:29Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R5",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "AMD"
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "AMD": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 14.55,
+        "historical_cvar_pct": 18.35,
+        "fhs_var_pct": 14.32,
+        "fhs_cvar_pct": 18.92,
+        "fhs_prob_loss_over_10pct": 11.51,
+        "current_vol_pct": 52.89,
+        "average_vol_pct": 57.61,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 19.5,
+        "facts": [
+          "AMD 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.55% of value",
+          "AMD 95% 10-day expected shortfall, historical: 18.35%",
+          "AMD 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 14.32%",
+          "AMD 95% 10-day expected shortfall, filtered historical simulation: 18.92%",
+          "AMD current volatility 52.89% vs 5-year average 57.61% (annualized)",
+          "AMD probability of losing more than 10% over 10 days (filtered historical simulation): 11.51%"
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AMD?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:03:12Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R6",
+      "agent": "risk",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "AMD"
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "AMD": 1.0
+        },
+        "episodes": [
+          {
+            "episode": "2018 Q4 sell-off",
+            "portfolio_return_pct": -46.6,
+            "spy_return_pct": -19.35
+          },
+          {
+            "episode": "2020 COVID crash",
+            "portfolio_return_pct": -29.3,
+            "spy_return_pct": -33.72
+          },
+          {
+            "episode": "2022 rate-hike bear market",
+            "portfolio_return_pct": -61.49,
+            "spy_return_pct": -24.5
+          }
+        ],
+        "beta_vs_spy_3y": 2.31,
+        "beta_implied_move_if_spy_falls_20pct": -46.13,
+        "facts": [
+          "AMD in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -46.6% vs SPY -19.35%",
+          "AMD in the 2020 COVID crash (2020-02-19 to 2020-03-23): -29.3% vs SPY -33.72%",
+          "AMD in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.49% vs SPY -24.5%",
+          "AMD 3-year beta vs SPY: 2.31; a 20% SPY fall implies about -46.13%"
+        ]
+      },
+      "seconds": 0.01,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AMD?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:03:04Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T03:37:29Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D1",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "NVDA",
+        "query": "competitive threats"
+      },
+      "result": {
+        "ticker": "NVDA",
+        "filing": "10-K filed 2026-02-25 (period 2026-01-25)",
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "risk_factors#30",
+            "text": "... While we invest in training programs and security awareness initiatives and take steps to detect and remediate certain vulnerabilities that we have identified, we may not always be able to prevent threats or detect and mitigate all vulnerabilities in our security controls, systems or software, including third-party software we have installed, as such threats and techniques change frequently and may not be detected until after a security incident has occurred. ..."
+          },
+          {
+            "ref": "risk_factors#28",
+            "text": "... Additionally, some actors are using AI technology to launch more automated, targeted and coordinated attacks. Due to geopolitical conflicts and during times of war or other major conflicts, we and the third parties we rely upon may be subject to a heightened risk of cyber-attacks that could materially disrupt our ability to provide services and products. We may also face cybersecurity threats due to error or intentional misconduct by employees, contractors or other third-party service providers. ..."
+          },
+          {
+            "ref": "business#23",
+            "text": "... Competition The market for our products is intensely competitive and is characterized by rapid technological change and evolving industry standards. We believe that the principal competitive factors in this market are performance, breadth of product offerings, access to customers and partners and distribution channels, software support, conformity to industry standard APIs, manufacturing capabilities, processor pricing, and total system costs. ..."
+          }
+        ]
+      },
+      "seconds": 0.38,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001045810.json",
+          "fetched_at": "2026-10-21T21:16:04Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+          "fetched_at": "2026-10-21T21:16:05Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D2",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "AMD",
+        "query": "competitive threats"
+      },
+      "result": {
+        "ticker": "AMD",
+        "filing": "10-K filed 2026-02-04 (period 2025-12-27)",
+        "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "risk_factors#34",
+            "text": "Our IT Systems and Confidential Data are vulnerable to a range of cybersecurity risks and threats, including malicious code that is added to widely available open-source software, compromised commercial software or security vulnerabilities in our products or systems, or those of a third party, that are being used by attackers prior to mitigations being put in place, such as zero-day attacks. ..."
+          },
+          {
+            "ref": "risk_factors#33",
+            "text": "... While we and others have implemented various controls and defenses, AMD and companies like AMD and our vendors and customers have been and are increasingly subject to cybersecurity attacks, risks and threats. Risks and threat factors range in sophistication from negligent or bad acts by individuals, hackers or insiders, to ransom gangs and state-sponsored attackers. Cyber threats may be generic, or they may be custom-crafted against our IT Systems or supply chain. ..."
+          },
+          {
+            "ref": "risk_factors#55",
+            "text": "... Even if we are granted licenses, the licenses may be temporary or could impose onerous conditions for us or our customers. If we are not granted licenses, we may be unable to develop a competitive product for the China market that is not subject to licensing requirements. Limits on sales of our offerings in the China market due to export controls could impact our competitive position compared to domestic Chinese competitors and other companies or competitors not subject to the same restrictions. ..."
+          }
+        ]
+      },
+      "seconds": 0.51,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000002488.json",
+          "fetched_at": "2026-10-21T21:22:48Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+          "fetched_at": "2026-10-21T21:22:50Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    }
+  ],
+  "llm_calls": [
+    {
+      "agent": "planner",
+      "role": "planner",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 256,
+      "completion_tokens": 141,
+      "latency_s": 7.42
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 654,
+      "completion_tokens": 75,
+      "latency_s": 7.35
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1378,
+      "completion_tokens": 165,
+      "latency_s": 14.69
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1455,
+      "completion_tokens": 172,
+      "latency_s": 15.03
+    },
+    {
+      "agent": "market",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 619,
+      "completion_tokens": 172,
+      "latency_s": 11.38
+    },
+    {
+      "agent": "market",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1463,
+      "completion_tokens": 126,
+      "latency_s": 13.55
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 672,
+      "completion_tokens": 91,
+      "latency_s": 7.6
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1418,
+      "completion_tokens": 247,
+      "latency_s": 17.79
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1922,
+      "completion_tokens": 196,
+      "latency_s": 19.5
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 452,
+      "completion_tokens": 81,
+      "latency_s": 6.12
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1437,
+      "completion_tokens": 81,
+      "latency_s": 11.64
+    },
+    {
+      "agent": "writer",
+      "role": "writer",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 853,
+      "completion_tokens": 456,
+      "latency_s": 21.92
+    }
+  ],
+  "narrative": "## Answer  \nNVDA revenue $215.94bn, up 65.47% year on year [F1] and NVDA gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1] indicate significantly stronger profitability than AMD, which has revenue $34.64bn, up 34.34% year on year [F2] and gross margin 49.52%, operating margin 10.66%, net margin 12.51% [F2]. NVDA 1y total return: 18.81% [M1] and AMD 1y total return: 122.29% [M2] show both stocks exhibit high growth but NVDA shows lower downside risk.  \n\n## Strengths  \n- NVDA revenue $215.94bn, up 65.47% year on year [F1]  \n- NVDA gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \n- NVDA 1y total return: 18.81% [M1]  \n\n## Risks  \n- Cybersecurity threats from AI and geopolitical conflicts may disrupt NVIDIA\u2019s services [D1]  \n- Licensing restrictions in China could limit AMD\u2019s competitive position [D2]  \n- NVDA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R3]  \n\n## What to watch  \n- NVDA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R3]  \n- AMD 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.55% of value [R5]",
+  "narrative_draft": "## Answer  \nNVDA revenue $215.94bn, up 65.47% year on year [F1] and NVDA gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1] indicate significantly stronger profitability than AMD, which has revenue $34.64bn, up 34.34% year on year [F2] and gross margin 49.52%, operating margin 10.66%, net margin 12.51% [F2]. NVDA 1y total return: 18.81% [M1] and AMD 1y total return: 122.29% [M2] show both stocks exhibit high growth but NVDA shows lower downside risk.  \n\n## Strengths  \n- NVDA revenue $215.94bn, up 65.47% year on year [F1]  \n- NVDA gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \n- NVDA 1y total return: 18.81% [M1]  \n\n## Risks  \n- Cybersecurity threats from AI and geopolitical conflicts may disrupt NVIDIA\u2019s services [D1]  \n- Licensing restrictions in China could limit AMD\u2019s competitive position [D2]  \n- NVDA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R3]  \n\n## What to watch  \n- NVDA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R3]  \n- AMD 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.55% of value [R5]",
+  "writer_check": {
+    "provenance": {
+      "checked": 24,
+      "verified": 24,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": []
+    },
+    "attribution": {
+      "claims": 10,
+      "supported": 10,
+      "score": 1.0,
+      "issues": []
+    },
+    "problems": []
+  },
+  "revisions": [],
+  "report": "# Research note: NVDA, AMD\n**Question:** Compare NVIDIA and AMD on growth, valuation and downside risk.\n\n*Generated 2026-10-22 19:52 by FinAgent \u00b7 4 specialist agents \u00b7 models `nemotron-3-nano:4b-cpu` / `nemotron-3-nano:4b-cpu`*\n\n> This note was generated by AI agents for educational purposes. It is general information, not personal financial advice or a recommendation to buy or sell any security. Figures come from public data (SEC EDGAR, US Treasury, Yahoo Finance) and may contain errors; verify before relying on them.\n\n## Answer  \nNVDA revenue $215.94bn, up 65.47% year on year [F1] and NVDA gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1] indicate significantly stronger profitability than AMD, which has revenue $34.64bn, up 34.34% year on year [F2] and gross margin 49.52%, operating margin 10.66%, net margin 12.51% [F2]. NVDA 1y total return: 18.81% [M1] and AMD 1y total return: 122.29% [M2] show both stocks exhibit high growth but NVDA shows lower downside risk.  \n\n## Strengths  \n- NVDA revenue $215.94bn, up 65.47% year on year [F1]  \n- NVDA gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \n- NVDA 1y total return: 18.81% [M1]  \n\n## Risks  \n- Cybersecurity threats from AI and geopolitical conflicts may disrupt NVIDIA\u2019s services [D1]  \n- Licensing restrictions in China could limit AMD\u2019s competitive position [D2]  \n- NVDA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R3]  \n\n## What to watch  \n- NVDA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R3]  \n- AMD 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.55% of value [R5]\n\n## Specialist findings\n### Fundamentals Analyst\n*Focus: revenue growth rates and margin trends for both NVDA and AMD*\n\nNVDA revenue $215.94bn, up 65.47% year on year [F1]  \nNVDA gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \nAMD revenue $34.64bn, up 34.34% year on year [F2]  \nAMD gross margin 49.52%, operating margin 10.66%, net margin 12.51% [F2]  \nNVDA market cap: $5216.93bn at $216.47 per share [F3]  \n\nNVDA demonstrates significantly stronger growth and profitability than AMD.\n\n### Market Analyst\n*Focus: current price-to-sales and price-to-earnings multiples relative to growth*\n\nNVDA 1y total return: 18.81% [M1]  \nAMD 1y total return: 122.29% [M2]  \nNVDA 1y beta vs SPY: 1.92 [M3]  \nAMD 1y beta vs SPY: 3.22 [M4]  \nNVDA 1y max drawdown: -20.21% [M1]  \n\nBoth stocks exhibit high growth but NVDA shows lower downside risk.\n\n### Risk Analyst\n*Focus: downside risk measures such as Value at Risk and expected shortfall for each stock*\n\nNVDA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R3]  \nNVDA 95% 10-day expected shortfall, historical: 17.91% [R3]  \nNVDA 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.27% [R3]  \nNVDA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R3]  \nAMD 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.55% of value [R5]  \n\nThe downside risk profiles differ significantly between the two companies.\n\n### Filings Analyst\n*Focus: key risks and competitive threats highlighted in the latest 10-K filings*\n\n- Cybersecurity threats from AI and geopolitical conflicts may disrupt NVIDIA\u2019s services [D1]  \n- Cybersecurity risks include zero-day attacks and supply chain vulnerabilities [D2]  \n- NVIDIA\u2019s competitive factors include pricing, system costs, and manufacturing capabilities [D1]  \n- Licensing restrictions in China could limit AMD\u2019s competitive position [D2]\n\n## Key figures (generated from tool outputs, not by a model)\n\n| Metric | NVDA | AMD |\n|---|---|---|\n| Price | 216.47 [M1] | 534.74 [M2] |\n| Total return (1y) | 18.81% [M1] | 122.29% [M2] |\n| Volatility, annualised (1y) | 37.34% [M1] | 67.87% [M2] |\n| Max drawdown (1y) | -20.21% [M1] | -27.76% [M2] |\n| Beta vs SPY (1y) | 1.92 [M3] | 3.22 [M4] |\n| Market cap ($bn) | 5,216.93 [F3] | 872.95 [F4] |\n| P/E (TTM) | 27.05x [F3] | 135.68x [F4] |\n| Price / sales (TTM) | 17.22x [F3] | 21.13x [F4] |\n| FCF yield | 1.85% [F3] | 0.77% [F4] |\n| Revenue, latest FY ($bn) | 215.94 [F1] | 34.64 [F2] |\n| Revenue growth, latest FY | 65.47% [F1] | 34.34% [F2] |\n| Operating margin, latest FY | 60.38% [F1] | 10.66% [F2] |\n| 10-day VaR 95% (historical) | 14.27% [R3] | 14.55% [R5] |\n| 10-day VaR 95% (filtered historical simulation) | 7.27% [R3] | 14.32% [R5] |\n\n## Evidence ledger\n\n| ID | Agent | Tool call | Chosen by | Source | Data retrieved |\n|---|---|---|---|---|---|\n| F1 | fundamentals | `financial_statements(ticker=NVDA, years=3)` | model | SEC EDGAR XBRL company facts | 2026-10-21 21:15:59 UTC |\n| F2 | fundamentals | `financial_statements(ticker=AMD, years=3)` | model | SEC EDGAR XBRL company facts | 2026-10-21 21:15:59 UTC |\n| F3 | fundamentals | `valuation_snapshot(ticker=NVDA)` | coverage check | SEC EDGAR XBRL + Yahoo Finance price | 2026-10-21 21:15:59 UTC |\n| F4 | fundamentals | `valuation_snapshot(ticker=AMD)` | coverage check | SEC EDGAR XBRL + Yahoo Finance price | 2026-10-21 21:15:59 UTC |\n| M1 | market | `price_performance(ticker=NVDA, period=1y)` | model | Yahoo Finance daily prices; US Treasury bill rates | 2026-10-21 21:17:11 UTC |\n| M2 | market | `price_performance(ticker=AMD, period=1y)` | model | Yahoo Finance daily prices; US Treasury bill rates | 2026-10-21 21:17:11 UTC |\n| M3 | market | `benchmark_comparison(ticker=NVDA, benchmark=SPY, period=1y)` | model | Yahoo Finance daily prices | 2026-10-22 03:37:27 UTC |\n| M4 | market | `benchmark_comparison(ticker=AMD, benchmark=SPY, period=1y)` | model | Yahoo Finance daily prices | 2026-10-22 03:37:29 UTC |\n| R1 | risk | `value_at_risk(tickers=['NVDA', 'AMD'], confidence=0.95, horizon_days=10)` | model | computed from 5y daily prices | 2026-10-22 03:37:34 UTC |\n| R2 | risk | `stress_test(tickers=['NVDA', 'AMD'])` | model | computed from 10y daily prices | 2026-10-22 03:37:27 UTC |\n| R3 | risk | `value_at_risk(tickers=['NVDA'])` | coverage check | computed from 5y daily prices | 2026-10-22 03:37:34 UTC |\n| R4 | risk | `stress_test(tickers=['NVDA'])` | coverage check | computed from 10y daily prices | 2026-10-22 03:37:27 UTC |\n| R5 | risk | `value_at_risk(tickers=['AMD'])` | coverage check | computed from 5y daily prices | 2026-10-22 06:03:12 UTC |\n| R6 | risk | `stress_test(tickers=['AMD'])` | coverage check | computed from 10y daily prices | 2026-10-22 03:37:29 UTC |\n| D1 | filings | `search_10k(ticker=NVDA, query=competitive threats)` | model | https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm | 2026-10-21 21:15:59 UTC |\n| D2 | filings | `search_10k(ticker=AMD, query=competitive threats)` | model | https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm | 2026-10-21 21:15:59 UTC |\n\n## How this note was produced\n\n- **Number provenance:** 51 of 51 numbers trace back to a tool result the agent received (100%).\n- **Claim attribution:** 29 of 29 cited claims match their source (company, period, metric, direction; 10-K points by wording) (100%).\n- **Agents:** planner \u2192 fundamentals, market, risk, filings \u2192 fact-check \u2192 lead analyst.\n- **Tool calls:** 16 (10 chosen by the models, 6 added by coverage checks).\n- **Data:** 16 sources, all fetched or cached within their freshness window. Retrieval times are in the evidence ledger.\n- **Language model:** 12 calls, 12,579 prompt + 2,003 completion tokens, 154.0 s of model time; 154.1 s end to end.\n- **Compute:** risk simulation on CPU (NumPy); 10-K retrieval: BM25; endpoint `http://127.0.0.1:11434/v1`.\n",
+  "stats": {
+    "llm_calls": 12,
+    "prompt_tokens": 12579,
+    "completion_tokens": 2003,
+    "model_seconds": 154.0,
+    "wall_seconds": 154.1,
+    "tool_calls": 16,
+    "tool_calls_chosen_by_model": 10,
+    "revisions": 0,
+    "risk_backend": "CPU (NumPy)",
+    "retrieval": "BM25",
+    "data_sources": 16,
+    "stale_sources": [],
+    "dropped_params": [],
+    "ablations": [],
+    "endpoint": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "quality": {
+      "numbers_checked": 51,
+      "numbers_traced": 51,
+      "number_provenance": 1.0,
+      "claims_checked": 29,
+      "claims_supported": 29,
+      "claim_attribution": 1.0,
+      "claim_issues": []
+    },
+    "provenance": {
+      "checked": 51,
+      "verified": 51,
+      "score": 1.0,
+      "unverified": []
+    },
+    "promissory_phrases": []
+  },
+  "eval": null,
+  "events": [
+    {
+      "t": 1792658973.3,
+      "event": "guard",
+      "allowed": true,
+      "personal_advice": false,
+      "rail": "rules"
+    },
+    {
+      "t": 1792658980.79,
+      "event": "plan",
+      "tasks": [
+        {
+          "agent": "fundamentals",
+          "focus": "revenue growth rates and margin trends for both NVDA and AMD"
+        },
+        {
+          "agent": "market",
+          "focus": "current price-to-sales and price-to-earnings multiples relative to growth"
+        },
+        {
+          "agent": "risk",
+          "focus": "downside risk measures such as Value at Risk and expected shortfall for each stock"
+        },
+        {
+          "agent": "filings",
+          "focus": "key risks and competitive threats highlighted in the latest 10-K filings"
+        }
+      ],
+      "source": "model"
+    },
+    {
+      "t": 1792658980.8,
+      "event": "agent_start",
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "revenue growth rates and margin trends for both NVDA and AMD"
+    },
+    {
+      "t": 1792658980.8,
+      "event": "agent_start",
+      "agent": "market",
+      "title": "Market Analyst",
+      "focus": "current price-to-sales and price-to-earnings multiples relative to growth"
+    },
+    {
+      "t": 1792658980.81,
+      "event": "agent_start",
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "downside risk measures such as Value at Risk and expected shortfall for each stock"
+    },
+    {
+      "t": 1792658980.81,
+      "event": "agent_start",
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "key risks and competitive threats highlighted in the latest 10-K filings"
+    },
+    {
+      "t": 1792658988.16,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [
+        "financial_statements",
+        "financial_statements"
+      ],
+      "latency_s": 7.35,
+      "prompt_tokens": 654,
+      "completion_tokens": 75
+    },
+    {
+      "t": 1792658988.22,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F1",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "NVDA",
+        "years": 3
+      },
+      "seconds": 0.07,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792658988.4,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F2",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "AMD",
+        "years": 3
+      },
+      "seconds": 0.18,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792658999.54,
+      "event": "llm",
+      "agent": "market",
+      "tool_calls": [
+        "price_performance",
+        "price_performance",
+        "benchmark_comparison",
+        "benchmark_comparison"
+      ],
+      "latency_s": 11.38,
+      "prompt_tokens": 619,
+      "completion_tokens": 172
+    },
+    {
+      "t": 1792658999.59,
+      "event": "tool",
+      "agent": "market",
+      "id": "M1",
+      "tool": "price_performance",
+      "args": {
+        "ticker": "NVDA",
+        "period": "1y"
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792658999.65,
+      "event": "tool",
+      "agent": "market",
+      "id": "M2",
+      "tool": "price_performance",
+      "args": {
+        "ticker": "AMD",
+        "period": "1y"
+      },
+      "seconds": 0.06,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792658999.67,
+      "event": "tool",
+      "agent": "market",
+      "id": "M3",
+      "tool": "benchmark_comparison",
+      "args": {
+        "ticker": "NVDA",
+        "benchmark": "SPY",
+        "period": "1y"
+      },
+      "seconds": 0.02,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792658999.68,
+      "event": "tool",
+      "agent": "market",
+      "id": "M4",
+      "tool": "benchmark_comparison",
+      "args": {
+        "ticker": "AMD",
+        "benchmark": "SPY",
+        "period": "1y"
+      },
+      "seconds": 0.01,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792659007.14,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [
+        "value_at_risk",
+        "stress_test"
+      ],
+      "latency_s": 7.6,
+      "prompt_tokens": 672,
+      "completion_tokens": 91
+    },
+    {
+      "t": 1792659007.27,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R1",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "NVDA",
+          "AMD"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "seconds": 0.13,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792659007.29,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R2",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "NVDA",
+          "AMD"
+        ]
+      },
+      "seconds": 0.02,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792659013.26,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [
+        "search_10k",
+        "search_10k"
+      ],
+      "latency_s": 6.12,
+      "prompt_tokens": 452,
+      "completion_tokens": 81
+    },
+    {
+      "t": 1792659013.64,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D1",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "NVDA",
+        "query": "competitive threats"
+      },
+      "seconds": 0.38,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792659014.16,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D2",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "AMD",
+        "query": "competitive threats"
+      },
+      "seconds": 0.51,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792659027.96,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 14.69,
+      "prompt_tokens": 1378,
+      "completion_tokens": 165
+    },
+    {
+      "t": 1792659028.02,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F3",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "NVDA"
+      },
+      "seconds": 0.07,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792659028.12,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F4",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "AMD"
+      },
+      "seconds": 0.1,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792659041.51,
+      "event": "llm",
+      "agent": "market",
+      "tool_calls": [],
+      "latency_s": 13.55,
+      "prompt_tokens": 1463,
+      "completion_tokens": 126
+    },
+    {
+      "t": 1792659041.51,
+      "event": "agent_done",
+      "agent": "market",
+      "seconds": 60.7
+    },
+    {
+      "t": 1792659059.3,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 17.79,
+      "prompt_tokens": 1418,
+      "completion_tokens": 247
+    },
+    {
+      "t": 1792659059.34,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R3",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "NVDA"
+        ]
+      },
+      "seconds": 0.04,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792659059.35,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R4",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "NVDA"
+        ]
+      },
+      "seconds": 0.02,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792659059.38,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R5",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "AMD"
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792659059.39,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R6",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "AMD"
+        ]
+      },
+      "seconds": 0.01,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792659070.93,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [],
+      "latency_s": 11.64,
+      "prompt_tokens": 1437,
+      "completion_tokens": 81
+    },
+    {
+      "t": 1792659070.93,
+      "event": "agent_done",
+      "agent": "filings",
+      "seconds": 90.1
+    },
+    {
+      "t": 1792659085.96,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 15.03,
+      "prompt_tokens": 1455,
+      "completion_tokens": 172
+    },
+    {
+      "t": 1792659085.96,
+      "event": "agent_done",
+      "agent": "fundamentals",
+      "seconds": 105.2
+    },
+    {
+      "t": 1792659105.46,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 19.5,
+      "prompt_tokens": 1922,
+      "completion_tokens": 196
+    },
+    {
+      "t": 1792659105.46,
+      "event": "agent_done",
+      "agent": "risk",
+      "seconds": 124.7
+    },
+    {
+      "t": 1792659105.47,
+      "event": "verify",
+      "agent": "fundamentals",
+      "checked": 12,
+      "verified": 12,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792659105.48,
+      "event": "verify",
+      "agent": "market",
+      "checked": 5,
+      "verified": 5,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792659105.48,
+      "event": "verify",
+      "agent": "risk",
+      "checked": 10,
+      "verified": 10,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792659105.49,
+      "event": "verify",
+      "agent": "filings",
+      "checked": 0,
+      "verified": 0,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 4,
+      "claims_supported": 4,
+      "claim_issues": []
+    },
+    {
+      "t": 1792659105.49,
+      "event": "agent_start",
+      "agent": "writer",
+      "title": "Lead Analyst",
+      "focus": "summary"
+    },
+    {
+      "t": 1792659127.41,
+      "event": "llm",
+      "agent": "writer",
+      "tool_calls": [],
+      "latency_s": 21.92,
+      "prompt_tokens": 853,
+      "completion_tokens": 456
+    },
+    {
+      "t": 1792659127.44,
+      "event": "verify",
+      "agent": "writer",
+      "checked": 24,
+      "verified": 24,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 10,
+      "claims_supported": 10,
+      "claim_issues": []
+    },
+    {
+      "t": 1792659127.52,
+      "event": "done",
+      "stats": {
+        "llm_calls": 12,
+        "prompt_tokens": 12579,
+        "completion_tokens": 2003,
+        "model_seconds": 154.0,
+        "wall_seconds": 154.1,
+        "tool_calls": 16,
+        "tool_calls_chosen_by_model": 10,
+        "revisions": 0,
+        "risk_backend": "CPU (NumPy)",
+        "retrieval": "BM25",
+        "data_sources": 16,
+        "stale_sources": [],
+        "dropped_params": [],
+        "ablations": [],
+        "endpoint": "http://127.0.0.1:11434/v1",
+        "orchestrator_model": "nemotron-3-nano:4b-cpu",
+        "specialist_model": "nemotron-3-nano:4b-cpu",
+        "quality": {
+          "numbers_checked": 51,
+          "numbers_traced": 51,
+          "number_provenance": 1.0,
+          "claims_checked": 29,
+          "claims_supported": 29,
+          "claim_attribution": 1.0,
+          "claim_issues": []
+        },
+        "provenance": {
+          "checked": 51,
+          "verified": 51,
+          "score": 1.0,
+          "unverified": []
+        },
+        "promissory_phrases": []
+      }
+    }
+  ],
+  "settings": {
+    "profile": "local",
+    "base_url": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "temperature": 0.0,
+    "reasoning": false,
+    "ablate": []
+  }
+}
