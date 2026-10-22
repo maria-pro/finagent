@@ -16,12 +16,15 @@ small models.** The same code moves to NVIDIA NIM endpoints by changing configur
 | Machine | Inference server | Question | End to end | Model calls | Tool calls (chosen by the model) | Numbers traced to a tool |
 |---|---|---|---|---|---|---|
 | Apple M1 Pro laptop, CPU only (`-ngl 0`, 6 threads) | llama.cpp | NVDA: is the valuation justified, what are the risks? | **104 s** | 10 | 9 (9) | 38 / 38 |
+| Apple M1 Pro laptop, CPU only (`num_gpu 0`) | Ollama 0.17 | NVDA: is the valuation justified, what are the risks? | **105 s** | 10 | 8 (8) | 34 / 34 |
 | Apple M1 Pro laptop, CPU only | llama.cpp | NVDA vs AMD: growth, valuation, downside risk | **112 s** | 12 | 15 (9) | 51 / 51 |
 | Intel Xeon E5-2690 v4 (2016), 8-vCPU VM, 4 threads, shared with another job | Ollama 0.40 | NVDA: is the valuation justified, what are the risks? | **454 s** | 10 | 9 (9) | 35 / 35 |
 
 Model: [NVIDIA Nemotron 3 Nano 4B](https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-4B-GGUF), Q4_K_M, 2.8 GB.
 The notes and full run records (every prompt's token count, every tool call and result)
-are in [`examples/`](examples/); the web UI replays them without a model. The risk
+are in [`examples/`](examples/); the web UI replays them without a model. Letting Ollama
+use the laptop's Apple GPU (Metal) instead cut the same run only from 105 s to 87 s: at
+4B parameters the CPU is already enough. The risk
 engine's million-path Monte Carlo VaR takes 137 ms on the same laptop CPU
 (`finagent bench-risk`).
 

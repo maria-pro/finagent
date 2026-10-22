@@ -103,10 +103,10 @@ def cmd_analyze(args) -> int:
 
 def cmd_doctor(args) -> int:
     from .accel import array_backend
-    from .agents.planner import PLAN_SCHEMA
+    from .agents.planner import make_plan
     from .data.prices import adjusted_close, risk_free_rate
     from .data.sec import ticker_to_cik
-    from .llm import OpenAICompatLLM, extract_json
+    from .llm import OpenAICompatLLM
 
     settings = load_settings(args.profile)
     table = Table(title=f"FinAgent doctor · profile '{settings.profile}'", show_lines=False)
@@ -148,11 +148,11 @@ def cmd_doctor(args) -> int:
         row("Tool calling", False, f"{type(err).__name__}: {err}"[:160])
 
     try:
-        r = llm.chat([{"role": "user", "content": "Plan research on AMD's valuation. Return JSON."}], role="planner", json_schema=PLAN_SCHEMA, max_tokens=300)
-        plan = extract_json(r.content)
-        row("Structured output", bool(plan.get("tasks")), f"{len(plan.get('tasks', []))} tasks in {r.usage['latency_s']}s")
+        tasks, usage, source = make_plan(llm, ["AMD"], "Is AMD's valuation justified by its growth?")
+        latency = usage[0]["latency_s"] if usage else 0
+        row("Planner (JSON schema)", source == "model", f"{len(tasks)} tasks from the {source} in {latency}s: {', '.join(t['agent'] for t in tasks)}")
     except Exception as err:
-        row("Structured output", False, f"{type(err).__name__}: {err}"[:160])
+        row("Planner (JSON schema)", False, f"{type(err).__name__}: {err}"[:160])
 
     for name, probe in (
         ("SEC EDGAR", lambda: f"NVDA → CIK {ticker_to_cik(settings, 'NVDA')[0]}"),

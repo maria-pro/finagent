@@ -164,7 +164,9 @@ class OpenAICompatLLM:
     def _reasoning_params(self, enabled: bool) -> tuple[dict, dict]:
         """Return (top-level kwargs, extra_body) that switch reasoning on or off."""
         if self._style == "ollama" and "reasoning_effort" not in self._unsupported:
-            return {"reasoning_effort": "medium" if enabled else "none"}, {}
+            # Nemotron's thinking is on/off only (Ollama rejects effort levels such as "medium"),
+            # so "on" means leaving the model's default, which is thinking enabled.
+            return ({}, {}) if enabled else ({"reasoning_effort": "none"}, {})
         if self._style == "template" and "chat_template_kwargs" not in self._unsupported:
             return {}, {"chat_template_kwargs": {"enable_thinking": enabled}}
         return {}, {}
