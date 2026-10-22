@@ -19,7 +19,11 @@ def financial_statements(ctx: ToolContext, ticker: str, years: int = 3) -> dict:
 
     revenue = sec.annual_facts(facts, "revenue")
     if not revenue:
-        return {"ticker": ticker, "error": "no annual revenue reported in XBRL (common for banks and insurers)"}
+        return {
+            "ticker": ticker,
+            "error": f"no annual revenue in XBRL for {title} (CIK {cik}): some insurers tag revenue differently, "
+            "and a newly registered successor company has no annual filings yet",
+        }
     ends = sorted(revenue)[-(years + 1) :]  # one extra year to compute growth for the first shown year
     series = {
         m: sec.annual_facts(facts, m, ends)
@@ -63,7 +67,9 @@ def financial_statements(ctx: ToolContext, ticker: str, years: int = 3) -> dict:
     # Latest year first: small models tend to quote whatever they read first.
     latest = rows[-1]
     fy = f"{ticker} FY ending {latest['fiscal_year_end']}"
-    facts_out = [f"{fy}: revenue ${latest['revenue_bn']}bn" + (f", up {latest['revenue_growth_pct']}% year on year" if latest["revenue_growth_pct"] is not None else "")]
+    growth = latest["revenue_growth_pct"]
+    change = "" if growth is None else f", {'up' if growth >= 0 else 'down'} {abs(growth)}% year on year"
+    facts_out = [f"{fy}: revenue ${latest['revenue_bn']}bn{change}"]
     margins = [(name, latest[key]) for name, key in (("gross", "gross_margin_pct"), ("operating", "operating_margin_pct"), ("net", "net_margin_pct")) if latest[key] is not None]
     if margins:
         facts_out.append(f"{fy}: " + ", ".join(f"{name} margin {v}%" for name, v in margins))

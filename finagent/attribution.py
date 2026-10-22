@@ -303,6 +303,7 @@ def check_claim(
     multi_company: bool,
     passages: set[str] = frozenset(),
     aliases: dict[str, set[str]] | None = None,
+    failed: set[str] = frozenset(),
 ) -> None:
     numbers = extract_numbers(claim.text)
     if not claim.cited:
@@ -311,8 +312,11 @@ def check_claim(
             claim.issues.append("numbers without a citation")
         return
     unknown = [c for c in claim.cited if c not in sources]
-    if unknown:
-        claim.issues.append(f"cites evidence it was not given ({', '.join(unknown)})")
+    failed_ids = [c for c in unknown if c in failed]
+    if failed_ids:
+        claim.issues.append(f"cites a tool call that failed ({', '.join(failed_ids)})")
+    if set(unknown) - set(failed_ids):
+        claim.issues.append(f"cites evidence it was not given ({', '.join(c for c in unknown if c not in failed)})")
     pool = [(eid, s) for eid in claim.cited if eid in sources for s in sources[eid]]
     if numbers:
         claim.kind = "numeric"
@@ -401,14 +405,16 @@ def check_claim(
 def check(text: str, evidence: list[dict], tickers: list[str], allowed_ids: set[str] | None = None) -> AttributionReport:
     """Check every cited claim in ``text``. ``allowed_ids`` restricts which evidence a
     claim may cite (an agent's own); by default any evidence in the ledger counts."""
-    usable = [e for e in evidence if not e.get("error") and (allowed_ids is None or e["id"] in allowed_ids)]
+    in_scope = [e for e in evidence if allowed_ids is None or e["id"] in allowed_ids]
+    usable = [e for e in in_scope if not e.get("error")]
+    failed = {e["id"] for e in in_scope if e.get("error")}
     sources = {e["id"]: source_strings(e) for e in usable}
     passages = {e["id"] for e in usable if e.get("result", {}).get("passages")}
     universe = set(tickers) | {"SPY"}
     aliases = company_aliases(evidence, tickers)
     claims = split_claims(text)
     for claim in claims:
-        check_claim(claim, sources, universe, multi_company=len(tickers) > 1, passages=passages, aliases=aliases)
+        check_claim(claim, sources, universe, multi_company=len(tickers) > 1, passages=passages, aliases=aliases, failed=failed)
     # Interpretation (opinions without numbers) is not a claim about the data.
     return AttributionReport([c for c in claims if c.kind != "interpretation" or c.issues])
 

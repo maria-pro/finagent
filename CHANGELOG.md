@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.2.1 — 2026-10-22
+
+Fixes found by the first pilot evaluation (`eval/results/`).
+
+- **No evidence, no findings:** when every tool call of a specialist fails, its finding
+  states what failed instead of asking the model to write - in the pilot, the filings
+  agent invented figures when ExxonMobil's 10-K search failed (the checker caught them).
+- A tool that returns "no data" (`{"error": ...}`) is recorded as a failed call in the
+  ledger, and attempted calls are not re-run by the coverage check.
+- Claims citing a failed tool call are reported as such.
+- Writer: the Answer must address every part of the question with a cited finding (the
+  pilot's summaries sometimes skipped the valuation or fundamentals figures).
+- Broker-dealer net revenue (`RevenuesNetOfInterestExpense`, e.g. Goldman Sachs) is
+  recognised; clearer errors for registrants without annual filings (ExxonMobil's new
+  holding company, CIK 2115436, has filed only a 10-Q).
+- Negative growth is written "down X%" rather than "up -X%".
+- Evaluation rows record the code version.
+
 ## 0.2.0 — 2026-10-22
 
 Stronger verification, a better risk model, auditable data, and an evaluation harness.
@@ -69,7 +87,7 @@ Stronger verification, a better risk model, auditable data, and an evaluation ha
   checks when configured, and parameters the endpoint rejected.
 
 ### Tests
-- 108 offline tests, 93% line coverage. New: the LLM client through the real OpenAI SDK
+- 108 offline tests (113 in 0.2.1), 93% line coverage. New: the LLM client through the real OpenAI SDK
   over a mocked HTTP transport (probing, reasoning toggles, the fallback loop, tool-call
   parsing, concurrency limit), attribution rules, CLI commands, run records, data
   freshness, filtered historical simulation, dated Sharpe, debt composition.

@@ -129,7 +129,8 @@ def model_view(ev_id: str, result: dict, use_facts: bool = True) -> dict:
 def _covered(call: tuple[str, dict], evidence: list[dict]) -> bool:
     name, args = call
     for ev in evidence:
-        if ev["tool"] != name or ev.get("error"):
+        # an attempted call counts even if it failed: running it again would fail the same way
+        if ev["tool"] != name:
             continue
         if "ticker" in args and parse_tickers(ev["args"].get("ticker", ""))[:1] != [args["ticker"]]:
             continue
@@ -180,6 +181,8 @@ def run_specialist(
                 except Exception as err:  # tool failures go back to the model so it can adapt
                     error = f"{type(err).__name__}: {err}"
                     result = {"error": error}
+        if error is None and isinstance(result, dict) and result.get("error"):
+            error = str(result["error"])  # a tool that reports "no data" failed just the same
         seconds = round(time.perf_counter() - t0, 2)
         sources = fetched if tool is not None and call.name in spec.tools else []
         record = {
@@ -242,7 +245,12 @@ def run_specialist(
         for call in calls:
             execute(call, "coverage check")
         text = ""
-    if not text:
+    if not any(not e.get("error") for e in evidence):
+        # No evidence, no findings: with every tool call failed, anything the model wrote
+        # would be invented, so the finding says what happened instead.
+        failures = "; ".join(f"{e['tool']}: {e['error']}" for e in evidence) or "no tool was called"
+        text = f"No findings: every data request failed ({failures})."
+    elif not text:
         messages.append({"role": "user", "content": spec.findings_rules})
         text = ask(with_tools=False).content
 

@@ -120,3 +120,29 @@ def test_ablations_switch_off_each_mechanism(offline):
     assert not any(e["event"] == "revise" for e in events)  # the planted 987.65% stays...
     assert "987.65% ⚠unverified" in final["report"]  # ...but is still flagged in the note
     assert "**Ablation run:** switched off attribution, coverage, revision" in final["report"]
+
+
+def test_agent_whose_tools_all_fail_reports_no_findings(offline, monkeypatch):
+    from finagent.agents import specialists
+
+    def fails(ctx, ticker, query, k=3):
+        raise RuntimeError("no 10-K among the recent filings")
+
+    monkeypatch.setattr(specialists._ALL_TOOLS["search_10k"], "fn", fails)
+    llm = ScriptedLLM(hallucinate=False, plan=["filings"])
+    final = run_research(llm, offline, ["NVDA"], "q")
+    text = final["findings"]["filings"]["text"]
+    assert text.startswith("No findings: every data request failed (search_10k: RuntimeError: no 10-K")
+    assert all(e["error"] for e in final["evidence"])
+    writes = [c for c in llm.calls if c["role"] == "specialist" and not c["tools"]]
+    assert writes == []  # the model was never asked to write findings without data
+
+
+def test_tool_that_reports_no_data_counts_as_failed(offline, monkeypatch):
+    from finagent.agents import specialists
+
+    monkeypatch.setattr(specialists._ALL_TOOLS["valuation_snapshot"], "fn", lambda ctx, ticker: {"ticker": ticker, "error": "share count stale"})
+    final = run_research(ScriptedLLM(hallucinate=False, plan=["fundamentals"]), offline, ["NVDA"], "q")
+    failed = [e for e in final["evidence"] if e["tool"] == "valuation_snapshot"]
+    assert len(failed) == 1 and failed[0]["error"] == "share count stale"  # recorded once, not retried by coverage
+    assert "error: share count stale" in final["report"]

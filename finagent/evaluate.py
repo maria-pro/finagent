@@ -27,6 +27,7 @@ import time
 from pathlib import Path
 from typing import Callable
 
+from . import __version__
 from .checks import note_quality
 from .config import ABLATIONS, Settings
 
@@ -164,6 +165,7 @@ def run_eval(
                 except Exception as err:  # one failed run must not end a long study
                     row = {"ticker": ticker, "question": qkey, "variant": name, "ok": False, "error": f"{type(err).__name__}: {err}"}
                 row["elapsed"] = round(time.time() - started, 1)
+                row["version"] = __version__
                 row["model"] = run_settings.specialist_model
                 row["endpoint"] = run_settings.base_url
                 with out.open("a", encoding="utf-8") as fh:

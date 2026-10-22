@@ -108,3 +108,27 @@ def test_personal_advice_is_framed_not_refused(settings):
 
 def test_output_rail_flags_promises():
     assert guard.check_output("This is a guaranteed winner that can't lose.") == ["can't lose", "guaranteed"]
+
+
+def test_negative_growth_is_written_as_down(offline, monkeypatch):
+    from conftest import SYNTHETIC_FACTS
+
+    from finagent.data import sec
+
+    shrinking = {"facts": {"us-gaap": {"Revenues": {"units": {"USD": [
+        {"start": "2024-01-01", "end": "2024-12-31", "val": 100e9, "form": "10-K", "filed": "2025-02-01", "accn": "a"},
+        {"start": "2025-01-01", "end": "2025-12-31", "val": 99e9, "form": "10-K", "filed": "2026-02-01", "accn": "b"},
+    ]}}}}}
+    monkeypatch.setattr(sec, "company_facts", lambda _s, _cik: shrinking)
+    assert financial_statements(offline, "NVDA")["facts"][0] == "NVDA FY ending 2025-12-31: revenue $99.0bn, down 1.0% year on year"
+    assert SYNTHETIC_FACTS  # fixture data untouched
+
+
+def test_broker_dealer_net_revenue_is_recognised():
+    from datetime import date
+
+    from finagent.data import sec
+
+    gs_like = {"facts": {"us-gaap": {"RevenuesNetOfInterestExpense": {"units": {"USD": [
+        {"start": "2025-01-01", "end": "2025-12-31", "val": 53.5e9, "form": "10-K", "filed": "2026-02-20", "accn": "g"}]}}}}}
+    assert sec.annual_values(gs_like, "revenue") == {date(2025, 12, 31): 53.5e9}

@@ -16,6 +16,7 @@ Two or three sentences that directly answer the question.
 - two bullets
 Rules:
 - Build each Strengths and Risks bullet by copying one finding bullet word for word, including its evidence id in square brackets.
+- The Answer must address every part of the question, citing the finding that bears on each part: valuation questions need the valuation figures (P/E, price-to-sales), fundamentals the revenue and margin figures, risks the risk figures or the 10-K points.
 - In the Answer, copy each number from a finding together with its label - the same company, period, fiscal year and metric - and put that finding's evidence id in square brackets right after it.
 - Do not recommend buying or selling. Write for an educated reader, in plain English."""
 

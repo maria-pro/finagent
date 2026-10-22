@@ -107,3 +107,9 @@ def test_growth_rate_spans_need_their_start_year():
     assert attribution.check("- NVDA revenue CAGR FY2024-FY2026: 88.68% [F1]", evidence, ["NVDA"]).score == 1.0
     flagged = attribution.check("- NVDA revenue growth of 88.68% [F1]", evidence, ["NVDA"]).flagged[0]
     assert flagged.issues == ["88.68%: period FY2024-FY2026 missing (source: NVDA revenue CAGR from FY 2024 to FY 2026)"]
+
+
+def test_citing_a_failed_tool_call_is_named_as_such():
+    evidence = EVIDENCE + [{"id": "D2", "agent": "D", "error": "no 10-K", "result": {"error": "no 10-K"}}]
+    found = attribution.check("- Free cash flow was $12.5 billion [D2]", evidence, ["NVDA"]).flagged[0].issues
+    assert found == ["cites a tool call that failed (D2)"]

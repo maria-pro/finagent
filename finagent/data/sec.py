@@ -40,6 +40,7 @@ CONCEPTS: dict[str, Metric] = {
             "SalesRevenueNet",
             "RevenueFromContractWithCustomerIncludingAssessedTax",
             "SalesRevenueGoodsNet",
+            "RevenuesNetOfInterestExpense",  # broker-dealers' net revenue (e.g. Goldman Sachs)
         ),
         "USD",
         "duration",
@@ -354,7 +355,10 @@ def latest_annual_filing(settings: Settings, cik: int) -> dict:
                     "period": recent["reportDate"][i],
                     "url": f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession.replace('-', '')}/{doc}",
                 }
-    raise DataSourceError(f"no annual report found for CIK {cik}")
+    raise DataSourceError(
+        f"no 10-K, 20-F or 40-F among the recent filings of CIK {cik} "
+        "(a newly registered successor company files only 10-Qs until its first annual report)"
+    )
 
 
 def html_to_text(html: str) -> str:
