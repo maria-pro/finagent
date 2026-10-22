@@ -59,3 +59,37 @@ def test_html_to_text_drops_hidden_xbrl_header():
     html = '<html><body><div style="display:none"><ix:header>junk 123</ix:header></div><p>Item 1A.</p><p>Risk Factors</p></body></html>'
     text = sec.html_to_text(html)
     assert "junk" not in text and "Risk Factors" in text
+
+
+def _bs(**concepts):
+    facts = {"facts": {"us-gaap": {}}}
+    for concept, value in concepts.items():
+        facts["facts"]["us-gaap"][concept] = {"units": {"USD": [{"end": "2026-06-30", "val": value, "form": "10-Q", "filed": "2026-07-30", "accn": "x"}]}}
+    return facts
+
+
+@pytest.mark.parametrize(
+    "concepts, debt, method",
+    [
+        ({"LongTermDebtNoncurrent": 90.0, "DebtCurrent": 15.0}, 105.0, "LongTermDebtNoncurrent + DebtCurrent"),
+        ({"LongTermDebtNoncurrent": 90.0, "LongTermDebtCurrent": 10.0, "ShortTermBorrowings": 5.0}, 105.0, "LongTermDebtNoncurrent + LongTermDebtCurrent + ShortTermBorrowings"),
+        # LongTermDebt already includes the current portion by definition; only add short-term borrowings
+        ({"LongTermDebt": 100.0, "CommercialPaper": 5.0}, 105.0, "LongTermDebt + CommercialPaper"),
+        ({}, 0.0, "no debt tags"),
+    ],
+)
+def test_balance_sheet_debt_is_composed_explicitly(concepts, debt, method):
+    sheet = sec.balance_sheet(_bs(CashAndCashEquivalentsAtCarryingValue=50.0, **concepts))
+    assert sheet["debt"] == debt and sheet["as_of"] == "2026-06-30"
+    assert sheet["debt_method"].startswith(method)
+
+
+def test_net_income_prefers_the_parent_over_profit_including_minorities():
+    def annual(value):
+        return {"units": {"USD": [{"start": "2025-01-01", "end": "2025-12-31", "val": value, "form": "10-K", "filed": "2026-02-01", "accn": "a"}]}}
+
+    both = {"facts": {"us-gaap": {"ProfitLoss": annual(110.0), "NetIncomeLoss": annual(100.0)}}}
+    assert sec.annual_values(both, "net_income") == {date(2025, 12, 31): 100.0}
+    only_total = {"facts": {"us-gaap": {"ProfitLoss": annual(110.0)}}}
+    fact = sec.annual_facts(only_total, "net_income")[date(2025, 12, 31)]
+    assert fact.value == 110.0 and fact.concept == "ProfitLoss"

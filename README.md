@@ -5,10 +5,12 @@
 FinAgent is a team of AI agents that researches public companies (as financial analyst): 
 - a planner assigns work, 
 - four specialists (market, fundamentals, risk, filings) call real data tools in parallel, 
-- a fact-checker traces every number they write back to the tool output it came from, and a lead analyst writes the note.
+- a fact-checker traces every number they write back to the tool output it came from and checks that each claim keeps its source's company, period and metric, and
+- a lead analyst writes the note, which gets the same check.
 
-It is built to make one point measurable: **a 4-billion-parameter model on a CPU can do useful, auditable agentic work when the system around it is designed for
-small models.** The same code moves to NVIDIA NIM endpoints by changing configuration.
+It is built to make one claim testable: **a 4-billion-parameter model on a CPU can do useful, auditable agentic work when the system around it is designed for
+small models.** The evidence so far is a pilot study ([Evaluation](#evaluation)): enough to show what each design choice contributes, not yet a research result.
+The same code moves to NVIDIA NIM or Amazon Bedrock endpoints by changing configuration.
 
 ## Results
 
@@ -70,11 +72,13 @@ flowchart LR
     P -->|Send| F[Fundamentals analyst]
     P -->|Send| R[Risk analyst]
     P -->|Send| D[Filings analyst]
-    M & F & R & D --> V{Fact-check<br/>number provenance}
-    V -->|untraced numbers| RV[Targeted revision]
-    V -->|all traced| W[Lead analyst]
+    M & F & R & D --> V{Fact-check<br/>numbers + claims}
+    V -->|problems| RV[Targeted revision]
+    V -->|clean| W[Lead analyst]
     RV --> W
-    W --> N([research note + evidence ledger])
+    W --> WC{Fact-check}
+    WC -->|problems: revise once| W
+    WC --> N([research note + evidence ledger])
 
     subgraph Tools [deterministic tools]
       T1[price_performance<br/>benchmark_comparison]
@@ -96,7 +100,7 @@ progress streams to the CLI and web UI as it happens.
 |---|---|---|
 | Market analyst | `price_performance`, `benchmark_comparison` | daily prices; SPY benchmark; 13-week T-bill from the US Treasury |
 | Fundamentals analyst | `financial_statements`, `valuation_snapshot`, `calculator` | SEC EDGAR XBRL company facts (10-K/10-Q) |
-| Risk analyst | `value_at_risk`, `stress_test` | historical + 100,000-path bootstrap Monte Carlo VaR/CVaR; 2018, 2020, 2022 crash windows |
+| Risk analyst | `value_at_risk`, `stress_test` | historical VaR/CVaR and filtered historical simulation (EWMA-scaled, 100,000 paths), with current vs average volatility; 2018, 2020, 2022 crash windows |
 | Filings analyst | `search_10k` | latest 10-K from EDGAR, split into Item 1, 1A, 7 and 7A, retrieved with BM25 (plus NeMo Retriever embeddings on NIM) |
 
 ## Design principles for small-model agents
@@ -108,19 +112,29 @@ progress streams to the CLI and web UI as it happens.
    `market_cap_bn: 5349.48`); derived figures go through a `calculator` tool so they are traceable too.
 3. **Constrain structure, don't request it.** The planner's output is bound to a JSON
    schema, which Ollama and llama.cpp compile into a decoding grammar.
-4. **Verify deterministically.** Instead of a large LLM-as-judge, `provenance.py`
-   extracts every number from the prose and matches it against the evidence it
-   cites, allowing for rounding and unit changes (0.2282 → 22.82%, 215,938,000,000 →
-   $215.94B). Agents with untraceable numbers get one targeted revision; anything still
-   untraced is flagged ⚠ in the note.
+4. **Verify deterministically.** Instead of a large LLM-as-judge, two rule-based checks
+   run on everything a model writes. `provenance.py` traces every number to a tool result
+   the agent actually received, allowing for rounding and unit changes (0.2282 → 22.82%,
+   215,938,000,000 → $215.94B). `attribution.py` checks that each cited claim *says what
+   its source says*: the same company, period (1y/3y/5y, n-day horizon, fiscal year,
+   trailing twelve months), method and metric, a direction ("fell", "rose") that agrees
+   with the source's sign, and - for 10-K points - the passage's wording. Agents with
+   problems get one revision with the exact problems in the prompt; the lead analyst's
+   summary gets the same; anything left is flagged ⚠ in the note.
 5. **Guarantee coverage.** If a model skips a tool call the answer needs (say, the second
    ticker), the system runs it and records that it did. No finding rests on missing data.
 6. **Report honestly.** Every run records which tool calls the models chose and which the
-   system added, every model call's latency and tokens, and the provenance score.
+   system added, every model call's latency and tokens, the provenance and attribution
+   scores, and for every piece of evidence the URLs it came from, when they were retrieved,
+   and whether a provider outage meant a stale cached copy. Fundamentals carry the XBRL
+   concept and filing accession behind each figure.
 7. **One protocol, any hardware.** Ollama, llama.cpp, self-hosted NIM and the NVIDIA API
    catalog all speak the OpenAI-compatible API, so moving from a laptop CPU to NVIDIA
-   GPUs is configuration, not code. The Monte Carlo engine takes its array module as a
+   GPUs is configuration, not code. The risk simulation takes its array module as a
    parameter: NumPy on CPU, CuPy on an NVIDIA GPU.
+8. **Measure what each choice is worth.** Every mechanism above can be switched off
+   (`FINAGENT_ABLATE=facts,phases,coverage,revision,own_evidence,attribution`), and
+   `finagent eval` scores full and ablated runs with the same yardstick.
 
 ## Quickstart
 
@@ -161,7 +175,22 @@ The `nim` profile routes specialists to `nvidia/nemotron-3.5-lightning-30b-a3b`,
 planner and writer to `nvidia/nemotron-3-super-120b-a12b`, adds NeMo Retriever
 embeddings (`nvidia/nemotron-3-embed-1b`) to the 10-K search, enables the NemoGuard
 topic-control rail and runs the specialists in parallel. Point `FINAGENT_BASE_URL` at a
-self-hosted NIM container to keep everything on-premises.
+self-hosted NIM container to keep everything on-premises. All four model IDs are listed
+in NVIDIA's public catalog (checked 2026-10-22); the profile has not been run end to end
+yet, so run `finagent doctor --profile nim` first.
+
+### 4. Amazon Bedrock
+
+```bash
+export BEDROCK_API_KEY=...                     # Bedrock long-term API key
+export AWS_REGION=us-east-1
+finagent doctor --profile bedrock
+```
+
+Bedrock serves Nemotron through an OpenAI-compatible endpoint, so this is configuration
+only: specialists on `nvidia.nemotron-nano-3-30b`, orchestration on
+`nvidia.nemotron-super-3-120b`, reasoning switched with `reasoning_effort`. Not yet
+measured. The `local` profile also runs unchanged on any CPU cloud instance with Ollama.
 
 ### Shared servers behind a proxy
 
@@ -181,6 +210,7 @@ each has a regression test.
 | With the answer format in the system prompt, agents skipped their tools and wrote a fluent answer with invented numbers and invented evidence IDs. | **Phase-separated prompting:** the system prompt only says "you have no data until you call your tools"; the format arrives after the first tool results. An answer written with no data is discarded and the agent is nudged once. |
 | An agent copied the example bullet from its prompt (a real-looking figure) into its findings. | Prompts use placeholders (`<fact copied from a tool result>`), never sample numbers. Each agent is fact-checked only against **its own** evidence, so borrowing another agent's figure is caught. |
 | Correct numbers with wrong labels: an older year's growth quoted as the latest, a 25-day VaR called "1-year". | Tools return **pre-labelled facts**, latest first (`NVDA FY ending 2026-01-25: revenue $215.94bn, up 65.47% year on year`). The model sees only these, which also cut its prompt tokens. |
+| Even copying labelled facts, agents and the writer dropped the label: FY2024's 125.85% growth written as "revenue growth of 125.85%", five-year returns without "5-year". The number check passed them - these are in the v0.1 example notes. | **Claim attribution** checks each claim against the fact it cites (company, period, metric, direction) and sends the agent - or the writer - back with the exact mismatch. |
 | Agents stopped after one tool call, or merged two tickers into one portfolio when asked to compare them. | Agents are told which tools they have not used yet; a **coverage check** runs any required call the model still skipped, and the trace records that the system, not the model, made it. |
 | The fact-checker flagged "S&P 500" as an untraced figure, and an early version accepted a fabricated number within 0.6% of a real one. | Index and form names are masked; matching allows display rounding only, not "close enough". |
 
@@ -188,20 +218,24 @@ each has a regression test.
 
 ```
 finagent/
-  config.py          profiles (local / nim) and FINAGENT_* overrides
-  llm.py             OpenAI-compatible client: reasoning toggle, tool-call recovery, JSON schema
+  config.py          profiles (local / nim / bedrock), ablation switches, FINAGENT_* overrides
+  llm.py             OpenAI-compatible client: server probe, reasoning toggle, parameter fallback, tool-call recovery
   graph.py           LangGraph workflow and event streaming
   agents/            planner, specialists (tool loop + coverage check + revision), writer, guardrails
   tools/             market, fundamentals, risk, filings, calculator
   data/              cached HTTP, SEC EDGAR (XBRL facts, 10-K text), prices, Treasury rate
-  analytics.py       returns, drawdowns, beta, historical and Monte Carlo VaR, stress tests
+  analytics.py       returns, drawdowns, beta, dated Sharpe, historical VaR, filtered historical simulation, stress tests
   retrieval.py       chunking, BM25, optional dense embeddings with reciprocal rank fusion
   provenance.py      number extraction and tracing
+  attribution.py     claim-to-source checking: company, period, metric, direction, passage wording
+  checks.py          the fact-check shared by the workflow, the report and the evaluation
+  evaluate.py        evaluation harness: tickers x questions x ablations
   report.py          note assembly: key-figures table and evidence ledger come from tools, not models
-  cli.py             analyze · doctor · bench-risk · tools
+  cli.py             analyze · doctor · eval · bench-risk · tools
 app/streamlit_app.py web UI
 tests/               offline test suite (synthetic data + scripted model)
 examples/            real run records and notes from the CPU runs in the results table
+eval/results/        pilot evaluation results (JSON lines + summary)
 workshop/LAB.md      two-hour hands-on lab
 scripts/             llama.cpp server, offline Ollama import
 docs/                screenshots
@@ -213,16 +247,21 @@ docs/                screenshots
 pytest -q
 ```
 
-The suite runs offline against synthetic prices, synthetic SEC facts and a scripted
-model. It covers the finance maths, XBRL parsing (fiscal years, TTM, restatements,
-tag changes, share classes), tool-call recovery from text, the provenance checker, the
-guardrails, and the full workflow, including a planted hallucination that must be caught
-and repaired.
+The suite (108 tests, 93% line coverage) runs offline against synthetic prices, synthetic
+SEC facts and a scripted model. It covers the finance maths (filtered historical
+simulation against volatility regimes, dated Sharpe), XBRL parsing (fiscal years, TTM,
+restatements, tag changes, share classes, debt composition, net-income attribution), the
+LLM client through the real OpenAI SDK over a mocked HTTP transport (server probing,
+reasoning switches, the parameter-fallback loop, concurrency), the provenance and
+attribution checkers, data freshness, the guardrails, the CLI, the evaluation harness, and
+the full workflow - including a planted hallucination and a writer that drops periods,
+both of which must be caught and repaired.
 
 ## Teaching with FinAgent
 
 `workshop/LAB.md` is a two-hour lab in the style of an NVIDIA Deep Learning Institute
-workshop: six modules, exercises, and an assessment rubric. It needs no GPU. It is
+workshop: six modules, exercises, an optional ablation-study module, and an assessment
+rubric. It needs no GPU. It is
 designed as a follow-on to the DLI courses
 [*Building Agentic AI Applications with LLMs*](https://learn.nvidia.com/courses/course-detail?course_id=course-v1%3ADLI+C-FX-25+V1)
 (LangGraph, tool-using ReAct agents) and *Building RAG Agents with LLMs* (retrieval).
@@ -237,9 +276,13 @@ designed as a follow-on to the DLI courses
 - A 4B model writes plainer prose than a frontier model, and the planner sometimes
   picks the whole team when a subset would do. The verification and coverage layers
   keep the *numbers* trustworthy either way; they do not make the *judgement* expert.
-- The `nim` profile (NVIDIA API catalog) is implemented and falls back gracefully when an
-  endpoint rejects an optional parameter, but the measured results above are all CPU runs;
-  run `finagent doctor --profile nim` with your key to check it on your account.
+- The `nim` and `bedrock` profiles are implemented and fall back gracefully when an
+  endpoint rejects an optional parameter, but every measured result here is a CPU run;
+  run `finagent doctor --profile nim` (or `bedrock`) with your key first.
+- The attribution checker is a set of explicit rules calibrated on this project's own
+  runs. It checks labels and direction, not reasoning, and it can be fooled by phrasing
+  its rules do not anticipate; treat its score as a floor on mislabelling caught, not a
+  proof of correctness.
 - The note is educational analysis, not investment advice.
 
 ## License

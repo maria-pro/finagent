@@ -96,7 +96,7 @@ def offline(monkeypatch, settings):
 
     for module in (market, risk, fundamentals):
         monkeypatch.setattr(module, "adjusted_close", fake_close)
-    monkeypatch.setattr(market, "risk_free_rate", lambda _s: 0.04)
+    monkeypatch.setattr(market, "risk_free_series", lambda _s, start: pd.Series(0.04, index=pd.bdate_range(start, "2026-10-21")))
     monkeypatch.setattr(sec, "ticker_to_cik", lambda _s, t: (1, f"{t} CORP"))
     monkeypatch.setattr(sec, "company_facts", lambda _s, _cik: SYNTHETIC_FACTS)
     monkeypatch.setattr(

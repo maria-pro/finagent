@@ -12,3 +12,4 @@ __pycache__/
 .finagent_cache/
 reports/
 .ruff_cache/
+.coverage

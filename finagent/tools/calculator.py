@@ -6,6 +6,7 @@ from __future__ import annotations
 import ast
 import math
 import operator
+import re
 
 from . import Tool, ToolContext, rnd
 
@@ -38,9 +39,21 @@ def _eval(node):
     raise ValueError(f"unsupported expression element: {ast.dump(node)[:60]}")
 
 
+# "5%" is a percentage unless an operand follows the sign, as in "10 % 3" (modulo).
+_PERCENT_RE = re.compile(r"(\d+(?:\.\d+)?)\s*%(?!\s*[\d.(])")
+_OF_RE = re.compile(r"\bof\b", re.IGNORECASE)
+
+
+def normalize(expression: str) -> str:
+    """Turn analyst shorthand into Python arithmetic: "$1,200 * 5%" -> "1200 * (5/100)",
+    "50% of 200" -> "(50/100) * 200"; "%" between two operands stays modulo."""
+    cleaned = expression.replace(",", "").replace("$", "").replace("^", "**")
+    cleaned = _PERCENT_RE.sub(r"(\1/100)", cleaned)
+    return _OF_RE.sub("*", cleaned)
+
+
 def evaluate(expression: str) -> float:
-    cleaned = expression.replace(",", "").replace("%", "").replace("$", "").replace("^", "**")
-    return float(_eval(ast.parse(cleaned, mode="eval")))
+    return float(_eval(ast.parse(normalize(expression), mode="eval")))
 
 
 def calculator(ctx: ToolContext, expression: str) -> dict:
@@ -50,7 +63,7 @@ def calculator(ctx: ToolContext, expression: str) -> dict:
 TOOLS = [
     Tool(
         "calculator",
-        "Evaluate an arithmetic expression, e.g. '(130.5 - 60.9) / 60.9 * 100'. Use it for any derived number.",
+        "Evaluate an arithmetic expression, e.g. '(130.5 - 60.9) / 60.9 * 100' or '15% of 240'. Use it for any derived number.",
         {"type": "object", "properties": {"expression": {"type": "string"}}, "required": ["expression"]},
         calculator,
     ),

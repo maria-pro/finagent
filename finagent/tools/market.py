@@ -3,7 +3,7 @@ from __future__ import annotations
 import pandas as pd
 
 from .. import analytics as an
-from ..data.prices import adjusted_close, risk_free_rate
+from ..data.prices import adjusted_close, risk_free_series
 from . import TICKER, Tool, ToolContext, parse_tickers, pct, rnd
 
 _PERIOD_DAYS = {"1y": 365, "3y": 3 * 365, "5y": 5 * 365}
@@ -25,7 +25,8 @@ def price_performance(ctx: ToolContext, ticker: str, period: str = "1y") -> dict
     full = adjusted_close(ctx.settings, ticker)
     prices = _window(full, period)
     returns = an.daily_returns(prices)
-    rf = risk_free_rate(ctx.settings)
+    rf = risk_free_series(ctx.settings, prices.index[0])
+    rf_in_window = rf[rf.index >= prices.index[0]] if len(rf) else rf
     dd = an.max_drawdown(prices)
     last_year = _window(full, "1y")
     sma200 = full.rolling(200).mean().iloc[-1]
@@ -42,7 +43,10 @@ def price_performance(ctx: ToolContext, ticker: str, period: str = "1y") -> dict
     out.update(
         {
             "volatility_pct": pct(an.annualized_volatility(returns)),
+            # each day's return is measured against that day's T-bill rate, not today's
             "sharpe_ratio": rnd(an.sharpe_ratio(returns, rf)),
+            "avg_risk_free_rate_pct": pct(rf_in_window.mean()) if len(rf_in_window) else 0.0,
+            "risk_free_source": rf.attrs.get("source", "unavailable (0% used)"),
             "max_drawdown_pct": pct(dd.max_drawdown),
             "drawdown_peak_date": dd.peak.date().isoformat(),
             "drawdown_trough_date": dd.trough.date().isoformat(),
@@ -51,7 +55,6 @@ def price_performance(ctx: ToolContext, ticker: str, period: str = "1y") -> dict
             "sma_200": rnd(sma200),
             "price_vs_sma_200": "above" if prices.iloc[-1] > sma200 else "below",
             "rsi_14": rnd(an.rsi(full), 1),
-            "risk_free_rate_pct": pct(rf),
         }
     )
     facts = [f"{ticker} {period} total return: {out['total_return_pct']}%"]

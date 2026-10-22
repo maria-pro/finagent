@@ -5,7 +5,9 @@ and mark requests for personal advice so the answer is framed as general
 information. On the NVIDIA API catalog the request also goes through the
 NemoGuard topic-control NIM; on CPU the deterministic rules run alone.
 
-Output rail: flag promissory language and always attach a disclaimer.
+Output rail: mark promissory language inline in the note (and list it in the run
+summary), and always attach a disclaimer. The model's words are flagged, not
+rewritten, so a reader can see exactly what was said.
 """
 
 from __future__ import annotations
@@ -75,5 +77,10 @@ def refusal_message(reason: str) -> str:
 
 
 def check_output(text: str) -> list[str]:
-    """Phrases that over-promise; reported in the run summary and softened in the report."""
+    """Phrases that over-promise; listed in the run summary."""
     return sorted({m.group(0) for m in _PROMISSORY.finditer(text)})
+
+
+def flag_promissory(text: str, marker: str = " ⚠promissory") -> str:
+    """Mark each over-promising phrase where it occurs in the note."""
+    return _PROMISSORY.sub(lambda m: m.group(0) + marker, text)

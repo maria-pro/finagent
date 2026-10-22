@@ -22,9 +22,26 @@ def test_weights_normalise_and_default_to_equal():
 
 def test_calculator_is_safe():
     assert evaluate("(215.94 - 130.5) / 130.5 * 100") == pytest.approx(65.4713, rel=1e-4)
-    assert evaluate("$1,200 * 5%") == pytest.approx(6000)
     with pytest.raises(ValueError):
         evaluate("__import__('os').system('ls')")
+
+
+@pytest.mark.parametrize(
+    "expression, expected",
+    [("$1,200 * 5%", 60.0), ("50% of 200", 100.0), ("5% + 3%", 0.08), ("10 % 3", 1.0), ("10%3", 1.0), ("2^10", 1024.0)],
+)
+def test_calculator_reads_percentages_and_keeps_modulo(expression, expected):
+    assert evaluate(expression) == pytest.approx(expected)
+
+
+def test_filing_excerpt_keeps_the_sentences_that_matched():
+    from finagent.tools.filings import excerpt
+
+    filler = "General corporate matters are described in this paragraph at some length. " * 12
+    text = filler + "Export controls on our data center GPUs could reduce demand in China. " + filler
+    out = excerpt(text, "export controls China demand", limit=300)
+    assert "Export controls on our data center GPUs" in out and len(out) <= 310
+    assert out.startswith("...") and out.endswith("...")
 
 
 def test_market_tool_outputs_percent_units(offline):
@@ -35,19 +52,35 @@ def test_market_tool_outputs_percent_units(offline):
 
 
 def test_fundamentals_from_synthetic_facts(offline):
-    rows = financial_statements(offline, "NVDA")["fiscal_years"]
+    out = financial_statements(offline, "NVDA")
+    rows = out["fiscal_years"]
     assert rows[-1]["revenue_bn"] == 216.0
     assert rows[-1]["revenue_growth_pct"] == pytest.approx(66.15, abs=0.01)
     assert rows[-1]["free_cash_flow_bn"] == 95.0
+    assert out["xbrl_sources"]["revenue"].startswith("Revenues (10-K")
+    assert out["facts"][0].startswith("NVDA FY ending 2026-01-25: revenue $216.0bn")
     val = valuation_snapshot(offline, "NVDA")
     assert val["ttm_revenue_bn"] == 304.0
     assert val["shares_outstanding_bn"] == 10.0
+    # cash 20 and debt 8 on the same balance-sheet date: EV = 10bn shares x price - 20 + 8
+    assert val["balance_sheet_date"] == "2026-07-26" and val["total_debt_bn"] == 8.0
+    assert val["enterprise_value_bn"] == pytest.approx(val["market_cap_bn"] - 12.0, abs=0.01)
+    assert "LongTermDebt" in val["method"]
+
+
+def test_market_sharpe_reports_its_rate_source(offline):
+    out = price_performance(offline, "NVDA", "3y")
+    assert out["avg_risk_free_rate_pct"] == pytest.approx(4.0)
+    assert "Sharpe ratio" in " ".join(out["facts"])
 
 
 def test_var_tool_accepts_percent_confidence(offline):
     out = value_at_risk(offline, "NVDA, AMD", confidence=95, horizon_days=5)
     assert out["confidence_pct"] == 95.0 and out["portfolio"] == {"NVDA": 0.5, "AMD": 0.5}
-    assert out["monte_carlo_cvar_pct"] >= out["monte_carlo_var_pct"] > 0
+    assert out["fhs_cvar_pct"] >= out["fhs_var_pct"] > 0
+    assert out["historical_cvar_pct"] >= out["historical_var_pct"] > 0
+    assert "filtered historical simulation" in out["facts"][2]
+    assert "historical (based on" in out["facts"][0]
 
 
 def test_filing_search_finds_relevant_passage(offline):

@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 
 TRADING_DAYS = 252
+EWMA_LAMBDA = 0.94  # RiskMetrics decay for daily data
 
 # Market stress episodes used for historical stress tests (peak-to-trough of the S&P 500).
 STRESS_WINDOWS = {
@@ -37,8 +38,21 @@ def annualized_volatility(returns: pd.Series) -> float:
     return float(returns.std(ddof=1) * np.sqrt(TRADING_DAYS))
 
 
-def sharpe_ratio(returns: pd.Series, risk_free_annual: float = 0.0) -> float:
-    excess = returns - risk_free_annual / TRADING_DAYS
+def daily_risk_free(risk_free_annual: pd.Series | float, index: pd.Index) -> pd.Series | float:
+    """Per-day risk-free return aligned to ``index``; a dated yield series is forward-filled."""
+    if isinstance(risk_free_annual, pd.Series):
+        if risk_free_annual.empty:
+            return 0.0
+        rates = risk_free_annual.sort_index()
+        aligned = rates.reindex(rates.index.union(index)).ffill().reindex(index).fillna(rates.iloc[0])
+        return aligned / TRADING_DAYS
+    return risk_free_annual / TRADING_DAYS
+
+
+def sharpe_ratio(returns: pd.Series, risk_free_annual: pd.Series | float = 0.0) -> float:
+    """Annualised Sharpe ratio. Pass the dated T-bill series so each day is measured
+    against the rate that applied on that day, not today's rate."""
+    excess = returns - daily_risk_free(risk_free_annual, returns.index)
     sd = excess.std(ddof=1)
     return float(excess.mean() / sd * np.sqrt(TRADING_DAYS)) if sd > 0 else float("nan")
 
@@ -105,7 +119,9 @@ class VaRResult:
 
 
 def historical_var(returns: pd.Series, confidence: float = 0.95, horizon_days: int = 1) -> VaRResult:
-    """Empirical VaR from overlapping ``horizon_days`` compounded returns (no sqrt-time scaling)."""
+    """Unconditional historical VaR from overlapping ``horizon_days`` compounded returns
+    (no sqrt-time scaling). Every day in the window counts equally, whatever the
+    volatility regime today."""
     if horizon_days > 1:
         horizon = (1 + returns).rolling(horizon_days).apply(np.prod, raw=True).dropna() - 1
     else:
@@ -115,60 +131,96 @@ def historical_var(returns: pd.Series, confidence: float = 0.95, horizon_days: i
     return VaRResult(float(-cutoff), float(-tail.mean()))
 
 
+def ewma_variance(returns: np.ndarray, lam: float = EWMA_LAMBDA) -> np.ndarray:
+    """EWMA variance per asset. Row ``t`` is the variance forecast for day ``t`` made
+    at the close of day ``t-1``; the extra last row is the forecast for tomorrow."""
+    r = np.asarray(returns, dtype=np.float64)
+    if r.ndim == 1:
+        r = r[:, None]
+    var = np.empty((r.shape[0] + 1, r.shape[1]))
+    var[0] = r.var(axis=0, ddof=1)
+    for t in range(r.shape[0]):
+        var[t + 1] = lam * var[t] + (1 - lam) * r[t] ** 2
+    return var
+
+
 @dataclass
-class MonteCarloResult:
+class SimulationResult:
     var: float
     cvar: float
     prob_loss_over_10pct: float
     percentiles: dict[str, float]
     n_paths: int
     horizon_days: int
+    current_vol_annual: float  # portfolio EWMA volatility forecast, annualised
+    average_vol_annual: float  # portfolio volatility over the whole window, annualised
+    method: str
     backend: str
     runtime_ms: float
     samples: np.ndarray | None = None  # horizon returns, kept for charts
 
 
-def monte_carlo_var(
+def filtered_historical_simulation(
     returns: np.ndarray,
     weights: np.ndarray,
     *,
     horizon_days: int = 10,
     n_paths: int = 100_000,
     confidence: float = 0.95,
+    lam: float = EWMA_LAMBDA,
     seed: int = 7,
     xp=np,
     backend: str = "CPU (NumPy)",
     keep_samples: bool = False,
-) -> MonteCarloResult:
-    """Bootstrap Monte Carlo VaR.
+) -> SimulationResult:
+    """Filtered historical simulation (Barone-Adesi et al., 1999) with EWMA volatility.
 
-    Each simulated day re-samples one historical day's *vector* of returns, which
-    keeps the cross-asset correlation and fat tails of the real data instead of
-    assuming a normal distribution. ``xp`` is the array module: NumPy on CPU or
-    CuPy on an NVIDIA GPU - the code is identical.
+    Each asset's daily returns are divided by their EWMA volatility to get
+    standardised residuals. Simulated days re-sample whole residual *vectors*
+    (keeping cross-asset dependence and fat tails), rescale them by the current
+    volatility forecast, and update each asset's volatility along the path, so
+    volatility clustering carries into the horizon. Unlike an iid bootstrap of raw
+    returns - which is just historical VaR resampled - the result is conditional on
+    today's volatility regime, a genuinely different view.
+
+    ``xp`` is the array module: NumPy on CPU or CuPy on an NVIDIA GPU; the code is
+    identical. The filtering pass is cheap and always runs on the CPU.
     """
     started = time.perf_counter()
-    hist = xp.asarray(returns, dtype=xp.float32)
-    w = xp.asarray(weights, dtype=xp.float32)
-    daily_portfolio = hist @ w  # (n_days,)
-    rng = xp.random.default_rng(seed) if hasattr(xp.random, "default_rng") else xp.random
-    idx = rng.integers(0, daily_portfolio.shape[0], size=(n_paths, horizon_days))
-    log_growth = xp.log1p(daily_portfolio[idx]).sum(axis=1)
+    r = np.asarray(returns, dtype=np.float64)
+    if r.ndim == 1:
+        r = r[:, None]
+    w = np.asarray(weights, dtype=np.float64)
+    var = ewma_variance(r, lam)
+    resid = r / np.sqrt(var[:-1])
+    resid = resid / resid.std(axis=0, ddof=1)  # unit variance: removes the EWMA scale bias
+
+    z_hist = xp.asarray(resid, dtype=xp.float32)
+    weights_x = xp.asarray(w, dtype=xp.float32)
+    variance = xp.tile(xp.asarray(var[-1], dtype=xp.float32), (n_paths, 1))
+    rng = xp.random.default_rng(seed)
+    log_growth = xp.zeros(n_paths, dtype=xp.float32)
+    for _ in range(horizon_days):
+        day = xp.sqrt(variance) * z_hist[rng.integers(0, z_hist.shape[0], size=n_paths)]
+        log_growth += xp.log1p(xp.clip(day @ weights_x, -0.99, None))
+        variance = lam * variance + (1 - lam) * day * day
     horizon_returns = xp.expm1(log_growth)
 
     cutoff = xp.quantile(horizon_returns, 1 - confidence)
     tail = horizon_returns[horizon_returns <= cutoff]
-    pct = {f"p{p}": float(xp.quantile(horizon_returns, p / 100)) for p in (1, 5, 50, 95, 99)}
-    result = MonteCarloResult(
+    portfolio = r @ w
+    result = SimulationResult(
         var=float(-cutoff),
         cvar=float(-tail.mean()),
         prob_loss_over_10pct=float((horizon_returns < -0.10).mean()),
-        percentiles=pct,
+        percentiles={f"p{p}": float(xp.quantile(horizon_returns, p / 100)) for p in (1, 5, 50, 95, 99)},
         n_paths=n_paths,
         horizon_days=horizon_days,
+        current_vol_annual=float(np.sqrt(ewma_variance(portfolio, lam)[-1, 0] * TRADING_DAYS)),
+        average_vol_annual=float(portfolio.std(ddof=1) * np.sqrt(TRADING_DAYS)),
+        method=f"filtered historical simulation (EWMA lambda={lam})",
         backend=backend,
         runtime_ms=0.0,
-        samples=None,
     )
     if keep_samples:
         result.samples = horizon_returns.get() if hasattr(horizon_returns, "get") else np.asarray(horizon_returns)

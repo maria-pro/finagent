@@ -213,14 +213,20 @@ def risk_chart(settings, record: dict):
     weights = np.array(list(r["portfolio"].values()))
     frame = pd.concat([adjusted_close(settings, t, "5y") for t in tickers], axis=1, join="inner").pct_change().dropna()
     xp, backend = array_backend()
-    mc = an.monte_carlo_var(frame.to_numpy(), weights, horizon_days=r["horizon_days"], n_paths=100_000,
-                            confidence=r["confidence_pct"] / 100, xp=xp, backend=backend, keep_samples=True)
-    fig = go.Figure(go.Histogram(x=mc.samples * 100, nbinsx=120, marker={"color": series_colors[0]}, name="simulated", hovertemplate="%{x:.1f}%: %{y} paths<extra></extra>"))
-    fig.add_vline(x=-mc.var * 100, line={"color": "#e34948", "width": 2})
-    fig.add_annotation(x=-mc.var * 100, y=1, yref="paper", text=f"VaR {r['confidence_pct']:.0f}%: −{mc.var:.1%}", showarrow=False, xanchor="right", xshift=-6)
-    fig.update_xaxes(range=[float(np.percentile(mc.samples, 0.1)) * 100, float(np.percentile(mc.samples, 99.9)) * 100])
+    sim = an.filtered_historical_simulation(frame.to_numpy(), weights, horizon_days=r["horizon_days"], n_paths=100_000,
+                                            confidence=r["confidence_pct"] / 100, xp=xp, backend=backend, keep_samples=True)
+    hist = r.get("historical_var_pct")
+    fig = go.Figure(go.Histogram(x=sim.samples * 100, nbinsx=120, marker={"color": series_colors[0]}, name="simulated", hovertemplate="%{x:.1f}%: %{y} paths<extra></extra>"))
+    fig.add_vline(x=-sim.var * 100, line={"color": "#e34948", "width": 2})
+    fig.add_annotation(x=-sim.var * 100, y=1, yref="paper", text=f"FHS VaR {r['confidence_pct']:.0f}%: −{sim.var:.1%}", showarrow=False, xanchor="right", xshift=-6)
+    if hist is not None:
+        fig.add_vline(x=-hist, line={"color": colors()[1], "width": 2, "dash": "dot"})
+        fig.add_annotation(x=-hist, y=0.88, yref="paper", text=f"historical VaR: −{hist:.1f}%", showarrow=False, xanchor="left", xshift=6)
+    fig.update_xaxes(range=[float(np.percentile(sim.samples, 0.1)) * 100, float(np.percentile(sim.samples, 99.9)) * 100])
     label = " + ".join(f"{w:.0%} {t}" for t, w in r["portfolio"].items())
-    st.plotly_chart(style(fig, f"{r['horizon_days']}-day return distribution · {label} · 100,000 bootstrap paths [{ev['id']}]", "Paths", 320).update_layout(hovermode="closest", xaxis_title="%"), width="stretch")
+    title = (f"{r['horizon_days']}-day returns, filtered historical simulation · {label} · current volatility "
+             f"{sim.current_vol_annual:.0%} vs 5y average {sim.average_vol_annual:.0%} [{ev['id']}]")
+    st.plotly_chart(style(fig, title, "Paths", 320).update_layout(hovermode="closest", xaxis_title="%"), width="stretch")
 
 
 def fundamentals_charts(record: dict):
@@ -289,13 +295,16 @@ def show_result(settings, record: dict):
         st.warning(record.get("report", "Refused."))
         return
     prov = stats.get("provenance", {})
-    cols = st.columns(5)
+    quality = stats.get("quality") or {}
+    cols = st.columns(6)
     plain = {"delta_color": "off", "delta_arrow": "off"}
     cols[0].metric("Numbers traced to tools", f"{prov.get('verified', 0)}/{prov.get('checked', 0)}", f"{prov.get('score', 0):.0%}", **plain)
-    cols[1].metric("Tool calls", stats.get("tool_calls", 0), f"{stats.get('tool_calls_chosen_by_model', 0)} chosen by the models", **plain)
-    cols[2].metric("LLM calls", stats.get("llm_calls", 0), f"{stats.get('revisions', 0)} revision(s)", **plain)
-    cols[3].metric("Tokens", f"{stats.get('prompt_tokens', 0) + stats.get('completion_tokens', 0):,}")
-    cols[4].metric("End-to-end", f"{stats.get('wall_seconds', 0):.0f}s", f"{stats.get('model_seconds', 0):.0f}s model time", **plain)
+    if quality:
+        cols[1].metric("Claims match sources", f"{quality['claims_supported']}/{quality['claims_checked']}", f"{quality['claim_attribution']:.0%}", **plain)
+    cols[2].metric("Tool calls", stats.get("tool_calls", 0), f"{stats.get('tool_calls_chosen_by_model', 0)} chosen by the models", **plain)
+    cols[3].metric("LLM calls", stats.get("llm_calls", 0), f"{stats.get('revisions', 0)} revision(s)", **plain)
+    cols[4].metric("Tokens", f"{stats.get('prompt_tokens', 0) + stats.get('completion_tokens', 0):,}")
+    cols[5].metric("End-to-end", f"{stats.get('wall_seconds', 0):.0f}s", f"{stats.get('model_seconds', 0):.0f}s model time", **plain)
 
     tabs = st.tabs(["Research note", "Charts", "Evidence ledger", "Fact-check", "Agent timeline"])
     with tabs[0]:
@@ -311,23 +320,36 @@ def show_result(settings, record: dict):
     with tabs[2]:
         ledger = pd.DataFrame(
             [{"id": e["id"], "agent": e["agent"], "tool": e["tool"], "arguments": json.dumps(e["args"]),
-              "chosen by": e["chosen_by"], "seconds": e["seconds"], "error": e.get("error") or ""} for e in record.get("evidence", [])]
+              "chosen by": e["chosen_by"], "seconds": e["seconds"],
+              "data retrieved": min((s["fetched_at"] for s in e.get("sources") or []), default="–"),
+              "stale": "⚠ yes" if e.get("stale") else "", "error": e.get("error") or ""} for e in record.get("evidence", [])]
         )
         st.dataframe(ledger, width="stretch", hide_index=True)
         for e in record.get("evidence", []):
             with st.expander(f"{e['id']} · {e['tool']}"):
                 st.json(e["result"])
     with tabs[3]:
-        st.caption("Every number the models wrote is matched against the tool results it cites (allowing for rounding and unit changes). "
-                   "Agents with untraceable numbers get one revision; anything still untraced is marked ⚠ in the note.")
-        rows = []
-        for f in (record.get("findings") or {}).values():
-            p = f.get("provenance", {})
-            rows.append({"agent": f["title"], "numbers": p.get("checked"), "traced": p.get("verified"),
-                         "untraced": ", ".join(p.get("unverified", [])), "revised": bool(f.get("revised"))})
+        st.caption("Two checks run on everything a model writes. Number provenance: every number must trace to a tool result "
+                   "the agent received. Claim attribution: every cited claim must keep its source's company, period, metric and "
+                   "direction (10-K points are checked by wording). Agents with problems get one revision; anything left is marked ⚠ in the note.")
+
+        def check_row(name, check, revised):
+            p, a = check.get("provenance", {}), check.get("attribution") or {}
+            return {"agent": name, "numbers traced": f"{p.get('verified', 0)}/{p.get('checked', 0)}",
+                    "claims matching source": f"{a.get('supported', 0)}/{a.get('claims', 0)}" if a else "–",
+                    "issues": "; ".join(a.get("issues", [])) if a else "", "revised": revised}
+
+        rows = [check_row(f["title"], f, bool(f.get("revised"))) for f in (record.get("findings") or {}).values()]
+        if record.get("writer_check"):
+            rows.append(check_row("Lead Analyst", record["writer_check"], "writer" in (record.get("revisions") or [])))
         st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
-        if prov.get("unverified"):
-            st.warning("Still untraced in the final note: " + ", ".join(prov["unverified"]))
+        if quality.get("claim_issues"):
+            st.warning("Claim issues left in the final note:\n\n" + "\n".join(f"- {md(i)}" for i in quality["claim_issues"]))
+        if record.get("narrative_draft") and record.get("narrative_draft") != record.get("narrative"):
+            with st.expander("Lead Analyst: first draft vs revision"):
+                a, b = st.columns(2)
+                a.markdown("**First draft**\n\n" + md(record["narrative_draft"]))
+                b.markdown("**After fact-check**\n\n" + md(record["narrative"]))
         for f in (record.get("findings") or {}).values():
             if f.get("revised"):
                 with st.expander(f"{f['title']}: first draft vs revision"):

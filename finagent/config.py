@@ -1,13 +1,15 @@
 """Runtime settings: which model serves which agent role, and where data is cached.
 
-Two profiles ship by default:
+Three profiles ship by default:
 
-* ``local`` - one small NVIDIA Nemotron model (Nemotron 3 Nano 4B) served on CPU
+* ``local``   - one small NVIDIA Nemotron model (Nemotron 3 Nano 4B) served on CPU
   by Ollama or llama.cpp. No GPU, no API key, and nothing leaves the machine
   except the public market-data requests.
-* ``nim``   - the NVIDIA API catalog (build.nvidia.com): small models for the
+* ``nim``     - the NVIDIA API catalog (build.nvidia.com): small models for the
   specialist sub-agents, a larger model for orchestration, NeMo Retriever
   embeddings and a NemoGuard topic-control rail.
+* ``bedrock`` - Nemotron models served by Amazon Bedrock through its
+  OpenAI-compatible endpoint (Bedrock API key).
 
 Every field can be overridden with a ``FINAGENT_*`` environment variable (or a
 ``.env`` file), so the same code runs against self-hosted NIM, vLLM or any other
@@ -55,6 +57,33 @@ PROFILES: dict[str, dict] = {
         "max_concurrency": 4,
         "timeout_s": 180.0,
     },
+    "bedrock": {
+        # Bedrock's OpenAI-compatible Chat Completions endpoint; {region} comes from AWS_REGION.
+        "base_url": "https://bedrock-runtime.{region}.amazonaws.com/openai/v1",
+        "api_key": "",
+        "orchestrator_model": "nvidia.nemotron-super-3-120b",
+        "specialist_model": "nvidia.nemotron-nano-3-30b",
+        "embed_model": "",
+        "guard_model": "",
+        "temperature": 1.0,
+        "top_p": 0.95,
+        "reasoning": False,
+        # Bedrock exposes Nemotron reasoning as an effort level (none/low/medium/high).
+        "reasoning_style": "effort",
+        "max_concurrency": 4,
+        "timeout_s": 180.0,
+    },
+}
+
+# Design choices that can be switched off one at a time to measure what each contributes
+# (FINAGENT_ABLATE=facts,coverage ...); see finagent/evaluate.py.
+ABLATIONS = {
+    "facts": "the model reads raw tool JSON instead of pre-labelled facts",
+    "phases": "output-format rules sit in the system prompt from the start; no nudge after a data-free answer",
+    "coverage": "no coverage check: tool calls the model skips are not run for it",
+    "revision": "no revision passes after the fact-check",
+    "own_evidence": "agents are fact-checked against everyone's evidence, not just their own",
+    "attribution": "the fact-check traces numbers only; claims are not matched to their sources",
 }
 
 
@@ -74,6 +103,10 @@ class Settings:
     timeout_s: float
     sec_user_agent: str
     cache_dir: Path
+    # How reasoning is switched on/off: "auto" probes the server; or "ollama", "template"
+    # (chat_template_kwargs: NIM, vLLM, llama.cpp), "effort" (reasoning_effort), "none".
+    reasoning_style: str = "auto"
+    ablate: frozenset[str] = frozenset()
 
     @property
     def is_local(self) -> bool:
@@ -81,6 +114,10 @@ class Settings:
 
     def model_for(self, role: str) -> str:
         return self.specialist_model if role == "specialist" else self.orchestrator_model
+
+    def enabled(self, feature: str) -> bool:
+        """False when ``feature`` has been switched off for an ablation run."""
+        return feature not in self.ablate
 
     def with_overrides(self, **overrides) -> "Settings":
         return replace(self, **{k: v for k, v in overrides.items() if v is not None})
@@ -96,13 +133,24 @@ def _coerce(value: str, current):
     return value
 
 
+def parse_ablations(text: str | None) -> frozenset[str]:
+    items = frozenset(a.strip().lower() for a in (text or "").split(",") if a.strip())
+    unknown = items - set(ABLATIONS)
+    if unknown:
+        raise ValueError(f"Unknown ablation(s) {sorted(unknown)}; choose from {sorted(ABLATIONS)}")
+    return items
+
+
 def load_settings(profile: str | None = None) -> Settings:
     name = (profile or os.getenv("FINAGENT_PROFILE") or "local").strip().lower()
     if name not in PROFILES:
         raise ValueError(f"Unknown profile {name!r}; choose one of {sorted(PROFILES)}")
-    values = dict(PROFILES[name])
+    values = {"reasoning_style": "auto", **PROFILES[name]}
     if name == "nim":
         values["api_key"] = os.getenv("NVIDIA_API_KEY", "")
+    if name == "bedrock":
+        values["base_url"] = values["base_url"].format(region=os.getenv("AWS_REGION", "us-east-1"))
+        values["api_key"] = os.getenv("BEDROCK_API_KEY") or os.getenv("AWS_BEARER_TOKEN_BEDROCK") or os.getenv("OPENAI_API_KEY", "")
 
     for key, current in list(values.items()):
         env = os.getenv(f"FINAGENT_{key.upper()}")
@@ -113,6 +161,7 @@ def load_settings(profile: str | None = None) -> Settings:
         profile=name,
         sec_user_agent=os.getenv("SEC_USER_AGENT", "FinAgent research demo admin@example.com"),
         cache_dir=Path(os.getenv("FINAGENT_CACHE_DIR", ".finagent_cache")).expanduser(),
+        ablate=parse_ablations(os.getenv("FINAGENT_ABLATE")),
         **values,
     )
 

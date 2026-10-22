@@ -4,7 +4,8 @@ The NVIDIA API catalog, a self-hosted NIM container, Ollama and llama.cpp all
 speak the same chat-completions protocol, so the agents never know which one is
 answering. The differences that do matter are smoothed over here:
 
-* how reasoning ("thinking") is switched off,
+* how reasoning ("thinking") is switched off - detected by probing the server
+  (Ollama answers ``/api/version``), or set explicitly per profile,
 * small models that print a tool call as text instead of returning it in
   ``tool_calls``,
 * reasoning text returned inline as ``<think>...</think>``,
@@ -22,7 +23,8 @@ import uuid
 from dataclasses import dataclass, field
 from typing import Any, Protocol
 
-from openai import BadRequestError, OpenAI
+import httpx
+from openai import BadRequestError, OpenAI, UnprocessableEntityError
 
 from .config import Settings
 
@@ -135,58 +137,106 @@ def extract_json(text: str) -> Any:
 
 # --------------------------------------------------------------------------- client
 
+# Optional request parameters, in the order they are dropped when a server rejects a
+# request without naming the culprit (structured output is the least widely supported).
+_OPTIONAL_PARAMS = ("response_format", "chat_template_kwargs", "reasoning_effort")
 
-def reasoning_style(settings: Settings) -> str:
-    """How this endpoint expects reasoning to be toggled."""
-    if ":11434" in settings.base_url:
-        return "ollama"  # Ollama's OpenAI layer maps reasoning_effort onto its `think` option
-    return "template"  # NIM, vLLM and llama.cpp forward chat_template_kwargs to the chat template
+
+def _api_root(base_url: str) -> str:
+    root = base_url.rstrip("/")
+    return root[: -len("/v1")] if root.endswith("/v1") else root
+
+
+def detect_reasoning_style(base_url: str, http_client: httpx.Client | None = None) -> str:
+    """Ask the server what it is rather than guessing from its URL.
+
+    Ollama answers ``GET /api/version`` whatever port or proxy path it sits behind;
+    any other server is assumed to forward ``chat_template_kwargs`` to the model's
+    chat template (NIM, vLLM, llama.cpp). Set ``FINAGENT_REASONING_STYLE`` to skip
+    the probe, e.g. when a proxy only exposes the ``/v1`` routes.
+    """
+    client = http_client or httpx.Client(timeout=3.0)
+    try:
+        resp = client.get(_api_root(base_url) + "/api/version", timeout=3.0)
+        if resp.status_code == 200 and "version" in resp.json():
+            return "ollama"
+    except Exception:
+        pass
+    finally:
+        if http_client is None:
+            client.close()
+    return "template"
 
 
 class OpenAICompatLLM:
     """Chat client with per-role model routing and graceful capability fallbacks."""
 
-    def __init__(self, settings: Settings):
+    def __init__(self, settings: Settings, http_client: httpx.Client | None = None):
         self.settings = settings
+        self._http = http_client
         self._client = OpenAI(
             base_url=settings.base_url,
             api_key=settings.api_key or "not-needed",
             timeout=settings.timeout_s,
             max_retries=2,
+            http_client=http_client,
         )
-        self._style = reasoning_style(settings)
+        self._style: str | None = None if settings.reasoning_style == "auto" else settings.reasoning_style
         self._unsupported: set[str] = set()
         self._lock = threading.Lock()
         # Agents may run in parallel, but a CPU inference server handles one request
         # at a time well; queue requests here rather than overloading the server.
         self._slots = threading.BoundedSemaphore(max(1, settings.max_concurrency))
 
+    @property
+    def reasoning_style(self) -> str:
+        if self._style is None:
+            style = detect_reasoning_style(self.settings.base_url, self._http)
+            with self._lock:
+                self._style = style
+        return self._style
+
+    @property
+    def unsupported_params(self) -> set[str]:
+        return set(self._unsupported)
+
+    def list_models(self) -> list[str]:
+        return [m.id for m in self._client.models.list().data]
+
     def _reasoning_params(self, enabled: bool) -> tuple[dict, dict]:
         """Return (top-level kwargs, extra_body) that switch reasoning on or off."""
-        if self._style == "ollama" and "reasoning_effort" not in self._unsupported:
+        style = self.reasoning_style
+        if style == "ollama" and "reasoning_effort" not in self._unsupported:
             # Nemotron's thinking is on/off only (Ollama rejects effort levels such as "medium"),
             # so "on" means leaving the model's default, which is thinking enabled.
             return ({}, {}) if enabled else ({"reasoning_effort": "none"}, {})
-        if self._style == "template" and "chat_template_kwargs" not in self._unsupported:
+        if style == "effort" and "reasoning_effort" not in self._unsupported:
+            return {"reasoning_effort": "medium" if enabled else "none"}, {}
+        if style == "template" and "chat_template_kwargs" not in self._unsupported:
             return {}, {"chat_template_kwargs": {"enable_thinking": enabled}}
         return {}, {}
 
-    def _create(self, kwargs: dict, extra_body: dict):
-        """Call the endpoint, dropping optional parameters the server rejects."""
+    def _create(self, kwargs: dict, extra_body: dict) -> tuple[Any, list[str]]:
+        """Call the endpoint, dropping optional parameters the server rejects.
+
+        Returns the response and the parameters that had to be dropped, so a run can
+        report that, say, structured output was unavailable and JSON came from the prompt alone.
+        """
+        dropped: list[str] = []
         while True:
             try:
-                return self._client.chat.completions.create(**kwargs, extra_body=extra_body or None)
-            except BadRequestError as err:
-                message = str(err).lower()
-                for optional in ("chat_template_kwargs", "reasoning_effort", "response_format"):
-                    if optional in message and (optional in kwargs or optional in extra_body):
-                        with self._lock:
-                            self._unsupported.add(optional)
-                        kwargs.pop(optional, None)
-                        extra_body.pop(optional, None)
-                        break
-                else:
+                return self._client.chat.completions.create(**kwargs, extra_body=extra_body or None), dropped
+            except (BadRequestError, UnprocessableEntityError) as err:
+                present = [p for p in _OPTIONAL_PARAMS if p in kwargs or p in extra_body]
+                if not present:
                     raise
+                message = str(err).lower()
+                culprit = next((p for p in present if p in message), present[0])
+                with self._lock:
+                    self._unsupported.add(culprit)
+                kwargs.pop(culprit, None)
+                extra_body.pop(culprit, None)
+                dropped.append(culprit)
 
     def chat(
         self,
@@ -217,7 +267,7 @@ class OpenAICompatLLM:
 
         with self._slots:
             started = time.perf_counter()  # measured inside the slot: excludes queueing
-            resp = self._create(kwargs, extra)
+            resp, dropped = self._create(kwargs, extra)
             latency = time.perf_counter() - started
 
         msg = resp.choices[0].message
@@ -235,18 +285,16 @@ class OpenAICompatLLM:
             content, calls = parse_text_tool_calls(content)
 
         usage = resp.usage
-        return LLMResponse(
-            content=content,
-            tool_calls=calls,
-            reasoning=reasoning,
-            usage={
-                "role": role,
-                "model": model,
-                "prompt_tokens": getattr(usage, "prompt_tokens", 0) or 0,
-                "completion_tokens": getattr(usage, "completion_tokens", 0) or 0,
-                "latency_s": round(latency, 2),
-            },
-        )
+        record = {
+            "role": role,
+            "model": model,
+            "prompt_tokens": getattr(usage, "prompt_tokens", 0) or 0,
+            "completion_tokens": getattr(usage, "completion_tokens", 0) or 0,
+            "latency_s": round(latency, 2),
+        }
+        if dropped:
+            record["dropped_params"] = dropped
+        return LLMResponse(content=content, tool_calls=calls, reasoning=reasoning, usage=record)
 
 
 def tool_call_message(content: str, calls: list[ToolCall]) -> dict:
@@ -270,6 +318,7 @@ __all__ = [
     "LLMResponse",
     "OpenAICompatLLM",
     "ToolCall",
+    "detect_reasoning_style",
     "extract_json",
     "parse_text_tool_calls",
     "split_reasoning",

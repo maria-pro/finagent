@@ -1,4 +1,4 @@
-"""Daily price history (dividend- and split-adjusted) and the risk-free rate."""
+"""Daily price history (dividend- and split-adjusted) and risk-free rates."""
 
 from __future__ import annotations
 
@@ -13,6 +13,10 @@ from .http import DataSourceError, http_for
 _CHART_URL = (
     "https://query1.finance.yahoo.com/v8/finance/chart/{ticker}"
     "?range={range}&interval=1d&includeAdjustedClose=true&events=div%2Csplit"
+)
+_TREASURY_URL = (
+    "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/"
+    "daily-treasury-rates.csv/{year}/all?type=daily_treasury_bill_rates&field_tdr_date_value={year}&_format=csv"
 )
 _PRICE_TTL_S = 6 * 3600
 
@@ -57,30 +61,42 @@ def adjusted_close(settings: Settings, ticker: str, range_: str = "10y") -> pd.S
     return series
 
 
-def risk_free_rate(settings: Settings) -> float:
-    """Latest 13-week US Treasury bill yield as a decimal; 0.0 if no source answers.
+def risk_free_series(settings: Settings, start) -> pd.Series:
+    """Daily 13-week US Treasury bill yield (annualised decimal) from ``start`` to today.
 
-    Primary source is the US Treasury's daily bill-rate CSV (coupon-equivalent
-    yield); Yahoo's ^IRX index is the fallback.
+    The primary source is the US Treasury's daily bill-rate CSVs (coupon-equivalent
+    yield, one file per year); Yahoo's ^IRX index is the fallback. Returns an empty
+    series if neither answers. Using the dated series - rather than today's rate for
+    every day - matters for Sharpe ratios over windows in which rates moved a lot.
     """
+    start = pd.Timestamp(start)
+    today = pd.Timestamp.today()
     http = http_for(settings)
-    year = pd.Timestamp.today().year
-    for y in (year, year - 1):
+    parts = []
+    for year in range(start.year, today.year + 1):
+        # Files for older years no longer change; recent ones are refreshed daily.
+        ttl = 24 * 3600 if year >= today.year - 1 else -1
         try:
-            text = http.get_text(
-                "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/"
-                f"daily-treasury-rates.csv/{y}/all?type=daily_treasury_bill_rates&field_tdr_date_value={y}&_format=csv",
-                24 * 3600,
-            )
-            frame = pd.read_csv(io.StringIO(text))
+            frame = pd.read_csv(io.StringIO(http.get_text(_TREASURY_URL.format(year=year), ttl)))
             column = next(c for c in frame.columns if "13 WEEKS COUPON" in c.upper())
-            frame["Date"] = pd.to_datetime(frame["Date"], format="%m/%d/%Y")
-            latest = frame.sort_values("Date")[column].dropna()
-            if len(latest):
-                return float(latest.iloc[-1]) / 100.0
+            values = pd.to_numeric(frame[column], errors="coerce").to_numpy() / 100.0
+            parts.append(pd.Series(values, index=pd.to_datetime(frame["Date"], format="%m/%d/%Y")).dropna())
         except Exception:
             continue
-    try:
-        return float(adjusted_close(settings, "^IRX", "1mo").iloc[-1]) / 100.0
-    except Exception:
-        return 0.0
+    if parts:
+        series = pd.concat(parts).sort_index()
+        series = series[~series.index.duplicated(keep="last")]
+        series.attrs["source"] = "US Treasury daily bill rates (13-week, coupon equivalent)"
+    else:
+        try:
+            series = adjusted_close(settings, "^IRX", "10y") / 100.0
+            series.attrs["source"] = "Yahoo Finance ^IRX (13-week T-bill discount rate)"
+        except Exception:
+            return pd.Series(dtype=float)
+    return series[series.index >= start - pd.Timedelta(days=14)]
+
+
+def risk_free_rate(settings: Settings) -> float:
+    """Latest 13-week US Treasury bill yield as a decimal; 0.0 if no source answers."""
+    series = risk_free_series(settings, pd.Timestamp.today() - pd.Timedelta(days=30))
+    return float(series.iloc[-1]) if len(series) else 0.0

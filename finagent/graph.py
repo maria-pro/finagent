@@ -1,11 +1,14 @@
 """The multi-agent workflow, as a LangGraph state machine.
 
-    guard -> plan -> [specialists in parallel] -> verify -> [revise failing ones] -> write
+    guard -> plan -> [specialists in parallel] -> verify -> [revise failing ones] -> write (+ check, revise once)
 
-``verify`` is deterministic: it checks every number each specialist wrote
-against the evidence ledger and sends only the agents with untraceable numbers
-back for one revision. Progress events are streamed with LangGraph's custom
-stream so the CLI and the web UI can show each agent and tool call live.
+``verify`` is deterministic. For each specialist it traces every number to the
+agent's own tool results (``provenance``) and checks that every cited claim says
+what its source says - company, period, metric, direction (``attribution``).
+Only agents with problems go back for one revision, with the exact problems in
+the prompt. The lead analyst's summary gets the same check and one revision.
+Progress events are streamed with LangGraph's custom stream so the CLI and the
+web UI can show each agent and tool call live.
 """
 
 from __future__ import annotations
@@ -18,11 +21,11 @@ from langgraph.config import get_stream_writer
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Send
 
-from . import provenance
 from .agents import guard as guardrails
 from .agents.planner import make_plan
 from .agents.specialists import SPECIALISTS, revise_finding, run_specialist
-from .agents.writer import write_summary
+from .agents.writer import revise_summary, write_summary
+from .checks import fact_check
 from .llm import LLM
 from .report import build_report
 from .tools import ToolContext
@@ -44,6 +47,8 @@ class ResearchState(TypedDict, total=False):
     llm_calls: Annotated[list[dict], operator.add]
     revisions: Annotated[list[str], operator.add]
     narrative: str
+    narrative_draft: str
+    writer_check: dict
     promissory_phrases: list[str]
     report: str
     stats: dict
@@ -55,6 +60,19 @@ def _emitter():
     except Exception:  # invoked outside a streaming run
         return lambda event: None
     return lambda event: writer({"t": round(time.time(), 2), **event})
+
+
+def _check_event(agent: str, check: dict, **extra) -> dict:
+    claims = check["attribution"] or {}
+    return {
+        "event": "verify",
+        "agent": agent,
+        **check["provenance"],
+        "claims_checked": claims.get("claims", 0),
+        "claims_supported": claims.get("supported", 0),
+        "claim_issues": claims.get("issues", []),
+        **extra,
+    }
 
 
 def build_graph(llm: LLM, ctx: ToolContext):
@@ -84,37 +102,69 @@ def build_graph(llm: LLM, ctx: ToolContext):
         emit = _emitter()
         updated = {}
         for key, finding in state["findings"].items():
-            # An agent can only know what its own tools returned, so check against those alone.
-            own = [e for e in state.get("evidence", []) if e["agent"] == key]
-            report = provenance.check(finding["text"], own)
-            updated[key] = dict(finding, provenance=report.summary())
-            emit({"event": "verify", "agent": key, **report.summary()})
+            check = fact_check(settings, finding["text"], state.get("evidence", []), state["tickers"], agent=key)
+            updated[key] = dict(finding, **check)
+            emit(_check_event(key, check))
         return {"findings": updated}
 
     def revise(payload: dict) -> dict:
         spec = SPECIALISTS[payload["agent"]]
         emit = _emitter()
-        emit({"event": "revise", "agent": spec.key, "unverified": payload["unverified"]})
-        out = revise_finding(llm, spec, payload["finding"], payload["evidence"], payload["unverified"], emit)
+        emit({"event": "revise", "agent": spec.key, "problems": payload["problems"]})
+        out = revise_finding(
+            llm, spec, payload["finding"], payload["evidence"], payload["problems"], emit, use_facts=settings.enabled("facts")
+        )
         finding = out["finding"]
-        own = [e for e in payload["evidence"] if e["agent"] == spec.key]
-        finding["provenance"] = provenance.check(finding["text"], own).summary()
-        emit({"event": "verify", "agent": spec.key, "after_revision": True, **finding["provenance"]})
+        check = fact_check(settings, finding["text"], payload["evidence"], payload["tickers"], agent=spec.key)
+        finding.update(check)
+        emit(_check_event(spec.key, check, after_revision=True))
         return {"findings": {spec.key: finding}, "llm_calls": out["usage"], "revisions": [spec.key]}
 
     def write(state: ResearchState) -> dict:
         emit = _emitter()
         emit({"event": "agent_start", "agent": "writer", "title": "Lead Analyst", "focus": "summary"})
         findings = [state["findings"][t["agent"]] for t in state["plan"] if t["agent"] in state["findings"]]
-        narrative, usage = write_summary(
-            llm, state["tickers"], state["question"], findings, state["guard"].get("personal_advice", False)
-        )
-        emit({"event": "llm", "agent": "writer", "tool_calls": [], **{k: usage[0][k] for k in ("latency_s", "prompt_tokens", "completion_tokens")}})
+        advice = state["guard"].get("personal_advice", False)
+        evidence, tickers = state.get("evidence", []), state["tickers"]
+
+        narrative, usage = write_summary(llm, tickers, state["question"], findings, advice)
+        emit({"event": "llm", "agent": "writer", "tool_calls": [], **{k: usage[-1][k] for k in ("latency_s", "prompt_tokens", "completion_tokens")}})
+        draft, check = narrative, fact_check(settings, narrative, evidence, tickers)
+        emit(_check_event("writer", check))
+        revisions = []
+        if check["problems"] and settings.enabled("revision"):
+            emit({"event": "revise", "agent": "writer", "problems": check["problems"]})
+            revised, more = revise_summary(llm, tickers, state["question"], findings, narrative, check["problems"], advice)
+            usage += more
+            emit({"event": "llm", "agent": "writer", "tool_calls": [], "revision": True, **{k: more[-1][k] for k in ("latency_s", "prompt_tokens", "completion_tokens")}})
+            revised_check = fact_check(settings, revised, evidence, tickers)
+            emit(_check_event("writer", revised_check, after_revision=True))
+            revisions = ["writer"]
+            if len(revised_check["problems"]) <= len(check["problems"]):  # keep the better of the two
+                narrative, check = revised, revised_check
+
         phrases = guardrails.check_output(narrative + " ".join(f["text"] for f in findings))
-        draft = {**state, "narrative": narrative, "llm_calls": state.get("llm_calls", []) + usage, "promissory_phrases": phrases}
-        report, stats = build_report(draft, settings, time.time() - state["started"])
+        final = {
+            **state,
+            "narrative": narrative,
+            "narrative_draft": draft,
+            "writer_check": check,
+            "llm_calls": state.get("llm_calls", []) + usage,
+            "revisions": state.get("revisions", []) + revisions,
+            "promissory_phrases": phrases,
+        }
+        report, stats = build_report(final, settings, time.time() - state["started"])
         emit({"event": "done", "stats": stats})
-        return {"narrative": narrative, "llm_calls": usage, "promissory_phrases": phrases, "report": report, "stats": stats}
+        return {
+            "narrative": narrative,
+            "narrative_draft": draft,
+            "writer_check": check,
+            "llm_calls": usage,
+            "revisions": revisions,
+            "promissory_phrases": phrases,
+            "report": report,
+            "stats": stats,
+        }
 
     def route_after_guard(state: ResearchState) -> str:
         return "plan" if state["guard"]["allowed"] else "refuse"
@@ -126,11 +176,17 @@ def build_graph(llm: LLM, ctx: ToolContext):
         ]
 
     def route_after_verify(state: ResearchState) -> list[Send] | str:
+        if not settings.enabled("revision"):
+            return "write"
         sends = []
         for key, finding in state["findings"].items():
-            unverified = finding.get("provenance", {}).get("unverified", [])
-            if unverified and key not in state.get("revisions", []):
-                sends.append(Send("revise", {"agent": key, "finding": finding, "evidence": state["evidence"], "unverified": unverified}))
+            if finding.get("problems") and key not in state.get("revisions", []):
+                sends.append(
+                    Send(
+                        "revise",
+                        {"agent": key, "finding": finding, "evidence": state["evidence"], "problems": finding["problems"], "tickers": state["tickers"]},
+                    )
+                )
         return sends or "write"
 
     graph = StateGraph(ResearchState)

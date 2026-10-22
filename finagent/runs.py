@@ -11,7 +11,10 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-RECORD_KEYS = ("tickers", "question", "guard", "plan", "plan_source", "findings", "evidence", "llm_calls", "narrative", "report", "stats")
+RECORD_KEYS = (
+    "tickers", "question", "guard", "plan", "plan_source", "findings", "evidence", "llm_calls",
+    "narrative", "narrative_draft", "writer_check", "revisions", "report", "stats",
+)
 
 
 def _slug(text: str) -> str:
@@ -32,6 +35,7 @@ def save_run(final: dict, events: list[dict], settings, out_dir: str | Path = "r
         "specialist_model": settings.specialist_model,
         "temperature": settings.temperature,
         "reasoning": settings.reasoning,
+        "ablate": sorted(settings.ablate),
     }
     (out / f"{stem}.md").write_text(final.get("report", ""), encoding="utf-8")
     path = out / f"{stem}.json"

@@ -133,13 +133,15 @@ class FilingIndex:
 
     def search(self, query: str, k: int = 3) -> list[tuple[Chunk, float]]:
         bm = self.bm25.scores(tokenize(query))
-        ranks = [np.argsort(-bm)]
+        # Only chunks that share a term with the query get BM25 credit: ranking the
+        # zero-score rest would hand out arbitrary points and drown the dense signal.
+        ranks = [[i for i in np.argsort(-bm, kind="stable") if bm[i] > 0]]
         if self._dense is not None:
             q = self._embed([query], "query")[0]
-            ranks.append(np.argsort(-(self._dense @ q)))
+            ranks.append(list(np.argsort(-(self._dense @ q), kind="stable")))
         fused = np.zeros(len(self.chunks))
         for order in ranks:
             for rank, idx in enumerate(order):
                 fused[idx] += 1.0 / (60 + rank)
-        top = np.argsort(-fused)[:k]
-        return [(self.chunks[i], float(fused[i])) for i in top if bm[i] > 0 or self._dense is not None]
+        top = np.argsort(-fused, kind="stable")[:k]
+        return [(self.chunks[i], float(fused[i])) for i in top if fused[i] > 0]

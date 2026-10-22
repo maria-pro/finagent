@@ -18,8 +18,9 @@ _TOOLS_BY_TITLE = {
 class ScriptedLLM:
     """Plays every role. ``hallucinate`` makes the market analyst's first draft include an untraceable number."""
 
-    def __init__(self, hallucinate: bool = True, plan: list[str] | None = None):
+    def __init__(self, hallucinate: bool = True, plan: list[str] | None = None, sloppy_writer: bool = False):
         self.hallucinate = hallucinate
+        self.sloppy_writer = sloppy_writer
         self.plan = plan or ["market", "fundamentals", "risk", "filings"]
         self.calls: list[dict] = []
 
@@ -33,9 +34,14 @@ class ScriptedLLM:
             tasks = [{"agent": a, "focus": f"focus for {a}"} for a in self.plan]
             return LLMResponse(json.dumps({"tasks": tasks}), usage=self._usage(role))
         if role == "writer":
-            numbers = re.findall(r"(-?\$?\d[\d,]*\.\d+(?:%|bn)?) \[([A-Z]\d+)\]", messages[1]["content"])
-            cited = "; ".join(f"{n} [{i}]" for n, i in numbers[:3])
-            text = f"## Answer\nThe team found {cited}.\n## Strengths\n- strong\n## Risks\n- volatile\n## What to watch\n- margins"
+            # copy finding bullets word for word, as the writer prompt asks
+            bullets = [line for line in messages[1]["content"].splitlines() if line.startswith("- ") and "[" in line]
+            if self.sloppy_writer and messages[-1]["role"] == "user" and "fact-checker" not in messages[-1]["content"]:
+                bullets = [re.sub(r"\b\d+y\b ", "", b) for b in bullets]  # drops the period from each fact
+            text = (
+                f"## Answer\n{bullets[0][2:] if bullets else 'No data.'}\n## Strengths\n" + "\n".join(bullets[1:3])
+                + "\n## Risks\n" + "\n".join(bullets[3:4]) + "\n## What to watch\n- margins"
+            )
             return LLMResponse(text, usage=self._usage(role))
 
         # specialist or revision

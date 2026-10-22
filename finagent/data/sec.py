@@ -2,7 +2,8 @@
 
 Everything here is free, keyless and authoritative - the numbers come straight
 from what companies filed with the SEC, which is what makes the evidence ledger
-auditable.
+auditable. Each figure keeps the XBRL concept and the filing (accession number)
+it came from.
 """
 
 from __future__ import annotations
@@ -20,56 +21,74 @@ from .prices import normalize_ticker
 
 _DAY = 86400
 
-# metric -> (candidate XBRL concepts in priority order, unit, kind)
-CONCEPTS: dict[str, tuple[list[str], str, str]] = {
-    "revenue": (
-        [
+
+@dataclass(frozen=True)
+class Metric:
+    concepts: tuple[str, ...]
+    unit: str
+    kind: str  # "duration" (income/cash-flow) or "instant" (balance sheet)
+    # "recency": the concept with the most recent data leads (filers switch revenue tags over time).
+    # "priority": per period, the first concept in the list that reports it wins.
+    merge: str = "recency"
+
+
+CONCEPTS: dict[str, Metric] = {
+    "revenue": Metric(
+        (
             "RevenueFromContractWithCustomerExcludingAssessedTax",
             "Revenues",
             "SalesRevenueNet",
             "RevenueFromContractWithCustomerIncludingAssessedTax",
             "SalesRevenueGoodsNet",
-        ],
+        ),
         "USD",
         "duration",
     ),
-    "gross_profit": (["GrossProfit"], "USD", "duration"),
-    "operating_income": (["OperatingIncomeLoss"], "USD", "duration"),
-    "net_income": (["NetIncomeLoss", "ProfitLoss", "NetIncomeLossAvailableToCommonStockholdersBasic"], "USD", "duration"),
-    "eps_diluted": (["EarningsPerShareDiluted", "EarningsPerShareBasicAndDiluted"], "USD/shares", "duration"),
-    "rnd": (["ResearchAndDevelopmentExpense", "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost"], "USD", "duration"),
-    "operating_cash_flow": (
-        ["NetCashProvidedByUsedInOperatingActivities", "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations"],
+    "gross_profit": Metric(("GrossProfit",), "USD", "duration"),
+    "operating_income": Metric(("OperatingIncomeLoss",), "USD", "duration"),
+    # Attributable to the parent first; ProfitLoss includes non-controlling interests and is a last resort.
+    "net_income": Metric(
+        ("NetIncomeLoss", "NetIncomeLossAvailableToCommonStockholdersBasic", "ProfitLoss"), "USD", "duration", "priority"
+    ),
+    "eps_diluted": Metric(("EarningsPerShareDiluted", "EarningsPerShareBasicAndDiluted"), "USD/shares", "duration"),
+    "rnd": Metric(("ResearchAndDevelopmentExpense", "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost"), "USD", "duration"),
+    "operating_cash_flow": Metric(
+        ("NetCashProvidedByUsedInOperatingActivities", "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations"),
         "USD",
         "duration",
     ),
-    "capex": (
-        [
+    "capex": Metric(
+        (
             "PaymentsToAcquirePropertyPlantAndEquipment",
             "PaymentsToAcquireProductiveAssets",
             "PaymentsForProceedsFromProductiveAssets",
             "PaymentsToAcquirePropertyPlantAndEquipmentAndIntangibleAssets",
-        ],
+        ),
         "USD",
         "duration",
     ),
-    "cash": (
-        ["CashAndCashEquivalentsAtCarryingValue", "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents", "Cash"],
+    "cash": Metric(
+        ("CashAndCashEquivalentsAtCarryingValue", "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents", "Cash"),
         "USD",
         "instant",
+        "priority",
     ),
-    "marketable_securities": (
-        ["MarketableSecuritiesCurrent", "AvailableForSaleSecuritiesDebtSecuritiesCurrent", "ShortTermInvestments"],
+    "marketable_securities": Metric(
+        ("MarketableSecuritiesCurrent", "AvailableForSaleSecuritiesDebtSecuritiesCurrent", "ShortTermInvestments"),
         "USD",
         "instant",
+        "priority",
     ),
-    "long_term_debt": (["LongTermDebt", "LongTermDebtNoncurrent", "LongTermDebtAndCapitalLeaseObligations"], "USD", "instant"),
-    "equity": (
-        ["StockholdersEquity", "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"],
-        "USD",
-        "instant",
+    # Debt pieces, combined explicitly in balance_sheet(): which tags a filer uses varies.
+    "debt_noncurrent": Metric(("LongTermDebtNoncurrent",), "USD", "instant"),
+    "debt_current_portion": Metric(("LongTermDebtCurrent",), "USD", "instant"),
+    "debt_current_total": Metric(("DebtCurrent",), "USD", "instant"),  # current LTD + short-term borrowings
+    "debt_long_term_total": Metric(("LongTermDebt", "LongTermDebtAndCapitalLeaseObligations"), "USD", "instant", "priority"),
+    "short_term_borrowings": Metric(("ShortTermBorrowings", "CommercialPaper"), "USD", "instant", "priority"),
+    "equity": Metric(
+        ("StockholdersEquity", "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"), "USD", "instant", "priority"
     ),
-    "total_assets": (["Assets"], "USD", "instant"),
+    "total_assets": Metric(("Assets",), "USD", "instant"),
 }
 
 _ANNUAL_FORMS = {"10-K", "10-K/A", "20-F", "20-F/A", "40-F", "40-F/A"}
@@ -84,14 +103,22 @@ class Fact:
     form: str
     filed: str
     accession: str
+    concept: str = ""
 
     @property
     def days(self) -> int:
         return (self.end - self.start).days if self.start else 0
 
+    def source(self) -> str:
+        return f"{self.concept} ({self.form} {self.accession}, filed {self.filed})"
+
 
 def _d(text: str | None) -> date | None:
     return date.fromisoformat(text) if text else None
+
+
+def filing_url(cik: int, accession: str) -> str:
+    return f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession.replace('-', '')}/"
 
 
 # --------------------------------------------------------------------------- lookups
@@ -119,7 +146,9 @@ def _facts_for(facts: dict, concept: str, unit: str, taxonomy: str = "us-gaap") 
     for r in rows:
         if r.get("form") not in _PERIODIC_FORMS:
             continue
-        out.append(Fact(_d(r.get("start")), _d(r["end"]), float(r["val"]), r["form"], r.get("filed", ""), r.get("accn", "")))
+        out.append(
+            Fact(_d(r.get("start")), _d(r["end"]), float(r["val"]), r["form"], r.get("filed", ""), r.get("accn", ""), concept)
+        )
     return out
 
 
@@ -134,18 +163,14 @@ def _latest_filed(rows: list[Fact]) -> dict[tuple, Fact]:
 
 
 def metric_facts(facts: dict, metric: str) -> list[Fact]:
-    """Facts for a metric, merged across XBRL concepts.
-
-    Filers switch tags over time (e.g. ``Revenues`` -> ``RevenueFromContract...``),
-    so the concept with the most recent data leads and older concepts only fill
-    periods it does not cover.
-    """
-    concepts, unit, _ = CONCEPTS[metric]
-    per_concept = [_latest_filed(_facts_for(facts, c, unit)) for c in concepts]
+    """Facts for a metric, merged across its XBRL concepts (see ``Metric.merge``)."""
+    spec = CONCEPTS[metric]
+    per_concept = [_latest_filed(_facts_for(facts, c, spec.unit)) for c in spec.concepts]
     per_concept = [p for p in per_concept if p]
     if not per_concept:
         return []
-    per_concept.sort(key=lambda p: max(f.end for f in p.values()), reverse=True)
+    if spec.merge == "recency":
+        per_concept.sort(key=lambda p: max(f.end for f in p.values()), reverse=True)
     merged: dict[tuple, Fact] = {}
     for periods in per_concept:
         for key, fact in periods.items():
@@ -153,14 +178,12 @@ def metric_facts(facts: dict, metric: str) -> list[Fact]:
     return sorted(merged.values(), key=lambda f: (f.end, f.days))
 
 
-def annual_values(facts: dict, metric: str, fiscal_year_ends: list[date] | None = None) -> dict[date, float]:
-    """Fiscal-year values keyed by period end date."""
-    _, _, kind = CONCEPTS[metric]
+def annual_facts(facts: dict, metric: str, fiscal_year_ends: list[date] | None = None) -> dict[date, Fact]:
+    """Fiscal-year facts keyed by period end date."""
     rows = metric_facts(facts, metric)
-    if kind == "duration":
-        annual = [f for f in rows if f.form in _ANNUAL_FORMS and 340 <= f.days <= 390]
-        return {f.end: f.value for f in annual}
-    values = {f.end: f.value for f in rows if f.form in _ANNUAL_FORMS}
+    if CONCEPTS[metric].kind == "duration":
+        return {f.end: f for f in rows if f.form in _ANNUAL_FORMS and 340 <= f.days <= 390}
+    values = {f.end: f for f in rows if f.form in _ANNUAL_FORMS}
     if fiscal_year_ends:
         aligned = {}
         for fy_end in fiscal_year_ends:
@@ -171,6 +194,11 @@ def annual_values(facts: dict, metric: str, fiscal_year_ends: list[date] | None 
     return values
 
 
+def annual_values(facts: dict, metric: str, fiscal_year_ends: list[date] | None = None) -> dict[date, float]:
+    """Fiscal-year values keyed by period end date."""
+    return {end: f.value for end, f in annual_facts(facts, metric, fiscal_year_ends).items()}
+
+
 def ttm_value(facts: dict, metric: str) -> dict | None:
     """Trailing-twelve-month value: last fiscal year + current YTD - prior-year YTD."""
     rows = metric_facts(facts, metric)
@@ -178,35 +206,92 @@ def ttm_value(facts: dict, metric: str) -> dict | None:
     if not annual:
         return None
     fy = max(annual, key=lambda f: f.end)
+    fallback = {
+        "value": fy.value,
+        "period_end": fy.end.isoformat(),
+        "method": "latest fiscal year",
+        "concept": fy.concept,
+        "accessions": [fy.accession],
+    }
     interim = [f for f in rows if f.form.startswith("10-Q") and f.end > fy.end and 80 <= f.days <= 290]
     if not interim:
-        return {"value": fy.value, "period_end": fy.end.isoformat(), "method": "latest fiscal year"}
+        return fallback
 
     latest_end = max(f.end for f in interim)
     ytd = max((f for f in interim if f.end == latest_end), key=lambda f: f.days)
     if ytd.start and abs((ytd.start - (fy.end + timedelta(days=1))).days) > 7:
-        return {"value": fy.value, "period_end": fy.end.isoformat(), "method": "latest fiscal year"}
+        return fallback
     prior = [
         f
         for f in rows
         if abs((f.end - (ytd.end - timedelta(days=364))).days) <= 10 and abs(f.days - ytd.days) <= 10
     ]
     if not prior:
-        return {"value": fy.value, "period_end": fy.end.isoformat(), "method": "latest fiscal year"}
+        return fallback
     prior_ytd = max(prior, key=lambda f: f.filed)
     return {
         "value": fy.value + ytd.value - prior_ytd.value,
         "period_end": ytd.end.isoformat(),
         "method": f"FY to {fy.end} + YTD to {ytd.end} - prior-year YTD",
+        "concept": ytd.concept if ytd.concept == fy.concept else f"{fy.concept} / {ytd.concept}",
+        "accessions": sorted({fy.accession, ytd.accession, prior_ytd.accession}),
     }
 
 
-def latest_instant(facts: dict, metric: str) -> tuple[float, date] | None:
+def latest_instant(facts: dict, metric: str) -> Fact | None:
     rows = metric_facts(facts, metric)
-    if not rows:
-        return None
-    last = max(rows, key=lambda f: (f.end, f.filed))
-    return last.value, last.end
+    return max(rows, key=lambda f: (f.end, f.filed)) if rows else None
+
+
+def instant_at(facts: dict, metric: str, on: date, tolerance_days: int = 5) -> Fact | None:
+    """The balance-sheet fact for ``metric`` dated ``on`` (within a few days), if reported."""
+    near = [f for f in metric_facts(facts, metric) if abs((f.end - on).days) <= tolerance_days]
+    return max(near, key=lambda f: f.filed) if near else None
+
+
+def balance_sheet(facts: dict) -> dict:
+    """Cash, current securities and total debt on one balance-sheet date.
+
+    The date is the latest one on which cash is reported, and every other item is
+    taken from that same date, so enterprise value never mixes quarters. Debt is
+    assembled explicitly because filers tag it differently: noncurrent long-term
+    debt plus whichever current-debt tags exist, or ``LongTermDebt`` (which by the
+    taxonomy's definition already includes the current portion) plus short-term
+    borrowings. Lease liabilities are not included.
+    """
+    cash = latest_instant(facts, "cash")
+    if cash is None:
+        return {"as_of": None, "cash": None, "securities": None, "debt": None, "debt_method": "no balance sheet in XBRL", "sources": []}
+    on = cash.end
+    securities = instant_at(facts, "marketable_securities", on)
+    pick = {m: instant_at(facts, m, on) for m in ("debt_noncurrent", "debt_current_portion", "debt_current_total", "debt_long_term_total", "short_term_borrowings")}
+
+    parts: list[Fact] = []
+    if pick["debt_noncurrent"] and pick["debt_current_total"]:
+        parts = [pick["debt_noncurrent"], pick["debt_current_total"]]
+    elif pick["debt_noncurrent"] and pick["debt_current_portion"]:
+        parts = [pick["debt_noncurrent"], pick["debt_current_portion"]] + [p for p in [pick["short_term_borrowings"]] if p]
+    elif pick["debt_long_term_total"]:
+        parts = [pick["debt_long_term_total"]] + [p for p in [pick["short_term_borrowings"]] if p]
+    elif pick["debt_noncurrent"]:
+        parts = [pick["debt_noncurrent"]] + [p for p in [pick["short_term_borrowings"]] if p]
+    elif pick["short_term_borrowings"]:
+        parts = [pick["short_term_borrowings"]]
+
+    if parts:
+        debt = sum(p.value for p in parts)
+        method = " + ".join(p.concept for p in parts) + f" as of {on}"
+    else:
+        debt, method = 0.0, f"no debt tags reported as of {on}"
+    used = [cash] + ([securities] if securities else []) + parts
+    return {
+        "as_of": on.isoformat(),
+        "cash": cash.value,
+        "securities": securities.value if securities else 0.0,
+        "debt": debt,
+        "debt_method": method,
+        "sources": [f.source() for f in used],
+    }
 
 
 def shares_outstanding(facts: dict) -> tuple[float, date, str] | None:

@@ -1,6 +1,6 @@
 [project]
 name = "finagent"
-version = "0.1.0"
+version = "0.2.0"
 description = "Grounded multi-agent equity research on NVIDIA NIM, built with LangGraph"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -20,7 +20,7 @@ dependencies = [
 [project.optional-dependencies]
 ui = ["streamlit>=1.38", "plotly>=5.22"]
 gpu = ["cupy-cuda12x>=13.0"]
-dev = ["pytest>=8.0"]
+dev = ["pytest>=8.0", "pytest-cov>=5.0"]
 
 [project.scripts]
 finagent = "finagent.cli:main"

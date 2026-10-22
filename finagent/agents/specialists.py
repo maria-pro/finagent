@@ -12,6 +12,7 @@ import time
 from dataclasses import dataclass
 from typing import Callable
 
+from ..data.http import record_fetches
 from ..llm import LLM, ToolCall, tool_call_message, usage_record
 from ..tools import (
     Tool,
@@ -31,7 +32,7 @@ _ALL_TOOLS: dict[str, Tool] = {
 }
 
 _FINDINGS_RULES = """Now write your findings for the research team.
-- At most 5 bullet points. Each bullet copies one fact from the tool results word for word and ends with its evidence id in square brackets:
+- At most 5 bullet points. Each bullet copies one fact from the tool results word for word - including its company, period and fiscal year - and ends with its evidence id in square brackets:
   - <fact copied from a tool result> [<evidence id>]
 - Pick the facts that matter most for your focus.
 - End with one sentence of interpretation that contains no numbers."""
@@ -46,14 +47,16 @@ class Specialist:
     tools: tuple[str, ...]
     findings_rules: str = _FINDINGS_RULES
 
-    def system_prompt(self) -> str:
+    def system_prompt(self, phased: bool = True) -> str:
         # Output-format rules are deliberately absent here: shown before any data, they
         # tempt a small model to skip its tools and write a plausible-looking answer.
-        return (
+        # (``phased=False`` restores that single-prompt design for the ablation study.)
+        prompt = (
             f"You are the {self.title} on an equity research team. Your job: {self.job}\n"
             "You have no data until you call your tools, so start by calling the tools you need; you can call several at once. "
             "Never guess numbers."
         )
+        return prompt if phased else prompt + "\n" + self.findings_rules
 
     def required_calls(self, tickers: list[str], question: str) -> list[tuple[str, dict]]:
         """Tool calls a complete answer needs; run by the system if the model skips them."""
@@ -109,14 +112,18 @@ SPECIALISTS: dict[str, Specialist] = {
 }
 
 
-def model_view(ev_id: str, result: dict) -> dict:
+# Audit trail for the ledger and the report; never worth a small model's tokens.
+_AUDIT_KEYS = {"facts", "xbrl_sources", "filing_urls", "method", "risk_free_source", "compute_backend", "compute_ms"}
+
+
+def model_view(ev_id: str, result: dict, use_facts: bool = True) -> dict:
     """What the model reads from a tool result: the pre-labelled facts when the tool
     provides them (full results stay in the evidence ledger). Labelled facts stop a
     small model from attaching a number to the wrong period or metric, and cost
     fewer prompt tokens than raw JSON."""
-    if "facts" in result:
+    if use_facts and "facts" in result:
         return {"evidence_id": ev_id, "facts": result["facts"]}
-    return {"evidence_id": ev_id, **result}
+    return {"evidence_id": ev_id, **{k: v for k, v in result.items() if k not in _AUDIT_KEYS}}
 
 
 def _covered(call: tuple[str, dict], evidence: list[dict]) -> bool:
@@ -144,10 +151,12 @@ def run_specialist(
     max_rounds: int = 3,
 ) -> dict:
     """Run one specialist to completion. Returns its finding, evidence and LLM usage."""
+    settings = ctx.settings
+    phased, use_facts = settings.enabled("phases"), settings.enabled("facts")
     tools = [_ALL_TOOLS[name] for name in spec.tools]
     specs = [t.spec() for t in tools]
     messages = [
-        {"role": "system", "content": spec.system_prompt()},
+        {"role": "system", "content": spec.system_prompt(phased)},
         {"role": "user", "content": f"Tickers: {', '.join(tickers)}\nResearch question: {question}\nYour focus: {focus}"},
     ]
     evidence: list[dict] = []
@@ -163,12 +172,16 @@ def run_specialist(
         if tool is None or call.name not in spec.tools:
             result, error = {"error": f"unknown tool {call.name}; available: {', '.join(spec.tools)}"}, "unknown tool"
         else:
-            try:
-                result = tool(ctx, call.arguments)
-            except Exception as err:  # tool failures go back to the model so it can adapt
-                error = f"{type(err).__name__}: {err}"
-                result = {"error": error}
+            # Record which data the result was computed from, when it was fetched, and
+            # whether a provider outage meant serving a stale cached copy.
+            with record_fetches() as fetched:
+                try:
+                    result = tool(ctx, call.arguments)
+                except Exception as err:  # tool failures go back to the model so it can adapt
+                    error = f"{type(err).__name__}: {err}"
+                    result = {"error": error}
         seconds = round(time.perf_counter() - t0, 2)
+        sources = fetched if tool is not None and call.name in spec.tools else []
         record = {
             "id": ev_id,
             "agent": spec.key,
@@ -178,10 +191,13 @@ def run_specialist(
             "seconds": seconds,
             "chosen_by": chosen_by,
             "error": error,
+            "sources": sources,
+            "stale": any(s["status"] == "stale-cache" for s in sources),
         }
         evidence.append(record)
-        emit({"event": "tool", **{k: record[k] for k in ("agent", "id", "tool", "args", "seconds", "chosen_by", "error")}})
-        messages.append({"role": "tool", "tool_call_id": call.id, "content": json.dumps(model_view(ev_id, result), separators=(",", ":"))})
+        emit({"event": "tool", **{k: record[k] for k in ("agent", "id", "tool", "args", "seconds", "chosen_by", "error", "stale")}})
+        view = model_view(ev_id, result, use_facts)
+        messages.append({"role": "tool", "tool_call_id": call.id, "content": json.dumps(view, separators=(",", ":"))})
 
     def ask(with_tools: bool):
         response = llm.chat(messages, role="specialist", tools=specs if with_tools else None, max_tokens=700)
@@ -204,13 +220,13 @@ def run_specialist(
             messages.append(tool_call_message(response.content, response.tool_calls))
             for call in response.tool_calls:
                 execute(call, "model" if call.native else "model (text-parsed)")
-            if not rules_shown:
+            if not rules_shown and phased:
                 unused = [n for n in spec.tools if n != "calculator" and n not in {e["tool"] for e in evidence}]
                 hint = f"Tools you have not used yet: {', '.join(unused)}. Call any that would help your focus now. " if unused else ""
                 messages.append({"role": "user", "content": hint + "When you have the data you need:\n" + spec.findings_rules})
                 rules_shown = True
             continue
-        if not evidence and not nudged:
+        if not evidence and not nudged and phased:
             # Answered without any data: whatever it wrote is invented. Discard it and ask once more.
             emit({"event": "nudge", "agent": spec.key})
             messages[1] = dict(messages[1], content=messages[1]["content"] + "\nYou have no data yet. Call your tools first.")
@@ -219,7 +235,7 @@ def run_specialist(
         text = response.content if evidence else ""
         break
 
-    missing = [c for c in spec.required_calls(tickers, question) if not _covered(c, evidence)]
+    missing = [c for c in spec.required_calls(tickers, question) if not _covered(c, evidence)] if settings.enabled("coverage") else []
     if missing:
         calls = [ToolCall(f"coverage_{i}", name, args) for i, (name, args) in enumerate(missing)]
         messages.append(tool_call_message("", calls))
@@ -242,18 +258,20 @@ def run_specialist(
     return {"finding": finding, "evidence": evidence, "usage": usage}
 
 
-def revise_finding(llm: LLM, spec: Specialist, finding: dict, evidence: list[dict], unverified: list[str], emit: Emit) -> dict:
-    """One self-correction pass: show the agent its untraceable numbers and its own evidence."""
-    own = [model_view(e["id"], e["result"]) for e in evidence if e["agent"] == spec.key and not e.get("error")]
+def revise_finding(llm: LLM, spec: Specialist, finding: dict, evidence: list[dict], problems: list[str], emit: Emit, use_facts: bool = True) -> dict:
+    """One self-correction pass: show the agent the fact-checker's findings and its own evidence."""
+    own = [model_view(e["id"], e["result"], use_facts) for e in evidence if e["agent"] == spec.key and not e.get("error")]
+    issues = "\n".join(f"- {p}" for p in problems)
     messages = [
         {"role": "system", "content": spec.system_prompt() + "\n" + spec.findings_rules},
         {"role": "assistant", "content": finding["text"]},
         {
             "role": "user",
             "content": (
-                f"A fact-checker could not find these numbers in your tool results: {', '.join(unverified)}.\n"
-                "Rewrite your findings in the same format. Copy every fact word for word from the tool results below and "
-                "cite its evidence id; remove anything you cannot find there. The closing sentence must contain no numbers.\n"
+                f"A fact-checker found these problems in your findings:\n{issues}\n"
+                "Rewrite your findings in the same format. Copy every fact word for word from the tool results below, "
+                "keeping its company, period and fiscal year, and cite its evidence id; remove anything you cannot find there. "
+                "The closing sentence must contain no numbers.\n"
                 f"Tool results: {json.dumps(own, separators=(',', ':'))}"
             ),
         },

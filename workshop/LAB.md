@@ -7,7 +7,7 @@ can repeat the final module against hosted NIM endpoints to see the same code sc
 | | |
 |---|---|
 | **Level** | Intermediate (comfortable with Python; first contact with agents is fine) |
-| **Duration** | 2 hours (6 modules, 15–25 minutes each) |
+| **Duration** | 2 hours (6 modules, 15–25 minutes each), plus an optional ablation-study module |
 | **Prerequisites** | Python 3.10+, basic pandas; [Ollama](https://ollama.com) installed |
 | **Companion DLI courses** | *Building Agentic AI Applications with LLMs*, *Building RAG Agents with LLMs* |
 
@@ -127,28 +127,43 @@ parallelism help? Why not? (Look at the agent timeline in the web UI.)
 
 ## Module 4 — Verification instead of LLM-as-judge (25 min)
 
-**Concept.** `finagent/provenance.py` extracts every number from the agents'
-prose and looks for it in the evidence the number cites, allowing for rounding and
-unit changes (0.2282 → 22.82%, 215,938,000,000 → $215.94B). Agents with
-untraceable numbers get **one** targeted revision; survivors are flagged ⚠ in the note.
+**Concept.** Two deterministic checks run on everything a model writes.
+
+1. `finagent/provenance.py` extracts every number from the prose and looks for it in
+   the tool results the agent received, allowing for rounding and unit changes
+   (0.2282 → 22.82%, 215,938,000,000 → $215.94B). This catches invented numbers.
+2. `finagent/attribution.py` asks the stronger question: does each cited claim *say
+   what its source says*? A real number under the wrong label - last year's growth
+   quoted as this year's, a 5-year return with the period dropped, one company's
+   figure under another's name, "fell" for a rise - passes the first check and fails
+   this one.
+
+Agents with problems get **one** targeted revision with the exact problems in the
+prompt; the lead analyst's summary gets the same check and one revision; anything
+left is flagged ⚠ in the note.
 
 **Do.**
 
 ```python
-from finagent import provenance
-evidence = [{"id": "M1", "result": {"total_return_pct": 22.82}}]
-provenance.check("Return was 22.82% [M1], target 987.65% [M1]", evidence).summary()
+from finagent import attribution, provenance
+evidence = [{"id": "M1", "agent": "market", "result": {"facts": ["NVDA 5y total return: 881.02%"]}}]
+provenance.check("NVDA returned 881.02% [M1]", evidence).summary()      # number exists: passes
+attribution.check("NVDA returned 881.02% [M1]", evidence, ["NVDA"]).summary()  # period dropped: flagged
 ```
 
-Then run the end-to-end test that plants a fabricated number and checks it is
-caught and repaired:
+Then run the end-to-end tests that plant a fabricated number and a writer that drops
+periods, and check both are caught and repaired:
 
 ```bash
-pytest -q tests/test_graph.py::test_hallucinated_number_triggers_one_targeted_revision
+pytest -q tests/test_graph.py -k "hallucinated or drops_periods"
 ```
 
-**Exercise 4.1.** The checker ignores years, dates and small counts. Find a sentence
-where that heuristic is wrong, write a failing test for it in
+**Exercise 4.1.** Run `attribution.check` over the findings in one of the saved runs in
+`examples/`. Every flag in the v0.1 notes is a real mislabel the original checker
+missed. Find one, and explain which rule caught it.
+
+**Exercise 4.2.** The number extractor ignores years, dates and small counts. Find a
+sentence where that heuristic is wrong, write a failing test for it in
 `tests/test_provenance.py`, then fix `extract_numbers`.
 
 **Discuss.** What does a deterministic verifier miss that a large judge model
@@ -199,13 +214,36 @@ Then look at the risk engine:
 finagent bench-risk --paths 1000000
 ```
 
-On a CPU the million-path Monte Carlo already takes a fraction of a second. On a
-machine with an NVIDIA GPU, `pip install -e ".[gpu]"` adds a CuPy row with no code
-change, because `monte_carlo_var` receives the array module (`numpy` or `cupy`) as a parameter.
+The risk engine is a filtered historical simulation: it rescales history to today's
+volatility, so it gives a second, conditional view next to plain historical VaR. On a
+CPU a million paths take well under two seconds. On a machine with an NVIDIA GPU,
+`pip install -e ".[gpu]"` adds a CuPy row with no code change, because
+`filtered_historical_simulation` receives the array module (`numpy` or `cupy`) as a parameter.
 
 **Discuss.** Compare the run statistics (wall time, tokens, provenance score) for
-the `local` and `nim` runs. Where did the bigger models change the *quality* of the
+the `local` and `nim` runs - or run the evaluation harness on both (Module 7). Where did the bigger models change the *quality* of the
 note, and where did the system design already guarantee it?
+
+---
+
+## Module 7 — Measure what each design choice is worth (optional, 30 min + compute)
+
+**Concept.** Every mechanism above can be switched off for an ablation run
+(`FINAGENT_ABLATE=facts,coverage`, or `--variants` in the harness), and every run is
+scored by the same yardstick: number provenance, claim attribution (draft and final),
+whether the note's opening addresses each part of the question, tool calls chosen by
+the model, and cost.
+
+**Do.** Start a small study and keep working while it runs (about 2 minutes per run on
+a laptop CPU):
+
+```bash
+finagent eval --tickers NVDA JPM KO --variants full,-facts,-phases,-coverage
+```
+
+**Discuss.** Which mechanism moves which metric? Which one costs the most model time?
+Would the ranking change with a larger model (`--profile nim`)? The README's
+*Evaluation* section shows the pilot results this lab is based on.
 
 ---
 
@@ -214,7 +252,8 @@ note, and where did the system design already guarantee it?
 Submit a pull request that completes **one** of:
 
 1. Exercise 2.1 (new tool), with a passing offline test.
-2. Exercise 4.1 (provenance edge case), with the failing-then-passing test.
+2. Exercise 4.2 (provenance edge case), with the failing-then-passing test, or a new
+   attribution rule with tests in `tests/test_attribution.py`.
 3. A new specialist (for example a *Macro Analyst* using US Treasury yields) wired into
    `SPECIALISTS`, the planner prompt and `PLAN_SCHEMA`, with a graph test using `ScriptedLLM`.
 

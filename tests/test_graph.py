@@ -26,7 +26,7 @@ def test_hallucinated_number_triggers_one_targeted_revision(offline):
     final = run_research(ScriptedLLM(hallucinate=True), offline, ["NVDA"], "q", on_event=events.append)
     revisions = [e for e in events if e["event"] == "revise"]
     assert [e["agent"] for e in revisions] == ["market"]
-    assert revisions[0]["unverified"] == ["987.65%"]
+    assert any("987.65%" in problem for problem in revisions[0]["problems"])
     assert final["findings"]["market"]["revised"] is True
     assert "987.65" not in final["findings"]["market"]["text"]
 
@@ -97,3 +97,26 @@ def test_answer_without_data_is_discarded_and_agent_nudged(offline):
     assert any(e["event"] == "nudge" for e in events)
     assert "120%" not in final["findings"]["market"]["text"]
     assert all(e["chosen_by"] == "model" for e in final["evidence"])
+
+
+def test_writer_that_drops_periods_is_revised_once(offline):
+    events = []
+    final = run_research(ScriptedLLM(hallucinate=False, plan=["market"], sloppy_writer=True), offline, ["NVDA"], "q", on_event=events.append)
+    writer_checks = [e for e in events if e["event"] == "verify" and e["agent"] == "writer"]
+    assert writer_checks[0]["claim_issues"]  # "22.82% [M1]" without "1y" is caught
+    assert [e["agent"] for e in events if e["event"] == "revise"] == ["writer"]
+    assert writer_checks[-1]["after_revision"] and not writer_checks[-1]["claim_issues"]
+    assert final["narrative_draft"] != final["narrative"]
+    assert final["stats"]["quality"]["claim_attribution"] == 1.0
+
+
+def test_ablations_switch_off_each_mechanism(offline):
+    from finagent.config import parse_ablations
+
+    offline.settings = offline.settings.with_overrides(ablate=parse_ablations("coverage,revision,attribution"))
+    events = []
+    final = run_research(ScriptedLLM(hallucinate=True), offline, ["NVDA"], "q", on_event=events.append)
+    assert not any(e["chosen_by"] == "coverage check" for e in final["evidence"])  # stress_test is not filled in
+    assert not any(e["event"] == "revise" for e in events)  # the planted 987.65% stays...
+    assert "987.65% ⚠unverified" in final["report"]  # ...but is still flagged in the note
+    assert "**Ablation run:** switched off attribution, coverage, revision" in final["report"]
