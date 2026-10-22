@@ -128,6 +128,14 @@ def test_swapped_labels_in_one_sentence_are_caught():
     assert "14.27%: says expected shortfall but the source says value at risk" in found
 
 
+def test_a_company_or_label_named_in_another_clause_stays_there():
+    # SPY labels the stress-test figures, not the VaR; "operating" labels 60.38%, not 55.6%
+    evidence = EVIDENCE + [{"id": "R2", "agent": "R", "result": {"facts": ["NVDA 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.96%"]}}]
+    text = "The stock risks a 95% 10-day Value at Risk of 14.27% of value [R1] and a 20% SPY fall implying about -40.96% [R2]."
+    assert attribution.check(text, evidence, ["NVDA"]).flagged == []
+    assert issues("- Margins were 60.38% operating and 55.6% net [F1]") == []
+
+
 def test_a_semicolon_starts_a_new_sub_fact():
     evidence = [{"id": "R2", "agent": "R", "result": {"facts": ["GOOGL 3-year beta vs SPY: 1.15; a 20% SPY fall implies about -23.02%"]}}]
     assert attribution.check("- A 20% SPY fall implies about -23.02% for GOOGL [R2]", evidence, ["GOOGL"]).score == 1.0

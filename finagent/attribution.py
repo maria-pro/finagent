@@ -65,7 +65,7 @@ _SYNONYMS = {
     "excess": (r"\bexcess\b", r"outperform", r"underperform"),
     "gross": (r"\bgross\b",),
     "operating": (r"\boperating\b",),
-    "net": (r"\bnet margin\b", r"\bnet income\b", r"\bnet profit\b"),
+    "net": (r"\bnet margin\b", r"\bnet income\b", r"\bnet profit\b", r"%\s+net\b"),  # "32.81% net"
     "revenue": (r"\brevenues?\b",),
     "net income": (r"\bnet income\b", r"\bnet profit\b"),
 }
@@ -330,6 +330,7 @@ def check_claim(
     passages: set[str] = frozenset(),
     aliases: dict[str, set[str]] | None = None,
     failed: set[str] = frozenset(),
+    benchmarks: set[str] = frozenset({"SPY"}),
 ) -> None:
     numbers = extract_numbers(claim.text)
     if not claim.cited:
@@ -366,7 +367,12 @@ def check_claim(
 
     claim_periods, claim_labels = _periods(claim.text), _labels(claim.text)
     claim_tickers, claim_years = _tickers(claim.text, universe, aliases), _years(claim.text)
-    for number in numbers:
+    clauses = [_claim_clause(claim.text, n) for n in numbers]
+    for number, local in zip(numbers, clauses):
+        # A benchmark named only in another number's clause is not what this number is about:
+        # in "a 14.55% VaR and a 20% SPY fall implying -46.13%", SPY belongs to the stress test.
+        elsewhere = _tickers(" ".join(c for c in clauses if c != local), universe, aliases)
+        number_tickers = claim_tickers - ((elsewhere & benchmarks) - _tickers(local, universe, aliases))
         hits = []
         for eid, source in pool:
             for candidate in extract_numbers(source):
@@ -377,14 +383,14 @@ def check_claim(
             continue
 
         # Among sources that contain the number, prefer the one whose labels the claim keeps.
-        def mismatches(hit, number=number) -> list[str]:
+        def mismatches(hit, number=number, local=local, number_tickers=number_tickers) -> list[str]:
             eid, source, candidate = hit
             problems = []
             clause = _clause(source, candidate)
             src_tickers = _tickers(source, universe, aliases)
-            if src_tickers and claim_tickers and not (src_tickers & claim_tickers):
-                problems.append(f"company {', '.join(sorted(claim_tickers))} but the source is about {', '.join(sorted(src_tickers))}")
-            elif multi_company and src_tickers and not claim_tickers:
+            if src_tickers and number_tickers and not (src_tickers & number_tickers):
+                problems.append(f"company {', '.join(sorted(number_tickers))} but the source is about {', '.join(sorted(src_tickers))}")
+            elif multi_company and src_tickers and not number_tickers:
                 problems.append(f"company missing (source: {', '.join(sorted(src_tickers))})")
             covered = set(claim_periods)
             source_fys = sorted(p[2:] for p in _periods(clause) if p.startswith("fy"))
@@ -408,7 +414,6 @@ def check_claim(
                         problems.append("period 'trailing 12 months' missing")
                 else:
                     problems.append(f"period '{period}' missing")
-            local = _claim_clause(claim.text, number)
             for wrong in sorted(_periods(local) - _periods(source)):
                 if not wrong.startswith("fy"):
                     problems.append(f"period '{wrong}' is not the source's")
@@ -443,7 +448,8 @@ def check(text: str, evidence: list[dict], tickers: list[str], allowed_ids: set[
     aliases = company_aliases(evidence, tickers)
     claims = split_claims(text)
     for claim in claims:
-        check_claim(claim, sources, universe, multi_company=len(tickers) > 1, passages=passages, aliases=aliases, failed=failed)
+        check_claim(claim, sources, universe, multi_company=len(tickers) > 1, passages=passages, aliases=aliases, failed=failed,
+                    benchmarks=universe - set(tickers))
     # Interpretation (opinions without numbers) is not a claim about the data.
     return AttributionReport([c for c in claims if c.kind != "interpretation" or c.issues])
 

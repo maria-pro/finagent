@@ -54,5 +54,6 @@ def test_saved_runs_can_be_rescored(offline, tmp_path):
     assert rows[0]["record"].endswith(".json")
     again = evaluate.rescore(tmp_path / "r-runs")
     assert len(again) == 1 and again[0]["variant"] == "full" and again[0]["ticker"] == "NVDA"
+    assert again[0]["version"] == again[0]["scored_with"] == evaluate.__version__  # who produced it, who scored it
     for key in ("number_provenance", "claim_attribution", "facet_coverage", "tool_calls"):
         assert again[0][key] == rows[0][key]

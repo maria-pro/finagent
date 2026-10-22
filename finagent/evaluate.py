@@ -6,10 +6,11 @@ Each run is scored the same way whatever was switched on while it was produced:
   the writing agent actually received;
 * **claim attribution** - share of cited claims that keep their source's company,
   period, metric and direction (10-K points: by wording);
-* **facet coverage** - whether the note's opening addresses each part of the
-  question (valuation, fundamentals, risk, performance, filings, comparison) with
-  cited evidence of the right kind - a transparent proxy for "does it answer the
-  question", not a judgement of the reasoning;
+* **facet coverage** - whether the lead analyst's summary addresses each part of
+  the question (valuation, fundamentals, risk, performance, filings, comparison) by
+  citing evidence of the right kind (a comparison must name every company in its
+  answer) - a transparent proxy for "does it answer the question", not a judgement
+  of the reasoning;
 * autonomy (tool calls chosen by the model vs added by coverage checks), revisions,
   cost (model calls, tokens, seconds) and data freshness.
 
@@ -196,7 +197,8 @@ def rescore(records_dir: str | Path) -> list[dict]:
         meta = record.get("eval") or {}
         row = summarize_run(record, record.get("events", []), ticker=meta.get("ticker", "?"),
                             question_key=meta.get("question", "?"), variant=meta.get("variant", "?"))
-        row.update(version=meta.get("version"), model=(record.get("settings") or {}).get("specialist_model"), record=path.name)
+        row.update(version=meta.get("version"), scored_with=__version__, model=(record.get("settings") or {}).get("specialist_model"),
+                   record=path.name)
         rows.append(row)
     return rows
 
