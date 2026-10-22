@@ -1,17 +1,16 @@
 # FinAgent
 
-**Grounded multi-agent equity research on a small NVIDIA Nemotron model — no GPU required.**
+**Multi-agent equity research on a small NVIDIA Nemotron model — no GPU required.**
 
-FinAgent is a team of AI agents that researches public companies the way an
-analyst desk does: a planner assigns work, four specialists (market, fundamentals,
-risk, filings) call real data tools in parallel, a fact-checker traces every number
-they write back to the tool output it came from, and a lead analyst writes the note.
+FinAgent is a team of AI agents that researches public companies (as financial analyst): 
+- a planner assigns work, 
+- four specialists (market, fundamentals, risk, filings) call real data tools in parallel, 
+- a fact-checker traces every number they write back to the tool output it came from, and a lead analyst writes the note.
 
-It is built to make one point measurable: **a 4-billion-parameter model on a CPU
-can do useful, auditable agentic work when the system around it is designed for
+It is built to make one point measurable: **a 4-billion-parameter model on a CPU can do useful, auditable agentic work when the system around it is designed for
 small models.** The same code moves to NVIDIA NIM endpoints by changing configuration.
 
-## Results — measured, no GPU anywhere
+## Results
 
 | Machine | Inference server | Question | End to end | Model calls | Tool calls (chosen by the model) | Numbers traced to a tool |
 |---|---|---|---|---|---|---|
@@ -51,17 +50,13 @@ What a run looks like (laptop CPU; each line is a model call or a tool call with
 
 ## Why
 
-- **Access.** Most agentic-AI teaching assumes a GPU or a paid API. FinAgent runs on
-  a student laptop or a shared university CPU server with
+- **Access.** Most agentic-AI teaching assumes a GPU or a paid API. FinAgent runs on a student laptop or a shared university CPU server with
   [NVIDIA Nemotron 3 Nano 4B](https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-4B-GGUF)
   served by Ollama or llama.cpp.
-- **Small models are enough for most agent steps.** NVIDIA Research argues that
-  small language models are sufficient and far more economical for the narrow,
-  repetitive sub-tasks that make up agentic systems
-  ([Belcak et al., 2025](https://arxiv.org/abs/2506.02153)). FinAgent is a concrete
+- **Small models are enough for most agent steps.** NVIDIA Research argues that small language models are sufficient and far more economical for the narrow,
+  repetitive sub-tasks that make up agentic systems ([Belcak et al., 2025](https://arxiv.org/abs/2506.02153)). FinAgent is a concrete
   case study with the telemetry to check the claim.
-- **Finance needs auditability.** A research note is only useful if its numbers
-  are right. Every figure here is traceable to a tool call, a public source and,
+- **Finance needs auditability.** A research note is only useful if its numbers are right. Every figure here is traceable to a tool call, a public source and,
   for fundamentals, the exact SEC filing.
 
 ## How it works
