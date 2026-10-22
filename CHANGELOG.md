@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.3.0 — 2026-10-22
+## 0.3.0 — 2026-10-23
 
 The tools, checked against what they measure; exercises on what the checks miss; and the
 project described as what it is, a teaching tool.
