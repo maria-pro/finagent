@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 import time
 from datetime import datetime
@@ -234,6 +235,14 @@ def cmd_eval(args) -> int:
     if args.summarize:
         console.print(Markdown(summary_markdown(load_results(args.summarize))))
         return 0
+    if args.rescore:
+        from .evaluate import rescore
+
+        rows = rescore(args.rescore)
+        if args.out:
+            Path(args.out).write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
+        console.print(Markdown(summary_markdown(rows, title="FinAgent evaluation (re-scored)")))
+        return 0
     settings = load_settings(args.profile)
     tickers = parse_tickers(args.tickers) if args.tickers else TICKER_SETS[args.set]
     questions = [q.strip() for q in args.questions.split(",")]
@@ -257,7 +266,7 @@ def cmd_eval(args) -> int:
         else:
             console.print(f"{row['ticker']:<6} {row['variant']:<14} [red]failed: {escape(str(row.get('error')))}[/]")
 
-    results = run_eval(settings, tickers, questions, list(chosen), out, on_progress=progress)
+    results = run_eval(settings, tickers, questions, list(chosen), out, on_progress=progress, records_dir=args.records)
     md = summary_markdown(results, title=f"FinAgent evaluation · {settings.specialist_model}")
     out.with_suffix(".md").write_text(md, encoding="utf-8")
     console.print(Markdown(md))
@@ -303,7 +312,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--variants", default="full", help="comma-separated: full,-facts,-phases,-coverage,-revision,-own_evidence,-attribution or all")
     p.add_argument("--profile", choices=profiles, default=None)
     p.add_argument("--out", help="results file (.jsonl); a .md summary is written next to it")
+    p.add_argument("--records", metavar="DIR", help="where to save each run's full record (default: <out>-runs next to the results)")
     p.add_argument("--summarize", metavar="JSONL", help="only print the summary of an existing results file")
+    p.add_argument("--rescore", metavar="RUNS_DIR", help="recompute metrics from saved run records with the current checks")
     p.set_defaults(func=cmd_eval)
 
     p = sub.add_parser("bench-risk", help="time the risk simulation engine")

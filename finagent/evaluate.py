@@ -15,7 +15,9 @@ Each run is scored the same way whatever was switched on while it was produced:
 
 Pre-revision drafts are scored too, so the effect of the revision pass is measured
 from the same runs. Results stream to a JSON-lines file so a long study survives
-interruption, and ``summarize`` turns them into a table per variant.
+interruption, and ``summarize`` turns them into a table per variant. The full run
+record of every run is saved too, so a study can be re-scored (``rescore``) when the
+checks improve, without running a model again.
 """
 
 from __future__ import annotations
@@ -141,15 +143,19 @@ def run_eval(
     out_path: str | Path,
     llm_factory: Callable | None = None,
     on_progress: Callable[[dict], None] | None = None,
+    records_dir: str | Path | None = None,
 ) -> list[dict]:
-    """Run every (ticker, question, variant) combination, appending one JSON line per run."""
+    """Run every (ticker, question, variant) combination, appending one JSON line per run
+    and saving each run's full record under ``records_dir`` (default: next to the results)."""
     from .graph import run_research
     from .llm import OpenAICompatLLM
+    from .runs import save_run
     from .tools import ToolContext
 
     factory = llm_factory or OpenAICompatLLM
     out = Path(out_path)
     out.parent.mkdir(parents=True, exist_ok=True)
+    records = Path(records_dir) if records_dir else out.with_name(out.stem + "-runs")
     chosen = variants(variant_names)
     results = []
     for ticker in tickers:
@@ -162,6 +168,10 @@ def run_eval(
                 try:
                     final = run_research(factory(run_settings), ToolContext(run_settings), [ticker], question, on_event=events.append)
                     row = summarize_run(final, events, ticker=ticker, question_key=qkey, variant=name)
+                    final["eval"] = {"ticker": ticker, "question": qkey, "variant": name, "version": __version__}
+                    label = "full" if name == "full" else "no-" + name.lstrip("-")
+                    stem = f"{ticker.lower()}-{qkey}-{label}-v{__version__}-{int(started)}"
+                    row["record"] = save_run(final, events, run_settings, records, stem=stem).name
                 except Exception as err:  # one failed run must not end a long study
                     row = {"ticker": ticker, "question": qkey, "variant": name, "ok": False, "error": f"{type(err).__name__}: {err}"}
                 row["elapsed"] = round(time.time() - started, 1)
@@ -174,6 +184,21 @@ def run_eval(
                 if on_progress:
                     on_progress(row)
     return results
+
+
+def rescore(records_dir: str | Path) -> list[dict]:
+    """Recompute every metric from saved run records with the current checks."""
+    from .runs import list_runs, load_run
+
+    rows = []
+    for path in sorted(list_runs((str(records_dir),))):
+        record = load_run(path)
+        meta = record.get("eval") or {}
+        row = summarize_run(record, record.get("events", []), ticker=meta.get("ticker", "?"),
+                            question_key=meta.get("question", "?"), variant=meta.get("variant", "?"))
+        row.update(version=meta.get("version"), model=(record.get("settings") or {}).get("specialist_model"), record=path.name)
+        rows.append(row)
+    return rows
 
 
 def load_results(path: str | Path) -> list[dict]:

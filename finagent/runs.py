@@ -13,7 +13,7 @@ from pathlib import Path
 
 RECORD_KEYS = (
     "tickers", "question", "guard", "plan", "plan_source", "findings", "evidence", "llm_calls",
-    "narrative", "narrative_draft", "writer_check", "revisions", "report", "stats",
+    "narrative", "narrative_draft", "writer_check", "revisions", "report", "stats", "eval",
 )
 
 
@@ -21,11 +21,11 @@ def _slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:40]
 
 
-def save_run(final: dict, events: list[dict], settings, out_dir: str | Path = "reports") -> Path:
+def save_run(final: dict, events: list[dict], settings, out_dir: str | Path = "reports", stem: str | None = None) -> Path:
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     tickers = final.get("tickers", [])
-    stem = f"{datetime.now():%Y%m%d-%H%M}-{'-'.join(tickers).lower()}-{_slug(final.get('question', ''))}"
+    stem = stem or f"{datetime.now():%Y%m%d-%H%M}-{'-'.join(tickers).lower()}-{_slug(final.get('question', ''))}"
     record = {k: final.get(k) for k in RECORD_KEYS}
     record["events"] = events
     record["settings"] = {

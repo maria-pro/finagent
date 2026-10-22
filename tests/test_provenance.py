@@ -49,3 +49,7 @@ def test_citations_are_checked_against_the_cited_evidence():
 
 def test_numbers_inside_filing_passages_count_as_evidence():
     assert provenance.check("Two customers were 35% of revenue [D1].", EVIDENCE).score == 1.0
+
+
+def test_sec_identifiers_are_not_figures():
+    assert values("No 10-K among the filings of CIK 2115436 (accession 0001045810-26-000021); it files 10-Qs.") == []

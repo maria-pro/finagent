@@ -24,10 +24,11 @@ _NUMBER_RE = re.compile(
 _MONTHS = re.compile(r"(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s*$", re.IGNORECASE)
 _TIME_UNIT_AFTER = re.compile(r"^[\s-]*(trading\s+)?(day|days|week|weeks|month|months|year|years|quarter|quarters|yr|yrs)\b", re.I)
 _DATE_RE = re.compile(r"\b\d{4}-\d{2}-\d{2}\b")
-# Names that contain numbers but are not figures: market indices and filing forms.
+# Names that contain numbers but are not figures: market indices, filing forms, SEC identifiers.
 _NAMED_RE = re.compile(
     r"S\s?&\s?P\s?(500|400|600|100)|Russell\s?(1000|2000|3000)|Nasdaq[- ]?100|FTSE\s?(100|250)|Dow\s?(30|Jones)|"
-    r"DAX\s?40|CAC\s?40|Nikkei\s?225|Stoxx\s?(50|600)|ASX\s?200|MSCI\s?\w+|Form\s?\d+-?\w*",
+    r"DAX\s?40|CAC\s?40|Nikkei\s?225|Stoxx\s?(50|600)|ASX\s?200|MSCI\s?\w+|Form\s?\d+-?\w*|"
+    r"CIK\s?\d+|\b\d{10}-\d{2}-\d{6}\b",
     re.IGNORECASE,
 )
 _CITATION_AFTER = re.compile(r"^[\s)*,]{0,3}\[((?:[A-Z]\d+)(?:\s*[,;]\s*[A-Z]\d+)*)\]")

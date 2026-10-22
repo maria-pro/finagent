@@ -78,7 +78,9 @@ def test_eval_command_writes_results_and_summary(scripted, capsys):
     assert [(r["ticker"], r["variant"]) for r in rows] == [("NVDA", "full"), ("NVDA", "-coverage"), ("AMD", "full"), ("AMD", "-coverage")]
     assert all(r["ok"] for r in rows)
     assert out.with_suffix(".md").read_text().startswith("# FinAgent evaluation")
+    assert len(list((scripted / "eval" / "r-runs").glob("*.json"))) == 4  # full run records, for re-scoring
     assert cli.main(["eval", "--summarize", str(out)]) == 0
+    assert cli.main(["eval", "--rescore", str(scripted / "eval" / "r-runs")]) == 0
 
 
 def test_run_records_round_trip_and_skip_macos_metadata(scripted, settings):

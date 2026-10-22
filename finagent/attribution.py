@@ -246,12 +246,24 @@ def _source_sign(source: str, number: NumberClaim) -> int:
 
 def _clause(source: str, number: NumberClaim) -> str:
     """The part of a fact that labels one of its numbers: the clause around it, plus
-    the fact's lead label (text before the first colon) for context."""
-    left = max(source.rfind(sep, 0, number.start) for sep in (",", ";", "(", " vs "))
+    the fact's lead label (text before the first colon) - unless a semicolon has
+    started a new sub-fact ("3-year beta: 1.15; a 20% SPY fall implies -23%")."""
+    left, left_sep = max((source.rfind(sep, 0, number.start), sep) for sep in (",", ";", "(", " vs "))
     right_candidates = [i for i in (source.find(sep, number.end) for sep in (",", ";", ")", " vs ")) if i >= 0]
     right = min(right_candidates) if right_candidates else len(source)
-    lead = source.split(":", 1)[0] if ":" in source[: number.start] else ""
+    lead = source.split(":", 1)[0] if ":" in source[: number.start] and not (left >= 0 and left_sep == ";") else ""
     return f"{lead} {source[left + 1 : right]}"
+
+
+_CLAIM_SEPARATORS = (",", ";", "(", ")", " and ", " while ", " but ", " with ", " whereas ", " vs ", " versus ", ". ")
+
+
+def _claim_clause(text: str, number: NumberClaim) -> str:
+    """The clause of a claim that holds one number, so that a sentence combining
+    several facts ("a 14.27% 10-day VaR and revenue of $215.94bn") is checked fact by fact."""
+    starts = [text.rfind(sep, 0, number.start) + len(sep) for sep in _CLAIM_SEPARATORS if text.rfind(sep, 0, number.start) >= 0]
+    ends = [i for i in (text.find(sep, number.end) for sep in _CLAIM_SEPARATORS) if i >= 0]
+    return text[max(starts, default=0) : min(ends, default=len(text))]
 
 
 def _latest_fy(sources: list[str]) -> str | None:
@@ -290,10 +302,24 @@ def source_strings(evidence: dict) -> list[str]:
     if result.get("facts"):
         return list(result["facts"])
     if result.get("passages"):
-        return [p["text"] for p in result["passages"]]
+        meta = [f"{result['filing']} {result.get('url', '')}"] if result.get("filing") else []
+        return [p["text"] for p in result["passages"]] + meta
     if "expression" in result and "result" in result:
         return [f"{result['expression']} = {result['result']}"]
-    return [f"{k.replace('_', ' ')}: {v}" for k, v in result.items() if isinstance(v, (int, float, str)) and k != "error"]
+    # A raw result without labelled facts: one string of all its fields, nested ones
+    # included, so a number keeps its context (period, ticker) for the label checks.
+    return ["; ".join(f"{k.replace('_', ' ')}: {v}" for k, v in _flatten(result) if k != "error")]
+
+
+def _flatten(value, prefix: str = ""):
+    if isinstance(value, dict):
+        for k, v in value.items():
+            yield from _flatten(v, f"{prefix} {k}".strip())
+    elif isinstance(value, list):
+        for item in value:
+            yield from _flatten(item, prefix)
+    elif isinstance(value, (int, float, str)) and not isinstance(value, bool):
+        yield prefix, value
 
 
 def check_claim(
@@ -334,7 +360,7 @@ def check_claim(
     if not numbers:
         # Only claims about a filing's text can be checked by wording; a sentence citing
         # numeric facts without quoting any number is interpretation.
-        if claim.kind == "qualitative" and claim.support < 0.5:
+        if claim.kind == "qualitative" and claim.support < 0.4:
             claim.issues.append(f"not supported by the cited passage (word overlap {claim.support:.0%})")
         return
 
@@ -382,12 +408,15 @@ def check_claim(
                         problems.append("period 'trailing 12 months' missing")
                 else:
                     problems.append(f"period '{period}' missing")
-            for wrong in sorted(_periods(claim.text) - _periods(source)):
+            local = _claim_clause(claim.text, number)
+            for wrong in sorted(_periods(local) - _periods(source)):
                 if not wrong.startswith("fy"):
                     problems.append(f"period '{wrong}' is not the source's")
-            src_labels = _labels(clause)
+            src_labels, local_labels = _labels(clause), _labels(local)
             for group in _CONFLICT_GROUPS:
-                claim_side, src_side = claim_labels & group, src_labels & group
+                # the number's own clause decides; the whole sentence only when that clause names none
+                claim_side = (local_labels & group) or (claim_labels & group)
+                src_side = src_labels & group
                 if claim_side and src_side and not (claim_side & src_side):
                     problems.append(f"says {'/'.join(sorted(claim_side))} but the source says {'/'.join(sorted(src_side))}")
             want, have = _claim_sign(claim.text, number), _source_sign(source, candidate)

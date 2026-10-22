@@ -113,3 +113,35 @@ def test_citing_a_failed_tool_call_is_named_as_such():
     evidence = EVIDENCE + [{"id": "D2", "agent": "D", "error": "no 10-K", "result": {"error": "no 10-K"}}]
     found = attribution.check("- Free cash flow was $12.5 billion [D2]", evidence, ["NVDA"]).flagged[0].issues
     assert found == ["cites a tool call that failed (D2)"]
+
+
+def test_sentences_combining_facts_are_checked_fact_by_fact():
+    # "10-day" belongs to the VaR clause, not to the revenue figure in the same sentence
+    text = ("- NVDA carries a 14.27% 95% 10-day Value at Risk, historical [R1], "
+            "and FY2026 revenue of $215.94bn up 65.47% [F1]")
+    assert issues(text) == []
+
+
+def test_swapped_labels_in_one_sentence_are_caught():
+    text = "- NVDA's 95% 10-day expected shortfall is 14.27% and its historical Value at Risk is 13.75% [R1]"
+    found = " ".join(issues(text))
+    assert "14.27%: says expected shortfall but the source says value at risk" in found
+
+
+def test_a_semicolon_starts_a_new_sub_fact():
+    evidence = [{"id": "R2", "agent": "R", "result": {"facts": ["GOOGL 3-year beta vs SPY: 1.15; a 20% SPY fall implies about -23.02%"]}}]
+    assert attribution.check("- A 20% SPY fall implies about -23.02% for GOOGL [R2]", evidence, ["GOOGL"]).score == 1.0
+    assert attribution.check("- GOOGL beta vs SPY: 1.15 [R2]", evidence, ["GOOGL"]).flagged[0].issues == ["1.15: period '3y' missing"]
+
+
+def test_filing_metadata_counts_as_evidence():
+    evidence = [{"id": "D1", "agent": "D", "result": {"filing": "10-K filed 2026-02-20 (period 2025-12-31)", "url": "https://sec.example/k",
+                                                    "passages": [{"ref": "a#1", "text": "Unrelated risk factor text."}]}}]
+    assert attribution.check("- The 10-K was filed for the period ending 2025-12-31 [D1]", evidence, ["KO"]).score == 1.0
+
+
+def test_raw_results_without_facts_keep_their_context():
+    evidence = [{"id": "M1", "agent": "M", "result": {"ticker": "NVDA", "period": "1y", "total_return_pct": 22.82,
+                                                    "fiscal_years": [{"fiscal_year_end": "2024-01-28", "revenue_growth_pct": 125.85}]}}]
+    assert attribution.check("- NVDA 1-year total return: 22.82% [M1]", evidence, ["NVDA"]).score == 1.0
+    assert attribution.check("- Revenue growth: 125.85% [M1]", evidence, ["NVDA"]).flagged == []  # nested values are evidence too

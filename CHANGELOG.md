@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.2.2 — 2026-10-22
+
+Claim checking, sharpened on the pilot's risk-question runs, where summaries combine
+several facts in one sentence.
+
+- Each number is checked against its own clause of the claim: in "a 14.27% 10-day VaR
+  and revenue of $215.94bn", the "10-day" no longer counts against the revenue. Labels
+  are compared clause by clause too, which also catches swapped labels ("expected
+  shortfall 14.27% and VaR 13.75%").
+- In a fact with sub-facts ("3-year beta: 1.15; a 20% SPY fall implies -23%"), the lead
+  label stops at the semicolon.
+- SEC identifiers (CIK, accession numbers) are not treated as figures; filing metadata
+  counts as evidence for 10-K points; the wording threshold for 10-K points is 40%.
+- Raw tool results without labelled facts are checked with their nested fields and context.
+- `finagent eval` saves every run's full record and `--rescore` recomputes all metrics
+  from saved records with the current checks.
+
 ## 0.2.1 — 2026-10-22
 
 Fixes found by the first pilot evaluation (`eval/results/`).

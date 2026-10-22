@@ -44,3 +44,15 @@ def test_summary_aggregates_per_variant():
     assert table["runs"] == 2 and table["succeeded"] == 1 and table["draft_claim_attribution"] == 0.8
     md = evaluate.summary_markdown(rows)
     assert "| full | 2 (1) |" in md and "B/full: boom" in md
+
+
+def test_saved_runs_can_be_rescored(offline, tmp_path):
+    from fakes import ScriptedLLM
+
+    rows = evaluate.run_eval(offline.settings, ["NVDA"], ["valuation"], ["full"], tmp_path / "r.jsonl",
+                             llm_factory=lambda s: ScriptedLLM(hallucinate=False))
+    assert rows[0]["record"].endswith(".json")
+    again = evaluate.rescore(tmp_path / "r-runs")
+    assert len(again) == 1 and again[0]["variant"] == "full" and again[0]["ticker"] == "NVDA"
+    for key in ("number_provenance", "claim_attribution", "facet_coverage", "tool_calls"):
+        assert again[0][key] == rows[0][key]
