@@ -16,6 +16,14 @@ authors:
 version: 0.3.1
 date-released: 2026-10-23
 license: MIT
+doi: 10.5281/zenodo.23578666
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23578666
+    description: All versions (resolves to the latest)
+  - type: doi
+    value: 10.5281/zenodo.23578667
+    description: Version 0.3.1
 repository-code: "https://github.com/maria-pro/finagent"
 keywords:
   - agentic AI

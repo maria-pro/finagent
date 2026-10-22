@@ -1,5 +1,7 @@
 # FinAgent
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23578666.svg)](https://doi.org/10.5281/zenodo.23578666)
+
 **Multi-agent equity research on a small NVIDIA Nemotron model — no GPU required. A teaching project for agentic AI.**
 
 FinAgent is a team of AI agents that researches public companies the way an analyst would:
@@ -445,6 +447,8 @@ What the checks cannot see — worth knowing before you trust a note, and the su
 ## Citing FinAgent
 
 If you use FinAgent in teaching or research, please cite it with the metadata in [`CITATION.cff`](CITATION.cff) (on GitHub: *Cite this repository*).
+Releases are archived on Zenodo: [10.5281/zenodo.23578666](https://doi.org/10.5281/zenodo.23578666) always points to the latest version; version
+0.3.1 is [10.5281/zenodo.23578667](https://doi.org/10.5281/zenodo.23578667).
 
 ## License
 
