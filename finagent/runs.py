@@ -21,11 +21,8 @@ def _slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:40]
 
 
-def save_run(final: dict, events: list[dict], settings, out_dir: str | Path = "reports", stem: str | None = None) -> Path:
-    out = Path(out_dir)
-    out.mkdir(parents=True, exist_ok=True)
-    tickers = final.get("tickers", [])
-    stem = stem or f"{datetime.now():%Y%m%d-%H%M}-{'-'.join(tickers).lower()}-{_slug(final.get('question', ''))}"
+def build_record(final: dict, events: list[dict], settings) -> dict:
+    """The run record: everything needed to replay and audit a run, without the API key."""
     record = {k: final.get(k) for k in RECORD_KEYS}
     record["events"] = events
     record["settings"] = {
@@ -37,6 +34,15 @@ def save_run(final: dict, events: list[dict], settings, out_dir: str | Path = "r
         "reasoning": settings.reasoning,
         "ablate": sorted(settings.ablate),
     }
+    return record
+
+
+def save_run(final: dict, events: list[dict], settings, out_dir: str | Path = "reports", stem: str | None = None) -> Path:
+    out = Path(out_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    tickers = final.get("tickers", [])
+    stem = stem or f"{datetime.now():%Y%m%d-%H%M}-{'-'.join(tickers).lower()}-{_slug(final.get('question', ''))}"
+    record = build_record(final, events, settings)
     (out / f"{stem}.md").write_text(final.get("report", ""), encoding="utf-8")
     path = out / f"{stem}.json"
     path.write_text(json.dumps(record, indent=2, default=str), encoding="utf-8")

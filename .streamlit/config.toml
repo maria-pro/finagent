@@ -1,0 +1,8 @@
+# The web UI has no login. By default it listens on this computer only, so nobody else on
+# the network can reach it. Before serving it to other people, read "Sharing the web UI"
+# in the README: put it behind a login and set FINAGENT_UI_SHARED=1.
+[server]
+address = "127.0.0.1"
+
+[browser]
+gatherUsageStats = false

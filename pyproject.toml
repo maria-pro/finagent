@@ -1,6 +1,6 @@
 [project]
 name = "finagent"
-version = "0.3.0"
+version = "0.3.1"
 description = "Multi-agent equity research on a small NVIDIA Nemotron model, CPU only: a LangGraph teaching project with deterministic fact-checks and an evaluation harness"
 readme = "README.md"
 requires-python = ">=3.10"

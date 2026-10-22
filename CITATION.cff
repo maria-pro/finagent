@@ -13,7 +13,7 @@ authors:
   - family-names: Prokofieva
     given-names: Maria
     affiliation: Victoria University
-version: 0.3.0
+version: 0.3.1
 date-released: 2026-10-23
 license: MIT
 repository-code: "https://github.com/maria-pro/finagent"

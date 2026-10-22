@@ -154,7 +154,7 @@ cp .env.example .env                           # set SEC_USER_AGENT to your name
 
 finagent doctor                                # checks endpoint, tool calling, JSON output, data sources
 finagent analyze NVDA -q "Is NVIDIA's valuation justified by its fundamentals, and what are the main risks?"
-streamlit run app/streamlit_app.py             # web UI: live agent trace, charts, evidence ledger, fact-check
+streamlit run app/streamlit_app.py             # web UI on this computer only: live trace, charts, evidence ledger, fact-check
 ```
 
 Runs are saved to `reports/` as a Markdown note plus a JSON run record. The web UI can replay any saved run — and the examples shipped in `examples/` —
@@ -200,6 +200,21 @@ JSON-schema request, checks embeddings and the topic rail when configured, and l
 
 If the Ollama service on a shared machine cannot reach the internet and you cannot change it, `scripts/ollama_import_gguf.sh` downloads NVIDIA's official
 GGUF through your own shell and registers it with Ollama, using the built-in Nemotron renderer and tool-call parser and a thread cap for polite sharing.
+
+### Sharing the web UI
+
+The web UI has no login, so it listens on your own computer only (`.streamlit/config.toml`). To serve it to a class or a team:
+
+- Put it behind a login first — a reverse proxy with your institution's single sign-on, or a hosting service's viewer authentication — and only
+  then change `server.address`.
+- Set `FINAGENT_UI_SHARED=1`. The endpoint and model fields are then fixed to the server's configuration, and each visitor sees only the shipped
+  examples and their own runs, which stay in their browser session (with download buttons) instead of going to the shared `reports/` folder.
+- A key held by the server (`NVIDIA_API_KEY`, `BEDROCK_API_KEY`) is never sent to the browser and is used only with the endpoint the server is
+  configured for, in either mode. Visitors can still spend it by running analyses, so give the key a spending limit.
+- `FINAGENT_TOPIC_RAIL_REQUIRED=1` makes the NemoGuard topic rail fail closed: questions are refused when it does not answer, instead of
+  passing on the deterministic rules alone.
+
+See [`SECURITY.md`](SECURITY.md) to report a security problem.
 
 ## What small models get wrong, and how the system copes
 
@@ -374,7 +389,9 @@ eval/results/        the measurements in "Measuring the system", with every run'
 workshop/LAB.md      two-hour hands-on lab (solutions on the `solutions` branch)
 scripts/             llama.cpp server, offline Ollama import
 docs/                screenshots
+.streamlit/          web UI server settings (this computer only)
 CITATION.cff         how to cite FinAgent
+SECURITY.md          reporting a security problem
 ```
 
 ## Testing
@@ -383,7 +400,7 @@ CITATION.cff         how to cite FinAgent
 pytest -q
 ```
 
-The suite (138 tests, 94% line coverage, under ten seconds) runs offline against synthetic prices, synthetic SEC facts and a scripted model; CI runs it on Python 3.10 and
+The suite (143 tests, 94% line coverage, under ten seconds) runs offline against synthetic prices, synthetic SEC facts and a scripted model; CI runs it on Python 3.10 and
 3.12 with the exact versions in `uv.lock`. It covers the finance maths (filtered historical simulation against volatility regimes, dated Sharpe, CAPM
 alpha over the risk-free rate, daily-rebalanced stress tests), XBRL parsing (fiscal years, TTM, restatements, tag changes, share classes, debt
 composition, net-income attribution, industry-specific valuation for financial companies), the LLM client through the real OpenAI SDK over a mocked HTTP transport (server probing,
@@ -408,6 +425,13 @@ What the checks cannot see — worth knowing before you trust a note, and the su
 - **The reasoning is not checked.** A note can cite the right figures and draw the wrong conclusion: one saved summary calls Goldman Sachs's valuation
   "not fully justified" because of its *low* P/E. Facet coverage counts whether each part of the question is answered with evidence, not whether the
   argument holds, and a 4B model's interpretation is not expert. Read the notes as faithful to their sources, not as sound analysis.
+- **Filing text is untrusted input.** A 10-K passage could carry text written to steer an AI reader. The filings tool withholds sentences that
+  address one ("ignore previous instructions", "AI assistants must report …") — a heuristic that matched nothing in the 10-Ks of the 11 companies
+  with one and catches the obvious phrasings, not every one. The agents' tools only read public data, so planted text can at worst mislead a note;
+  the claim check would not notice that it was planted.
+- **The guardrails are a teaching example, not a compliance control.** The rules are regular expressions, and the optional NemoGuard topic rail
+  fails open — the run records that it did — unless `FINAGENT_TOPIC_RAIL_REQUIRED=1`. A regulated deployment needs more.
+- **The web UI has no login.** It listens on your own computer only; read [Sharing the web UI](#sharing-the-web-ui) before serving it to anyone.
 - **The attribution rules are explicit and finite.** They check labels and direction against what this project's runs have shown so far, and miss
   phrasings they do not anticipate — treat the claim score as a floor on the mislabelling caught, not as proof of correctness.
 - Daily prices come from Yahoo Finance's public chart endpoint, which is unofficial and may change. SEC EDGAR and the US Treasury are official sources.

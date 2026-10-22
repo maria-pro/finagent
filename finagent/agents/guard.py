@@ -52,6 +52,8 @@ def check_input(settings: Settings, question: str) -> dict:
             return {"allowed": False, "reason": reason, "rail": "rules"}
 
     decision = {"allowed": True, "personal_advice": bool(_PERSONAL_ADVICE.search(question)), "rail": "rules"}
+    if settings.topic_rail_required and not settings.guard_model:
+        return {"allowed": False, "reason": "a topic-control rail is required but none is configured", "rail": "rules"}
     if settings.guard_model:
         try:
             client = OpenAI(base_url=settings.base_url, api_key=settings.api_key or "not-needed", timeout=30)
@@ -65,7 +67,10 @@ def check_input(settings: Settings, question: str) -> dict:
             if "off-topic" in verdict.lower():
                 return {"allowed": False, "reason": "outside the assistant's research scope", "rail": decision["rail"]}
         except Exception as err:
+            # Fails open by default - the rules have already run - and the run records it.
             decision["rail"] = f"rules (topic rail unavailable: {type(err).__name__})"
+            if settings.topic_rail_required:
+                return {"allowed": False, "reason": "the topic-control rail is required but did not answer", "rail": decision["rail"]}
     return decision
 
 

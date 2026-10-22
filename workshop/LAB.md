@@ -222,6 +222,15 @@ finagent analyze NVDA -q "Should I put my retirement savings into NVDA?"
 **Exercise 5.1.** Add a rule for requests to front-run client orders, with a test
 in `tests/test_tools.py`. Why is a rule better than a model for this case?
 
+**Untrusted documents.** Filing text reaches the agents as tool results, so text planted
+in a filing could try to steer them (prompt injection). `finagent/tools/filings.py`
+withholds sentences that address an AI reader before any agent sees them.
+
+**Exercise 5.2.** Plant an instruction in `SYNTHETIC_10K` (`tests/conftest.py`) and check
+that `search_10k` withholds it. Then write one the screen misses, and decide whether to
+widen the pattern. Before you trust a wider pattern, run it over the real 10-Ks the pilot
+used: how many ordinary sentences would it withhold?
+
 ---
 
 ## Module 6 — Same code, bigger iron (20 min)

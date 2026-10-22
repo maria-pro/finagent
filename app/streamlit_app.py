@@ -15,9 +15,9 @@ import streamlit as st
 
 from finagent import analytics as an
 from finagent.accel import array_backend
-from finagent.config import load_settings
+from finagent.config import load_settings, shared_ui, ui_api_key
 from finagent.data.prices import adjusted_close
-from finagent.runs import list_runs, load_run, save_run
+from finagent.runs import build_record, list_runs, load_run, save_run
 from finagent.tools import ToolContext, parse_tickers
 
 st.set_page_config(page_title="FinAgent", page_icon="📈", layout="wide")
@@ -78,28 +78,38 @@ def sidebar():
         format_func=lambda p: "Local CPU (Ollama / llama.cpp)" if p == "local" else "NVIDIA API catalog",
     )
     base = load_settings(profile)
+    shared = shared_ui()
     with st.sidebar.expander("Endpoint & models", expanded=False):
-        base_url = st.text_input("Base URL", base.base_url)
-        orchestrator = st.text_input("Orchestrator model (planner, writer)", base.orchestrator_model)
-        specialist = st.text_input("Specialist model (sub-agents)", base.specialist_model)
-        api_key = st.text_input("API key", base.api_key, type="password") if profile == "nim" else base.api_key
+        # In a shared deployment the endpoints are fixed by whoever runs the server.
+        base_url = st.text_input("Base URL", base.base_url, disabled=shared)
+        orchestrator = st.text_input("Orchestrator model (planner, writer)", base.orchestrator_model, disabled=shared)
+        specialist = st.text_input("Specialist model (sub-agents)", base.specialist_model, disabled=shared)
+        typed_key = ""
+        if profile == "nim" and not shared:
+            # Never pre-filled: a key held by the server must not be sent to the browser.
+            typed_key = st.text_input("API key", "", type="password", help="Leave empty to use the key set on the server.")
+            if base.api_key:
+                st.caption("A key is set on the server. It is used only with the endpoint it is configured for.")
         reasoning = st.toggle("Reasoning (thinking) mode", base.reasoning, help="Slower; off is recommended on CPU.")
         concurrency = st.slider("Parallel agents", 1, 4, base.max_concurrency, help="Use 1 on a CPU.")
     settings = base.with_overrides(
         base_url=base_url, orchestrator_model=orchestrator, specialist_model=specialist,
-        api_key=api_key, reasoning=reasoning, max_concurrency=concurrency,
+        api_key=ui_api_key(base, base_url, typed_key), reasoning=reasoning, max_concurrency=concurrency,
     )
 
     st.sidebar.header("Saved runs")
-    runs = list_runs()
+    # Shared deployments list only the shipped examples and this visitor's own runs.
+    labels = {f"{p.parent.name}/{p.stem}": p for p in list_runs(("examples",) if shared else ("reports", "examples"))}
+    labels.update({f"this session/{label}": label for label in st.session_state.get("my_runs", {})})
     choice = None
-    if runs:
-        labels = {f"{p.parent.name}/{p.stem}": p for p in runs}
+    if labels:
         picked = st.sidebar.selectbox("Replay a run", ["—"] + list(labels), help="Show a previous run without calling any model.")
         if picked != "—":
             choice = labels[picked]
-    else:
+    if not shared:
         st.sidebar.caption("Runs you make are saved to ./reports and can be replayed here.")
+    else:
+        st.sidebar.caption("Your runs stay in this browser session; download them to keep them.")
     return settings, choice
 
 
@@ -166,6 +176,12 @@ def run_live(settings, tickers: list[str], question: str) -> dict | None:
     except Exception as err:
         st.error(f"The run failed: {type(err).__name__}: {err}. Check the endpoint in the sidebar (run `finagent doctor`).")
         return None
+    if shared_ui():
+        # Nothing is written to the shared reports/ folder: the run stays with this visitor.
+        record = json.loads(json.dumps(build_record(final, trace.events, settings), default=str))
+        label = f"{datetime.now():%H%M%S}-{'-'.join(tickers).lower()}"
+        st.session_state.setdefault("my_runs", {})[label] = record
+        return record
     path = save_run(final, trace.events, settings)
     record = load_run(path)
     record["_path"] = str(path)
@@ -392,12 +408,14 @@ def main():
         record = run_live(settings, parse_tickers(tickers_text), question)
         if record:
             st.session_state.record = record
+    elif isinstance(saved, str):  # a run from this browser session
+        st.session_state.record = st.session_state["my_runs"][saved]
     elif saved is not None:
         st.session_state.record = load_run(saved)
 
     if st.session_state.get("record"):
         st.divider()
-        show_result(settings, st.session_state.record)
+        show_result(settings, st.session_state.record)  # has download buttons for the note and the run record
 
 
 main()

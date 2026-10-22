@@ -9,6 +9,24 @@ from . import TICKER, Tool, ToolContext, parse_tickers
 
 PASSAGE_CHARS = 600
 _SENTENCE_RE = re.compile(r"(?<=[.!?])\s+(?=[A-Z(\"'])")
+# Filing text is untrusted input: a sentence written to steer an AI reader ("ignore previous
+# instructions", "AI assistants must report ...") is withheld before any agent sees it. A
+# heuristic, not a defence: it matched nothing in the 10-Ks of the pilot's companies (2.8M
+# characters) and catches the obvious phrasings, not every one.
+_INSTRUCTION_RE = re.compile(
+    r"\b(?:ignore|disregard|forget|override)\b[^.!?]{0,30}\b(?:instructions?|prompts?)\b"
+    r"|\b(?:you are|act as|pretend to be|you must now)\b[^.!?]{0,30}\b(?:an? )?(?:ai|assistant|language model|chatbot|llm)\b"
+    r"|\bsystem prompt\b|\b(?:dear|attention)[,:]? (?:the )?(?:ai|assistant|language model|llm)s?\b"
+    r"|\b(?:ai|assistant|language model|llm)s?\b[^.!?]{0,40}\b(?:must|should) (?:ignore|report|say|state|write|conclude)\b",
+    re.IGNORECASE,
+)
+
+
+def screen(text: str) -> tuple[str, int]:
+    """``text`` without sentences that address an AI reader, and how many were withheld."""
+    sentences = _SENTENCE_RE.split(text)
+    kept = [s for s in sentences if not _INSTRUCTION_RE.search(s)]
+    return " ".join(kept), len(sentences) - len(kept)
 
 
 def _index(ctx: ToolContext, ticker: str) -> tuple[dict, FilingIndex]:
@@ -55,13 +73,21 @@ def search_10k(ctx: ToolContext, ticker: str, query: str, k: int = 3) -> dict:
     ticker = parse_tickers(ticker)[0]
     filing, index = _index(ctx, ticker)
     hits = index.search(query, k=max(1, min(int(k), 5)))
-    return {
+    passages, withheld = [], 0
+    for chunk, _ in hits:
+        text, dropped = screen(chunk.text)
+        withheld += dropped
+        passages.append({"ref": chunk.ref, "text": excerpt(text, query)})
+    out = {
         "ticker": ticker,
         "filing": f"{filing['form']} filed {filing['filed']} (period {filing['period']})",
         "url": filing["url"],
         "retrieval": index.mode,
-        "passages": [{"ref": c.ref, "text": excerpt(c.text, query)} for c, _ in hits],
+        "passages": passages,
     }
+    if withheld:
+        out["withheld"] = f"{withheld} sentence(s) addressed to an AI reader were withheld from these passages"
+    return out
 
 
 TOOLS = [

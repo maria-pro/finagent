@@ -107,6 +107,9 @@ class Settings:
     # (chat_template_kwargs: NIM, vLLM, llama.cpp), "effort" (reasoning_effort), "none".
     reasoning_style: str = "auto"
     ablate: frozenset[str] = frozenset()
+    # With a topic-control rail configured, refuse questions when it does not answer,
+    # instead of continuing on the deterministic rules alone (FINAGENT_TOPIC_RAIL_REQUIRED).
+    topic_rail_required: bool = False
 
     @property
     def is_local(self) -> bool:
@@ -145,7 +148,7 @@ def load_settings(profile: str | None = None) -> Settings:
     name = (profile or os.getenv("FINAGENT_PROFILE") or "local").strip().lower()
     if name not in PROFILES:
         raise ValueError(f"Unknown profile {name!r}; choose one of {sorted(PROFILES)}")
-    values = {"reasoning_style": "auto", **PROFILES[name]}
+    values = {"reasoning_style": "auto", "topic_rail_required": False, **PROFILES[name]}
     if name == "nim":
         values["api_key"] = os.getenv("NVIDIA_API_KEY", "")
     if name == "bedrock":
@@ -167,3 +170,19 @@ def load_settings(profile: str | None = None) -> Settings:
 
 
 SETTING_NAMES = [f.name for f in fields(Settings)]
+
+
+def shared_ui() -> bool:
+    """True when the web UI serves other people (FINAGENT_UI_SHARED=1): fixed endpoints, and
+    each visitor sees only their own runs. The UI has no login - put it behind one."""
+    return os.getenv("FINAGENT_UI_SHARED", "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def ui_api_key(base: Settings, base_url: str, typed_key: str = "") -> str:
+    """The API key a request from the web UI may use. A key held by the server goes only to
+    the endpoint the server is configured for: a visitor who points the UI somewhere else must
+    bring their own key, or the server's key would be sent to an address they control."""
+    if typed_key.strip():
+        return typed_key.strip()
+    same_endpoint = base_url.strip().rstrip("/") == base.base_url.strip().rstrip("/")
+    return base.api_key if same_endpoint else ""

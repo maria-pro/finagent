@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.1 — 2026-10-23
+
+Security, for anyone serving the web UI to other people.
+
+- The web UI listens on this computer only (`.streamlit/config.toml`); it has no login.
+- An API key held by the server is no longer pre-filled in the web UI, so it never reaches
+  the browser, and it is used only with the endpoint the server is configured for: a visitor
+  who changes the endpoint must bring their own key.
+- `FINAGENT_UI_SHARED=1` for shared deployments: fixed endpoints and models, and each
+  visitor sees only the shipped examples and their own runs, kept in their browser session
+  instead of the shared `reports/` folder.
+- `FINAGENT_TOPIC_RAIL_REQUIRED=1` makes the topic-control rail fail closed.
+- The filings tool withholds 10-K sentences that address an AI reader (prompt injection).
+  The screen matched nothing in the 10-Ks of the measured companies, so the 0.3.0
+  measurements and example runs stand for this version.
+- README: sharing the web UI, and limitations on guardrails and untrusted documents;
+  SECURITY.md; lab Exercise 5.2 on planted instructions.
+- 143 offline tests.
+
 ## 0.3.0 — 2026-10-23
 
 The tools, checked against what they measure; exercises on what the checks miss; and the

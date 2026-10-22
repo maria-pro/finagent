@@ -131,3 +131,20 @@ def test_profiles_and_environment_overrides(monkeypatch):
         config.load_settings("nope")
     with pytest.raises(ValueError):
         config.parse_ablations("facts,typo")
+
+
+def test_server_key_goes_only_to_its_own_endpoint(monkeypatch):
+    monkeypatch.setenv("NVIDIA_API_KEY", "nvapi-server-key")
+    base = config.load_settings("nim")
+    assert config.ui_api_key(base, base.base_url) == "nvapi-server-key"
+    assert config.ui_api_key(base, base.base_url + "/") == "nvapi-server-key"
+    # a visitor who points the UI at another endpoint gets no server key, only their own
+    assert config.ui_api_key(base, "https://attacker.example/v1") == ""
+    assert config.ui_api_key(base, "https://attacker.example/v1", "their-own-key") == "their-own-key"
+
+
+def test_shared_ui_and_required_rail_come_from_the_environment(monkeypatch):
+    assert not config.shared_ui() and not config.load_settings("local").topic_rail_required
+    monkeypatch.setenv("FINAGENT_UI_SHARED", "1")
+    monkeypatch.setenv("FINAGENT_TOPIC_RAIL_REQUIRED", "true")
+    assert config.shared_ui() and config.load_settings("nim").topic_rail_required
