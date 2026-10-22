@@ -298,6 +298,40 @@ def split_claims(text: str) -> list[ClaimCheck]:
     return claims
 
 
+_NEGATION = re.compile(
+    r"\b(not|no|never|cannot|without|unable|inability|neither|nor|fails?\s+to|failed\s+to|failure\s+to)\b|n't\b", re.IGNORECASE
+)
+# Legal boilerplate that contains a negation word but negates nothing.
+_NOT_NEGATION = re.compile(
+    r"\b(?:but\s+)?not\s+limited\s+to\b|\bwithout\s+limitation\b|\bwhether\s+or\s+not\b|\bnot\s+only\b|\bif\s+not\b",
+    re.IGNORECASE,
+)
+
+
+def _negations(text: str) -> list[tuple[str, set[str]]]:
+    """Each negation with the word it governs: the first content word after it ("not exposed",
+    "may not be effective", "unable to reduce"). A negation elsewhere in a long sentence
+    governs some other word, and does not count against this claim."""
+    cleaned = _NOT_NEGATION.sub(" ", text)
+    out = []
+    for m in _NEGATION.finditer(cleaned):
+        following = _WORD_RE.findall(cleaned[m.end() : m.end() + 60].lower())[:4]
+        head = next((w for w in following if _content_words(w)), None)
+        if head:
+            out.append((" ".join([m.group().lower(), *following[: following.index(head) + 1]]), _content_words(head)))
+    return out
+
+
+def _negated_words(text: str) -> set[str]:
+    return set().union(*(governed for _, governed in _negations(text)))
+
+
+def _closest_sentence(words: set[str], passage: str) -> str:
+    """The sentence of a passage that shares most content words with a claim."""
+    sentences = [s for s in re.split(r"(?<=[.!?])\s+", passage) if s.strip()] or [passage]
+    return max(sentences, key=lambda s: len(words & _content_words(s)))
+
+
 def source_strings(evidence: dict) -> list[str]:
     result = evidence.get("result", {})
     if result.get("facts"):
@@ -309,7 +343,12 @@ def source_strings(evidence: dict) -> list[str]:
         return [f"{result['expression']} = {result['result']}"]
     # A raw result without labelled facts: one string of all its fields, nested ones
     # included, so a number keeps its context (period, ticker) for the label checks.
-    return ["; ".join(f"{k.replace('_', ' ')}: {v}" for k, v in _flatten(result) if k != "error")]
+    return ["; ".join(f"{k.replace('_', ' ')}: {v}{_unit_suffix(k)}" for k, v in _flatten(result) if k != "error")]
+
+
+def _unit_suffix(key: str) -> str:
+    """Keep a field's unit when flattening it to text, so unit-consistent matching still works."""
+    return "%" if key.endswith("_pct") else "bn" if key.endswith("_bn") else ""
 
 
 def _flatten(value, prefix: str = ""):
@@ -364,6 +403,18 @@ def check_claim(
         # numeric facts without quoting any number is interpretation.
         if claim.kind == "qualitative" and claim.support < 0.4:
             claim.issues.append(f"not supported by the cited passage (word overlap {claim.support:.0%})")
+        elif claim.kind == "qualitative":
+            # Word overlap cannot see "not": "is not exposed to credit risk" shares almost every
+            # word with "is exposed to credit risk". Compare polarity with the closest sentence.
+            sentence = _closest_sentence(words, best[1])
+            shared = words & _content_words(sentence)
+            in_claim, in_source = _negated_words(claim.text) & shared, _negated_words(sentence) & shared
+            if in_claim ^ in_source:
+                who, text, flipped = (
+                    ("the claim", claim.text, in_claim - in_source) if in_claim - in_source else ("the passage", sentence, in_source - in_claim)
+                )
+                phrase = next(p for p, governed in _negations(text) if governed & flipped)
+                claim.issues.append(f'polarity differs from the cited passage: {who} says "{phrase}" ("{sentence[:100]}")')
         return
 
     claim_periods, claim_labels = _periods(claim.text), _labels(claim.text)
@@ -377,7 +428,7 @@ def check_claim(
         hits = []
         for eid, source in pool:
             for candidate in extract_numbers(source):
-                if numbers_match(number, candidate.value):
+                if numbers_match(number, candidate.value, candidate.unit):
                     hits.append((eid, source, candidate))
         if not hits:
             claim.issues.append(f"{number.text} is not in the cited source{'s' if len(claim.cited) > 1 else ''}")

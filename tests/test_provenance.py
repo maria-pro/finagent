@@ -26,8 +26,23 @@ def test_index_names_are_not_figures():
 
 
 def test_unit_conversions_are_traced():
-    report = provenance.check("Revenue of $215.94B, market cap of $5.35 trillion, 95% VaR of 13.49%.", EVIDENCE)
+    report = provenance.check("Revenue of $215.94B, market cap of $5.35 trillion, 95% VaR of 13.49% [R1].", EVIDENCE)
     assert report.verified == report.checked == 4
+
+
+def test_units_must_agree():
+    # a P/E of 27.73 is not a 28% margin, and a 22.82% return is not a multiple of 22.82
+    assert provenance.check("A margin of 28% [F1].", EVIDENCE).unverified
+    assert provenance.check("A P/E of 22.82x [M1].", EVIDENCE).unverified
+
+
+def test_rounded_numbers_count_only_from_the_evidence_their_sentence_cites():
+    assert provenance.check("The stock returned about 23% [M1].", EVIDENCE).score == 1.0
+    assert provenance.check("The stock returned about 23%.", EVIDENCE).score == 0.0
+    assert provenance.check("The stock returned about 23% [F1].", EVIDENCE).score == 0.0
+    # two decimals still trace anywhere in the ledger, reported as mis-cited
+    claim = provenance.check("The stock returned 22.82% [F1].", EVIDENCE).claims[0]
+    assert claim.verified and claim.miscited
 
 
 def test_untraceable_number_is_flagged():

@@ -134,54 +134,95 @@ def extract_numbers(text: str) -> list[NumberClaim]:
     return claims
 
 
-def _walk(value: Any) -> Iterable[float]:
+def _key_unit(key: str) -> str:
+    """The unit a tool result's field is in, from its name (``total_return_pct``, ``market_cap_bn``)."""
+    key = key.lower()
+    if key.endswith("_pct"):
+        return "%"
+    if key.endswith("_bn"):
+        return "b"
+    return ""
+
+
+def _walk(value: Any, key: str = "") -> Iterable[tuple[float, str]]:
     if isinstance(value, bool):
         return
     if isinstance(value, (int, float)):
         if not (isinstance(value, float) and (math.isnan(value) or math.isinf(value))):
-            yield float(value)
+            yield float(value), _key_unit(key)
     elif isinstance(value, str):
         for claim in extract_numbers(value):
-            yield claim.value
+            yield claim.value, claim.unit
     elif isinstance(value, dict):
-        for v in value.values():
-            yield from _walk(v)
+        for k, v in value.items():
+            yield from _walk(v, str(k))
     elif isinstance(value, (list, tuple)):
         for v in value:
-            yield from _walk(v)
+            yield from _walk(v, key)
 
 
-def evidence_numbers(evidence: list[dict]) -> list[tuple[float, str]]:
-    """(absolute value, evidence id) for every number in every tool result."""
+def evidence_numbers(evidence: list[dict]) -> list[tuple[float, str, str]]:
+    """(absolute value, unit, evidence id) for every number in every tool result."""
     out = []
     for ev in evidence:
-        for v in _walk(ev.get("result", {})):
-            out.append((abs(v), ev["id"]))
+        for v, unit in _walk(ev.get("result", {})):
+            out.append((abs(v), unit, ev["id"]))
     return out
 
 
-def _matches(claim: NumberClaim, value: float) -> bool:
-    # Allow for display rounding only (e.g. 5349.48bn shown as $5.35 trillion), not for "close enough".
+# How a value stored in one unit may be written in another: {claim unit: {evidence unit: scales}}.
+# A percentage traces to a percentage or to a fraction (0.2282 -> 22.82%), never to a ratio such
+# as a P/E of 23.1; amounts convert between bn, million and trillion and raw dollars.
+_COMPATIBLE = {
+    "%": {"%": (1.0,), "": (100.0,)},
+    "b": {"b": (1.0,), "": (1e-9,)},
+    "m": {"m": (1.0,), "b": (1e3,), "": (1e-6,)},
+    "t": {"t": (1.0,), "b": (1e-3,), "": (1e-12,)},
+    "k": {"k": (1.0,), "": (1e-3,)},
+    "x": {"x": (1.0,), "": (1.0,)},
+    "": {"": (1.0,), "x": (1.0,)},
+}
+
+
+def _matches(claim: NumberClaim, value: float, unit: str | None = None) -> bool:
+    """Display rounding only (5349.48bn shown as $5.35 trillion), not "close enough". With ``unit``,
+    only unit-consistent conversions count; without it, any scale does (the unit-agnostic match)."""
     tolerance = 0.5 * 10 ** (-claim.decimals) * 1.001 + 0.0005 * claim.value
-    for scale in _SCALES.get(claim.unit, _SCALES[""]):
-        if abs(claim.value - value * scale) <= tolerance:
-            return True
-    return False
+    scales = _SCALES.get(claim.unit, _SCALES[""]) if unit is None else _COMPATIBLE.get(claim.unit, {}).get(unit, ())
+    return any(abs(claim.value - value * scale) <= tolerance for scale in scales)
+
+
+_SENTENCE_END = re.compile(r"(?<=[.!?])\s+(?=[A-Z(\"'*\-•])|\n")
+_CITATIONS = re.compile(r"\[((?:[A-Z]\d+)(?:\s*[,;]\s*[A-Z]\d+)*)\]")
+
+
+def _sentence_citations(text: str, claim: NumberClaim) -> list[str]:
+    """Evidence ids cited anywhere in the sentence or bullet that holds ``claim``."""
+    starts = [m.end() for m in _SENTENCE_END.finditer(text, 0, claim.start)]
+    end = _SENTENCE_END.search(text, claim.end)
+    sentence = text[starts[-1] if starts else 0 : end.start() if end else len(text)]
+    return re.findall(r"[A-Z]\d+", " ".join(_CITATIONS.findall(sentence)))
 
 
 def check(text: str, evidence: list[dict]) -> ProvenanceReport:
     """Trace each number to the evidence it cites, falling back to the whole ledger.
 
-    A number found only in evidence it does not cite still counts as grounded,
-    but is reported as mis-cited.
+    Units must agree. A number found only in evidence it does not cite still counts as
+    grounded, but is reported as mis-cited - except a rounded number (fewer than two
+    decimals): it matches so many values by chance that it counts only if the evidence its
+    own sentence cites contains it.
     """
     pool = evidence_numbers(evidence)
     claims = extract_numbers(text)
     for claim in claims:
+        if claim.decimals < 2:
+            nearby = set(claim.cited or _sentence_citations(text, claim))
+            claim.source = next((ev for v, u, ev in pool if ev in nearby and _matches(claim, v, u)), None)
+            continue
         if claim.cited:
-            claim.source = next((ev_id for value, ev_id in pool if ev_id in claim.cited and _matches(claim, value)), None)
+            claim.source = next((ev for v, u, ev in pool if ev in claim.cited and _matches(claim, v, u)), None)
         if claim.source is None:
-            claim.source = next((ev_id for value, ev_id in pool if _matches(claim, value)), None)
+            claim.source = next((ev for v, u, ev in pool if _matches(claim, v, u)), None)
             claim.miscited = claim.source is not None and bool(claim.cited)
     return ProvenanceReport(claims)
 

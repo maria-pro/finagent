@@ -153,3 +153,25 @@ def test_raw_results_without_facts_keep_their_context():
                                                     "fiscal_years": [{"fiscal_year_end": "2024-01-28", "revenue_growth_pct": 125.85}]}}]
     assert attribution.check("- NVDA 1-year total return: 22.82% [M1]", evidence, ["NVDA"]).score == 1.0
     assert attribution.check("- Revenue growth: 125.85% [M1]", evidence, ["NVDA"]).flagged == []  # nested values are evidence too
+
+
+def test_negated_10k_claims_are_caught():
+    passage = ("The use of such hedging activities may not be effective to offset the adverse effects of currency moves. "
+               "The Company is exposed to credit risk on its investment portfolio, including but not limited to bonds.")
+    evidence = [{"id": "D2", "agent": "D", "result": {"passages": [{"ref": "risk_factors#9", "text": passage}]}}]
+
+    def flags(claim):
+        return attribution.check(f"- {claim} [D2]", evidence, ["AAPL"]).flagged
+
+    assert 'the claim says "not exposed"' in flags("Apple is not exposed to credit risk on its investment portfolio")[0].issues[0]
+    assert 'the passage says "not be effective"' in flags("Apple's hedging activities are fully effective to offset currency moves")[0].issues[0]
+    assert flags("Hedging activities may not be effective to offset the adverse effects of currency moves") == []
+    assert flags("The Company is exposed to credit risk on its investment portfolio") == []  # "not limited to" negates nothing
+    assert flags("The Company cannot hedge all of the adverse effects of currency moves") == []  # negates a word the passage lacks
+
+
+def test_negations_with_different_words_still_agree():
+    passage = "If the Company is unable to reduce positions effectively during a market disruption, it could incur losses."
+    evidence = [{"id": "D3", "agent": "D", "result": {"passages": [{"ref": "risk_factors#4", "text": passage}]}}]
+    claim = "- The 10-K flags the inability to reduce positions effectively during a market disruption [D3]"
+    assert attribution.check(claim, evidence, ["JPM"]).flagged == []  # "inability to reduce" = "unable to reduce"
