@@ -1,0 +1,988 @@
+{
+  "tickers": [
+    "NVDA"
+  ],
+  "question": "How risky is NVDA for a long-term investor, and what does its 10-K flag?",
+  "guard": {
+    "allowed": true,
+    "personal_advice": false,
+    "rail": "rules"
+  },
+  "plan": [
+    {
+      "agent": "risk",
+      "focus": "Value at Risk and expected shortfall to assess downside volatility"
+    },
+    {
+      "agent": "fundamentals",
+      "focus": "sustainable revenue growth and cash flow resilience over time"
+    },
+    {
+      "agent": "filings",
+      "focus": "any explicit risk disclosures or contingent liabilities in the 10-K"
+    }
+  ],
+  "plan_source": "model",
+  "findings": {
+    "risk": {
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall to assess downside volatility",
+      "text": "- NVDA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R1]  \n- NVDA 95% 10-day expected shortfall, historical: 17.91% [R1]  \n- NVDA 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.27% [R1]  \n- NVDA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n- NVDA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R3]  \n\nNVDA exhibits significant downside risk during market stress events.",
+      "draft": "- NVDA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R1]  \n- NVDA 95% 10-day expected shortfall, historical: 17.91% [R1]  \n- NVDA 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.27% [R1]  \n- NVDA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n- NVDA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R3]  \n\nNVDA exhibits significant downside risk during market stress events.",
+      "seconds": 81.1,
+      "provenance": {
+        "checked": 10,
+        "verified": 10,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "fundamentals": {
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "sustainable revenue growth and cash flow resilience over time",
+      "text": "- NVDA FY ending 2026-01-25: revenue $215.94bn, up 65.47% year on year [F1]  \n- NVDA FY ending 2026-01-25: free cash flow $96.68bn [F1]  \n- NVDA revenue CAGR from FY 2022 to FY 2026: 68.6% [F1]  \n- NVDA market cap: $5216.93bn at $216.47 per share [F2]  \n- NVDA free-cash-flow yield: 1.85% [F2]  \n\nThis suggests strong, sustainable growth and resilient cash generation.",
+      "draft": "- NVDA FY ending 2026-01-25: revenue $215.94bn, up 65.47% year on year [F1]  \n- NVDA FY ending 2026-01-25: free cash flow $96.68bn [F1]  \n- NVDA revenue CAGR from FY 2022 to FY 2026: 68.6% [F1]  \n- NVDA market cap: $5216.93bn at $216.47 per share [F2]  \n- NVDA free-cash-flow yield: 1.85% [F2]  \n\nThis suggests strong, sustainable growth and resilient cash generation.",
+      "seconds": 53.8,
+      "provenance": {
+        "checked": 7,
+        "verified": 7,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "filings": {
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "any explicit risk disclosures or contingent liabilities in the 10-K",
+      "text": "- Our operating results may be adversely impacted by additional tax liabilities, higher than expected tax rates, changes in tax laws, and other tax-related factors. [D1]  \n- Our business is exposed to the burden and risks associated with litigation, investigations, and regulatory proceedings. [D1]  \n- Delaware law, provisions in our governing documents and our agreement with Microsoft could delay or prevent a change in control. [D1]  \n- While difficult to isolate and quantify, these macroeconomic factors impact our supply chain and manufacturing costs, employee wages, costs for capital equipment, the value of our investments, revenue and competitive position. [D1]",
+      "draft": "- Our operating results may be adversely impacted by additional tax liabilities, higher than expected tax rates, changes in tax laws, and other tax-related factors. [D1]  \n- Our business is exposed to the burden and risks associated with litigation, investigations, and regulatory proceedings. [D1]  \n- Delaware law, provisions in our governing documents and our agreement with Microsoft could delay or prevent a change in control. [D1]  \n- While difficult to isolate and quantify, these macroeconomic factors impact our supply chain and manufacturing costs, employee wages, costs for capital equipment, the value of our investments, revenue and competitive position. [D1]",
+      "seconds": 64.9,
+      "provenance": {
+        "checked": 0,
+        "verified": 0,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 4,
+        "supported": 4,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    }
+  },
+  "evidence": [
+    {
+      "id": "R1",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "NVDA"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "result": {
+        "portfolio": {
+          "NVDA": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 14.27,
+        "historical_cvar_pct": 17.91,
+        "fhs_var_pct": 7.27,
+        "fhs_cvar_pct": 9.82,
+        "fhs_prob_loss_over_10pct": 1.66,
+        "current_vol_pct": 28.9,
+        "average_vol_pct": 51.96,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "price_basis": "returns from dividend- and split-adjusted closes",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 24.8,
+        "facts": [
+          "NVDA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value",
+          "NVDA 95% 10-day expected shortfall, historical: 17.91%",
+          "NVDA 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.27%",
+          "NVDA 95% 10-day expected shortfall, filtered historical simulation: 9.82%",
+          "NVDA current volatility 28.9% vs 5-year average 51.96% (annualized)",
+          "NVDA probability of losing more than 10% over 10 days (filtered historical simulation): 1.66%"
+        ]
+      },
+      "seconds": 0.1,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T09:45:26Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R2",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "NVDA"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "result": {
+        "portfolio": {
+          "NVDA": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 14.27,
+        "historical_cvar_pct": 17.91,
+        "fhs_var_pct": 7.27,
+        "fhs_cvar_pct": 9.82,
+        "fhs_prob_loss_over_10pct": 1.66,
+        "current_vol_pct": 28.9,
+        "average_vol_pct": 51.96,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "price_basis": "returns from dividend- and split-adjusted closes",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 26.0,
+        "facts": [
+          "NVDA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value",
+          "NVDA 95% 10-day expected shortfall, historical: 17.91%",
+          "NVDA 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.27%",
+          "NVDA 95% 10-day expected shortfall, filtered historical simulation: 9.82%",
+          "NVDA current volatility 28.9% vs 5-year average 51.96% (annualized)",
+          "NVDA probability of losing more than 10% over 10 days (filtered historical simulation): 1.66%"
+        ]
+      },
+      "seconds": 0.04,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T09:45:26Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R3",
+      "agent": "risk",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "NVDA"
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "NVDA": 1.0
+        },
+        "episodes": [
+          {
+            "episode": "2018 Q4 sell-off",
+            "portfolio_return_pct": -52.23,
+            "spy_return_pct": -19.35
+          },
+          {
+            "episode": "2020 COVID crash",
+            "portfolio_return_pct": -32.37,
+            "spy_return_pct": -33.72
+          },
+          {
+            "episode": "2022 rate-hike bear market",
+            "portfolio_return_pct": -61.79,
+            "spy_return_pct": -24.5
+          }
+        ],
+        "beta_vs_spy_3y": 2.05,
+        "beta_implied_move_if_spy_falls_20pct": -40.94,
+        "method": "daily returns compounded over each window",
+        "price_basis": "returns from dividend- and split-adjusted closes",
+        "facts": [
+          "NVDA in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -52.23% vs SPY -19.35%",
+          "NVDA in the 2020 COVID crash (2020-02-19 to 2020-03-23): -32.37% vs SPY -33.72%",
+          "NVDA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5%",
+          "NVDA 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.94%"
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T09:43:56Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T09:42:42Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F1",
+      "agent": "fundamentals",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "NVDA",
+        "years": 5
+      },
+      "result": {
+        "ticker": "NVDA",
+        "company": "NVIDIA CORP",
+        "industry": "SIC 3674 Semiconductors & Related Devices",
+        "source": "SEC XBRL company facts (10-K)",
+        "fiscal_years": [
+          {
+            "fiscal_year_end": "2022-01-30",
+            "revenue_bn": 26.91,
+            "revenue_growth_pct": 61.4,
+            "gross_margin_pct": 64.93,
+            "operating_margin_pct": 37.31,
+            "net_income_bn": 9.75,
+            "net_margin_pct": 36.23,
+            "eps_diluted": 3.85,
+            "rnd_pct_of_revenue": 19.57,
+            "free_cash_flow_bn": 8.13
+          },
+          {
+            "fiscal_year_end": "2023-01-29",
+            "revenue_bn": 26.97,
+            "revenue_growth_pct": 0.22,
+            "gross_margin_pct": 56.93,
+            "operating_margin_pct": 15.66,
+            "net_income_bn": 4.37,
+            "net_margin_pct": 16.19,
+            "eps_diluted": 0.17,
+            "rnd_pct_of_revenue": 27.21,
+            "free_cash_flow_bn": 3.81
+          },
+          {
+            "fiscal_year_end": "2024-01-28",
+            "revenue_bn": 60.92,
+            "revenue_growth_pct": 125.85,
+            "gross_margin_pct": 72.72,
+            "operating_margin_pct": 54.12,
+            "net_income_bn": 29.76,
+            "net_margin_pct": 48.85,
+            "eps_diluted": 1.19,
+            "rnd_pct_of_revenue": 14.24,
+            "free_cash_flow_bn": 27.02
+          },
+          {
+            "fiscal_year_end": "2025-01-26",
+            "revenue_bn": 130.5,
+            "revenue_growth_pct": 114.2,
+            "gross_margin_pct": 74.99,
+            "operating_margin_pct": 62.42,
+            "net_income_bn": 72.88,
+            "net_margin_pct": 55.85,
+            "eps_diluted": 2.94,
+            "rnd_pct_of_revenue": 9.9,
+            "free_cash_flow_bn": 60.85
+          },
+          {
+            "fiscal_year_end": "2026-01-25",
+            "revenue_bn": 215.94,
+            "revenue_growth_pct": 65.47,
+            "gross_margin_pct": 71.07,
+            "operating_margin_pct": 60.38,
+            "net_income_bn": 120.07,
+            "net_margin_pct": 55.6,
+            "eps_diluted": 4.9,
+            "rnd_pct_of_revenue": 8.57,
+            "free_cash_flow_bn": 96.68
+          }
+        ],
+        "revenue_cagr_pct": 68.6,
+        "net_income_includes_nci": false,
+        "xbrl_sources": {
+          "revenue": "Revenues (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "gross_profit": "GrossProfit (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "operating_income": "OperatingIncomeLoss (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "net_income": "NetIncomeLoss (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "eps_diluted": "EarningsPerShareDiluted (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "rnd": "ResearchAndDevelopmentExpense (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "operating_cash_flow": "NetCashProvidedByUsedInOperatingActivities (10-K 0001045810-26-000021, filed 2026-02-25)",
+          "capex": "PaymentsToAcquireProductiveAssets (10-K 0001045810-26-000021, filed 2026-02-25)"
+        },
+        "filing_urls": [
+          "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/"
+        ],
+        "facts": [
+          "NVDA FY ending 2026-01-25: revenue $215.94bn, up 65.47% year on year",
+          "NVDA FY ending 2026-01-25: gross margin 71.07%, operating margin 60.38%, net margin 55.6%",
+          "NVDA FY ending 2026-01-25: net income $120.07bn, diluted EPS $4.9, free cash flow $96.68bn",
+          "NVDA FY ending 2025-01-26: revenue $130.5bn (growth 114.2%), operating margin 62.42%",
+          "NVDA FY ending 2024-01-28: revenue $60.92bn (growth 125.85%), operating margin 54.12%",
+          "NVDA FY ending 2023-01-29: revenue $26.97bn (growth 0.22%), operating margin 15.66%",
+          "NVDA FY ending 2022-01-30: revenue $26.91bn (growth 61.4%), operating margin 37.31%",
+          "NVDA revenue CAGR from FY 2022 to FY 2026: 68.6%"
+        ]
+      },
+      "seconds": 0.07,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+          "fetched_at": "2026-10-21T21:16:00Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001045810.json",
+          "fetched_at": "2026-10-21T21:16:04Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F2",
+      "agent": "fundamentals",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "NVDA"
+      },
+      "result": {
+        "ticker": "NVDA",
+        "company": "NVIDIA CORP",
+        "industry": "SIC 3674 Semiconductors & Related Devices",
+        "price": 216.47,
+        "price_date": "2026-10-20",
+        "shares_outstanding_bn": 24.1,
+        "market_cap_bn": 5216.93,
+        "ttm_revenue_bn": 302.97,
+        "ttm_net_income_bn": 192.88,
+        "ttm_period_end": "2026-07-26",
+        "pe_ratio_ttm": 27.05,
+        "net_income_includes_nci": false,
+        "price_to_sales_ttm": 17.22,
+        "balance_sheet_date": "2026-07-26",
+        "cash_and_securities_bn": 22.44,
+        "total_debt_bn": 33.37,
+        "enterprise_value_bn": 5227.85,
+        "ev_to_sales_ttm": 17.26,
+        "free_cash_flow_last_fy_bn": 96.68,
+        "fcf_yield_pct": 1.85,
+        "method": "market cap = closing price x EntityCommonStockSharesOutstanding shares; TTM = FY to 2026-01-25 + YTD to 2026-07-26 - prior-year YTD; debt = LongTermDebtNoncurrent + DebtCurrent as of 2026-07-26; leases excluded",
+        "xbrl_sources": {
+          "revenue_ttm": "Revenues ['0001045810-26-000021', '0001045810-26-000075']",
+          "net_income_ttm": "NetIncomeLoss ['0001045810-26-000021', '0001045810-26-000075']",
+          "balance_sheet": [
+            "CashAndCashEquivalentsAtCarryingValue (10-Q 0001045810-26-000075, filed 2026-08-26)",
+            "LongTermDebtNoncurrent (10-Q 0001045810-26-000075, filed 2026-08-26)",
+            "DebtCurrent (10-Q 0001045810-26-000075, filed 2026-08-26)"
+          ]
+        },
+        "facts": [
+          "NVDA market cap: $5216.93bn at $216.47 per share (2026-10-20 close)",
+          "NVDA P/E (trailing 12 months): 27.05",
+          "NVDA price-to-sales (trailing 12 months): 17.22; EV-to-sales: 17.26",
+          "NVDA trailing-12-month revenue $302.97bn and net income $192.88bn (to 2026-07-26)",
+          "NVDA free-cash-flow yield: 1.85% (last fiscal year FCF $96.68bn)",
+          "NVDA cash and current securities $22.44bn vs total debt $33.37bn (balance sheet 2026-07-26); enterprise value $5227.85bn"
+        ]
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+          "fetched_at": "2026-10-21T21:16:00Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001045810.json",
+          "fetched_at": "2026-10-21T21:16:04Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=1y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T09:42:41Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D1",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "NVDA",
+        "query": "risk factors"
+      },
+      "result": {
+        "ticker": "NVDA",
+        "filing": "10-K filed 2026-02-25 (period 2026-01-25)",
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "risk_factors#0",
+            "text": "Item 1A. Risk Factors The following risk factors should be considered in addition to the other information in this Annual Report on Form 10-K. ..."
+          },
+          {
+            "ref": "risk_factors#4",
+            "text": "\u2022 Our operating results may be adversely impacted by additional tax liabilities, higher than expected tax rates, changes in tax laws, and other tax-related factors. \u2022 Our business is exposed to the burden and risks associated with litigation, investigations, and regulatory proceedings. \u2022 Delaware law, provisions in our governing documents and our agreement with Microsoft could delay or prevent a change in control. Risk Factors Risks Related to Our Industry and Markets Failure to meet the evolving needs of our industry and markets may adversely impact our financial results. ..."
+          },
+          {
+            "ref": "mda#5",
+            "text": "Macroeconomic factors, including\u202ftariffs, inflation, interest rate changes, capital market volatility, global supply chain constraints, and global economic and geopolitical developments, have direct and indirect impacts on our results of operations, particularly demand for our products. While difficult to isolate and quantify, these macroeconomic factors impact our supply chain and manufacturing costs, employee wages, costs for capital equipment, the value of our investments, revenue and competitive position. ..."
+          }
+        ]
+      },
+      "seconds": 0.26,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001045810.json",
+          "fetched_at": "2026-10-21T21:16:04Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+          "fetched_at": "2026-10-21T21:16:05Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    }
+  ],
+  "llm_calls": [
+    {
+      "agent": "planner",
+      "role": "planner",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 261,
+      "completion_tokens": 80,
+      "latency_s": 4.94
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 673,
+      "completion_tokens": 112,
+      "latency_s": 8.68
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1306,
+      "completion_tokens": 202,
+      "latency_s": 16.5
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1130,
+      "completion_tokens": 220,
+      "latency_s": 16.17
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 685,
+      "completion_tokens": 65,
+      "latency_s": 7.25
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1446,
+      "completion_tokens": 180,
+      "latency_s": 16.88
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 457,
+      "completion_tokens": 41,
+      "latency_s": 4.44
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 985,
+      "completion_tokens": 136,
+      "latency_s": 11.15
+    },
+    {
+      "agent": "writer",
+      "role": "writer",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 827,
+      "completion_tokens": 371,
+      "latency_s": 19.28
+    }
+  ],
+  "narrative": "## Answer  \nNVDA carries significant downside risk during market stress events, with a 95% 10-day Value at Risk of 14.27% [R1] and an expected shortfall of 17.91% [R1], indicating high volatility and potential losses. The company\u2019s 2022 rate-hike bear market saw a -61.79% decline versus SPY\u2019s -24.5% [R3], highlighting its vulnerability in downturns.  \n\n## Strengths  \n- NVDA revenue CAGR from FY 2022 to FY 2026: 68.6% [F1]  \n- NVDA free cash flow: $96.68bn [F1]  \n- NVDA market cap: $5216.93bn at $216.47 per share [F2]  \n\n## Risks  \n- Our operating results may be adversely impacted by additional tax liabilities, higher than expected tax rates, changes in tax laws, and other tax-related factors. [D1]  \n- Our business is exposed to the burden and risks associated with litigation, investigations, and regulatory proceedings. [D1]  \n- Delaware law, provisions in our governing documents and our agreement with Microsoft could delay or prevent a change in control. [D1]  \n\n## What to watch  \n- Our operating results may be adversely impacted by additional tax liabilities, higher than expected tax rates, changes in tax laws, and other tax-related factors. [D1]  \n- Our business is exposed to the burden and risks associated with litigation, investigations, and regulatory proceedings. [D1]",
+  "narrative_draft": "## Answer  \nNVDA carries significant downside risk during market stress events, with a 95% 10-day Value at Risk of 14.27% [R1] and an expected shortfall of 17.91% [R1], indicating high volatility and potential losses. The company\u2019s 2022 rate-hike bear market saw a -61.79% decline versus SPY\u2019s -24.5% [R3], highlighting its vulnerability in downturns.  \n\n## Strengths  \n- NVDA revenue CAGR from FY 2022 to FY 2026: 68.6% [F1]  \n- NVDA free cash flow: $96.68bn [F1]  \n- NVDA market cap: $5216.93bn at $216.47 per share [F2]  \n\n## Risks  \n- Our operating results may be adversely impacted by additional tax liabilities, higher than expected tax rates, changes in tax laws, and other tax-related factors. [D1]  \n- Our business is exposed to the burden and risks associated with litigation, investigations, and regulatory proceedings. [D1]  \n- Delaware law, provisions in our governing documents and our agreement with Microsoft could delay or prevent a change in control. [D1]  \n\n## What to watch  \n- Our operating results may be adversely impacted by additional tax liabilities, higher than expected tax rates, changes in tax laws, and other tax-related factors. [D1]  \n- Our business is exposed to the burden and risks associated with litigation, investigations, and regulatory proceedings. [D1]",
+  "writer_check": {
+    "provenance": {
+      "checked": 9,
+      "verified": 9,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": []
+    },
+    "attribution": {
+      "claims": 10,
+      "supported": 10,
+      "score": 1.0,
+      "issues": []
+    },
+    "problems": []
+  },
+  "revisions": [],
+  "report": "# Research note: NVDA\n**Question:** How risky is NVDA for a long-term investor, and what does its 10-K flag?\n\n*Generated 2026-10-22 20:48 by FinAgent \u00b7 3 specialist agents \u00b7 models `nemotron-3-nano:4b-cpu` / `nemotron-3-nano:4b-cpu`*\n\n> This note was generated by AI agents for educational purposes. It is general information, not personal financial advice or a recommendation to buy or sell any security. Figures come from public data (SEC EDGAR, US Treasury, Yahoo Finance) and may contain errors; verify before relying on them.\n\n## Answer  \nNVDA carries significant downside risk during market stress events, with a 95% 10-day Value at Risk of 14.27% [R1] and an expected shortfall of 17.91% [R1], indicating high volatility and potential losses. The company\u2019s 2022 rate-hike bear market saw a -61.79% decline versus SPY\u2019s -24.5% [R3], highlighting its vulnerability in downturns.  \n\n## Strengths  \n- NVDA revenue CAGR from FY 2022 to FY 2026: 68.6% [F1]  \n- NVDA free cash flow: $96.68bn [F1]  \n- NVDA market cap: $5216.93bn at $216.47 per share [F2]  \n\n## Risks  \n- Our operating results may be adversely impacted by additional tax liabilities, higher than expected tax rates, changes in tax laws, and other tax-related factors. [D1]  \n- Our business is exposed to the burden and risks associated with litigation, investigations, and regulatory proceedings. [D1]  \n- Delaware law, provisions in our governing documents and our agreement with Microsoft could delay or prevent a change in control. [D1]  \n\n## What to watch  \n- Our operating results may be adversely impacted by additional tax liabilities, higher than expected tax rates, changes in tax laws, and other tax-related factors. [D1]  \n- Our business is exposed to the burden and risks associated with litigation, investigations, and regulatory proceedings. [D1]\n\n## Specialist findings\n### Risk Analyst\n*Focus: Value at Risk and expected shortfall to assess downside volatility*\n\n- NVDA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R1]  \n- NVDA 95% 10-day expected shortfall, historical: 17.91% [R1]  \n- NVDA 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.27% [R1]  \n- NVDA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n- NVDA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R3]  \n\nNVDA exhibits significant downside risk during market stress events.\n\n### Fundamentals Analyst\n*Focus: sustainable revenue growth and cash flow resilience over time*\n\n- NVDA FY ending 2026-01-25: revenue $215.94bn, up 65.47% year on year [F1]  \n- NVDA FY ending 2026-01-25: free cash flow $96.68bn [F1]  \n- NVDA revenue CAGR from FY 2022 to FY 2026: 68.6% [F1]  \n- NVDA market cap: $5216.93bn at $216.47 per share [F2]  \n- NVDA free-cash-flow yield: 1.85% [F2]  \n\nThis suggests strong, sustainable growth and resilient cash generation.\n\n### Filings Analyst\n*Focus: any explicit risk disclosures or contingent liabilities in the 10-K*\n\n- Our operating results may be adversely impacted by additional tax liabilities, higher than expected tax rates, changes in tax laws, and other tax-related factors. [D1]  \n- Our business is exposed to the burden and risks associated with litigation, investigations, and regulatory proceedings. [D1]  \n- Delaware law, provisions in our governing documents and our agreement with Microsoft could delay or prevent a change in control. [D1]  \n- While difficult to isolate and quantify, these macroeconomic factors impact our supply chain and manufacturing costs, employee wages, costs for capital equipment, the value of our investments, revenue and competitive position. [D1]\n\n## Key figures (generated from tool outputs, not by a model)\n\n| Metric | NVDA |\n|---|---|\n| Market cap ($bn) | 5,216.93 [F2] |\n| P/E (TTM) | 27.05x [F2] |\n| Price / sales (TTM) | 17.22x [F2] |\n| FCF yield | 1.85% [F2] |\n| 10-day VaR 95% (historical) | 14.27% [R2] |\n| 10-day VaR 95% (filtered historical simulation) | 7.27% [R2] |\n| Revenue, latest FY ($bn) | 215.94 [F1] |\n| Revenue growth, latest FY | 65.47% [F1] |\n| Operating margin, latest FY | 60.38% [F1] |\n\n## Evidence ledger\n\n| ID | Agent | Tool call | Chosen by | Source | Data retrieved |\n|---|---|---|---|---|---|\n| R1 | risk | `value_at_risk(tickers=['NVDA'], confidence=0.95, horizon_days=10)` | model | computed from 5y daily prices | 2026-10-22 09:45:26 UTC |\n| R2 | risk | `value_at_risk(tickers=['NVDA'], confidence=0.95, horizon_days=10)` | model | computed from 5y daily prices | 2026-10-22 09:45:26 UTC |\n| R3 | risk | `stress_test(tickers=['NVDA'])` | coverage check | computed from 10y daily prices | 2026-10-22 09:42:42 UTC |\n| F1 | fundamentals | `financial_statements(ticker=NVDA, years=5)` | model | SEC EDGAR XBRL company facts | 2026-10-21 21:15:59 UTC |\n| F2 | fundamentals | `valuation_snapshot(ticker=NVDA)` | model | SEC EDGAR XBRL + Yahoo Finance price | 2026-10-21 21:15:59 UTC |\n| D1 | filings | `search_10k(ticker=NVDA, query=risk factors)` | model | https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm | 2026-10-21 21:15:59 UTC |\n\n## How this note was produced\n\n- **Number provenance:** 26 of 26 numbers trace back to a tool result the agent received (100%).\n- **Claim attribution:** 24 of 24 cited claims match their source (company, period, metric, direction; 10-K points by wording) (100%).\n- **Agents:** planner \u2192 risk, fundamentals, filings \u2192 fact-check \u2192 lead analyst.\n- **Tool calls:** 6 (5 chosen by the models, 1 added by coverage checks).\n- **Data:** 8 sources, all fetched or cached within their freshness window. Retrieval times are in the evidence ledger.\n- **Language model:** 9 calls, 7,770 prompt + 1,407 completion tokens, 105.3 s of model time; 105.4 s end to end.\n- **Compute:** risk simulation on CPU (NumPy); 10-K retrieval: BM25; endpoint `http://127.0.0.1:11434/v1`.\n",
+  "stats": {
+    "llm_calls": 9,
+    "prompt_tokens": 7770,
+    "completion_tokens": 1407,
+    "model_seconds": 105.3,
+    "wall_seconds": 105.4,
+    "tool_calls": 6,
+    "tool_calls_chosen_by_model": 5,
+    "revisions": 0,
+    "risk_backend": "CPU (NumPy)",
+    "retrieval": "BM25",
+    "data_sources": 8,
+    "stale_sources": [],
+    "dropped_params": [],
+    "ablations": [],
+    "endpoint": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "quality": {
+      "numbers_checked": 26,
+      "numbers_traced": 26,
+      "number_provenance": 1.0,
+      "claims_checked": 24,
+      "claims_supported": 24,
+      "claim_attribution": 1.0,
+      "claim_issues": []
+    },
+    "provenance": {
+      "checked": 26,
+      "verified": 26,
+      "score": 1.0,
+      "unverified": []
+    },
+    "promissory_phrases": []
+  },
+  "eval": {
+    "ticker": "NVDA",
+    "question": "risk",
+    "variant": "full",
+    "version": "0.3.0"
+  },
+  "events": [
+    {
+      "t": 1792662425.65,
+      "event": "guard",
+      "allowed": true,
+      "personal_advice": false,
+      "rail": "rules"
+    },
+    {
+      "t": 1792662430.61,
+      "event": "plan",
+      "tasks": [
+        {
+          "agent": "risk",
+          "focus": "Value at Risk and expected shortfall to assess downside volatility"
+        },
+        {
+          "agent": "fundamentals",
+          "focus": "sustainable revenue growth and cash flow resilience over time"
+        },
+        {
+          "agent": "filings",
+          "focus": "any explicit risk disclosures or contingent liabilities in the 10-K"
+        }
+      ],
+      "source": "model"
+    },
+    {
+      "t": 1792662430.61,
+      "event": "agent_start",
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall to assess downside volatility"
+    },
+    {
+      "t": 1792662430.62,
+      "event": "agent_start",
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "sustainable revenue growth and cash flow resilience over time"
+    },
+    {
+      "t": 1792662430.62,
+      "event": "agent_start",
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "any explicit risk disclosures or contingent liabilities in the 10-K"
+    },
+    {
+      "t": 1792662439.29,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [
+        "value_at_risk",
+        "value_at_risk"
+      ],
+      "latency_s": 8.68,
+      "prompt_tokens": 673,
+      "completion_tokens": 112
+    },
+    {
+      "t": 1792662439.4,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R1",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "NVDA"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "seconds": 0.1,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792662439.43,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R2",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "NVDA"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "seconds": 0.04,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792662446.55,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [
+        "financial_statements",
+        "valuation_snapshot"
+      ],
+      "latency_s": 7.25,
+      "prompt_tokens": 685,
+      "completion_tokens": 65
+    },
+    {
+      "t": 1792662446.61,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F1",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "NVDA",
+        "years": 5
+      },
+      "seconds": 0.07,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792662446.66,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F2",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "NVDA"
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792662450.99,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [
+        "search_10k"
+      ],
+      "latency_s": 4.44,
+      "prompt_tokens": 457,
+      "completion_tokens": 41
+    },
+    {
+      "t": 1792662451.26,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D1",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "NVDA",
+        "query": "risk factors"
+      },
+      "seconds": 0.26,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792662467.5,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 16.5,
+      "prompt_tokens": 1306,
+      "completion_tokens": 202
+    },
+    {
+      "t": 1792662467.53,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R3",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "NVDA"
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792662484.37,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 16.88,
+      "prompt_tokens": 1446,
+      "completion_tokens": 180
+    },
+    {
+      "t": 1792662484.37,
+      "event": "agent_done",
+      "agent": "fundamentals",
+      "seconds": 53.8
+    },
+    {
+      "t": 1792662495.53,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [],
+      "latency_s": 11.15,
+      "prompt_tokens": 985,
+      "completion_tokens": 136
+    },
+    {
+      "t": 1792662495.53,
+      "event": "agent_done",
+      "agent": "filings",
+      "seconds": 64.9
+    },
+    {
+      "t": 1792662511.69,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 16.17,
+      "prompt_tokens": 1130,
+      "completion_tokens": 220
+    },
+    {
+      "t": 1792662511.69,
+      "event": "agent_done",
+      "agent": "risk",
+      "seconds": 81.1
+    },
+    {
+      "t": 1792662511.7,
+      "event": "verify",
+      "agent": "risk",
+      "checked": 10,
+      "verified": 10,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792662511.71,
+      "event": "verify",
+      "agent": "fundamentals",
+      "checked": 7,
+      "verified": 7,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792662511.71,
+      "event": "verify",
+      "agent": "filings",
+      "checked": 0,
+      "verified": 0,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 4,
+      "claims_supported": 4,
+      "claim_issues": []
+    },
+    {
+      "t": 1792662511.71,
+      "event": "agent_start",
+      "agent": "writer",
+      "title": "Lead Analyst",
+      "focus": "summary"
+    },
+    {
+      "t": 1792662530.99,
+      "event": "llm",
+      "agent": "writer",
+      "tool_calls": [],
+      "latency_s": 19.28,
+      "prompt_tokens": 827,
+      "completion_tokens": 371
+    },
+    {
+      "t": 1792662531.0,
+      "event": "verify",
+      "agent": "writer",
+      "checked": 9,
+      "verified": 9,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 10,
+      "claims_supported": 10,
+      "claim_issues": []
+    },
+    {
+      "t": 1792662531.06,
+      "event": "done",
+      "stats": {
+        "llm_calls": 9,
+        "prompt_tokens": 7770,
+        "completion_tokens": 1407,
+        "model_seconds": 105.3,
+        "wall_seconds": 105.4,
+        "tool_calls": 6,
+        "tool_calls_chosen_by_model": 5,
+        "revisions": 0,
+        "risk_backend": "CPU (NumPy)",
+        "retrieval": "BM25",
+        "data_sources": 8,
+        "stale_sources": [],
+        "dropped_params": [],
+        "ablations": [],
+        "endpoint": "http://127.0.0.1:11434/v1",
+        "orchestrator_model": "nemotron-3-nano:4b-cpu",
+        "specialist_model": "nemotron-3-nano:4b-cpu",
+        "quality": {
+          "numbers_checked": 26,
+          "numbers_traced": 26,
+          "number_provenance": 1.0,
+          "claims_checked": 24,
+          "claims_supported": 24,
+          "claim_attribution": 1.0,
+          "claim_issues": []
+        },
+        "provenance": {
+          "checked": 26,
+          "verified": 26,
+          "score": 1.0,
+          "unverified": []
+        },
+        "promissory_phrases": []
+      }
+    }
+  ],
+  "settings": {
+    "profile": "local",
+    "base_url": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "temperature": 0.0,
+    "reasoning": false,
+    "ablate": []
+  }
+}

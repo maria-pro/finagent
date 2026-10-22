@@ -7,7 +7,7 @@ can repeat the final module against hosted NIM endpoints to see the same code sc
 | | |
 |---|---|
 | **Level** | Intermediate (comfortable with Python; first contact with agents is fine) |
-| **Duration** | 2 hours (6 modules, 15–25 minutes each), plus an optional ablation-study module |
+| **Duration** | 2 hours (6 modules, 15–25 minutes each), plus an optional ablation-study module and three extension exercises |
 | **Prerequisites** | Python 3.10+, basic pandas; [Ollama](https://ollama.com) installed |
 | **Companion DLI courses** | *Building Agentic AI Applications with LLMs*, *Building RAG Agents with LLMs* |
 
@@ -72,6 +72,13 @@ mechanism that handles one of them.
 **Concept.** Tools return finished numbers in the units an analyst quotes
 (`total_return_pct: 22.82`, `market_cap_bn: 5349.48`), so the model copies rather
 than converts. Arguments are parsed forgivingly (`"nvda"`, `"$NVDA"`, `"NVDA, AMD"`).
+
+Tools must be right too. The checks in Module 4 compare what the model writes with what
+the tools return; they cannot tell when a tool measures the wrong thing. A valuation tool
+that treats a bank like a manufacturer will produce an enterprise value and a free-cash-flow
+yield that mean nothing, and a note built on them will pass every check (Exercise 4.5).
+That is why `valuation_snapshot` reads the company's SEC industry code: banks, brokers and
+insurers get price-to-book and return on equity instead.
 
 **Do.** Call a tool directly, exactly as an agent would:
 
@@ -169,6 +176,29 @@ have copied, and explain which rule caught it.
 sentence where that heuristic is wrong, write a failing test for it in
 `tests/test_provenance.py`, then fix `extract_numbers`.
 
+The next three exercises go further and suit a second session or homework. Solutions are
+on the `solutions` branch (`git checkout solutions`, then `workshop/solutions/README.md`).
+
+**Exercise 4.3 — Null baseline.** "100% of numbers traced" only means something if a
+made-up number would usually fail. Load the evidence ledger of a saved run (the `evidence`
+key of any `.json` file in `eval/results/pilot-0.3.0-runs/`), write random numbers into a
+sentence such as `"The figure was 23%."` and count how often `provenance.check` accepts
+them. Compare two-decimal, one-decimal and whole-number figures (23.47%, 23.5%, 23%), with
+and without a citation. Which passes by chance most often, and why? What would you change
+in `provenance._matches`?
+
+**Exercise 4.4 — Break the 10-K check.** Take a passage from a saved run's `search_10k`
+evidence and write a claim that contradicts it but still passes `attribution.check`
+(hint: negate it). Add a check that catches it, with a test in `tests/test_attribution.py`.
+Then run your rule over the 10-K claims of all the saved runs: how many correct claims does
+it flag?
+
+**Exercise 4.5 — Traced but wrong.** Open the Goldman Sachs note from version 0.2.2,
+`eval/results/pilot-0.2.2-runs/gs-valuation-full-v0.2.2-*.md`. Every number traces and nearly
+every claim matches its source. Find two things that are wrong anyway: one in what a tool
+computed, one in the reasoning. Which could a deterministic check catch, and what would it
+need? Compare the same question in `eval/results/pilot-0.3.0-runs/`.
+
 **Discuss.** What does a deterministic verifier miss that a large judge model
 would catch, and the reverse? When is each worth its cost?
 
@@ -249,7 +279,7 @@ finagent eval --tickers NVDA JPM KO --variants full,-facts,-phases,-coverage
 
 **Discuss.** Which mechanism moves which metric? Which one costs the most model time?
 Would the ranking change with a larger model (`--profile nim`)? The README's
-*Evaluation* section shows the pilot results this lab is based on.
+*Measuring the system* section is a worked example of this module.
 
 ---
 
@@ -258,8 +288,8 @@ Would the ranking change with a larger model (`--profile nim`)? The README's
 Submit a pull request that completes **one** of:
 
 1. Exercise 2.1 (new tool), with a passing offline test.
-2. Exercise 4.2 (provenance edge case), with the failing-then-passing test, or a new
-   attribution rule with tests in `tests/test_attribution.py`.
+2. Exercise 4.2, 4.3 or 4.4 (a checker fix), with the failing-then-passing test and the
+   number of correct claims in the saved runs that your new rule flags.
 3. A new specialist (for example a *Macro Analyst* using US Treasury yields) wired into
    `SPECIALISTS`, the planner prompt and `PLAN_SCHEMA`, with a graph test using `ScriptedLLM`.
 
@@ -273,3 +303,6 @@ the provenance checker (20%), code reads like the surrounding code (10%).
   or replay a saved run in the web UI (`streamlit run app/streamlit_app.py`, then *Saved runs*).
 - All market data is public (SEC EDGAR, US Treasury, Yahoo Finance) and cached in
   `.finagent_cache`, so a room of students does not hit rate limits twice.
+- Solutions to Exercises 4.3–4.5, with the code, are on the `solutions` branch. The checker
+  weaknesses those exercises explore are left in `main` on purpose, and are listed in the
+  README's limitations.

@@ -32,9 +32,9 @@
       "agent": "fundamentals",
       "title": "Fundamentals Analyst",
       "focus": "NVIDIA's revenue growth and margins versus its current P/E and price-to-sales multiples",
-      "text": "NVDA FY ending 2026-01-25: revenue $215.94bn, up 65.47% year on year [F1]  \nNVDA FY ending 2026-01-25: gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \nNVDA FY ending 2026-01-25: net income $120.07bn, diluted EPS $4.9, free cash flow $96.68bn [F1]  \nNVDA revenue CAGR from FY 2024 to FY 2026: 88.68% [F1]  \nNVDA market cap: $5216.93bn at $216.47 per share (2026-10-20) [F2]  \n\nNVIDIA's valuation appears justified by its exceptional revenue growth and high margins.",
+      "text": "NVDA FY ending 2026-01-25: revenue $215.94bn, up 65.47% year on year [F1]  \nNVDA FY ending 2026-01-25: gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \nNVDA FY ending 2026-01-25: net income $120.07bn, diluted EPS $4.9, free cash flow $96.68bn [F1]  \nNVDA revenue CAGR from FY 2024 to FY 2026: 88.68% [F1]  \nNVDA market cap: $5216.93bn at $216.47 per share (2026-10-20 close) [F2]  \n\nNVIDIA's valuation appears justified by its exceptional revenue growth and high margins.",
       "draft": "NVIDIA revenue $215.94bn, up 65.47% year on year [F1]  \nNVIDIA revenue $130.5bn (growth 114.2%) [F1]  \nNVIDIA revenue $60.92bn (growth 125.85%) [F1]  \nNVIDIA market cap: $5216.93bn at $216.47 per share [F2]  \nNVIDIA P/E (trailing 12 months): 27.05 [F2]  \n\nNVIDIA's valuation appears justified by its exceptional revenue growth and high margins.",
-      "seconds": 44.2,
+      "seconds": 41.7,
       "provenance": {
         "checked": 11,
         "verified": 11,
@@ -55,12 +55,12 @@
       "agent": "market",
       "title": "Market Analyst",
       "focus": "how much of NVIDIA's growth is already priced in through its stock price and volatility",
-      "text": "NVDA 5y total return: 858.15% [M1]  \nNVDA 5y annualized return: 57.19% [M1]  \nNVDA 5y annualized volatility: 51.94% [M1]  \nNVDA 5y Sharpe ratio: 1.06 [M1]  \nNVDA 5y beta vs SPY: 2.14 [M2]  \n\nThe stock's extreme returns and volatility suggest much of its growth is already priced in.",
-      "draft": "NVDA 5y total return: 858.15% [M1]  \nNVDA 5y annualized return: 57.19% [M1]  \nNVDA 5y annualized volatility: 51.94% [M1]  \nNVDA 5y Sharpe ratio: 1.06 [M1]  \nNVDA 5y beta vs SPY: 2.14 [M2]  \n\nThe stock's extreme returns and volatility suggest much of its growth is already priced in.",
-      "seconds": 57.8,
+      "text": "NVDA 5y total return: 858.15% [M1]  \nNVDA 5y annualized return: 57.19% [M1]  \nNVDA 5y annualized volatility: 51.94% [M1]  \nNVDA 5y beta vs SPY: 2.14 [M2]  \nNVDA 5y return: NVDA 858.15% vs SPY 81.28% (excess 776.87%) [M2]  \n\nThe stock's extreme returns and volatility suggest much of its growth is already priced in.",
+      "draft": "NVDA 5y total return: 858.15% [M1]  \nNVDA 5y annualized return: 57.19% [M1]  \nNVDA 5y annualized volatility: 51.94% [M1]  \nNVDA 5y beta vs SPY: 2.14 [M2]  \nNVDA 5y return: NVDA 858.15% vs SPY 81.28% (excess 776.87%) [M2]  \n\nThe stock's extreme returns and volatility suggest much of its growth is already priced in.",
+      "seconds": 54.9,
       "provenance": {
-        "checked": 5,
-        "verified": 5,
+        "checked": 7,
+        "verified": 7,
         "score": 1.0,
         "unverified": [],
         "miscited": []
@@ -77,9 +77,9 @@
       "agent": "risk",
       "title": "Risk Analyst",
       "focus": "Value at Risk and expected shortfall under downside scenarios, including potential market saturation",
-      "text": "NVIDIA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R1]  \nNVIDIA 95% 10-day expected shortfall, historical: 17.91% [R1]  \nNVIDIA 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.96% [R2]  \nNVIDIA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R2]  \nNVIDIA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n\nThese risks reflect significant downside potential despite strong fundamentals.",
-      "draft": "NVIDIA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R1]  \nNVIDIA 95% 10-day expected shortfall, historical: 17.91% [R1]  \nNVIDIA 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.96% [R2]  \nNVIDIA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R2]  \nNVIDIA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n\nThese risks reflect significant downside potential despite strong fundamentals.",
-      "seconds": 76.1,
+      "text": "NVIDIA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R1]  \nNVIDIA 95% 10-day expected shortfall, historical: 17.91% [R1]  \nNVIDIA 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.94% [R2]  \nNVIDIA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R2]  \nNVIDIA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n\nThese risks reflect significant downside potential despite strong fundamentals.",
+      "draft": "NVIDIA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R1]  \nNVIDIA 95% 10-day expected shortfall, historical: 17.91% [R1]  \nNVIDIA 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.94% [R2]  \nNVIDIA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R2]  \nNVIDIA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n\nThese risks reflect significant downside potential despite strong fundamentals.",
+      "seconds": 71.1,
       "provenance": {
         "checked": 11,
         "verified": 11,
@@ -101,7 +101,7 @@
       "focus": "risks and business challenges highlighted in NVIDIA's latest 10-K, such as competition and supply constraints",
       "text": "- Increased regulatory scrutiny in AI markets, including competition investigations in graphics card and CSP markets [D1]  \n- Competition from existing and new entrants could reduce market share and revenue [D1]  \n- Supply chain disruptions and geopolitical developments may impact demand and costs [D2]  \n- Reliance on third-party suppliers exposes us to supply-chain attacks and operational disruptions [D2]",
       "draft": "- Increased regulatory scrutiny in AI markets, including competition investigations in graphics card and CSP markets [D1]  \n- Competition from existing and new entrants could reduce market share and revenue [D1]  \n- Supply chain disruptions and geopolitical developments may impact demand and costs [D2]  \n- Reliance on third-party suppliers exposes us to supply-chain attacks and operational disruptions [D2]",
-      "seconds": 89.3,
+      "seconds": 83.2,
       "provenance": {
         "checked": 0,
         "verified": 0,
@@ -130,6 +130,7 @@
       "result": {
         "ticker": "NVDA",
         "company": "NVIDIA CORP",
+        "industry": "SIC 3674 Semiconductors & Related Devices",
         "source": "SEC XBRL company facts (10-K)",
         "fiscal_years": [
           {
@@ -141,8 +142,8 @@
             "net_income_bn": 29.76,
             "net_margin_pct": 48.85,
             "eps_diluted": 1.19,
-            "free_cash_flow_bn": 27.02,
-            "rnd_pct_of_revenue": 14.24
+            "rnd_pct_of_revenue": 14.24,
+            "free_cash_flow_bn": 27.02
           },
           {
             "fiscal_year_end": "2025-01-26",
@@ -153,8 +154,8 @@
             "net_income_bn": 72.88,
             "net_margin_pct": 55.85,
             "eps_diluted": 2.94,
-            "free_cash_flow_bn": 60.85,
-            "rnd_pct_of_revenue": 9.9
+            "rnd_pct_of_revenue": 9.9,
+            "free_cash_flow_bn": 60.85
           },
           {
             "fiscal_year_end": "2026-01-25",
@@ -165,8 +166,8 @@
             "net_income_bn": 120.07,
             "net_margin_pct": 55.6,
             "eps_diluted": 4.9,
-            "free_cash_flow_bn": 96.68,
-            "rnd_pct_of_revenue": 8.57
+            "rnd_pct_of_revenue": 8.57,
+            "free_cash_flow_bn": 96.68
           }
         ],
         "revenue_cagr_pct": 88.68,
@@ -193,7 +194,7 @@
           "NVDA revenue CAGR from FY 2024 to FY 2026: 88.68%"
         ]
       },
-      "seconds": 0.15,
+      "seconds": 0.06,
       "chosen_by": "model",
       "error": null,
       "sources": [
@@ -205,6 +206,11 @@
         {
           "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
           "fetched_at": "2026-10-21T21:16:00Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001045810.json",
+          "fetched_at": "2026-10-21T21:16:04Z",
           "status": "cache"
         }
       ],
@@ -220,6 +226,7 @@
       "result": {
         "ticker": "NVDA",
         "company": "NVIDIA CORP",
+        "industry": "SIC 3674 Semiconductors & Related Devices",
         "price": 216.47,
         "price_date": "2026-10-20",
         "shares_outstanding_bn": 24.1,
@@ -228,6 +235,7 @@
         "ttm_net_income_bn": 192.88,
         "ttm_period_end": "2026-07-26",
         "pe_ratio_ttm": 27.05,
+        "net_income_includes_nci": false,
         "price_to_sales_ttm": 17.22,
         "balance_sheet_date": "2026-07-26",
         "cash_and_securities_bn": 22.44,
@@ -236,8 +244,7 @@
         "ev_to_sales_ttm": 17.26,
         "free_cash_flow_last_fy_bn": 96.68,
         "fcf_yield_pct": 1.85,
-        "net_income_includes_nci": false,
-        "method": "market cap = price x EntityCommonStockSharesOutstanding shares; TTM = FY to 2026-01-25 + YTD to 2026-07-26 - prior-year YTD; debt = LongTermDebtNoncurrent + DebtCurrent as of 2026-07-26; leases excluded",
+        "method": "market cap = closing price x EntityCommonStockSharesOutstanding shares; TTM = FY to 2026-01-25 + YTD to 2026-07-26 - prior-year YTD; debt = LongTermDebtNoncurrent + DebtCurrent as of 2026-07-26; leases excluded",
         "xbrl_sources": {
           "revenue_ttm": "Revenues ['0001045810-26-000021', '0001045810-26-000075']",
           "net_income_ttm": "NetIncomeLoss ['0001045810-26-000021', '0001045810-26-000075']",
@@ -248,7 +255,7 @@
           ]
         },
         "facts": [
-          "NVDA market cap: $5216.93bn at $216.47 per share (2026-10-20)",
+          "NVDA market cap: $5216.93bn at $216.47 per share (2026-10-20 close)",
           "NVDA P/E (trailing 12 months): 27.05",
           "NVDA price-to-sales (trailing 12 months): 17.22; EV-to-sales: 17.26",
           "NVDA trailing-12-month revenue $302.97bn and net income $192.88bn (to 2026-07-26)",
@@ -256,7 +263,7 @@
           "NVDA cash and current securities $22.44bn vs total debt $33.37bn (balance sheet 2026-07-26); enterprise value $5227.85bn"
         ]
       },
-      "seconds": 0.19,
+      "seconds": 0.06,
       "chosen_by": "model",
       "error": null,
       "sources": [
@@ -271,8 +278,13 @@
           "status": "cache"
         },
         {
+          "url": "https://data.sec.gov/submissions/CIK0001045810.json",
+          "fetched_at": "2026-10-21T21:16:04Z",
+          "status": "cache"
+        },
+        {
           "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=1y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
-          "fetched_at": "2026-10-22T03:37:20Z",
+          "fetched_at": "2026-10-22T09:42:41Z",
           "status": "cache"
         }
       ],
@@ -303,26 +315,27 @@
         "drawdown_trough_date": "2022-10-14",
         "high_52w": 239.24,
         "pct_below_52w_high": 9.52,
-        "sma_200": 202.95,
+        "sma_200": 203.26,
         "price_vs_sma_200": "above",
         "rsi_14": 40.9,
+        "price_basis": "returns from dividend- and split-adjusted closes; price levels from actual closes",
         "facts": [
           "NVDA 5y total return: 858.15%",
           "NVDA 5y annualized return: 57.19%",
           "NVDA 5y annualized volatility: 51.94%",
           "NVDA 5y Sharpe ratio: 1.06",
           "NVDA 5y max drawdown: -66.34% (2021-11-29 to 2022-10-14)",
-          "NVDA price: $216.47 on 2026-10-20, 9.52% below the 52-week high of $239.24",
-          "NVDA price is above its 200-day average of $202.95"
+          "NVDA closing price: $216.47 on 2026-10-20, 9.52% below the 52-week closing high of $239.24",
+          "NVDA closing price is above its 200-day average of $203.26"
         ]
       },
-      "seconds": 0.11,
+      "seconds": 0.07,
       "chosen_by": "model",
       "error": null,
       "sources": [
         {
           "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
-          "fetched_at": "2026-10-22T03:37:27Z",
+          "fetched_at": "2026-10-22T09:43:56Z",
           "status": "cache"
         },
         {
@@ -373,17 +386,20 @@
         "period": "5y",
         "beta": 2.14,
         "correlation": 0.71,
-        "alpha_pct_per_year": 30.11,
+        "alpha_pct_per_year": 34.57,
         "tracking_error_pct": 41.65,
         "information_ratio": 1.09,
         "ticker_return_pct": 858.15,
         "benchmark_return_pct": 81.28,
         "excess_return_pct": 776.87,
+        "method": "CAPM regression of daily returns in excess of the 13-week T-bill rate",
+        "risk_free_source": "US Treasury daily bill rates (13-week, coupon equivalent)",
+        "price_basis": "returns from dividend- and split-adjusted closes",
         "facts": [
           "NVDA 5y beta vs SPY: 2.14",
           "NVDA 5y correlation with SPY: 0.71",
           "5y return: NVDA 858.15% vs SPY 81.28% (excess 776.87%)",
-          "NVDA 5y annualized alpha vs SPY: 30.11%"
+          "NVDA 5y annualized alpha vs SPY (CAPM, over the T-bill rate): 34.57%"
         ]
       },
       "seconds": 0.02,
@@ -392,12 +408,42 @@
       "sources": [
         {
           "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
-          "fetched_at": "2026-10-22T03:37:27Z",
+          "fetched_at": "2026-10-22T09:43:56Z",
           "status": "cache"
         },
         {
           "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
-          "fetched_at": "2026-10-22T03:37:29Z",
+          "fetched_at": "2026-10-22T09:42:42Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2021/all?type=daily_treasury_bill_rates&field_tdr_date_value=2021&_format=csv",
+          "fetched_at": "2026-10-22T05:55:40Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2022/all?type=daily_treasury_bill_rates&field_tdr_date_value=2022&_format=csv",
+          "fetched_at": "2026-10-22T05:55:41Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2023/all?type=daily_treasury_bill_rates&field_tdr_date_value=2023&_format=csv",
+          "fetched_at": "2026-10-22T05:55:42Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2024/all?type=daily_treasury_bill_rates&field_tdr_date_value=2024&_format=csv",
+          "fetched_at": "2026-10-22T05:55:43Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2025/all?type=daily_treasury_bill_rates&field_tdr_date_value=2025&_format=csv",
+          "fetched_at": "2026-10-22T05:55:43Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_bill_rates&field_tdr_date_value=2026&_format=csv",
+          "fetched_at": "2026-10-21T21:17:11Z",
           "status": "cache"
         }
       ],
@@ -430,8 +476,9 @@
         "average_vol_pct": 51.96,
         "simulated_paths": 100000,
         "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "price_basis": "returns from dividend- and split-adjusted closes",
         "compute_backend": "CPU (NumPy)",
-        "compute_ms": 29.7,
+        "compute_ms": 22.8,
         "facts": [
           "NVDA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value",
           "NVDA 95% 10-day expected shortfall, historical: 17.91%",
@@ -441,13 +488,13 @@
           "NVDA probability of losing more than 10% over 10 days (filtered historical simulation): 1.66%"
         ]
       },
-      "seconds": 0.06,
+      "seconds": 0.04,
       "chosen_by": "model",
       "error": null,
       "sources": [
         {
           "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
-          "fetched_at": "2026-10-22T03:37:34Z",
+          "fetched_at": "2026-10-22T09:45:26Z",
           "status": "cache"
         }
       ],
@@ -484,12 +531,14 @@
           }
         ],
         "beta_vs_spy_3y": 2.05,
-        "beta_implied_move_if_spy_falls_20pct": -40.96,
+        "beta_implied_move_if_spy_falls_20pct": -40.94,
+        "method": "daily returns compounded over each window",
+        "price_basis": "returns from dividend- and split-adjusted closes",
         "facts": [
           "NVDA in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -52.23% vs SPY -19.35%",
           "NVDA in the 2020 COVID crash (2020-02-19 to 2020-03-23): -32.37% vs SPY -33.72%",
           "NVDA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5%",
-          "NVDA 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.96%"
+          "NVDA 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.94%"
         ]
       },
       "seconds": 0.01,
@@ -498,12 +547,12 @@
       "sources": [
         {
           "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
-          "fetched_at": "2026-10-22T03:37:27Z",
+          "fetched_at": "2026-10-22T09:43:56Z",
           "status": "cache"
         },
         {
           "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
-          "fetched_at": "2026-10-22T03:37:29Z",
+          "fetched_at": "2026-10-22T09:42:42Z",
           "status": "cache"
         }
       ],
@@ -537,7 +586,7 @@
           }
         ]
       },
-      "seconds": 0.48,
+      "seconds": 0.32,
       "chosen_by": "model",
       "error": null,
       "sources": [
@@ -617,23 +666,23 @@
       "model": "nemotron-3-nano:4b-cpu",
       "prompt_tokens": 258,
       "completion_tokens": 157,
-      "latency_s": 9.15
+      "latency_s": 7.67
     },
     {
       "agent": "fundamentals",
       "role": "specialist",
       "model": "nemotron-3-nano:4b-cpu",
-      "prompt_tokens": 662,
+      "prompt_tokens": 692,
       "completion_tokens": 65,
-      "latency_s": 7.63
+      "latency_s": 6.88
     },
     {
       "agent": "fundamentals",
       "role": "specialist",
       "model": "nemotron-3-nano:4b-cpu",
-      "prompt_tokens": 1337,
+      "prompt_tokens": 1368,
       "completion_tokens": 156,
-      "latency_s": 14.9
+      "latency_s": 14.26
     },
     {
       "agent": "market",
@@ -641,15 +690,15 @@
       "model": "nemotron-3-nano:4b-cpu",
       "prompt_tokens": 624,
       "completion_tokens": 88,
-      "latency_s": 8.08
+      "latency_s": 7.4
     },
     {
       "agent": "market",
       "role": "specialist",
       "model": "nemotron-3-nano:4b-cpu",
-      "prompt_tokens": 1131,
-      "completion_tokens": 130,
-      "latency_s": 13.65
+      "prompt_tokens": 1144,
+      "completion_tokens": 155,
+      "latency_s": 13.14
     },
     {
       "agent": "risk",
@@ -657,7 +706,7 @@
       "model": "nemotron-3-nano:4b-cpu",
       "prompt_tokens": 674,
       "completion_tokens": 83,
-      "latency_s": 7.69
+      "latency_s": 7.49
     },
     {
       "agent": "risk",
@@ -665,7 +714,7 @@
       "model": "nemotron-3-nano:4b-cpu",
       "prompt_tokens": 1282,
       "completion_tokens": 219,
-      "latency_s": 18.22
+      "latency_s": 16.26
     },
     {
       "agent": "filings",
@@ -673,7 +722,7 @@
       "model": "nemotron-3-nano:4b-cpu",
       "prompt_tokens": 461,
       "completion_tokens": 81,
-      "latency_s": 5.9
+      "latency_s": 5.69
     },
     {
       "agent": "filings",
@@ -681,27 +730,27 @@
       "model": "nemotron-3-nano:4b-cpu",
       "prompt_tokens": 1419,
       "completion_tokens": 86,
-      "latency_s": 13.28
+      "latency_s": 12.06
     },
     {
       "agent": "fundamentals",
       "role": "specialist",
       "model": "nemotron-3-nano:4b-cpu",
-      "prompt_tokens": 1131,
-      "completion_tokens": 239,
-      "latency_s": 17.43
+      "prompt_tokens": 1132,
+      "completion_tokens": 240,
+      "latency_s": 16.21
     },
     {
       "agent": "writer",
       "role": "writer",
       "model": "nemotron-3-nano:4b-cpu",
-      "prompt_tokens": 954,
+      "prompt_tokens": 992,
       "completion_tokens": 329,
-      "latency_s": 18.51
+      "latency_s": 17.98
     }
   ],
-  "narrative": "## Answer  \nNVIDIA's valuation appears justified by its exceptional revenue growth and high margins [F1]. The stock's extreme returns and volatility suggest much of its growth is already priced in [M1].  \n\n## Strengths  \n- revenue $215.94bn, up 65.47% year on year [F1]  \n- gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \n- net income $120.07bn, diluted EPS $4.9, free cash flow $96.68bn [F1]  \n\n## Risks  \n- 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.96% [R2]  \n- NVIDIA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R2]  \n- 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n\n## What to watch  \n- Increased regulatory scrutiny in AI markets, including competition investigations in graphics card and CSP markets [D1]  \n- Supply chain disruptions and geopolitical developments may impact demand and costs [D2]",
-  "narrative_draft": "## Answer  \nNVIDIA's valuation appears justified by its exceptional revenue growth and high margins [F1]. The stock's extreme returns and volatility suggest much of its growth is already priced in [M1].  \n\n## Strengths  \n- revenue $215.94bn, up 65.47% year on year [F1]  \n- gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \n- net income $120.07bn, diluted EPS $4.9, free cash flow $96.68bn [F1]  \n\n## Risks  \n- 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.96% [R2]  \n- NVIDIA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R2]  \n- 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n\n## What to watch  \n- Increased regulatory scrutiny in AI markets, including competition investigations in graphics card and CSP markets [D1]  \n- Supply chain disruptions and geopolitical developments may impact demand and costs [D2]",
+  "narrative": "## Answer  \nNVIDIA's valuation appears justified by its exceptional revenue growth and high margins [F1]. The stock's extreme returns and volatility suggest much of its growth is already priced in [M1].  \n\n## Strengths  \n- revenue $215.94bn, up 65.47% year on year [F1]  \n- gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \n- net income $120.07bn, diluted EPS $4.9, free cash flow $96.68bn [F1]  \n\n## Risks  \n- 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.94% [R2]  \n- NVIDIA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R2]  \n- 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n\n## What to watch  \n- Increased regulatory scrutiny in AI markets, including competition investigations in graphics card and CSP markets [D1]  \n- Supply chain disruptions and geopolitical developments may impact demand and costs [D2]",
+  "narrative_draft": "## Answer  \nNVIDIA's valuation appears justified by its exceptional revenue growth and high margins [F1]. The stock's extreme returns and volatility suggest much of its growth is already priced in [M1].  \n\n## Strengths  \n- revenue $215.94bn, up 65.47% year on year [F1]  \n- gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \n- net income $120.07bn, diluted EPS $4.9, free cash flow $96.68bn [F1]  \n\n## Risks  \n- 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.94% [R2]  \n- NVIDIA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R2]  \n- 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n\n## What to watch  \n- Increased regulatory scrutiny in AI markets, including competition investigations in graphics card and CSP markets [D1]  \n- Supply chain disruptions and geopolitical developments may impact demand and costs [D2]",
   "writer_check": {
     "provenance": {
       "checked": 15,
@@ -721,13 +770,13 @@
   "revisions": [
     "fundamentals"
   ],
-  "report": "# Research note: NVDA\n**Question:** Is NVIDIA's valuation justified by its fundamentals, and what are the main risks?\n\n*Generated 2026-10-22 19:49 by FinAgent \u00b7 4 specialist agents \u00b7 models `nemotron-3-nano:4b-cpu` / `nemotron-3-nano:4b-cpu`*\n\n> This note was generated by AI agents for educational purposes. It is general information, not personal financial advice or a recommendation to buy or sell any security. Figures come from public data (SEC EDGAR, US Treasury, Yahoo Finance) and may contain errors; verify before relying on them.\n\n## Answer  \nNVIDIA's valuation appears justified by its exceptional revenue growth and high margins [F1]. The stock's extreme returns and volatility suggest much of its growth is already priced in [M1].  \n\n## Strengths  \n- revenue $215.94bn, up 65.47% year on year [F1]  \n- gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \n- net income $120.07bn, diluted EPS $4.9, free cash flow $96.68bn [F1]  \n\n## Risks  \n- 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.96% [R2]  \n- NVIDIA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R2]  \n- 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n\n## What to watch  \n- Increased regulatory scrutiny in AI markets, including competition investigations in graphics card and CSP markets [D1]  \n- Supply chain disruptions and geopolitical developments may impact demand and costs [D2]\n\n## Specialist findings\n### Fundamentals Analyst *(revised after fact-check)*\n*Focus: NVIDIA's revenue growth and margins versus its current P/E and price-to-sales multiples*\n\nNVDA FY ending 2026-01-25: revenue $215.94bn, up 65.47% year on year [F1]  \nNVDA FY ending 2026-01-25: gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \nNVDA FY ending 2026-01-25: net income $120.07bn, diluted EPS $4.9, free cash flow $96.68bn [F1]  \nNVDA revenue CAGR from FY 2024 to FY 2026: 88.68% [F1]  \nNVDA market cap: $5216.93bn at $216.47 per share (2026-10-20) [F2]  \n\nNVIDIA's valuation appears justified by its exceptional revenue growth and high margins.\n\n### Market Analyst\n*Focus: how much of NVIDIA's growth is already priced in through its stock price and volatility*\n\nNVDA 5y total return: 858.15% [M1]  \nNVDA 5y annualized return: 57.19% [M1]  \nNVDA 5y annualized volatility: 51.94% [M1]  \nNVDA 5y Sharpe ratio: 1.06 [M1]  \nNVDA 5y beta vs SPY: 2.14 [M2]  \n\nThe stock's extreme returns and volatility suggest much of its growth is already priced in.\n\n### Risk Analyst\n*Focus: Value at Risk and expected shortfall under downside scenarios, including potential market saturation*\n\nNVIDIA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R1]  \nNVIDIA 95% 10-day expected shortfall, historical: 17.91% [R1]  \nNVIDIA 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.96% [R2]  \nNVIDIA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R2]  \nNVIDIA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n\nThese risks reflect significant downside potential despite strong fundamentals.\n\n### Filings Analyst\n*Focus: risks and business challenges highlighted in NVIDIA's latest 10-K, such as competition and supply constraints*\n\n- Increased regulatory scrutiny in AI markets, including competition investigations in graphics card and CSP markets [D1]  \n- Competition from existing and new entrants could reduce market share and revenue [D1]  \n- Supply chain disruptions and geopolitical developments may impact demand and costs [D2]  \n- Reliance on third-party suppliers exposes us to supply-chain attacks and operational disruptions [D2]\n\n## Key figures (generated from tool outputs, not by a model)\n\n| Metric | NVDA |\n|---|---|\n| Price | 216.47 [M1] |\n| Total return (5y) | 858.15% [M1] |\n| Volatility, annualised (5y) | 51.94% [M1] |\n| Max drawdown (5y) | -66.34% [M1] |\n| Beta vs SPY (5y) | 2.14 [M2] |\n| Market cap ($bn) | 5,216.93 [F2] |\n| P/E (TTM) | 27.05x [F2] |\n| Price / sales (TTM) | 17.22x [F2] |\n| FCF yield | 1.85% [F2] |\n| Revenue, latest FY ($bn) | 215.94 [F1] |\n| Revenue growth, latest FY | 65.47% [F1] |\n| Operating margin, latest FY | 60.38% [F1] |\n| 10-day VaR 95% (historical) | 14.27% [R1] |\n| 10-day VaR 95% (filtered historical simulation) | 7.27% [R1] |\n\n## Evidence ledger\n\n| ID | Agent | Tool call | Chosen by | Source | Data retrieved |\n|---|---|---|---|---|---|\n| F1 | fundamentals | `financial_statements(ticker=NVDA, years=3)` | model | SEC EDGAR XBRL company facts | 2026-10-21 21:15:59 UTC |\n| F2 | fundamentals | `valuation_snapshot(ticker=NVDA)` | model | SEC EDGAR XBRL + Yahoo Finance price | 2026-10-21 21:15:59 UTC |\n| M1 | market | `price_performance(ticker=NVDA, period=5y)` | model | Yahoo Finance daily prices; US Treasury bill rates | 2026-10-21 21:17:11 UTC |\n| M2 | market | `benchmark_comparison(ticker=NVDA, benchmark=SPY, period=5y)` | model | Yahoo Finance daily prices | 2026-10-22 03:37:27 UTC |\n| R1 | risk | `value_at_risk(tickers=['NVDA'], confidence=0.95, horizon_days=10)` | model | computed from 5y daily prices | 2026-10-22 03:37:34 UTC |\n| R2 | risk | `stress_test(tickers=['NVDA'])` | model | computed from 10y daily prices | 2026-10-22 03:37:27 UTC |\n| D1 | filings | `search_10k(ticker=NVDA, query=competition)` | model | https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm | 2026-10-21 21:15:59 UTC |\n| D2 | filings | `search_10k(ticker=NVDA, query=supply chain)` | model | https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm | 2026-10-21 21:15:59 UTC |\n\n## How this note was produced\n\n- **Number provenance:** 42 of 42 numbers trace back to a tool result the agent received (100%).\n- **Claim attribution:** 27 of 27 cited claims match their source (company, period, metric, direction; 10-K points by wording) (100%).\n- **Agents:** planner \u2192 fundamentals, market, risk, filings \u2192 fact-check \u2192 1 revision(s) \u2192 lead analyst.\n- **Tool calls:** 8 (all chosen by the models).\n- **Data:** 14 sources, all fetched or cached within their freshness window. Retrieval times are in the evidence ledger.\n- **Language model:** 11 calls, 9,933 prompt + 1,633 completion tokens, 134.4 s of model time; 134.7 s end to end.\n- **Compute:** risk simulation on CPU (NumPy); 10-K retrieval: BM25; endpoint `http://127.0.0.1:11434/v1`.\n",
+  "report": "# Research note: NVDA\n**Question:** Is NVIDIA's valuation justified by its fundamentals, and what are the main risks?\n\n*Generated 2026-10-22 21:37 by FinAgent \u00b7 4 specialist agents \u00b7 models `nemotron-3-nano:4b-cpu` / `nemotron-3-nano:4b-cpu`*\n\n> This note was generated by AI agents for educational purposes. It is general information, not personal financial advice or a recommendation to buy or sell any security. Figures come from public data (SEC EDGAR, US Treasury, Yahoo Finance) and may contain errors; verify before relying on them.\n\n## Answer  \nNVIDIA's valuation appears justified by its exceptional revenue growth and high margins [F1]. The stock's extreme returns and volatility suggest much of its growth is already priced in [M1].  \n\n## Strengths  \n- revenue $215.94bn, up 65.47% year on year [F1]  \n- gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \n- net income $120.07bn, diluted EPS $4.9, free cash flow $96.68bn [F1]  \n\n## Risks  \n- 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.94% [R2]  \n- NVIDIA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R2]  \n- 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n\n## What to watch  \n- Increased regulatory scrutiny in AI markets, including competition investigations in graphics card and CSP markets [D1]  \n- Supply chain disruptions and geopolitical developments may impact demand and costs [D2]\n\n## Specialist findings\n### Fundamentals Analyst *(revised after fact-check)*\n*Focus: NVIDIA's revenue growth and margins versus its current P/E and price-to-sales multiples*\n\nNVDA FY ending 2026-01-25: revenue $215.94bn, up 65.47% year on year [F1]  \nNVDA FY ending 2026-01-25: gross margin 71.07%, operating margin 60.38%, net margin 55.6% [F1]  \nNVDA FY ending 2026-01-25: net income $120.07bn, diluted EPS $4.9, free cash flow $96.68bn [F1]  \nNVDA revenue CAGR from FY 2024 to FY 2026: 88.68% [F1]  \nNVDA market cap: $5216.93bn at $216.47 per share (2026-10-20 close) [F2]  \n\nNVIDIA's valuation appears justified by its exceptional revenue growth and high margins.\n\n### Market Analyst\n*Focus: how much of NVIDIA's growth is already priced in through its stock price and volatility*\n\nNVDA 5y total return: 858.15% [M1]  \nNVDA 5y annualized return: 57.19% [M1]  \nNVDA 5y annualized volatility: 51.94% [M1]  \nNVDA 5y beta vs SPY: 2.14 [M2]  \nNVDA 5y return: NVDA 858.15% vs SPY 81.28% (excess 776.87%) [M2]  \n\nThe stock's extreme returns and volatility suggest much of its growth is already priced in.\n\n### Risk Analyst\n*Focus: Value at Risk and expected shortfall under downside scenarios, including potential market saturation*\n\nNVIDIA 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 14.27% of value [R1]  \nNVIDIA 95% 10-day expected shortfall, historical: 17.91% [R1]  \nNVIDIA 3-year beta vs SPY: 2.05; a 20% SPY fall implies about -40.94% [R2]  \nNVIDIA in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -61.79% vs SPY -24.5% [R2]  \nNVIDIA 95% 10-day expected shortfall, filtered historical simulation: 9.82% [R1]  \n\nThese risks reflect significant downside potential despite strong fundamentals.\n\n### Filings Analyst\n*Focus: risks and business challenges highlighted in NVIDIA's latest 10-K, such as competition and supply constraints*\n\n- Increased regulatory scrutiny in AI markets, including competition investigations in graphics card and CSP markets [D1]  \n- Competition from existing and new entrants could reduce market share and revenue [D1]  \n- Supply chain disruptions and geopolitical developments may impact demand and costs [D2]  \n- Reliance on third-party suppliers exposes us to supply-chain attacks and operational disruptions [D2]\n\n## Key figures (generated from tool outputs, not by a model)\n\n| Metric | NVDA |\n|---|---|\n| Price | 216.47 [M1] |\n| Total return (5y) | 858.15% [M1] |\n| Volatility, annualised (5y) | 51.94% [M1] |\n| Max drawdown (5y) | -66.34% [M1] |\n| Beta vs SPY (5y) | 2.14 [M2] |\n| Market cap ($bn) | 5,216.93 [F2] |\n| P/E (TTM) | 27.05x [F2] |\n| Price / sales (TTM) | 17.22x [F2] |\n| FCF yield | 1.85% [F2] |\n| Revenue, latest FY ($bn) | 215.94 [F1] |\n| Revenue growth, latest FY | 65.47% [F1] |\n| Operating margin, latest FY | 60.38% [F1] |\n| 10-day VaR 95% (historical) | 14.27% [R1] |\n| 10-day VaR 95% (filtered historical simulation) | 7.27% [R1] |\n\n## Evidence ledger\n\n| ID | Agent | Tool call | Chosen by | Source | Data retrieved |\n|---|---|---|---|---|---|\n| F1 | fundamentals | `financial_statements(ticker=NVDA, years=3)` | model | SEC EDGAR XBRL company facts | 2026-10-21 21:15:59 UTC |\n| F2 | fundamentals | `valuation_snapshot(ticker=NVDA)` | model | SEC EDGAR XBRL + Yahoo Finance price | 2026-10-21 21:15:59 UTC |\n| M1 | market | `price_performance(ticker=NVDA, period=5y)` | model | Yahoo Finance daily prices; US Treasury bill rates | 2026-10-21 21:17:11 UTC |\n| M2 | market | `benchmark_comparison(ticker=NVDA, benchmark=SPY, period=5y)` | model | Yahoo Finance daily prices | 2026-10-21 21:17:11 UTC |\n| R1 | risk | `value_at_risk(tickers=['NVDA'], confidence=0.95, horizon_days=10)` | model | computed from 5y daily prices | 2026-10-22 09:45:26 UTC |\n| R2 | risk | `stress_test(tickers=['NVDA'])` | model | computed from 10y daily prices | 2026-10-22 09:42:42 UTC |\n| D1 | filings | `search_10k(ticker=NVDA, query=competition)` | model | https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm | 2026-10-21 21:15:59 UTC |\n| D2 | filings | `search_10k(ticker=NVDA, query=supply chain)` | model | https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm | 2026-10-21 21:15:59 UTC |\n\n## How this note was produced\n\n- **Number provenance:** 44 of 44 numbers trace back to a tool result the agent received (100%).\n- **Claim attribution:** 27 of 27 cited claims match their source (company, period, metric, direction; 10-K points by wording) (100%).\n- **Agents:** planner \u2192 fundamentals, market, risk, filings \u2192 fact-check \u2192 1 revision(s) \u2192 lead analyst.\n- **Tool calls:** 8 (all chosen by the models).\n- **Data:** 14 sources, all fetched or cached within their freshness window. Retrieval times are in the evidence ledger.\n- **Language model:** 11 calls, 10,046 prompt + 1,659 completion tokens, 125.0 s of model time; 125.2 s end to end.\n- **Compute:** risk simulation on CPU (NumPy); 10-K retrieval: BM25; endpoint `http://127.0.0.1:11434/v1`.\n",
   "stats": {
     "llm_calls": 11,
-    "prompt_tokens": 9933,
-    "completion_tokens": 1633,
-    "model_seconds": 134.4,
-    "wall_seconds": 134.7,
+    "prompt_tokens": 10046,
+    "completion_tokens": 1659,
+    "model_seconds": 125.0,
+    "wall_seconds": 125.2,
     "tool_calls": 8,
     "tool_calls_chosen_by_model": 8,
     "revisions": 1,
@@ -741,8 +790,8 @@
     "orchestrator_model": "nemotron-3-nano:4b-cpu",
     "specialist_model": "nemotron-3-nano:4b-cpu",
     "quality": {
-      "numbers_checked": 42,
-      "numbers_traced": 42,
+      "numbers_checked": 44,
+      "numbers_traced": 44,
       "number_provenance": 1.0,
       "claims_checked": 27,
       "claims_supported": 27,
@@ -750,8 +799,8 @@
       "claim_issues": []
     },
     "provenance": {
-      "checked": 42,
-      "verified": 42,
+      "checked": 44,
+      "verified": 44,
       "score": 1.0,
       "unverified": []
     },
@@ -760,14 +809,14 @@
   "eval": null,
   "events": [
     {
-      "t": 1792658835.36,
+      "t": 1792665325.08,
       "event": "guard",
       "allowed": true,
       "personal_advice": false,
       "rail": "rules"
     },
     {
-      "t": 1792658844.75,
+      "t": 1792665332.82,
       "event": "plan",
       "tasks": [
         {
@@ -790,47 +839,47 @@
       "source": "model"
     },
     {
-      "t": 1792658844.76,
+      "t": 1792665332.84,
       "event": "agent_start",
       "agent": "fundamentals",
       "title": "Fundamentals Analyst",
       "focus": "NVIDIA's revenue growth and margins versus its current P/E and price-to-sales multiples"
     },
     {
-      "t": 1792658844.76,
+      "t": 1792665332.84,
       "event": "agent_start",
       "agent": "market",
       "title": "Market Analyst",
       "focus": "how much of NVIDIA's growth is already priced in through its stock price and volatility"
     },
     {
-      "t": 1792658844.76,
+      "t": 1792665332.84,
       "event": "agent_start",
       "agent": "risk",
       "title": "Risk Analyst",
       "focus": "Value at Risk and expected shortfall under downside scenarios, including potential market saturation"
     },
     {
-      "t": 1792658844.76,
+      "t": 1792665332.84,
       "event": "agent_start",
       "agent": "filings",
       "title": "Filings Analyst",
       "focus": "risks and business challenges highlighted in NVIDIA's latest 10-K, such as competition and supply constraints"
     },
     {
-      "t": 1792658852.39,
+      "t": 1792665339.72,
       "event": "llm",
       "agent": "fundamentals",
       "tool_calls": [
         "financial_statements",
         "valuation_snapshot"
       ],
-      "latency_s": 7.63,
-      "prompt_tokens": 662,
+      "latency_s": 6.88,
+      "prompt_tokens": 692,
       "completion_tokens": 65
     },
     {
-      "t": 1792658852.54,
+      "t": 1792665339.79,
       "event": "tool",
       "agent": "fundamentals",
       "id": "F1",
@@ -839,13 +888,13 @@
         "ticker": "NVDA",
         "years": 3
       },
-      "seconds": 0.15,
+      "seconds": 0.06,
       "chosen_by": "model",
       "error": null,
       "stale": false
     },
     {
-      "t": 1792658852.73,
+      "t": 1792665339.85,
       "event": "tool",
       "agent": "fundamentals",
       "id": "F2",
@@ -853,25 +902,25 @@
       "args": {
         "ticker": "NVDA"
       },
-      "seconds": 0.19,
+      "seconds": 0.06,
       "chosen_by": "model",
       "error": null,
       "stale": false
     },
     {
-      "t": 1792658860.47,
+      "t": 1792665347.12,
       "event": "llm",
       "agent": "market",
       "tool_calls": [
         "price_performance",
         "benchmark_comparison"
       ],
-      "latency_s": 8.08,
+      "latency_s": 7.4,
       "prompt_tokens": 624,
       "completion_tokens": 88
     },
     {
-      "t": 1792658860.58,
+      "t": 1792665347.2,
       "event": "tool",
       "agent": "market",
       "id": "M1",
@@ -880,13 +929,13 @@
         "ticker": "NVDA",
         "period": "5y"
       },
-      "seconds": 0.11,
+      "seconds": 0.07,
       "chosen_by": "model",
       "error": null,
       "stale": false
     },
     {
-      "t": 1792658860.6,
+      "t": 1792665347.22,
       "event": "tool",
       "agent": "market",
       "id": "M2",
@@ -902,19 +951,19 @@
       "stale": false
     },
     {
-      "t": 1792658868.16,
+      "t": 1792665354.61,
       "event": "llm",
       "agent": "risk",
       "tool_calls": [
         "value_at_risk",
         "stress_test"
       ],
-      "latency_s": 7.69,
+      "latency_s": 7.49,
       "prompt_tokens": 674,
       "completion_tokens": 83
     },
     {
-      "t": 1792658868.22,
+      "t": 1792665354.65,
       "event": "tool",
       "agent": "risk",
       "id": "R1",
@@ -926,13 +975,13 @@
         "confidence": 0.95,
         "horizon_days": 10
       },
-      "seconds": 0.06,
+      "seconds": 0.04,
       "chosen_by": "model",
       "error": null,
       "stale": false
     },
     {
-      "t": 1792658868.23,
+      "t": 1792665354.66,
       "event": "tool",
       "agent": "risk",
       "id": "R2",
@@ -948,19 +997,19 @@
       "stale": false
     },
     {
-      "t": 1792658874.06,
+      "t": 1792665360.31,
       "event": "llm",
       "agent": "filings",
       "tool_calls": [
         "search_10k",
         "search_10k"
       ],
-      "latency_s": 5.9,
+      "latency_s": 5.69,
       "prompt_tokens": 461,
       "completion_tokens": 81
     },
     {
-      "t": 1792658874.54,
+      "t": 1792665360.62,
       "event": "tool",
       "agent": "filings",
       "id": "D1",
@@ -969,13 +1018,13 @@
         "ticker": "NVDA",
         "query": "competition"
       },
-      "seconds": 0.48,
+      "seconds": 0.32,
       "chosen_by": "model",
       "error": null,
       "stale": false
     },
     {
-      "t": 1792658874.55,
+      "t": 1792665360.62,
       "event": "tool",
       "agent": "filings",
       "id": "D2",
@@ -990,67 +1039,67 @@
       "stale": false
     },
     {
-      "t": 1792658888.96,
+      "t": 1792665374.56,
       "event": "llm",
       "agent": "fundamentals",
       "tool_calls": [],
-      "latency_s": 14.9,
-      "prompt_tokens": 1337,
+      "latency_s": 14.26,
+      "prompt_tokens": 1368,
       "completion_tokens": 156
     },
     {
-      "t": 1792658888.96,
+      "t": 1792665374.56,
       "event": "agent_done",
       "agent": "fundamentals",
-      "seconds": 44.2
+      "seconds": 41.7
     },
     {
-      "t": 1792658902.61,
+      "t": 1792665387.7,
       "event": "llm",
       "agent": "market",
       "tool_calls": [],
-      "latency_s": 13.65,
-      "prompt_tokens": 1131,
-      "completion_tokens": 130
+      "latency_s": 13.14,
+      "prompt_tokens": 1144,
+      "completion_tokens": 155
     },
     {
-      "t": 1792658902.61,
+      "t": 1792665387.7,
       "event": "agent_done",
       "agent": "market",
-      "seconds": 57.8
+      "seconds": 54.9
     },
     {
-      "t": 1792658920.82,
+      "t": 1792665403.96,
       "event": "llm",
       "agent": "risk",
       "tool_calls": [],
-      "latency_s": 18.22,
+      "latency_s": 16.26,
       "prompt_tokens": 1282,
       "completion_tokens": 219
     },
     {
-      "t": 1792658920.82,
+      "t": 1792665403.96,
       "event": "agent_done",
       "agent": "risk",
-      "seconds": 76.1
+      "seconds": 71.1
     },
     {
-      "t": 1792658934.1,
+      "t": 1792665416.02,
       "event": "llm",
       "agent": "filings",
       "tool_calls": [],
-      "latency_s": 13.28,
+      "latency_s": 12.06,
       "prompt_tokens": 1419,
       "completion_tokens": 86
     },
     {
-      "t": 1792658934.1,
+      "t": 1792665416.02,
       "event": "agent_done",
       "agent": "filings",
-      "seconds": 89.3
+      "seconds": 83.2
     },
     {
-      "t": 1792658934.12,
+      "t": 1792665416.03,
       "event": "verify",
       "agent": "fundamentals",
       "checked": 9,
@@ -1066,11 +1115,11 @@
       ]
     },
     {
-      "t": 1792658934.12,
+      "t": 1792665416.03,
       "event": "verify",
       "agent": "market",
-      "checked": 5,
-      "verified": 5,
+      "checked": 7,
+      "verified": 7,
       "score": 1.0,
       "unverified": [],
       "miscited": [],
@@ -1079,7 +1128,7 @@
       "claim_issues": []
     },
     {
-      "t": 1792658934.12,
+      "t": 1792665416.04,
       "event": "verify",
       "agent": "risk",
       "checked": 11,
@@ -1092,7 +1141,7 @@
       "claim_issues": []
     },
     {
-      "t": 1792658934.13,
+      "t": 1792665416.04,
       "event": "verify",
       "agent": "filings",
       "checked": 0,
@@ -1105,7 +1154,7 @@
       "claim_issues": []
     },
     {
-      "t": 1792658934.13,
+      "t": 1792665416.04,
       "event": "revise",
       "agent": "fundamentals",
       "problems": [
@@ -1114,17 +1163,17 @@
       ]
     },
     {
-      "t": 1792658951.56,
+      "t": 1792665432.25,
       "event": "llm",
       "agent": "fundamentals",
       "tool_calls": [],
       "revision": true,
-      "latency_s": 17.43,
-      "prompt_tokens": 1131,
-      "completion_tokens": 239
+      "latency_s": 16.21,
+      "prompt_tokens": 1132,
+      "completion_tokens": 240
     },
     {
-      "t": 1792658951.57,
+      "t": 1792665432.26,
       "event": "verify",
       "agent": "fundamentals",
       "checked": 11,
@@ -1138,23 +1187,23 @@
       "after_revision": true
     },
     {
-      "t": 1792658951.57,
+      "t": 1792665432.26,
       "event": "agent_start",
       "agent": "writer",
       "title": "Lead Analyst",
       "focus": "summary"
     },
     {
-      "t": 1792658970.08,
+      "t": 1792665450.23,
       "event": "llm",
       "agent": "writer",
       "tool_calls": [],
-      "latency_s": 18.51,
-      "prompt_tokens": 954,
+      "latency_s": 17.98,
+      "prompt_tokens": 992,
       "completion_tokens": 329
     },
     {
-      "t": 1792658970.09,
+      "t": 1792665450.24,
       "event": "verify",
       "agent": "writer",
       "checked": 15,
@@ -1167,14 +1216,14 @@
       "claim_issues": []
     },
     {
-      "t": 1792658970.15,
+      "t": 1792665450.3,
       "event": "done",
       "stats": {
         "llm_calls": 11,
-        "prompt_tokens": 9933,
-        "completion_tokens": 1633,
-        "model_seconds": 134.4,
-        "wall_seconds": 134.7,
+        "prompt_tokens": 10046,
+        "completion_tokens": 1659,
+        "model_seconds": 125.0,
+        "wall_seconds": 125.2,
         "tool_calls": 8,
         "tool_calls_chosen_by_model": 8,
         "revisions": 1,
@@ -1188,8 +1237,8 @@
         "orchestrator_model": "nemotron-3-nano:4b-cpu",
         "specialist_model": "nemotron-3-nano:4b-cpu",
         "quality": {
-          "numbers_checked": 42,
-          "numbers_traced": 42,
+          "numbers_checked": 44,
+          "numbers_traced": 44,
           "number_provenance": 1.0,
           "claims_checked": 27,
           "claims_supported": 27,
@@ -1197,8 +1246,8 @@
           "claim_issues": []
         },
         "provenance": {
-          "checked": 42,
-          "verified": 42,
+          "checked": 44,
+          "verified": 44,
           "score": 1.0,
           "unverified": []
         },

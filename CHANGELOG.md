@@ -1,5 +1,44 @@
 # Changelog
 
+## 0.3.0 — 2026-10-22
+
+The tools, checked against what they measure; exercises on what the checks miss; and the
+project described as what it is, a teaching tool.
+
+The fact-checks compare what a model writes with what the tools return, so they cannot
+catch a tool that measures the wrong thing. Fixes in the tools:
+
+- Banks, brokers and insurers (SEC industry codes 6000-6499, from EDGAR's submissions
+  data) get price-to-book and return on equity instead of enterprise value, EV-to-sales,
+  price-to-sales and free cash flow, which do not mean the same for them.
+- A missing debt tag gives no enterprise value, not a debt of zero.
+- Total revenues win over contract revenue reported for the same year (Berkshire
+  Hathaway: $371bn, not $247bn).
+- Year-end balances are found when a later 10-Q repeats them.
+- Stress tests compound the weighted daily returns, rebalanced daily, instead of
+  following a buy-and-hold index started ten years earlier, whose weights had drifted far
+  from the stated ones by any crash window.
+- Alpha and beta come from returns in excess of the T-bill rate.
+- Price levels (52-week high, 200-day average, market cap) use actual closes; returns use
+  adjusted closes, and a missing adjusted series is recorded in the evidence.
+
+Lab and documentation:
+
+- Exercises 4.3-4.5: a null baseline for number tracing, negated 10-K claims that pass the
+  wording check, and a note that is fully traced but wrong. The weaknesses stay in `main`
+  so the exercises work; worked solutions and fixes are on the `solutions` branch.
+- README: the measurements are worked examples of how to measure an agentic system, and
+  the limitations list what the checks cannot see.
+- The 24-run measurement was re-run on 0.3.0 and the example runs refreshed. The 0.2.2
+  runs stay in `eval/results/`; one of them is Exercise 4.5.
+
+Packaging:
+
+- CI installs the exact versions in `uv.lock`; upper bounds at the next major version for
+  openai, langgraph, numpy and pandas.
+- CITATION.cff; package description and authors.
+- 138 offline tests.
+
 ## 0.2.3 — 2026-10-22
 
 Two false alarms in the claim checker, found in the pilot's 0.2.2 runs, and the pilot

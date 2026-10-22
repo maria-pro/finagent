@@ -1,0 +1,1045 @@
+{
+  "tickers": [
+    "GOOGL"
+  ],
+  "question": "How risky is GOOGL for a long-term investor, and what does its 10-K flag?",
+  "guard": {
+    "allowed": true,
+    "personal_advice": false,
+    "rail": "rules"
+  },
+  "plan": [
+    {
+      "agent": "risk",
+      "focus": "Value at Risk and expected shortfall to quantify downside potential"
+    },
+    {
+      "agent": "fundamentals",
+      "focus": "cash flow stability and margin trends to assess long-term resilience"
+    },
+    {
+      "agent": "filings",
+      "focus": "any explicit risk disclosures in the 10-K regarding long-term liabilities or competitive threats"
+    }
+  ],
+  "plan_source": "model",
+  "findings": {
+    "risk": {
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall to quantify downside potential",
+      "text": "- GOOGL 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 8.86% of value [R1]  \n- GOOGL 95% 10-day expected shortfall, historical: 10.74% [R1]  \n- GOOGL 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 6.43% [R1]  \n- GOOGL 95% 10-day expected shortfall, filtered historical simulation: 8.93% [R1]  \n- GOOGL 3-year beta vs SPY: 1.15; a 20% SPY fall implies about -23.02% [R2]  \n\nThe risk profile is moderate with historical stress events showing significant downside potential.",
+      "draft": "- GOOGL 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 8.86% of value [R1]  \n- GOOGL 95% 10-day expected shortfall, historical: 10.74% [R1]  \n- GOOGL 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 6.43% [R1]  \n- GOOGL 95% 10-day expected shortfall, filtered historical simulation: 8.93% [R1]  \n- GOOGL 3-year beta vs SPY: 1.15; a 20% SPY fall implies about -23.02% [R2]  \n\nThe risk profile is moderate with historical stress events showing significant downside potential.",
+      "seconds": 79.6,
+      "provenance": {
+        "checked": 11,
+        "verified": 11,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "fundamentals": {
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "cash flow stability and margin trends to assess long-term resilience",
+      "text": "- GOOGL FY ending 2025-12-31: free cash flow $73.27bn [F1]  \n- GOOGL FY ending 2025-12-31: operating margin 32.03% [F1]  \n- GOOGL FY ending 2025-12-31: net margin 32.81% [F1]  \n- GOOGL cash and current securities $242.47bn vs total debt $100.16bn [F2]  \n- GOOGL free-cash-flow yield: 1.76% (last fiscal year FCF $73.27bn) [F2]  \n\nThe company demonstrates strong cash generation and a healthy balance sheet, suggesting resilience for long-term investors.",
+      "draft": "- GOOGL FY ending 2025-12-31: free cash flow $73.27bn [F1]  \n- GOOGL FY ending 2025-12-31: operating margin 32.03% [F1]  \n- GOOGL FY ending 2025-12-31: net margin 32.81% [F1]  \n- GOOGL cash and current securities $242.47bn vs total debt $100.16bn [F2]  \n- GOOGL free-cash-flow yield: 1.76% (last fiscal year FCF $73.27bn) [F2]  \n\nThe company demonstrates strong cash generation and a healthy balance sheet, suggesting resilience for long-term investors.",
+      "seconds": 93.0,
+      "provenance": {
+        "checked": 7,
+        "verified": 7,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "filings": {
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "any explicit risk disclosures in the 10-K regarding long-term liabilities or competitive threats",
+      "text": "- Total undiscounted future lease payments under finance leases was $2.9 billion, of which $491 million is short-term [D1]  \n- Accrued legal and regulatory fines and settlements as of December 31, 2025, were $15.6 billion [D1]  \n- Long-term income taxes payable were $9.5 billion primarily related to unrecognized tax benefits [D1]  \n- Risk of cyber attacks, data exfiltration, or compromise by nation-states and state-sponsored actors [D2]",
+      "draft": "- Total undiscounted future lease payments under finance leases was $2.9 billion, of which $491 million is short-term [D1]  \n- Accrued legal and regulatory fines and settlements as of December 31, 2025, were $15.6 billion [D1]  \n- Long-term income taxes payable were $9.5 billion primarily related to unrecognized tax benefits [D1]  \n- Risk of cyber attacks, data exfiltration, or compromise by nation-states and state-sponsored actors [D2]",
+      "seconds": 66.5,
+      "provenance": {
+        "checked": 4,
+        "verified": 4,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 4,
+        "supported": 4,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    }
+  },
+  "evidence": [
+    {
+      "id": "R1",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "GOOGL"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "result": {
+        "portfolio": {
+          "GOOGL": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 8.86,
+        "historical_cvar_pct": 10.74,
+        "fhs_var_pct": 6.43,
+        "fhs_cvar_pct": 8.93,
+        "fhs_prob_loss_over_10pct": 1.17,
+        "current_vol_pct": 22.81,
+        "average_vol_pct": 32.15,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "price_basis": "returns from dividend- and split-adjusted closes",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 27.5,
+        "facts": [
+          "GOOGL 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 8.86% of value",
+          "GOOGL 95% 10-day expected shortfall, historical: 10.74%",
+          "GOOGL 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 6.43%",
+          "GOOGL 95% 10-day expected shortfall, filtered historical simulation: 8.93%",
+          "GOOGL current volatility 22.81% vs 5-year average 32.15% (annualized)",
+          "GOOGL probability of losing more than 10% over 10 days (filtered historical simulation): 1.17%"
+        ]
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/GOOGL?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:09:18Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R2",
+      "agent": "risk",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "GOOGL"
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "GOOGL": 1.0
+        },
+        "episodes": [
+          {
+            "episode": "2018 Q4 sell-off",
+            "portfolio_return_pct": -17.36,
+            "spy_return_pct": -19.35
+          },
+          {
+            "episode": "2020 COVID crash",
+            "portfolio_return_pct": -30.87,
+            "spy_return_pct": -33.72
+          },
+          {
+            "episode": "2022 rate-hike bear market",
+            "portfolio_return_pct": -32.71,
+            "spy_return_pct": -24.5
+          }
+        ],
+        "beta_vs_spy_3y": 1.15,
+        "beta_implied_move_if_spy_falls_20pct": -23.02,
+        "method": "daily returns compounded over each window",
+        "price_basis": "returns from dividend- and split-adjusted closes",
+        "facts": [
+          "GOOGL in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -17.36% vs SPY -19.35%",
+          "GOOGL in the 2020 COVID crash (2020-02-19 to 2020-03-23): -30.87% vs SPY -33.72%",
+          "GOOGL in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -32.71% vs SPY -24.5%",
+          "GOOGL 3-year beta vs SPY: 1.15; a 20% SPY fall implies about -23.02%"
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/GOOGL?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:09:12Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T09:42:42Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F1",
+      "agent": "fundamentals",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "GOOGL",
+        "years": 5
+      },
+      "result": {
+        "ticker": "GOOGL",
+        "company": "Alphabet Inc.",
+        "industry": "SIC 7370 Services-Computer Programming, Data Processing, Etc.",
+        "source": "SEC XBRL company facts (10-K)",
+        "fiscal_years": [
+          {
+            "fiscal_year_end": "2021-12-31",
+            "revenue_bn": 257.64,
+            "revenue_growth_pct": 41.15,
+            "gross_margin_pct": null,
+            "operating_margin_pct": 30.55,
+            "net_income_bn": 76.03,
+            "net_margin_pct": 29.51,
+            "eps_diluted": 5.61,
+            "rnd_pct_of_revenue": 12.25,
+            "free_cash_flow_bn": 67.01
+          },
+          {
+            "fiscal_year_end": "2022-12-31",
+            "revenue_bn": 282.84,
+            "revenue_growth_pct": 9.78,
+            "gross_margin_pct": null,
+            "operating_margin_pct": 26.46,
+            "net_income_bn": 59.97,
+            "net_margin_pct": 21.2,
+            "eps_diluted": 4.56,
+            "rnd_pct_of_revenue": 13.97,
+            "free_cash_flow_bn": 60.01
+          },
+          {
+            "fiscal_year_end": "2023-12-31",
+            "revenue_bn": 307.39,
+            "revenue_growth_pct": 8.68,
+            "gross_margin_pct": null,
+            "operating_margin_pct": 27.42,
+            "net_income_bn": 73.8,
+            "net_margin_pct": 24.01,
+            "eps_diluted": 5.8,
+            "rnd_pct_of_revenue": 14.78,
+            "free_cash_flow_bn": 69.5
+          },
+          {
+            "fiscal_year_end": "2024-12-31",
+            "revenue_bn": 350.02,
+            "revenue_growth_pct": 13.87,
+            "gross_margin_pct": null,
+            "operating_margin_pct": 32.11,
+            "net_income_bn": 100.12,
+            "net_margin_pct": 28.6,
+            "eps_diluted": 8.04,
+            "rnd_pct_of_revenue": 14.09,
+            "free_cash_flow_bn": 72.76
+          },
+          {
+            "fiscal_year_end": "2025-12-31",
+            "revenue_bn": 402.84,
+            "revenue_growth_pct": 15.09,
+            "gross_margin_pct": null,
+            "operating_margin_pct": 32.03,
+            "net_income_bn": 132.17,
+            "net_margin_pct": 32.81,
+            "eps_diluted": 10.81,
+            "rnd_pct_of_revenue": 15.16,
+            "free_cash_flow_bn": 73.27
+          }
+        ],
+        "revenue_cagr_pct": 11.82,
+        "net_income_includes_nci": false,
+        "xbrl_sources": {
+          "revenue": "Revenues (10-K 0001652044-26-000018, filed 2026-02-05)",
+          "operating_income": "OperatingIncomeLoss (10-K 0001652044-26-000018, filed 2026-02-05)",
+          "net_income": "NetIncomeLoss (10-K 0001652044-26-000018, filed 2026-02-05)",
+          "eps_diluted": "EarningsPerShareDiluted (10-K 0001652044-26-000018, filed 2026-02-05)",
+          "rnd": "ResearchAndDevelopmentExpense (10-K 0001652044-26-000018, filed 2026-02-05)",
+          "operating_cash_flow": "NetCashProvidedByUsedInOperatingActivities (10-K 0001652044-26-000018, filed 2026-02-05)",
+          "capex": "PaymentsToAcquirePropertyPlantAndEquipment (10-K 0001652044-26-000018, filed 2026-02-05)"
+        },
+        "filing_urls": [
+          "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/"
+        ],
+        "facts": [
+          "GOOGL FY ending 2025-12-31: revenue $402.84bn, up 15.09% year on year",
+          "GOOGL FY ending 2025-12-31: operating margin 32.03%, net margin 32.81%",
+          "GOOGL FY ending 2025-12-31: net income $132.17bn, diluted EPS $10.81, free cash flow $73.27bn",
+          "GOOGL FY ending 2024-12-31: revenue $350.02bn (growth 13.87%), operating margin 32.11%",
+          "GOOGL FY ending 2023-12-31: revenue $307.39bn (growth 8.68%), operating margin 27.42%",
+          "GOOGL FY ending 2022-12-31: revenue $282.84bn (growth 9.78%), operating margin 26.46%",
+          "GOOGL FY ending 2021-12-31: revenue $257.64bn (growth 41.15%), operating margin 30.55%",
+          "GOOGL revenue CAGR from FY 2021 to FY 2025: 11.82%"
+        ]
+      },
+      "seconds": 0.06,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+          "fetched_at": "2026-10-21T21:25:55Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001652044.json",
+          "fetched_at": "2026-10-22T06:09:22Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F2",
+      "agent": "fundamentals",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "GOOGL"
+      },
+      "result": {
+        "ticker": "GOOGL",
+        "company": "Alphabet Inc.",
+        "industry": "SIC 7370 Services-Computer Programming, Data Processing, Etc.",
+        "price": 340.28,
+        "price_date": "2026-10-20",
+        "shares_outstanding_bn": 12.23,
+        "market_cap_bn": 4161.62,
+        "ttm_revenue_bn": 445.87,
+        "ttm_net_income_bn": 244.21,
+        "ttm_period_end": "2026-06-30",
+        "pe_ratio_ttm": 17.04,
+        "net_income_includes_nci": false,
+        "price_to_sales_ttm": 9.33,
+        "balance_sheet_date": "2026-06-30",
+        "cash_and_securities_bn": 242.47,
+        "total_debt_bn": 100.16,
+        "enterprise_value_bn": 4019.31,
+        "ev_to_sales_ttm": 9.01,
+        "free_cash_flow_last_fy_bn": 73.27,
+        "fcf_yield_pct": 1.76,
+        "method": "market cap = closing price x CommonStockSharesOutstanding shares; TTM = FY to 2025-12-31 + YTD to 2026-06-30 - prior-year YTD; debt = LongTermDebtNoncurrent + LongTermDebtCurrent + CommercialPaper as of 2026-06-30; leases excluded",
+        "xbrl_sources": {
+          "revenue_ttm": "Revenues ['0001652044-26-000018', '0001652044-26-000071']",
+          "net_income_ttm": "NetIncomeLoss ['0001652044-26-000018', '0001652044-26-000071']",
+          "balance_sheet": [
+            "CashAndCashEquivalentsAtCarryingValue (10-Q 0001652044-26-000071, filed 2026-07-23)",
+            "MarketableSecuritiesCurrent (10-Q 0001652044-26-000071, filed 2026-07-23)",
+            "LongTermDebtNoncurrent (10-Q 0001652044-26-000071, filed 2026-07-23)",
+            "LongTermDebtCurrent (10-Q 0001652044-26-000071, filed 2026-07-23)",
+            "CommercialPaper (10-Q 0001652044-26-000071, filed 2026-07-23)"
+          ]
+        },
+        "facts": [
+          "GOOGL market cap: $4161.62bn at $340.28 per share (2026-10-20 close)",
+          "GOOGL P/E (trailing 12 months): 17.04",
+          "GOOGL price-to-sales (trailing 12 months): 9.33; EV-to-sales: 9.01",
+          "GOOGL trailing-12-month revenue $445.87bn and net income $244.21bn (to 2026-06-30)",
+          "GOOGL free-cash-flow yield: 1.76% (last fiscal year FCF $73.27bn)",
+          "GOOGL cash and current securities $242.47bn vs total debt $100.16bn (balance sheet 2026-06-30); enterprise value $4019.31bn"
+        ]
+      },
+      "seconds": 0.06,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+          "fetched_at": "2026-10-21T21:25:55Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001652044.json",
+          "fetched_at": "2026-10-22T06:09:22Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/GOOGL?range=1y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:09:04Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D1",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "GOOGL",
+        "query": "long-term liabilities risk"
+      },
+      "result": {
+        "ticker": "GOOGL",
+        "filing": "10-K filed 2026-02-05 (period 2025-12-31)",
+        "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "mda#35",
+            "text": "... Leases As of December 31, 2025, the amount of total undiscounted future lease payments under operating leases was $18.3 billion, of which $3.3 billion is short-term, and total undiscounted future lease payments under finance leases was $2.9 billion, of which $491 million is short-term. As of December 31, 2025, we have entered into leases primarily related to data centers that have not yet commenced with short-term and long-term future lease payments of $5.8 billion and $52.7 billion, respectively. ..."
+          },
+          {
+            "ref": "risk_factors#64",
+            "text": "Our acquisitions and other strategic arrangements could also result in dilutive issuances of our equity securities, the incurrence of debt, contingent liabilities, or amortization expenses, or impairment of goodwill or purchased long-lived assets, and restructuring charges, any of which could harm our financial condition and operating results. ..."
+          },
+          {
+            "ref": "mda#40",
+            "text": "Accrued Legal and Regulatory As of December 31, 2025, we had short-term accrued legal and regulatory fines and settlements of $15.6 billion. This amount primarily included EC fines, in addition to accruals related to other legal matters and regulatory fines and settlements. For additional information, see Note 10 of the Notes to Consolidated Financial Statements included in Item 8 of this Annual Report on Form 10-K. 39. Alphabet Inc. Taxes As of December 31, 2025 , we had long-term income taxes payable of $9.5 billion primarily related to unrecognized tax benefits. ..."
+          }
+        ]
+      },
+      "seconds": 0.53,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001652044.json",
+          "fetched_at": "2026-10-22T06:09:22Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+          "fetched_at": "2026-10-22T06:09:22Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D2",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "GOOGL",
+        "query": "competitive threats risk"
+      },
+      "result": {
+        "ticker": "GOOGL",
+        "filing": "10-K filed 2026-02-05 (period 2025-12-31)",
+        "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "risk_factors#30",
+            "text": "Our products and services involve the storage, handling, and transmission of proprietary and other sensitive information. Malicious software such as viruses, software bugs, theft, misuse, defects, vulnerabilities in our products and services, as well as cyber attacks, phishing schemes, and other types of security attacks, which increasingly use AI, expose us to a risk of loss or improper use and disclosure of such information, which could result in litigation and other potential liabilities, including regulatory fines and penalties, as well as reputational harm. ..."
+          },
+          {
+            "ref": "risk_factors#32",
+            "text": "15. Alphabet Inc. and other critical infrastructure, which could affect our or other parties' systems. We expect to continue to experience such incidents or vulnerabilities in the future. Our efforts to prevent security incidents and address undesirable activity on our platform may require us to spend additional resources to prepare and defend against such threats, and could also increase the risk of retaliatory attack. In addition, we face the risk of cyber attacks and data exfiltration or compromise by nation-states and state-sponsored actors. ..."
+          },
+          {
+            "ref": "risk_factors#13",
+            "text": "... The confidentiality of such trade secrets and other sensitive information could be compromised, which could cause us to lose the competitive advantage resulting from these trade secrets. We also face risks associated with our trademarks. For example, there is a risk that the word \"Google\" could become so commonly used that it becomes synonymous with the word \"search.\" Some courts have ruled that \"Google\" is a protectable trademark, but it is possible that other courts, particularly those outside of the US, may reach a different determination. ..."
+          }
+        ]
+      },
+      "seconds": 0.0,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001652044.json",
+          "fetched_at": "2026-10-22T06:09:22Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+          "fetched_at": "2026-10-22T06:09:22Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    }
+  ],
+  "llm_calls": [
+    {
+      "agent": "planner",
+      "role": "planner",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 261,
+      "completion_tokens": 107,
+      "latency_s": 5.9
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 673,
+      "completion_tokens": 57,
+      "latency_s": 6.6
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1056,
+      "completion_tokens": 191,
+      "latency_s": 14.45
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 880,
+      "completion_tokens": 200,
+      "latency_s": 13.08
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 687,
+      "completion_tokens": 39,
+      "latency_s": 6.11
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1206,
+      "completion_tokens": 255,
+      "latency_s": 17.57
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1009,
+      "completion_tokens": 189,
+      "latency_s": 13.36
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 461,
+      "completion_tokens": 85,
+      "latency_s": 6.22
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1606,
+      "completion_tokens": 124,
+      "latency_s": 15.58
+    },
+    {
+      "agent": "writer",
+      "role": "writer",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 804,
+      "completion_tokens": 417,
+      "latency_s": 19.98
+    },
+    {
+      "agent": "writer",
+      "role": "writer",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1403,
+      "completion_tokens": 337,
+      "latency_s": 17.82
+    }
+  ],
+  "narrative": "## Answer  \nGOOGL carries a moderate risk profile with historical stress events showing significant downside potential, as evidenced by a 95% 10-day Value at Risk of 8.86% of value [R1] and a 3-year beta of 1.15 implying a 20% SPY fall would result in about -23.02% [R2]. The company\u2019s balance sheet is healthy, with cash and current securities of $242.47bn versus total debt of $100.16bn [F2].  \n\n## Strengths  \n- GOOGL cash and current securities $242.47bn vs total debt $100.16bn [F2]  \n\n## Risks  \n- Accrued legal and regulatory fines and settlements as of December 31, 2025, were $15.6 billion [D1]  \n- Risk of cyber attacks, data exfiltration, or compromise by nation-states and state-sponsored actors [D2]  \n- Total undiscounted future lease payments under finance leases was $2.9 billion, of which $491 million is short-term [D1]  \n\n## What to watch  \n- Accrued legal and regulatory fines and settlements as of December 31, 2025, were $15.6 billion [D1]  \n- Risk of cyber attacks, data exfiltration, or compromise by nation-states and state-sponsored actors [D2]",
+  "narrative_draft": "## Answer  \nGOOGL carries a moderate risk profile with historical stress events showing significant downside potential, as evidenced by a 95% 10-day Value at Risk of 8.86% of value [R1] and a 3-year beta of 1.15 implying a 20% SPY fall would result in about -23.02% [R2]. The company\u2019s fundamentals are strong, with operating margin at 32.03% and net margin at 32.81% in FY ending 2025-12-31, and a healthy balance sheet with cash and current securities of $242.47bn versus total debt of $100.16bn [F2].  \n\n## Strengths  \n- GOOGL operating margin 32.03% [F1]  \n- GOOGL net margin 32.81% [F1]  \n- GOOGL cash and current securities $242.47bn vs total debt $100.16bn [F2]  \n\n## Risks  \n- Accrued legal and regulatory fines and settlements as of December 31, 2025, were $15.6 billion [D1]  \n- Risk of cyber attacks, data exfiltration, or compromise by nation-states and state-sponsored actors [D2]  \n- Total undiscounted future lease payments under finance leases was $2.9 billion, of which $491 million is short-term [D1]  \n\n## What to watch  \n- Accrued legal and regulatory fines and settlements as of December 31, 2025, were $15.6 billion [D1]  \n- Risk of cyber attacks, data exfiltration, or compromise by nation-states and state-sponsored actors [D2]",
+  "writer_check": {
+    "provenance": {
+      "checked": 13,
+      "verified": 13,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": []
+    },
+    "attribution": {
+      "claims": 8,
+      "supported": 8,
+      "score": 1.0,
+      "issues": []
+    },
+    "problems": []
+  },
+  "revisions": [
+    "writer"
+  ],
+  "report": "# Research note: GOOGL\n**Question:** How risky is GOOGL for a long-term investor, and what does its 10-K flag?\n\n*Generated 2026-10-22 21:05 by FinAgent \u00b7 3 specialist agents \u00b7 models `nemotron-3-nano:4b-cpu` / `nemotron-3-nano:4b-cpu`*\n\n> This note was generated by AI agents for educational purposes. It is general information, not personal financial advice or a recommendation to buy or sell any security. Figures come from public data (SEC EDGAR, US Treasury, Yahoo Finance) and may contain errors; verify before relying on them.\n\n*(revised after fact-check)*\n\n## Answer  \nGOOGL carries a moderate risk profile with historical stress events showing significant downside potential, as evidenced by a 95% 10-day Value at Risk of 8.86% of value [R1] and a 3-year beta of 1.15 implying a 20% SPY fall would result in about -23.02% [R2]. The company\u2019s balance sheet is healthy, with cash and current securities of $242.47bn versus total debt of $100.16bn [F2].  \n\n## Strengths  \n- GOOGL cash and current securities $242.47bn vs total debt $100.16bn [F2]  \n\n## Risks  \n- Accrued legal and regulatory fines and settlements as of December 31, 2025, were $15.6 billion [D1]  \n- Risk of cyber attacks, data exfiltration, or compromise by nation-states and state-sponsored actors [D2]  \n- Total undiscounted future lease payments under finance leases was $2.9 billion, of which $491 million is short-term [D1]  \n\n## What to watch  \n- Accrued legal and regulatory fines and settlements as of December 31, 2025, were $15.6 billion [D1]  \n- Risk of cyber attacks, data exfiltration, or compromise by nation-states and state-sponsored actors [D2]\n\n## Specialist findings\n### Risk Analyst\n*Focus: Value at Risk and expected shortfall to quantify downside potential*\n\n- GOOGL 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 8.86% of value [R1]  \n- GOOGL 95% 10-day expected shortfall, historical: 10.74% [R1]  \n- GOOGL 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 6.43% [R1]  \n- GOOGL 95% 10-day expected shortfall, filtered historical simulation: 8.93% [R1]  \n- GOOGL 3-year beta vs SPY: 1.15; a 20% SPY fall implies about -23.02% [R2]  \n\nThe risk profile is moderate with historical stress events showing significant downside potential.\n\n### Fundamentals Analyst\n*Focus: cash flow stability and margin trends to assess long-term resilience*\n\n- GOOGL FY ending 2025-12-31: free cash flow $73.27bn [F1]  \n- GOOGL FY ending 2025-12-31: operating margin 32.03% [F1]  \n- GOOGL FY ending 2025-12-31: net margin 32.81% [F1]  \n- GOOGL cash and current securities $242.47bn vs total debt $100.16bn [F2]  \n- GOOGL free-cash-flow yield: 1.76% (last fiscal year FCF $73.27bn) [F2]  \n\nThe company demonstrates strong cash generation and a healthy balance sheet, suggesting resilience for long-term investors.\n\n### Filings Analyst\n*Focus: any explicit risk disclosures in the 10-K regarding long-term liabilities or competitive threats*\n\n- Total undiscounted future lease payments under finance leases was $2.9 billion, of which $491 million is short-term [D1]  \n- Accrued legal and regulatory fines and settlements as of December 31, 2025, were $15.6 billion [D1]  \n- Long-term income taxes payable were $9.5 billion primarily related to unrecognized tax benefits [D1]  \n- Risk of cyber attacks, data exfiltration, or compromise by nation-states and state-sponsored actors [D2]\n\n## Key figures (generated from tool outputs, not by a model)\n\n| Metric | GOOGL |\n|---|---|\n| Market cap ($bn) | 4,161.62 [F2] |\n| P/E (TTM) | 17.04x [F2] |\n| Price / sales (TTM) | 9.33x [F2] |\n| FCF yield | 1.76% [F2] |\n| 10-day VaR 95% (historical) | 8.86% [R1] |\n| 10-day VaR 95% (filtered historical simulation) | 6.43% [R1] |\n| Revenue, latest FY ($bn) | 402.84 [F1] |\n| Revenue growth, latest FY | 15.09% [F1] |\n| Operating margin, latest FY | 32.03% [F1] |\n\n## Evidence ledger\n\n| ID | Agent | Tool call | Chosen by | Source | Data retrieved |\n|---|---|---|---|---|---|\n| R1 | risk | `value_at_risk(tickers=['GOOGL'], confidence=0.95, horizon_days=10)` | model | computed from 5y daily prices | 2026-10-22 06:09:18 UTC |\n| R2 | risk | `stress_test(tickers=['GOOGL'])` | coverage check | computed from 10y daily prices | 2026-10-22 06:09:12 UTC |\n| F1 | fundamentals | `financial_statements(ticker=GOOGL, years=5)` | model | SEC EDGAR XBRL company facts | 2026-10-21 21:15:59 UTC |\n| F2 | fundamentals | `valuation_snapshot(ticker=GOOGL)` | coverage check | SEC EDGAR XBRL + Yahoo Finance price | 2026-10-21 21:15:59 UTC |\n| D1 | filings | `search_10k(ticker=GOOGL, query=long-term liabilities risk)` | model | https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm | 2026-10-21 21:15:59 UTC |\n| D2 | filings | `search_10k(ticker=GOOGL, query=competitive threats risk)` | model | https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm | 2026-10-21 21:15:59 UTC |\n\n## How this note was produced\n\n- **Number provenance:** 35 of 35 numbers trace back to a tool result the agent received (100%).\n- **Claim attribution:** 22 of 22 cited claims match their source (company, period, metric, direction; 10-K points by wording) (100%).\n- **Agents:** planner \u2192 risk, fundamentals, filings \u2192 fact-check \u2192 1 revision(s) \u2192 lead analyst.\n- **Tool calls:** 6 (4 chosen by the models, 2 added by coverage checks).\n- **Data:** 8 sources, all fetched or cached within their freshness window. Retrieval times are in the evidence ledger.\n- **Language model:** 11 calls, 10,046 prompt + 2,001 completion tokens, 136.7 s of model time; 136.7 s end to end.\n- **Compute:** risk simulation on CPU (NumPy); 10-K retrieval: BM25; endpoint `http://127.0.0.1:11434/v1`.\n",
+  "stats": {
+    "llm_calls": 11,
+    "prompt_tokens": 10046,
+    "completion_tokens": 2001,
+    "model_seconds": 136.7,
+    "wall_seconds": 136.7,
+    "tool_calls": 6,
+    "tool_calls_chosen_by_model": 4,
+    "revisions": 1,
+    "risk_backend": "CPU (NumPy)",
+    "retrieval": "BM25",
+    "data_sources": 8,
+    "stale_sources": [],
+    "dropped_params": [],
+    "ablations": [],
+    "endpoint": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "quality": {
+      "numbers_checked": 35,
+      "numbers_traced": 35,
+      "number_provenance": 1.0,
+      "claims_checked": 22,
+      "claims_supported": 22,
+      "claim_attribution": 1.0,
+      "claim_issues": []
+    },
+    "provenance": {
+      "checked": 35,
+      "verified": 35,
+      "score": 1.0,
+      "unverified": []
+    },
+    "promissory_phrases": []
+  },
+  "eval": {
+    "ticker": "GOOGL",
+    "question": "risk",
+    "variant": "full",
+    "version": "0.3.0"
+  },
+  "events": [
+    {
+      "t": 1792663413.34,
+      "event": "guard",
+      "allowed": true,
+      "personal_advice": false,
+      "rail": "rules"
+    },
+    {
+      "t": 1792663419.25,
+      "event": "plan",
+      "tasks": [
+        {
+          "agent": "risk",
+          "focus": "Value at Risk and expected shortfall to quantify downside potential"
+        },
+        {
+          "agent": "fundamentals",
+          "focus": "cash flow stability and margin trends to assess long-term resilience"
+        },
+        {
+          "agent": "filings",
+          "focus": "any explicit risk disclosures in the 10-K regarding long-term liabilities or competitive threats"
+        }
+      ],
+      "source": "model"
+    },
+    {
+      "t": 1792663419.25,
+      "event": "agent_start",
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall to quantify downside potential"
+    },
+    {
+      "t": 1792663419.25,
+      "event": "agent_start",
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "cash flow stability and margin trends to assess long-term resilience"
+    },
+    {
+      "t": 1792663419.25,
+      "event": "agent_start",
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "any explicit risk disclosures in the 10-K regarding long-term liabilities or competitive threats"
+    },
+    {
+      "t": 1792663425.85,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [
+        "value_at_risk"
+      ],
+      "latency_s": 6.6,
+      "prompt_tokens": 673,
+      "completion_tokens": 57
+    },
+    {
+      "t": 1792663425.9,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R1",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "GOOGL"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792663431.96,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [
+        "financial_statements"
+      ],
+      "latency_s": 6.11,
+      "prompt_tokens": 687,
+      "completion_tokens": 39
+    },
+    {
+      "t": 1792663432.02,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F1",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "GOOGL",
+        "years": 5
+      },
+      "seconds": 0.06,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792663438.18,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [
+        "search_10k",
+        "search_10k"
+      ],
+      "latency_s": 6.22,
+      "prompt_tokens": 461,
+      "completion_tokens": 85
+    },
+    {
+      "t": 1792663438.71,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D1",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "GOOGL",
+        "query": "long-term liabilities risk"
+      },
+      "seconds": 0.53,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792663438.71,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D2",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "GOOGL",
+        "query": "competitive threats risk"
+      },
+      "seconds": 0.0,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792663452.63,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 14.45,
+      "prompt_tokens": 1056,
+      "completion_tokens": 191
+    },
+    {
+      "t": 1792663452.65,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R2",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "GOOGL"
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792663470.2,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 17.57,
+      "prompt_tokens": 1206,
+      "completion_tokens": 255
+    },
+    {
+      "t": 1792663470.26,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F2",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "GOOGL"
+      },
+      "seconds": 0.06,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792663485.78,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [],
+      "latency_s": 15.58,
+      "prompt_tokens": 1606,
+      "completion_tokens": 124
+    },
+    {
+      "t": 1792663485.78,
+      "event": "agent_done",
+      "agent": "filings",
+      "seconds": 66.5
+    },
+    {
+      "t": 1792663498.86,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 13.08,
+      "prompt_tokens": 880,
+      "completion_tokens": 200
+    },
+    {
+      "t": 1792663498.86,
+      "event": "agent_done",
+      "agent": "risk",
+      "seconds": 79.6
+    },
+    {
+      "t": 1792663512.22,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 13.36,
+      "prompt_tokens": 1009,
+      "completion_tokens": 189
+    },
+    {
+      "t": 1792663512.22,
+      "event": "agent_done",
+      "agent": "fundamentals",
+      "seconds": 93.0
+    },
+    {
+      "t": 1792663512.23,
+      "event": "verify",
+      "agent": "risk",
+      "checked": 11,
+      "verified": 11,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792663512.23,
+      "event": "verify",
+      "agent": "fundamentals",
+      "checked": 7,
+      "verified": 7,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792663512.24,
+      "event": "verify",
+      "agent": "filings",
+      "checked": 4,
+      "verified": 4,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 4,
+      "claims_supported": 4,
+      "claim_issues": []
+    },
+    {
+      "t": 1792663512.24,
+      "event": "agent_start",
+      "agent": "writer",
+      "title": "Lead Analyst",
+      "focus": "summary"
+    },
+    {
+      "t": 1792663532.21,
+      "event": "llm",
+      "agent": "writer",
+      "tool_calls": [],
+      "latency_s": 19.98,
+      "prompt_tokens": 804,
+      "completion_tokens": 417
+    },
+    {
+      "t": 1792663532.23,
+      "event": "verify",
+      "agent": "writer",
+      "checked": 17,
+      "verified": 17,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 10,
+      "claims_supported": 9,
+      "claim_issues": [
+        "The company\u2019s fundamentals are strong, with operating margin at 32.03% and net m -> 32.03% is not in the cited source; 32.81% is not in the cited source"
+      ]
+    },
+    {
+      "t": 1792663532.23,
+      "event": "revise",
+      "agent": "writer",
+      "problems": [
+        "\"The company\u2019s fundamentals are strong, with operating margin at 32.03% and net margin at 32.81% in FY ending 2\": 32.03% is not in the cited source; 32.81% is not in the cited source. Source says: \"GOOGL cash and current securities $242.47bn vs total debt $100.16bn (balance sheet 2026-06-30); enterprise value $4019.31bn\""
+      ]
+    },
+    {
+      "t": 1792663550.05,
+      "event": "llm",
+      "agent": "writer",
+      "tool_calls": [],
+      "revision": true,
+      "latency_s": 17.82,
+      "prompt_tokens": 1403,
+      "completion_tokens": 337
+    },
+    {
+      "t": 1792663550.06,
+      "event": "verify",
+      "agent": "writer",
+      "checked": 13,
+      "verified": 13,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 8,
+      "claims_supported": 8,
+      "claim_issues": [],
+      "after_revision": true
+    },
+    {
+      "t": 1792663550.11,
+      "event": "done",
+      "stats": {
+        "llm_calls": 11,
+        "prompt_tokens": 10046,
+        "completion_tokens": 2001,
+        "model_seconds": 136.7,
+        "wall_seconds": 136.7,
+        "tool_calls": 6,
+        "tool_calls_chosen_by_model": 4,
+        "revisions": 1,
+        "risk_backend": "CPU (NumPy)",
+        "retrieval": "BM25",
+        "data_sources": 8,
+        "stale_sources": [],
+        "dropped_params": [],
+        "ablations": [],
+        "endpoint": "http://127.0.0.1:11434/v1",
+        "orchestrator_model": "nemotron-3-nano:4b-cpu",
+        "specialist_model": "nemotron-3-nano:4b-cpu",
+        "quality": {
+          "numbers_checked": 35,
+          "numbers_traced": 35,
+          "number_provenance": 1.0,
+          "claims_checked": 22,
+          "claims_supported": 22,
+          "claim_attribution": 1.0,
+          "claim_issues": []
+        },
+        "provenance": {
+          "checked": 35,
+          "verified": 35,
+          "score": 1.0,
+          "unverified": []
+        },
+        "promissory_phrases": []
+      }
+    }
+  ],
+  "settings": {
+    "profile": "local",
+    "base_url": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "temperature": 0.0,
+    "reasoning": false,
+    "ablate": []
+  }
+}

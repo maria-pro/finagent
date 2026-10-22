@@ -1,0 +1,1335 @@
+{
+  "tickers": [
+    "KO"
+  ],
+  "question": "Is KO's valuation justified by its fundamentals, and what are the main risks?",
+  "guard": {
+    "allowed": true,
+    "personal_advice": false,
+    "rail": "rules"
+  },
+  "plan": [
+    {
+      "agent": "fundamentals",
+      "focus": "assess whether KO's P/E and price-to-sales multiples reflect its stable dividend yield and modest revenue growth"
+    },
+    {
+      "agent": "market",
+      "focus": "evaluate how KO's stock price has reacted to its dividend and earnings relative to the S&P 500"
+    },
+    {
+      "agent": "risk",
+      "focus": "identify Value at Risk and expected shortfall scenarios, especially dividend sustainability and interest rate sensitivity"
+    },
+    {
+      "agent": "filings",
+      "focus": "review 10-K risks related to consumer spending, competition, and dividend policy"
+    }
+  ],
+  "plan_source": "model",
+  "findings": {
+    "fundamentals": {
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "assess whether KO's P/E and price-to-sales multiples reflect its stable dividend yield and modest revenue growth",
+      "text": "KO revenue $47.94bn, up 1.87% year on year [F1]  \nKO market cap: $402.24bn at $93.49 per share [F2]  \nKO P/E (trailing 12 months): 29.36 [F2]  \nKO price-to-sales (trailing 12 months): 8.16 [F2]  \nKO free-cash-flow yield: 1.32% [F2]  \n\nKO's valuation appears stretched relative to its modest growth and stable dividend yield.",
+      "draft": "KO revenue $47.94bn, up 1.87% year on year [F1]  \nKO market cap: $402.24bn at $93.49 per share [F2]  \nKO P/E (trailing 12 months): 29.36 [F2]  \nKO price-to-sales (trailing 12 months): 8.16 [F2]  \nKO free-cash-flow yield: 1.32% [F2]  \n\nKO's valuation appears stretched relative to its modest growth and stable dividend yield.",
+      "seconds": 41.4,
+      "provenance": {
+        "checked": 7,
+        "verified": 7,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "market": {
+      "agent": "market",
+      "title": "Market Analyst",
+      "focus": "evaluate how KO's stock price has reacted to its dividend and earnings relative to the S&P 500",
+      "text": "KO 5y total return: 99.12% [M1]  \nKO 5y annualized return: 14.78% [M1]  \nKO 5y annualized volatility: 16.75% [M1]  \nKO 5y Sharpe ratio: 0.68 [M1]  \nKO 5y max drawdown: -17.27% (2022-04-21 to 2023-10-05) [M1]  \nKO 5y beta vs SPY: 0.25 [M2]  \nKO 5y correlation with SPY: 0.25 [M2]  \nKO 5y return: KO 99.12% vs SPY 81.28% (excess 17.85%) [M2]  \nKO 5y annualized alpha vs SPY (CAPM, over the T-bill rate): 8.99% [M2]  \n\nKO's stock has outperformed the S&P 500 over the past five years, showing strong returns and lower volatility than the benchmark.",
+      "draft": "KO 5y total return: 99.12% [M1]  \nKO 5y annualized return: 14.78% [M1]  \nKO 5y annualized volatility: 16.75% [M1]  \nKO 5y Sharpe ratio: 0.68 [M1]  \nKO 5y max drawdown: -17.27% (2022-04-21 to 2023-10-05) [M1]  \nKO 5y beta vs SPY: 0.25 [M2]  \nKO 5y correlation with SPY: 0.25 [M2]  \nKO 5y return: KO 99.12% vs SPY 81.28% (excess 17.85%) [M2]  \nKO 5y annualized alpha vs SPY (CAPM, over the T-bill rate): 8.99% [M2]  \n\nKO's stock has outperformed the S&P 500 over the past five years, showing strong returns and lower volatility than the benchmark.",
+      "seconds": 58.5,
+      "provenance": {
+        "checked": 11,
+        "verified": 11,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 9,
+        "supported": 9,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "risk": {
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "identify Value at Risk and expected shortfall scenarios, especially dividend sustainability and interest rate sensitivity",
+      "text": "KO 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 4.53% of value [R1]  \nKO 95% 10-day expected shortfall, historical: 5.8% [R1]  \nKO 3-year beta vs SPY: -0.0; a 20% SPY fall implies about 0.0% [R2]  \nKO in the 2020 COVID crash (2020-02-19 to 2020-03-23): -36.61% vs SPY -33.72% [R2]  \nKO in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -4.94% vs SPY -24.5% [R2]  \n\nKO's dividend sustainability and interest rate sensitivity are not supported by its historical risk profile.",
+      "draft": "KO 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 4.53% of value [R1]  \nKO 95% 10-day expected shortfall, historical: 5.8% [R1]  \nKO 3-year beta vs SPY: -0.0; a 20% SPY fall implies about 0.0% [R2]  \nKO in the 2020 COVID crash (2020-02-19 to 2020-03-23): -36.61% vs SPY -33.72% [R2]  \nKO in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -4.94% vs SPY -24.5% [R2]  \n\nKO's dividend sustainability and interest rate sensitivity are not supported by its historical risk profile.",
+      "seconds": 75.0,
+      "provenance": {
+        "checked": 11,
+        "verified": 11,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "filings": {
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "review 10-K risks related to consumer spending, competition, and dividend policy",
+      "text": "- Consumer product preferences have evolved and continue to evolve as a result of, among other things, health, wellness and nutrition considerations, including concerns regarding caloric intake associated with sweetened beverages and the perceived undesirability of processed foods and ingredients and artificial ingredients; concerns regarding the perceived health effects of, or location of origin of, ingredients, raw materials or substances in our products or packaging, including due to the results of third-party studies (whether or not scientifically valid); shifting consumer demographics; [D1]  \n- Talent Acquisition and Retention Competition for existing and prospective talent has increased, especially considering changing worker expectations and talent marketplace variability. In addition, the broader labor market is experiencing a shortage of qualified talent, which has further increased competition for specialized talent that we want and may require for our future business needs. [D2]  \n- Increased competition could hurt our business. We operate in the highly competitive commercial beverage industry. [D2]  \n- We conduct business in markets with high-risk legal compliance environments, which exposes us to increased legal and reputational risk. [D2]  \n- Company\u2019s local country subsidiary to pay a dividend), economic stability and asset risk. [D3]",
+      "draft": "- Consumer product preferences are evolving due to health and wellness concerns, including caloric intake and ingredient origins, which could affect sales [D1]  \n- Increased competition in the beverage industry could hurt business, with talent acquisition and retention becoming more challenging [D2]  \n- The company faces legal and reputational risks in markets with high-risk legal compliance environments [D2]  \n- Dividend policy is tied to economic stability and asset risk, with recovery of equity method investments and indefinite-lived intangible assets being uncertain [D3]",
+      "seconds": 91.1,
+      "provenance": {
+        "checked": 0,
+        "verified": 0,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": [],
+      "revised": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "F1",
+      "agent": "fundamentals",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "KO",
+        "years": 3
+      },
+      "result": {
+        "ticker": "KO",
+        "company": "COCA COLA CO",
+        "industry": "SIC 2080 Beverages",
+        "source": "SEC XBRL company facts (10-K)",
+        "fiscal_years": [
+          {
+            "fiscal_year_end": "2023-12-31",
+            "revenue_bn": 45.75,
+            "revenue_growth_pct": 6.39,
+            "gross_margin_pct": 59.52,
+            "operating_margin_pct": 24.72,
+            "net_income_bn": 10.71,
+            "net_margin_pct": 23.42,
+            "eps_diluted": 2.47,
+            "rnd_pct_of_revenue": null,
+            "free_cash_flow_bn": 9.75
+          },
+          {
+            "fiscal_year_end": "2024-12-31",
+            "revenue_bn": 47.06,
+            "revenue_growth_pct": 2.86,
+            "gross_margin_pct": 61.06,
+            "operating_margin_pct": 21.23,
+            "net_income_bn": 10.63,
+            "net_margin_pct": 22.59,
+            "eps_diluted": 2.46,
+            "rnd_pct_of_revenue": null,
+            "free_cash_flow_bn": 4.74
+          },
+          {
+            "fiscal_year_end": "2025-12-31",
+            "revenue_bn": 47.94,
+            "revenue_growth_pct": 1.87,
+            "gross_margin_pct": 61.63,
+            "operating_margin_pct": 28.71,
+            "net_income_bn": 13.11,
+            "net_margin_pct": 27.34,
+            "eps_diluted": 3.04,
+            "rnd_pct_of_revenue": null,
+            "free_cash_flow_bn": 5.3
+          }
+        ],
+        "revenue_cagr_pct": 2.36,
+        "net_income_includes_nci": false,
+        "xbrl_sources": {
+          "revenue": "Revenues (10-K 0001628280-26-010047, filed 2026-02-20)",
+          "gross_profit": "GrossProfit (10-K 0001628280-26-010047, filed 2026-02-20)",
+          "operating_income": "OperatingIncomeLoss (10-K 0001628280-26-010047, filed 2026-02-20)",
+          "net_income": "NetIncomeLoss (10-K 0001628280-26-010047, filed 2026-02-20)",
+          "eps_diluted": "EarningsPerShareDiluted (10-K 0001628280-26-010047, filed 2026-02-20)",
+          "operating_cash_flow": "NetCashProvidedByUsedInOperatingActivities (10-K 0001628280-26-010047, filed 2026-02-20)",
+          "capex": "PaymentsToAcquirePropertyPlantAndEquipment (10-K 0001628280-26-010047, filed 2026-02-20)"
+        },
+        "filing_urls": [
+          "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/"
+        ],
+        "facts": [
+          "KO FY ending 2025-12-31: revenue $47.94bn, up 1.87% year on year",
+          "KO FY ending 2025-12-31: gross margin 61.63%, operating margin 28.71%, net margin 27.34%",
+          "KO FY ending 2025-12-31: net income $13.11bn, diluted EPS $3.04, free cash flow $5.3bn",
+          "KO FY ending 2024-12-31: revenue $47.06bn (growth 2.86%), operating margin 21.23%",
+          "KO FY ending 2023-12-31: revenue $45.75bn (growth 6.39%), operating margin 24.72%",
+          "KO revenue CAGR from FY 2023 to FY 2025: 2.36%"
+        ]
+      },
+      "seconds": 0.08,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+          "fetched_at": "2026-10-22T06:24:04Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000021344.json",
+          "fetched_at": "2026-10-22T06:24:27Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F2",
+      "agent": "fundamentals",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "KO"
+      },
+      "result": {
+        "ticker": "KO",
+        "company": "COCA COLA CO",
+        "industry": "SIC 2080 Beverages",
+        "price": 93.49,
+        "price_date": "2026-10-20",
+        "shares_outstanding_bn": 4.302,
+        "market_cap_bn": 402.24,
+        "ttm_revenue_bn": 49.28,
+        "ttm_net_income_bn": 13.7,
+        "ttm_period_end": "2026-04-03",
+        "pe_ratio_ttm": 29.36,
+        "net_income_includes_nci": false,
+        "price_to_sales_ttm": 8.16,
+        "balance_sheet_date": "2026-04-03",
+        "cash_and_securities_bn": 10.57,
+        "total_debt_bn": 39.31,
+        "enterprise_value_bn": 430.98,
+        "ev_to_sales_ttm": 8.74,
+        "free_cash_flow_last_fy_bn": 5.3,
+        "fcf_yield_pct": 1.32,
+        "method": "market cap = closing price x EntityCommonStockSharesOutstanding shares; TTM = FY to 2025-12-31 + YTD to 2026-04-03 - prior-year YTD; debt = LongTermDebtAndCapitalLeaseObligations + CommercialPaper as of 2026-04-03; leases excluded",
+        "xbrl_sources": {
+          "revenue_ttm": "Revenues ['0001628280-26-010047', '0001628280-26-028802']",
+          "net_income_ttm": "NetIncomeLoss ['0001628280-26-010047', '0001628280-26-028802']",
+          "balance_sheet": [
+            "CashAndCashEquivalentsAtCarryingValue (10-Q 0001628280-26-028802, filed 2026-04-30)",
+            "LongTermDebtAndCapitalLeaseObligations (10-Q 0001628280-26-028802, filed 2026-04-30)",
+            "CommercialPaper (10-Q 0001628280-26-028802, filed 2026-04-30)"
+          ]
+        },
+        "facts": [
+          "KO market cap: $402.24bn at $93.49 per share (2026-10-20 close)",
+          "KO P/E (trailing 12 months): 29.36",
+          "KO price-to-sales (trailing 12 months): 8.16; EV-to-sales: 8.74",
+          "KO trailing-12-month revenue $49.28bn and net income $13.7bn (to 2026-04-03)",
+          "KO free-cash-flow yield: 1.32% (last fiscal year FCF $5.3bn)",
+          "KO cash and current securities $10.57bn vs total debt $39.31bn (balance sheet 2026-04-03); enterprise value $430.98bn"
+        ]
+      },
+      "seconds": 0.11,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+          "fetched_at": "2026-10-22T06:24:04Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000021344.json",
+          "fetched_at": "2026-10-22T06:24:27Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/KO?range=1y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:24:04Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "M1",
+      "agent": "market",
+      "tool": "price_performance",
+      "args": {
+        "ticker": "KO",
+        "period": "5y"
+      },
+      "result": {
+        "ticker": "KO",
+        "company": "The Coca-Cola Company",
+        "as_of": "2026-10-20",
+        "period": "5y",
+        "last_price": 93.49,
+        "total_return_pct": 99.12,
+        "annualized_return_pct": 14.78,
+        "volatility_pct": 16.75,
+        "sharpe_ratio": 0.68,
+        "avg_risk_free_rate_pct": 3.92,
+        "risk_free_source": "US Treasury daily bill rates (13-week, coupon equivalent)",
+        "max_drawdown_pct": -17.27,
+        "drawdown_peak_date": "2022-04-21",
+        "drawdown_trough_date": "2023-10-05",
+        "high_52w": 93.9,
+        "pct_below_52w_high": 0.44,
+        "sma_200": 81.2,
+        "price_vs_sma_200": "above",
+        "rsi_14": 71.9,
+        "price_basis": "returns from dividend- and split-adjusted closes; price levels from actual closes",
+        "facts": [
+          "KO 5y total return: 99.12%",
+          "KO 5y annualized return: 14.78%",
+          "KO 5y annualized volatility: 16.75%",
+          "KO 5y Sharpe ratio: 0.68",
+          "KO 5y max drawdown: -17.27% (2022-04-21 to 2023-10-05)",
+          "KO closing price: $93.49 on 2026-10-20, 0.44% below the 52-week closing high of $93.9",
+          "KO closing price is above its 200-day average of $81.2"
+        ]
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/KO?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:24:12Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2021/all?type=daily_treasury_bill_rates&field_tdr_date_value=2021&_format=csv",
+          "fetched_at": "2026-10-22T05:55:40Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2022/all?type=daily_treasury_bill_rates&field_tdr_date_value=2022&_format=csv",
+          "fetched_at": "2026-10-22T05:55:41Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2023/all?type=daily_treasury_bill_rates&field_tdr_date_value=2023&_format=csv",
+          "fetched_at": "2026-10-22T05:55:42Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2024/all?type=daily_treasury_bill_rates&field_tdr_date_value=2024&_format=csv",
+          "fetched_at": "2026-10-22T05:55:43Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2025/all?type=daily_treasury_bill_rates&field_tdr_date_value=2025&_format=csv",
+          "fetched_at": "2026-10-22T05:55:43Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_bill_rates&field_tdr_date_value=2026&_format=csv",
+          "fetched_at": "2026-10-21T21:17:11Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "M2",
+      "agent": "market",
+      "tool": "benchmark_comparison",
+      "args": {
+        "ticker": "KO",
+        "benchmark": "SPY",
+        "period": "5y"
+      },
+      "result": {
+        "ticker": "KO",
+        "benchmark": "SPY",
+        "period": "5y",
+        "beta": 0.25,
+        "correlation": 0.25,
+        "alpha_pct_per_year": 8.99,
+        "tracking_error_pct": 20.73,
+        "information_ratio": 0.09,
+        "ticker_return_pct": 99.12,
+        "benchmark_return_pct": 81.28,
+        "excess_return_pct": 17.85,
+        "method": "CAPM regression of daily returns in excess of the 13-week T-bill rate",
+        "risk_free_source": "US Treasury daily bill rates (13-week, coupon equivalent)",
+        "price_basis": "returns from dividend- and split-adjusted closes",
+        "facts": [
+          "KO 5y beta vs SPY: 0.25",
+          "KO 5y correlation with SPY: 0.25",
+          "5y return: KO 99.12% vs SPY 81.28% (excess 17.85%)",
+          "KO 5y annualized alpha vs SPY (CAPM, over the T-bill rate): 8.99%"
+        ]
+      },
+      "seconds": 0.02,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/KO?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:24:12Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T09:42:42Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2021/all?type=daily_treasury_bill_rates&field_tdr_date_value=2021&_format=csv",
+          "fetched_at": "2026-10-22T05:55:40Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2022/all?type=daily_treasury_bill_rates&field_tdr_date_value=2022&_format=csv",
+          "fetched_at": "2026-10-22T05:55:41Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2023/all?type=daily_treasury_bill_rates&field_tdr_date_value=2023&_format=csv",
+          "fetched_at": "2026-10-22T05:55:42Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2024/all?type=daily_treasury_bill_rates&field_tdr_date_value=2024&_format=csv",
+          "fetched_at": "2026-10-22T05:55:43Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2025/all?type=daily_treasury_bill_rates&field_tdr_date_value=2025&_format=csv",
+          "fetched_at": "2026-10-22T05:55:43Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_bill_rates&field_tdr_date_value=2026&_format=csv",
+          "fetched_at": "2026-10-21T21:17:11Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R1",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "KO"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "result": {
+        "portfolio": {
+          "KO": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 4.53,
+        "historical_cvar_pct": 5.8,
+        "fhs_var_pct": 5.03,
+        "fhs_cvar_pct": 6.88,
+        "fhs_prob_loss_over_10pct": 0.34,
+        "current_vol_pct": 17.27,
+        "average_vol_pct": 16.76,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "price_basis": "returns from dividend- and split-adjusted closes",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 20.2,
+        "facts": [
+          "KO 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 4.53% of value",
+          "KO 95% 10-day expected shortfall, historical: 5.8%",
+          "KO 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 5.03%",
+          "KO 95% 10-day expected shortfall, filtered historical simulation: 6.88%",
+          "KO current volatility 17.27% vs 5-year average 16.76% (annualized)",
+          "KO probability of losing more than 10% over 10 days (filtered historical simulation): 0.34%"
+        ]
+      },
+      "seconds": 0.08,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/KO?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:24:19Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R2",
+      "agent": "risk",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "KO"
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "KO": 1.0
+        },
+        "episodes": [
+          {
+            "episode": "2018 Q4 sell-off",
+            "portfolio_return_pct": -0.68,
+            "spy_return_pct": -19.35
+          },
+          {
+            "episode": "2020 COVID crash",
+            "portfolio_return_pct": -36.61,
+            "spy_return_pct": -33.72
+          },
+          {
+            "episode": "2022 rate-hike bear market",
+            "portfolio_return_pct": -4.94,
+            "spy_return_pct": -24.5
+          }
+        ],
+        "beta_vs_spy_3y": -0.0,
+        "beta_implied_move_if_spy_falls_20pct": 0.0,
+        "method": "daily returns compounded over each window",
+        "price_basis": "returns from dividend- and split-adjusted closes",
+        "facts": [
+          "KO in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -0.68% vs SPY -19.35%",
+          "KO in the 2020 COVID crash (2020-02-19 to 2020-03-23): -36.61% vs SPY -33.72%",
+          "KO in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -4.94% vs SPY -24.5%",
+          "KO 3-year beta vs SPY: -0.0; a 20% SPY fall implies about 0.0%"
+        ]
+      },
+      "seconds": 0.02,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/KO?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:24:12Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T09:42:42Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D1",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "KO",
+        "query": "consumer spending risk"
+      },
+      "result": {
+        "ticker": "KO",
+        "filing": "10-K filed 2026-02-20 (period 2025-12-31)",
+        "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "risk_factors#0",
+            "text": "... Our business, operating results, financial condition and liquidity may be adversely affected by changes in global economic conditions, including global inflationary pressures, prevailing interest rates, credit market conditions, increased unemployment, levels of consumer and business confidence, bank failures, commodity (including energy) prices and supply, a recession or economic slowdown, trade policies, foreign currency exchange rates, changing policy positions or priorities, governmental rules and approaches to taxation, levels of government spending and deficits, and actual or ..."
+          },
+          {
+            "ref": "risk_factors#19",
+            "text": "... Consumer product preferences have evolved and continue to evolve as a result of, among other things, health, wellness and nutrition considerations, including concerns regarding caloric intake associated with sweetened beverages and the perceived undesirability of processed foods and ingredients and artificial ingredients; concerns regarding the perceived health effects of, or location of origin of, ingredients, raw materials or substances in our products or packaging, including due to the results of third-party studies (whether or not scientifically valid); shifting consumer demographics;"
+          },
+          {
+            "ref": "mda#13",
+            "text": "... Recoverability of Equity Method Investments and Indefinite-Lived Intangible Assets Our Company faces many uncertainties and risks related to various economic, political and regulatory environments in the countries and territories in which we operate, particularly in developing and emerging markets. Refer to the heading \u201cOur Business \u2014 Challenges and Risks\u201d above and \u201cItem 1A. Risk Factors\u201d in Part I of this report as well as the heading \u201cOperations Review\u201d below for additional information related to our present business environment. ..."
+          }
+        ]
+      },
+      "seconds": 0.74,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000021344.json",
+          "fetched_at": "2026-10-22T06:24:27Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm",
+          "fetched_at": "2026-10-22T06:24:36Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D2",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "KO",
+        "query": "competition risk"
+      },
+      "result": {
+        "ticker": "KO",
+        "filing": "10-K filed 2026-02-20 (period 2025-12-31)",
+        "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "mda#9",
+            "text": "... Talent Acquisition and Retention Competition for existing and prospective talent has increased, especially considering changing worker expectations and talent marketplace variability. In addition, the broader labor market is experiencing a shortage of qualified talent, which has further increased competition for specialized talent that we want and may require for our future business needs."
+          },
+          {
+            "ref": "risk_factors#3",
+            "text": "Increased competition could hurt our business. We operate in the highly competitive commercial beverage industry. For additional information regarding the competitive environment in which we operate, including the names of certain of our significant competitors, refer to the heading \u201cCompetition\u201d set forth in Part I, \u201cItem 1. ..."
+          },
+          {
+            "ref": "risk_factors#43",
+            "text": "We conduct business in markets with high-risk legal compliance environments, which exposes us to increased legal and reputational risk. We have bottling and other business operations in markets with high-risk legal compliance environments. ..."
+          }
+        ]
+      },
+      "seconds": 0.0,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000021344.json",
+          "fetched_at": "2026-10-22T06:24:27Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm",
+          "fetched_at": "2026-10-22T06:24:36Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D3",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "KO",
+        "query": "dividend policy risk"
+      },
+      "result": {
+        "ticker": "KO",
+        "filing": "10-K filed 2026-02-20 (period 2025-12-31)",
+        "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "market_risk#3",
+            "text": "... However, this increase in interest expense would have been partially offset by the increase in interest income due to higher interest rates. The Company is subject to interest rate risk related to its investments in highly liquid debt securities. These investments are primarily managed by external managers within the guidelines of the Company\u2019s investment policy. Our policy requires these investments to be investment grade, with the primary objective of minimizing the risk of principal loss. In addition, our policy limits the amount of credit exposure to any one issuer. ..."
+          },
+          {
+            "ref": "market_risk#0",
+            "text": "ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK Our Company uses derivative financial instruments primarily to reduce our exposure to adverse fluctuations in foreign currency exchange rates, interest rates, commodity prices and other market risks. We do not enter into derivative financial instruments for trading purposes. As a matter of policy, all of our derivative positions are used to reduce risk by hedging an underlying economic exposure. ..."
+          },
+          {
+            "ref": "mda#30",
+            "text": "Company\u2019s local country subsidiary to pay a dividend), economic stability and asset risk. ..."
+          }
+        ]
+      },
+      "seconds": 0.0,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000021344.json",
+          "fetched_at": "2026-10-22T06:24:27Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm",
+          "fetched_at": "2026-10-22T06:24:36Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    }
+  ],
+  "llm_calls": [
+    {
+      "agent": "planner",
+      "role": "planner",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 254,
+      "completion_tokens": 160,
+      "latency_s": 7.5
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 690,
+      "completion_tokens": 61,
+      "latency_s": 6.71
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1321,
+      "completion_tokens": 135,
+      "latency_s": 13.29
+    },
+    {
+      "agent": "market",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 624,
+      "completion_tokens": 84,
+      "latency_s": 7.22
+    },
+    {
+      "agent": "market",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1109,
+      "completion_tokens": 269,
+      "latency_s": 17.1
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 671,
+      "completion_tokens": 79,
+      "latency_s": 7.21
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1248,
+      "completion_tokens": 235,
+      "latency_s": 16.53
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 451,
+      "completion_tokens": 119,
+      "latency_s": 6.96
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1850,
+      "completion_tokens": 113,
+      "latency_s": 16.05
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1569,
+      "completion_tokens": 248,
+      "latency_s": 19.66
+    },
+    {
+      "agent": "writer",
+      "role": "writer",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1175,
+      "completion_tokens": 455,
+      "latency_s": 24.38
+    }
+  ],
+  "narrative": "## Answer  \nKO's valuation is not justified by its fundamentals, as its P/E of 29.36 [F2] and price-to-sales of 8.16 [F2] are high relative to its modest revenue growth of 1.87% [F1] and low free-cash-flow yield of 1.32% [F2]. The stock's 5-year annualized return of 14.78% [M1] and Sharpe ratio of 0.68 [M1] suggest strong returns, but these are offset by high valuation multiples and limited cash generation.  \n\n## Strengths  \n- KO's 5-year annualized return of 14.78% [M1]  \n- KO's 5-year annualized volatility of 16.75% [M1]  \n- KO's 5-year Sharpe ratio of 0.68 [M1]  \n\n## Risks  \n- KO's 95% 10-day Value at Risk, historical: 4.53% of value [R1]  \n- KO's 95% 10-day expected shortfall, historical: 5.8% [R1]  \n- KO in the 2020 COVID crash: -36.61% vs SPY -33.72% [R2]  \n\n## What to watch  \n- KO's 3-year beta vs SPY: -0.0; a 20% SPY fall implies about 0.0% [R2]  \n- Consumer product preferences have evolved and continue to evolve as a result of, among other things, health, wellness and nutrition considerations, including concerns regarding caloric intake associated with sweetened beverages and the perceived undesirability of processed foods and ingredients and artificial ingredients; concerns regarding the perceived health effects of, or location of origin of, ingredients, raw materials or substances in our products or packaging, including due to the results of third-party studies (whether or not scientifically valid); shifting consumer demographics; [D1]",
+  "narrative_draft": "## Answer  \nKO's valuation is not justified by its fundamentals, as its P/E of 29.36 [F2] and price-to-sales of 8.16 [F2] are high relative to its modest revenue growth of 1.87% [F1] and low free-cash-flow yield of 1.32% [F2]. The stock's 5-year annualized return of 14.78% [M1] and Sharpe ratio of 0.68 [M1] suggest strong returns, but these are offset by high valuation multiples and limited cash generation.  \n\n## Strengths  \n- KO's 5-year annualized return of 14.78% [M1]  \n- KO's 5-year annualized volatility of 16.75% [M1]  \n- KO's 5-year Sharpe ratio of 0.68 [M1]  \n\n## Risks  \n- KO's 95% 10-day Value at Risk, historical: 4.53% of value [R1]  \n- KO's 95% 10-day expected shortfall, historical: 5.8% [R1]  \n- KO in the 2020 COVID crash: -36.61% vs SPY -33.72% [R2]  \n\n## What to watch  \n- KO's 3-year beta vs SPY: -0.0; a 20% SPY fall implies about 0.0% [R2]  \n- Consumer product preferences have evolved and continue to evolve as a result of, among other things, health, wellness and nutrition considerations, including concerns regarding caloric intake associated with sweetened beverages and the perceived undesirability of processed foods and ingredients and artificial ingredients; concerns regarding the perceived health effects of, or location of origin of, ingredients, raw materials or substances in our products or packaging, including due to the results of third-party studies (whether or not scientifically valid); shifting consumer demographics; [D1]",
+  "writer_check": {
+    "provenance": {
+      "checked": 18,
+      "verified": 18,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": []
+    },
+    "attribution": {
+      "claims": 10,
+      "supported": 10,
+      "score": 1.0,
+      "issues": []
+    },
+    "problems": []
+  },
+  "revisions": [
+    "filings"
+  ],
+  "report": "# Research note: KO\n**Question:** Is KO's valuation justified by its fundamentals, and what are the main risks?\n\n*Generated 2026-10-22 21:33 by FinAgent \u00b7 4 specialist agents \u00b7 models `nemotron-3-nano:4b-cpu` / `nemotron-3-nano:4b-cpu`*\n\n> This note was generated by AI agents for educational purposes. It is general information, not personal financial advice or a recommendation to buy or sell any security. Figures come from public data (SEC EDGAR, US Treasury, Yahoo Finance) and may contain errors; verify before relying on them.\n\n## Answer  \nKO's valuation is not justified by its fundamentals, as its P/E of 29.36 [F2] and price-to-sales of 8.16 [F2] are high relative to its modest revenue growth of 1.87% [F1] and low free-cash-flow yield of 1.32% [F2]. The stock's 5-year annualized return of 14.78% [M1] and Sharpe ratio of 0.68 [M1] suggest strong returns, but these are offset by high valuation multiples and limited cash generation.  \n\n## Strengths  \n- KO's 5-year annualized return of 14.78% [M1]  \n- KO's 5-year annualized volatility of 16.75% [M1]  \n- KO's 5-year Sharpe ratio of 0.68 [M1]  \n\n## Risks  \n- KO's 95% 10-day Value at Risk, historical: 4.53% of value [R1]  \n- KO's 95% 10-day expected shortfall, historical: 5.8% [R1]  \n- KO in the 2020 COVID crash: -36.61% vs SPY -33.72% [R2]  \n\n## What to watch  \n- KO's 3-year beta vs SPY: -0.0; a 20% SPY fall implies about 0.0% [R2]  \n- Consumer product preferences have evolved and continue to evolve as a result of, among other things, health, wellness and nutrition considerations, including concerns regarding caloric intake associated with sweetened beverages and the perceived undesirability of processed foods and ingredients and artificial ingredients; concerns regarding the perceived health effects of, or location of origin of, ingredients, raw materials or substances in our products or packaging, including due to the results of third-party studies (whether or not scientifically valid); shifting consumer demographics; [D1]\n\n## Specialist findings\n### Fundamentals Analyst\n*Focus: assess whether KO's P/E and price-to-sales multiples reflect its stable dividend yield and modest revenue growth*\n\nKO revenue $47.94bn, up 1.87% year on year [F1]  \nKO market cap: $402.24bn at $93.49 per share [F2]  \nKO P/E (trailing 12 months): 29.36 [F2]  \nKO price-to-sales (trailing 12 months): 8.16 [F2]  \nKO free-cash-flow yield: 1.32% [F2]  \n\nKO's valuation appears stretched relative to its modest growth and stable dividend yield.\n\n### Market Analyst\n*Focus: evaluate how KO's stock price has reacted to its dividend and earnings relative to the S&P 500*\n\nKO 5y total return: 99.12% [M1]  \nKO 5y annualized return: 14.78% [M1]  \nKO 5y annualized volatility: 16.75% [M1]  \nKO 5y Sharpe ratio: 0.68 [M1]  \nKO 5y max drawdown: -17.27% (2022-04-21 to 2023-10-05) [M1]  \nKO 5y beta vs SPY: 0.25 [M2]  \nKO 5y correlation with SPY: 0.25 [M2]  \nKO 5y return: KO 99.12% vs SPY 81.28% (excess 17.85%) [M2]  \nKO 5y annualized alpha vs SPY (CAPM, over the T-bill rate): 8.99% [M2]  \n\nKO's stock has outperformed the S&P 500 over the past five years, showing strong returns and lower volatility than the benchmark.\n\n### Risk Analyst\n*Focus: identify Value at Risk and expected shortfall scenarios, especially dividend sustainability and interest rate sensitivity*\n\nKO 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 4.53% of value [R1]  \nKO 95% 10-day expected shortfall, historical: 5.8% [R1]  \nKO 3-year beta vs SPY: -0.0; a 20% SPY fall implies about 0.0% [R2]  \nKO in the 2020 COVID crash (2020-02-19 to 2020-03-23): -36.61% vs SPY -33.72% [R2]  \nKO in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -4.94% vs SPY -24.5% [R2]  \n\nKO's dividend sustainability and interest rate sensitivity are not supported by its historical risk profile.\n\n### Filings Analyst *(revised after fact-check)*\n*Focus: review 10-K risks related to consumer spending, competition, and dividend policy*\n\n- Consumer product preferences have evolved and continue to evolve as a result of, among other things, health, wellness and nutrition considerations, including concerns regarding caloric intake associated with sweetened beverages and the perceived undesirability of processed foods and ingredients and artificial ingredients; concerns regarding the perceived health effects of, or location of origin of, ingredients, raw materials or substances in our products or packaging, including due to the results of third-party studies (whether or not scientifically valid); shifting consumer demographics; [D1]  \n- Talent Acquisition and Retention Competition for existing and prospective talent has increased, especially considering changing worker expectations and talent marketplace variability. In addition, the broader labor market is experiencing a shortage of qualified talent, which has further increased competition for specialized talent that we want and may require for our future business needs. [D2]  \n- Increased competition could hurt our business. We operate in the highly competitive commercial beverage industry. [D2]  \n- We conduct business in markets with high-risk legal compliance environments, which exposes us to increased legal and reputational risk. [D2]  \n- Company\u2019s local country subsidiary to pay a dividend), economic stability and asset risk. [D3]\n\n## Key figures (generated from tool outputs, not by a model)\n\n| Metric | KO |\n|---|---|\n| Price | 93.49 [M1] |\n| Total return (5y) | 99.12% [M1] |\n| Volatility, annualised (5y) | 16.75% [M1] |\n| Max drawdown (5y) | -17.27% [M1] |\n| Beta vs SPY (5y) | 0.25 [M2] |\n| Market cap ($bn) | 402.24 [F2] |\n| P/E (TTM) | 29.36x [F2] |\n| Price / sales (TTM) | 8.16x [F2] |\n| FCF yield | 1.32% [F2] |\n| Revenue, latest FY ($bn) | 47.94 [F1] |\n| Revenue growth, latest FY | 1.87% [F1] |\n| Operating margin, latest FY | 28.71% [F1] |\n| 10-day VaR 95% (historical) | 4.53% [R1] |\n| 10-day VaR 95% (filtered historical simulation) | 5.03% [R1] |\n\n## Evidence ledger\n\n| ID | Agent | Tool call | Chosen by | Source | Data retrieved |\n|---|---|---|---|---|---|\n| F1 | fundamentals | `financial_statements(ticker=KO, years=3)` | model | SEC EDGAR XBRL company facts | 2026-10-21 21:15:59 UTC |\n| F2 | fundamentals | `valuation_snapshot(ticker=KO)` | model | SEC EDGAR XBRL + Yahoo Finance price | 2026-10-21 21:15:59 UTC |\n| M1 | market | `price_performance(ticker=KO, period=5y)` | model | Yahoo Finance daily prices; US Treasury bill rates | 2026-10-21 21:17:11 UTC |\n| M2 | market | `benchmark_comparison(ticker=KO, benchmark=SPY, period=5y)` | model | Yahoo Finance daily prices | 2026-10-21 21:17:11 UTC |\n| R1 | risk | `value_at_risk(tickers=['KO'], confidence=0.95, horizon_days=10)` | model | computed from 5y daily prices | 2026-10-22 06:24:19 UTC |\n| R2 | risk | `stress_test(tickers=['KO'])` | model | computed from 10y daily prices | 2026-10-22 06:24:12 UTC |\n| D1 | filings | `search_10k(ticker=KO, query=consumer spending risk)` | model | https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm | 2026-10-21 21:15:59 UTC |\n| D2 | filings | `search_10k(ticker=KO, query=competition risk)` | model | https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm | 2026-10-21 21:15:59 UTC |\n| D3 | filings | `search_10k(ticker=KO, query=dividend policy risk)` | model | https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm | 2026-10-21 21:15:59 UTC |\n\n## How this note was produced\n\n- **Number provenance:** 47 of 47 numbers trace back to a tool result the agent received (100%).\n- **Claim attribution:** 34 of 34 cited claims match their source (company, period, metric, direction; 10-K points by wording) (100%).\n- **Agents:** planner \u2192 fundamentals, market, risk, filings \u2192 fact-check \u2192 1 revision(s) \u2192 lead analyst.\n- **Tool calls:** 9 (all chosen by the models).\n- **Data:** 14 sources, all fetched or cached within their freshness window. Retrieval times are in the evidence ledger.\n- **Language model:** 11 calls, 10,962 prompt + 1,958 completion tokens, 142.6 s of model time; 142.7 s end to end.\n- **Compute:** risk simulation on CPU (NumPy); 10-K retrieval: BM25; endpoint `http://127.0.0.1:11434/v1`.\n",
+  "stats": {
+    "llm_calls": 11,
+    "prompt_tokens": 10962,
+    "completion_tokens": 1958,
+    "model_seconds": 142.6,
+    "wall_seconds": 142.7,
+    "tool_calls": 9,
+    "tool_calls_chosen_by_model": 9,
+    "revisions": 1,
+    "risk_backend": "CPU (NumPy)",
+    "retrieval": "BM25",
+    "data_sources": 14,
+    "stale_sources": [],
+    "dropped_params": [],
+    "ablations": [],
+    "endpoint": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "quality": {
+      "numbers_checked": 47,
+      "numbers_traced": 47,
+      "number_provenance": 1.0,
+      "claims_checked": 34,
+      "claims_supported": 34,
+      "claim_attribution": 1.0,
+      "claim_issues": []
+    },
+    "provenance": {
+      "checked": 47,
+      "verified": 47,
+      "score": 1.0,
+      "unverified": []
+    },
+    "promissory_phrases": []
+  },
+  "eval": {
+    "ticker": "KO",
+    "question": "valuation",
+    "variant": "full",
+    "version": "0.3.0"
+  },
+  "events": [
+    {
+      "t": 1792665041.93,
+      "event": "guard",
+      "allowed": true,
+      "personal_advice": false,
+      "rail": "rules"
+    },
+    {
+      "t": 1792665049.44,
+      "event": "plan",
+      "tasks": [
+        {
+          "agent": "fundamentals",
+          "focus": "assess whether KO's P/E and price-to-sales multiples reflect its stable dividend yield and modest revenue growth"
+        },
+        {
+          "agent": "market",
+          "focus": "evaluate how KO's stock price has reacted to its dividend and earnings relative to the S&P 500"
+        },
+        {
+          "agent": "risk",
+          "focus": "identify Value at Risk and expected shortfall scenarios, especially dividend sustainability and interest rate sensitivity"
+        },
+        {
+          "agent": "filings",
+          "focus": "review 10-K risks related to consumer spending, competition, and dividend policy"
+        }
+      ],
+      "source": "model"
+    },
+    {
+      "t": 1792665049.44,
+      "event": "agent_start",
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "assess whether KO's P/E and price-to-sales multiples reflect its stable dividend yield and modest revenue growth"
+    },
+    {
+      "t": 1792665049.44,
+      "event": "agent_start",
+      "agent": "market",
+      "title": "Market Analyst",
+      "focus": "evaluate how KO's stock price has reacted to its dividend and earnings relative to the S&P 500"
+    },
+    {
+      "t": 1792665049.44,
+      "event": "agent_start",
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "identify Value at Risk and expected shortfall scenarios, especially dividend sustainability and interest rate sensitivity"
+    },
+    {
+      "t": 1792665049.44,
+      "event": "agent_start",
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "review 10-K risks related to consumer spending, competition, and dividend policy"
+    },
+    {
+      "t": 1792665056.15,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [
+        "financial_statements",
+        "valuation_snapshot"
+      ],
+      "latency_s": 6.71,
+      "prompt_tokens": 690,
+      "completion_tokens": 61
+    },
+    {
+      "t": 1792665056.23,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F1",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "KO",
+        "years": 3
+      },
+      "seconds": 0.08,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792665056.34,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F2",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "KO"
+      },
+      "seconds": 0.11,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792665063.38,
+      "event": "llm",
+      "agent": "market",
+      "tool_calls": [
+        "price_performance",
+        "benchmark_comparison"
+      ],
+      "latency_s": 7.22,
+      "prompt_tokens": 624,
+      "completion_tokens": 84
+    },
+    {
+      "t": 1792665063.42,
+      "event": "tool",
+      "agent": "market",
+      "id": "M1",
+      "tool": "price_performance",
+      "args": {
+        "ticker": "KO",
+        "period": "5y"
+      },
+      "seconds": 0.05,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792665063.44,
+      "event": "tool",
+      "agent": "market",
+      "id": "M2",
+      "tool": "benchmark_comparison",
+      "args": {
+        "ticker": "KO",
+        "benchmark": "SPY",
+        "period": "5y"
+      },
+      "seconds": 0.02,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792665070.58,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [
+        "value_at_risk",
+        "stress_test"
+      ],
+      "latency_s": 7.21,
+      "prompt_tokens": 671,
+      "completion_tokens": 79
+    },
+    {
+      "t": 1792665070.67,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R1",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "KO"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "seconds": 0.08,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792665070.68,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R2",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "KO"
+        ]
+      },
+      "seconds": 0.02,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792665077.54,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [
+        "search_10k",
+        "search_10k",
+        "search_10k"
+      ],
+      "latency_s": 6.96,
+      "prompt_tokens": 451,
+      "completion_tokens": 119
+    },
+    {
+      "t": 1792665078.29,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D1",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "KO",
+        "query": "consumer spending risk"
+      },
+      "seconds": 0.74,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792665078.29,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D2",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "KO",
+        "query": "competition risk"
+      },
+      "seconds": 0.0,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792665078.29,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D3",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "KO",
+        "query": "dividend policy risk"
+      },
+      "seconds": 0.0,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792665090.83,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 13.29,
+      "prompt_tokens": 1321,
+      "completion_tokens": 135
+    },
+    {
+      "t": 1792665090.83,
+      "event": "agent_done",
+      "agent": "fundamentals",
+      "seconds": 41.4
+    },
+    {
+      "t": 1792665107.93,
+      "event": "llm",
+      "agent": "market",
+      "tool_calls": [],
+      "latency_s": 17.1,
+      "prompt_tokens": 1109,
+      "completion_tokens": 269
+    },
+    {
+      "t": 1792665107.93,
+      "event": "agent_done",
+      "agent": "market",
+      "seconds": 58.5
+    },
+    {
+      "t": 1792665124.46,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 16.53,
+      "prompt_tokens": 1248,
+      "completion_tokens": 235
+    },
+    {
+      "t": 1792665124.46,
+      "event": "agent_done",
+      "agent": "risk",
+      "seconds": 75.0
+    },
+    {
+      "t": 1792665140.51,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [],
+      "latency_s": 16.05,
+      "prompt_tokens": 1850,
+      "completion_tokens": 113
+    },
+    {
+      "t": 1792665140.51,
+      "event": "agent_done",
+      "agent": "filings",
+      "seconds": 91.1
+    },
+    {
+      "t": 1792665140.51,
+      "event": "verify",
+      "agent": "fundamentals",
+      "checked": 7,
+      "verified": 7,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792665140.52,
+      "event": "verify",
+      "agent": "market",
+      "checked": 11,
+      "verified": 11,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 9,
+      "claims_supported": 9,
+      "claim_issues": []
+    },
+    {
+      "t": 1792665140.53,
+      "event": "verify",
+      "agent": "risk",
+      "checked": 11,
+      "verified": 11,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792665140.53,
+      "event": "verify",
+      "agent": "filings",
+      "checked": 0,
+      "verified": 0,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 4,
+      "claims_supported": 3,
+      "claim_issues": [
+        "Dividend policy is tied to economic stability and asset risk, with recovery of e -> not supported by the cited passage (word overlap 31%)"
+      ]
+    },
+    {
+      "t": 1792665140.53,
+      "event": "revise",
+      "agent": "filings",
+      "problems": [
+        "\"Dividend policy is tied to economic stability and asset risk, with recovery of equity method investments and i\": not supported by the cited passage (word overlap 31%). Source says: \"Company\u2019s local country subsidiary to pay a dividend), economic stability and asset risk. ...\""
+      ]
+    },
+    {
+      "t": 1792665160.19,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [],
+      "revision": true,
+      "latency_s": 19.66,
+      "prompt_tokens": 1569,
+      "completion_tokens": 248
+    },
+    {
+      "t": 1792665160.19,
+      "event": "verify",
+      "agent": "filings",
+      "checked": 0,
+      "verified": 0,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": [],
+      "after_revision": true
+    },
+    {
+      "t": 1792665160.2,
+      "event": "agent_start",
+      "agent": "writer",
+      "title": "Lead Analyst",
+      "focus": "summary"
+    },
+    {
+      "t": 1792665184.57,
+      "event": "llm",
+      "agent": "writer",
+      "tool_calls": [],
+      "latency_s": 24.38,
+      "prompt_tokens": 1175,
+      "completion_tokens": 455
+    },
+    {
+      "t": 1792665184.59,
+      "event": "verify",
+      "agent": "writer",
+      "checked": 18,
+      "verified": 18,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 10,
+      "claims_supported": 10,
+      "claim_issues": []
+    },
+    {
+      "t": 1792665184.72,
+      "event": "done",
+      "stats": {
+        "llm_calls": 11,
+        "prompt_tokens": 10962,
+        "completion_tokens": 1958,
+        "model_seconds": 142.6,
+        "wall_seconds": 142.7,
+        "tool_calls": 9,
+        "tool_calls_chosen_by_model": 9,
+        "revisions": 1,
+        "risk_backend": "CPU (NumPy)",
+        "retrieval": "BM25",
+        "data_sources": 14,
+        "stale_sources": [],
+        "dropped_params": [],
+        "ablations": [],
+        "endpoint": "http://127.0.0.1:11434/v1",
+        "orchestrator_model": "nemotron-3-nano:4b-cpu",
+        "specialist_model": "nemotron-3-nano:4b-cpu",
+        "quality": {
+          "numbers_checked": 47,
+          "numbers_traced": 47,
+          "number_provenance": 1.0,
+          "claims_checked": 34,
+          "claims_supported": 34,
+          "claim_attribution": 1.0,
+          "claim_issues": []
+        },
+        "provenance": {
+          "checked": 47,
+          "verified": 47,
+          "score": 1.0,
+          "unverified": []
+        },
+        "promissory_phrases": []
+      }
+    }
+  ],
+  "settings": {
+    "profile": "local",
+    "base_url": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "temperature": 0.0,
+    "reasoning": false,
+    "ablate": []
+  }
+}

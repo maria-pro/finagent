@@ -1,0 +1,1171 @@
+{
+  "tickers": [
+    "BAC"
+  ],
+  "question": "How risky is BAC for a long-term investor, and what does its 10-K flag?",
+  "guard": {
+    "allowed": true,
+    "personal_advice": false,
+    "rail": "rules"
+  },
+  "plan": [
+    {
+      "agent": "risk",
+      "focus": "Value at Risk and expected shortfall to quantify downside potential"
+    },
+    {
+      "agent": "fundamentals",
+      "focus": "cash flow stability and debt levels affecting long-term risk"
+    },
+    {
+      "agent": "filings",
+      "focus": "10-K risk disclosures related to interest rate sensitivity and credit risk"
+    }
+  ],
+  "plan_source": "model",
+  "findings": {
+    "risk": {
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall to quantify downside potential",
+      "text": "BAC 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 9.69% of value [R1]  \nBAC 95% 10-day expected shortfall, historical: 12.55% [R1]  \nBAC 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.61% [R1]  \nBAC 95% 10-day expected shortfall, filtered historical simulation: 10.35% [R1]  \nBAC in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -26.72% vs SPY -19.35% [R3]  \nBAC in the 2020 COVID crash (2020-02-19 to 2020-03-23): -47.59% vs SPY -33.72% [R3]  \nBAC in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -34.22% vs SPY -24.5% [R3]  \nBAC 3-year beta vs SPY: 0.91; a 20% SPY fall implies about -18.15% [R3]  \n\nBAC exhibits significant downside risk with historical Value at Risk and expected shortfall values indicating potential losses exceeding 10% in short periods.",
+      "draft": "BAC 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 9.69% of value [R1]  \nBAC 95% 10-day expected shortfall, historical: 12.55% [R1]  \nBAC 3-year beta vs SPY: 0.91; a 20% SPY fall implies about -18.15% [R3]  \nBAC in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -26.72% vs SPY -19.35% [R3]  \nBAC in the 2020 COVID crash (2020-02-19 to 2020-03-23): -47.59% vs SPY -33.72% [R3]  \n\nBAC exhibits significant downside risk with historical Value at Risk and expected shortfall values indicating potential losses exceeding 10% in short periods.",
+      "seconds": 81.2,
+      "provenance": {
+        "checked": 18,
+        "verified": 18,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 9,
+        "supported": 8,
+        "score": 0.889,
+        "issues": [
+          "BAC exhibits significant downside risk with historical Value at Risk and expecte -> numbers without a citation"
+        ]
+      },
+      "problems": [
+        "\"BAC exhibits significant downside risk with historical Value at Risk and expected shortfall values indicating \": numbers without a citation."
+      ],
+      "revised": true
+    },
+    "fundamentals": {
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "cash flow stability and debt levels affecting long-term risk",
+      "text": "- BAC FY ending 2025-12-31: net income $30.51bn, diluted EPS $3.81 [F1]  \n- BAC FY ending 2025-12-31: return on equity 10.22% (net income over average stockholders' equity) [F1]  \n- BAC market cap: $354.11bn at $50.64 per share (2026-10-20 close) [F2]  \n- BAC P/E (trailing 12 months): 10.53 [F2]  \n- BAC price-to-book: 1.18 (book value $301.09bn, stockholders' equity at 2026-06-30) [F2]  \n\nBAC demonstrates strong cash flow generation and manageable valuation multiples.",
+      "draft": "- BAC FY ending 2025-12-31: net income $30.51bn, diluted EPS $3.81 [F1]  \n- BAC FY ending 2025-12-31: return on equity 10.22% (net income over average stockholders' equity) [F1]  \n- BAC market cap: $354.11bn at $50.64 per share (2026-10-20 close) [F2]  \n- BAC P/E (trailing 12 months): 10.53 [F2]  \n- BAC price-to-book: 1.18 (book value $301.09bn, stockholders' equity at 2026-06-30) [F2]  \n\nBAC demonstrates strong cash flow generation and manageable valuation multiples.",
+      "seconds": 95.1,
+      "provenance": {
+        "checked": 8,
+        "verified": 8,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 5,
+        "supported": 5,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    },
+    "filings": {
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "10-K risk disclosures related to interest rate sensitivity and credit risk",
+      "text": "- The 10-K states that Economic Value of Equity (EVE) is used to measure interest rate sensitivity and its impact on Tier 1 capital, with limits established for EVE [D1]  \n- Interest rate sensitivity is managed through securities, residential mortgages, and derivatives, with sensitivity analysis assuming no action in response to rate shocks [D1]  \n- Credit risk is managed using risk ratings, collateral, and concentration limits, with capital and allowance adjustments based on risk ratings [D2]  \n- Issuer credit risk is monitored for changes in credit spreads, defaults, and migration, with hedging instruments like CDS used to mitigate exposure [D2]",
+      "draft": "- The 10-K states that Economic Value of Equity (EVE) is used to measure interest rate sensitivity and its impact on Tier 1 capital, with limits established for EVE [D1]  \n- Interest rate sensitivity is managed through securities, residential mortgages, and derivatives, with sensitivity analysis assuming no action in response to rate shocks [D1]  \n- Credit risk is managed using risk ratings, collateral, and concentration limits, with capital and allowance adjustments based on risk ratings [D2]  \n- Issuer credit risk is monitored for changes in credit spreads, defaults, and migration, with hedging instruments like CDS used to mitigate exposure [D2]",
+      "seconds": 64.8,
+      "provenance": {
+        "checked": 0,
+        "verified": 0,
+        "score": 1.0,
+        "unverified": [],
+        "miscited": []
+      },
+      "attribution": {
+        "claims": 4,
+        "supported": 4,
+        "score": 1.0,
+        "issues": []
+      },
+      "problems": []
+    }
+  },
+  "evidence": [
+    {
+      "id": "R1",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "BAC"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "result": {
+        "portfolio": {
+          "BAC": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 9.69,
+        "historical_cvar_pct": 12.55,
+        "fhs_var_pct": 7.61,
+        "fhs_cvar_pct": 10.35,
+        "fhs_prob_loss_over_10pct": 2.07,
+        "current_vol_pct": 24.89,
+        "average_vol_pct": 26.59,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "price_basis": "returns from dividend- and split-adjusted closes",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 29.1,
+        "facts": [
+          "BAC 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 9.69% of value",
+          "BAC 95% 10-day expected shortfall, historical: 12.55%",
+          "BAC 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.61%",
+          "BAC 95% 10-day expected shortfall, filtered historical simulation: 10.35%",
+          "BAC current volatility 24.89% vs 5-year average 26.59% (annualized)",
+          "BAC probability of losing more than 10% over 10 days (filtered historical simulation): 2.07%"
+        ]
+      },
+      "seconds": 0.04,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/BAC?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:15:33Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R2",
+      "agent": "risk",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "BAC"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10,
+        "weights": [
+          1
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "BAC": 1.0
+        },
+        "confidence_pct": 95.0,
+        "horizon_days": 10,
+        "lookback": "1252 trading days",
+        "historical_var_pct": 9.69,
+        "historical_cvar_pct": 12.55,
+        "fhs_var_pct": 7.61,
+        "fhs_cvar_pct": 10.35,
+        "fhs_prob_loss_over_10pct": 2.07,
+        "current_vol_pct": 24.89,
+        "average_vol_pct": 26.59,
+        "simulated_paths": 100000,
+        "method": "historical VaR (overlapping 10-day returns) and filtered historical simulation (EWMA lambda=0.94)",
+        "price_basis": "returns from dividend- and split-adjusted closes",
+        "compute_backend": "CPU (NumPy)",
+        "compute_ms": 21.3,
+        "facts": [
+          "BAC 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 9.69% of value",
+          "BAC 95% 10-day expected shortfall, historical: 12.55%",
+          "BAC 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.61%",
+          "BAC 95% 10-day expected shortfall, filtered historical simulation: 10.35%",
+          "BAC current volatility 24.89% vs 5-year average 26.59% (annualized)",
+          "BAC probability of losing more than 10% over 10 days (filtered historical simulation): 2.07%"
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/BAC?range=5y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:15:33Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "R3",
+      "agent": "risk",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "BAC"
+        ]
+      },
+      "result": {
+        "portfolio": {
+          "BAC": 1.0
+        },
+        "episodes": [
+          {
+            "episode": "2018 Q4 sell-off",
+            "portfolio_return_pct": -26.72,
+            "spy_return_pct": -19.35
+          },
+          {
+            "episode": "2020 COVID crash",
+            "portfolio_return_pct": -47.59,
+            "spy_return_pct": -33.72
+          },
+          {
+            "episode": "2022 rate-hike bear market",
+            "portfolio_return_pct": -34.22,
+            "spy_return_pct": -24.5
+          }
+        ],
+        "beta_vs_spy_3y": 0.91,
+        "beta_implied_move_if_spy_falls_20pct": -18.15,
+        "method": "daily returns compounded over each window",
+        "price_basis": "returns from dividend- and split-adjusted closes",
+        "facts": [
+          "BAC in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -26.72% vs SPY -19.35%",
+          "BAC in the 2020 COVID crash (2020-02-19 to 2020-03-23): -47.59% vs SPY -33.72%",
+          "BAC in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -34.22% vs SPY -24.5%",
+          "BAC 3-year beta vs SPY: 0.91; a 20% SPY fall implies about -18.15%"
+        ]
+      },
+      "seconds": 0.02,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/BAC?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:15:27Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=10y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T09:42:42Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F1",
+      "agent": "fundamentals",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "BAC",
+        "years": 5
+      },
+      "result": {
+        "ticker": "BAC",
+        "company": "BANK OF AMERICA CORP /DE/",
+        "industry": "SIC 6021 National Commercial Banks",
+        "source": "SEC XBRL company facts (10-K)",
+        "fiscal_years": [
+          {
+            "fiscal_year_end": "2021-12-31",
+            "revenue_bn": 89.11,
+            "revenue_growth_pct": 4.19,
+            "gross_margin_pct": null,
+            "operating_margin_pct": null,
+            "net_income_bn": 31.98,
+            "net_margin_pct": 35.88,
+            "eps_diluted": 3.57,
+            "rnd_pct_of_revenue": null,
+            "roe_pct": 11.78
+          },
+          {
+            "fiscal_year_end": "2022-12-31",
+            "revenue_bn": 94.95,
+            "revenue_growth_pct": 6.55,
+            "gross_margin_pct": null,
+            "operating_margin_pct": null,
+            "net_income_bn": 27.53,
+            "net_margin_pct": 28.99,
+            "eps_diluted": 3.19,
+            "rnd_pct_of_revenue": null,
+            "roe_pct": 10.13
+          },
+          {
+            "fiscal_year_end": "2023-12-31",
+            "revenue_bn": 102.77,
+            "revenue_growth_pct": 8.23,
+            "gross_margin_pct": null,
+            "operating_margin_pct": null,
+            "net_income_bn": 26.3,
+            "net_margin_pct": 25.6,
+            "eps_diluted": 3.05,
+            "rnd_pct_of_revenue": null,
+            "roe_pct": 9.34
+          },
+          {
+            "fiscal_year_end": "2024-12-31",
+            "revenue_bn": 105.86,
+            "revenue_growth_pct": 3.0,
+            "gross_margin_pct": null,
+            "operating_margin_pct": null,
+            "net_income_bn": 26.97,
+            "net_margin_pct": 25.48,
+            "eps_diluted": 3.19,
+            "rnd_pct_of_revenue": null,
+            "roe_pct": 9.23
+          },
+          {
+            "fiscal_year_end": "2025-12-31",
+            "revenue_bn": 113.1,
+            "revenue_growth_pct": 6.84,
+            "gross_margin_pct": null,
+            "operating_margin_pct": null,
+            "net_income_bn": 30.51,
+            "net_margin_pct": 26.98,
+            "eps_diluted": 3.81,
+            "rnd_pct_of_revenue": null,
+            "roe_pct": 10.22
+          }
+        ],
+        "revenue_cagr_pct": 6.14,
+        "net_income_includes_nci": false,
+        "xbrl_sources": {
+          "revenue": "Revenues (10-K 0000070858-26-000157, filed 2026-02-25)",
+          "net_income": "NetIncomeLoss (10-K 0000070858-26-000157, filed 2026-02-25)",
+          "eps_diluted": "EarningsPerShareDiluted (10-K 0000070858-26-000157, filed 2026-02-25)",
+          "equity": "StockholdersEquity (10-Q 0000070858-26-000394, filed 2026-07-31)"
+        },
+        "filing_urls": [
+          "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/",
+          "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/"
+        ],
+        "facts": [
+          "BAC FY ending 2025-12-31: revenue $113.1bn, up 6.84% year on year",
+          "BAC FY ending 2025-12-31: net margin 26.98%",
+          "BAC FY ending 2025-12-31: net income $30.51bn, diluted EPS $3.81",
+          "BAC FY ending 2025-12-31: return on equity 10.22% (net income over average stockholders' equity)",
+          "BAC FY ending 2024-12-31: revenue $105.86bn (growth 3.0%)",
+          "BAC FY ending 2023-12-31: revenue $102.77bn (growth 8.23%)",
+          "BAC FY ending 2022-12-31: revenue $94.95bn (growth 6.55%)",
+          "BAC FY ending 2021-12-31: revenue $89.11bn (growth 4.19%)",
+          "BAC revenue CAGR from FY 2021 to FY 2025: 6.14%"
+        ],
+        "note": "banks, lenders, brokers and insurers (SIC 6000-6499) get price-to-book and return on equity instead of enterprise value, EV-to-sales, price-to-sales and free cash flow: their debt and cash flows are part of operations (deposits, customer funds, trading assets)"
+      },
+      "seconds": 0.11,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json",
+          "fetched_at": "2026-10-22T06:15:20Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000070858.json",
+          "fetched_at": "2026-10-22T06:15:38Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "F2",
+      "agent": "fundamentals",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "BAC"
+      },
+      "result": {
+        "ticker": "BAC",
+        "company": "BANK OF AMERICA CORP /DE/",
+        "industry": "SIC 6021 National Commercial Banks",
+        "price": 50.64,
+        "price_date": "2026-10-20",
+        "shares_outstanding_bn": 6.993,
+        "market_cap_bn": 354.11,
+        "ttm_revenue_bn": 119.24,
+        "ttm_net_income_bn": 33.64,
+        "ttm_period_end": "2026-06-30",
+        "pe_ratio_ttm": 10.53,
+        "net_income_includes_nci": false,
+        "book_value_bn": 301.09,
+        "book_value_date": "2026-06-30",
+        "price_to_book": 1.18,
+        "note": "banks, lenders, brokers and insurers (SIC 6000-6499) get price-to-book and return on equity instead of enterprise value, EV-to-sales, price-to-sales and free cash flow: their debt and cash flows are part of operations (deposits, customer funds, trading assets)",
+        "method": "market cap = closing price x EntityCommonStockSharesOutstanding shares; TTM = FY to 2025-12-31 + YTD to 2026-06-30 - prior-year YTD; book value = total stockholders' equity",
+        "xbrl_sources": {
+          "revenue_ttm": "Revenues ['0000070858-26-000157', '0000070858-26-000394']",
+          "net_income_ttm": "NetIncomeLoss ['0000070858-26-000157', '0000070858-26-000394']",
+          "book_value": "StockholdersEquity (10-Q 0000070858-26-000394, filed 2026-07-31)"
+        },
+        "facts": [
+          "BAC market cap: $354.11bn at $50.64 per share (2026-10-20 close)",
+          "BAC P/E (trailing 12 months): 10.53",
+          "BAC price-to-book: 1.18 (book value $301.09bn, stockholders' equity at 2026-06-30)",
+          "BAC trailing-12-month net income $33.64bn (to 2026-06-30)"
+        ]
+      },
+      "seconds": 0.09,
+      "chosen_by": "coverage check",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json",
+          "fetched_at": "2026-10-22T06:15:20Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000070858.json",
+          "fetched_at": "2026-10-22T06:15:38Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/BAC?range=1y&interval=1d&includeAdjustedClose=true&events=div%2Csplit",
+          "fetched_at": "2026-10-22T06:15:20Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D1",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "BAC",
+        "query": "interest rate sensitivity"
+      },
+      "result": {
+        "ticker": "BAC",
+        "filing": "10-K filed 2026-02-25 (period 2025-12-31)",
+        "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-20251231.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "risk_factors#210",
+            "text": "... Economic Value of Equity In addition to interest rate sensitivity described above, the Corporation\u2019s management of its interest rate exposures in the banking book also considers a long-term view of interest rate sensitivity through the measurement of Economic Value of Equity (EVE). EVE captures changes in the net present value of banking book assets and liabilities under various interest rate scenarios and its impact to Tier 1 capital. Similar to net interest income, the Corporation establishes limits for EVE. ..."
+          },
+          {
+            "ref": "risk_factors#209",
+            "text": "As part of our ALM activities, we use securities, certain residential mortgages, and interest rate and foreign exchange derivatives in managing interest rate sensitivity. The sensitivity analysis in Table 45 assumes that we take no action in response to these rate shocks and does not assume any change in other macroeconomic variables normally correlated with changes in interest rates. In higher rate scenarios, the analysis assumes that a portion of low-cost or noninterest-bearing deposits are replaced with higher yielding deposits or market-based funding. ..."
+          },
+          {
+            "ref": "risk_factors#206",
+            "text": "We prepare forward-looking forecasts of net interest income. The baseline forecast takes into consideration expected future business growth, ALM positioning and the future direction of interest rate movements as implied by market-based forward curves. We then measure and evaluate the impact that alternative interest rate scenarios have on the baseline forecast in order to assess interest rate sensitivity under varied conditions. ..."
+          }
+        ]
+      },
+      "seconds": 2.23,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000070858.json",
+          "fetched_at": "2026-10-22T06:15:38Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-20251231.htm",
+          "fetched_at": "2026-10-22T06:15:40Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    },
+    {
+      "id": "D2",
+      "agent": "filings",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "BAC",
+        "query": "credit risk"
+      },
+      "result": {
+        "ticker": "BAC",
+        "filing": "10-K filed 2026-02-25 (period 2025-12-31)",
+        "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-20251231.htm",
+        "retrieval": "BM25",
+        "passages": [
+          {
+            "ref": "risk_factors#152",
+            "text": "... In making credit decisions, we consider risk rating, collateral, country, industry and single-name concentration limits while also balancing these considerations with the total borrower or counterparty relationship. We use a variety of tools to continuously monitor the ability of a borrower or counterparty to perform under its obligations. We use risk rating aggregations to measure and evaluate concentrations within portfolios. In addition, risk ratings are a factor in determining the level of allocated capital and the allowance for credit losses."
+          },
+          {
+            "ref": "risk_factors#191",
+            "text": "... Issuer Credit Risk Issuer credit risk represents exposures to changes in the creditworthiness of individual issuers or groups of issuers. Our portfolio is exposed to issuer credit risk where the value of an asset may be adversely impacted by changes in the levels of credit spreads, by credit migration or by defaults. Hedging instruments used to mitigate this risk include bonds, CDS and other credit fixed-income instruments. Market Liquidity Risk Market liquidity risk represents the risk that the level of expected market activity changes dramatically and, in certain cases, may even cease. ..."
+          },
+          {
+            "ref": "risk_factors#132",
+            "text": "... We manage credit risk based on the risk profile of the borrower or counterparty, repayment sources, the nature of underlying collateral and other support given current events, conditions and expectations. We classify our portfolios as either consumer or commercial and monitor credit risk in each as discussed below. We refine our underwriting and credit risk management practices as well as credit standards to meet the changing economic environment. ..."
+          }
+        ]
+      },
+      "seconds": 0.0,
+      "chosen_by": "model",
+      "error": null,
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers.json",
+          "fetched_at": "2026-10-21T21:15:59Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000070858.json",
+          "fetched_at": "2026-10-22T06:15:38Z",
+          "status": "cache"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-20251231.htm",
+          "fetched_at": "2026-10-22T06:15:40Z",
+          "status": "cache"
+        }
+      ],
+      "stale": false
+    }
+  ],
+  "llm_calls": [
+    {
+      "agent": "planner",
+      "role": "planner",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 259,
+      "completion_tokens": 80,
+      "latency_s": 4.7
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 671,
+      "completion_tokens": 121,
+      "latency_s": 9.02
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1303,
+      "completion_tokens": 207,
+      "latency_s": 15.62
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1122,
+      "completion_tokens": 258,
+      "latency_s": 16.47
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 684,
+      "completion_tokens": 38,
+      "latency_s": 5.71
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1165,
+      "completion_tokens": 207,
+      "latency_s": 14.85
+    },
+    {
+      "agent": "fundamentals",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 877,
+      "completion_tokens": 211,
+      "latency_s": 13.87
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 455,
+      "completion_tokens": 79,
+      "latency_s": 5.45
+    },
+    {
+      "agent": "filings",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1503,
+      "completion_tokens": 141,
+      "latency_s": 14.11
+    },
+    {
+      "agent": "risk",
+      "role": "specialist",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1126,
+      "completion_tokens": 383,
+      "latency_s": 21.75
+    },
+    {
+      "agent": "writer",
+      "role": "writer",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1024,
+      "completion_tokens": 416,
+      "latency_s": 21.59
+    },
+    {
+      "agent": "writer",
+      "role": "writer",
+      "model": "nemotron-3-nano:4b-cpu",
+      "prompt_tokens": 1594,
+      "completion_tokens": 412,
+      "latency_s": 23.08
+    }
+  ],
+  "narrative": "## Answer  \nBAC is moderately risky for a long-term investor, with historical Value at Risk values indicating potential losses exceeding 10% in short periods [R1]. The 10-K flags that Economic Value of Equity (EVE) is used to measure interest rate sensitivity and its impact on Tier 1 capital, with limits established for EVE [D1].  \n\n## Strengths  \n- BAC P/E (trailing 12 months): 10.53 [F2]  \n- BAC price-to-book: 1.18 [F2]  \n- BAC market cap: $354.11bn at $50.64 per share (2026-10-20 close) [F2]  \n\n## Risks  \n- BAC 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 9.69% of value [R1]  \n- BAC 95% 10-day expected shortfall, historical: 12.55% [R1]  \n- BAC in the 2020 COVID crash (2020-02-19 to 2020-03-23): -47.59% vs SPY -33.72% [R3]  \n\n## What to watch  \n- BAC 3-year beta vs SPY: 0.91; a 20% SPY fall implies about -18.15% [R3]  \n- BAC in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -34.22% vs SPY -24.5% [R3]",
+  "narrative_draft": "## Answer  \nBAC is moderately risky for a long-term investor, with historical Value at Risk and expected shortfall values indicating potential losses exceeding 10% in short periods [R1]. The 10-K flags that Economic Value of Equity (EVE) is used to measure interest rate sensitivity and its impact on Tier 1 capital, with limits established for EVE [D1].  \n\n## Strengths  \n- BAC P/E (trailing 12 months): 10.53 [F2]  \n- BAC price-to-book: 1.18 [F2]  \n- BAC market cap: $354.11bn at $50.64 per share (2026-10-20 close) [F2]  \n\n## Risks  \n- BAC 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 9.69% of value [R1]  \n- BAC 95% 10-day expected shortfall, historical: 12.55% [R1]  \n- BAC in the 2020 COVID crash (2020-02-19 to 2020-03-23): -47.59% vs SPY -33.72% [R3]  \n\n## What to watch  \n- BAC 3-year beta vs SPY: 0.91; a 20% SPY fall implies about -18.15% [R3]  \n- BAC in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -34.22% vs SPY -24.5% [R3]",
+  "writer_check": {
+    "provenance": {
+      "checked": 16,
+      "verified": 16,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": []
+    },
+    "attribution": {
+      "claims": 10,
+      "supported": 9,
+      "score": 0.9,
+      "issues": [
+        "BAC is moderately risky for a long-term investor, with historical Value at Risk  -> 10%: period '10d' missing"
+      ]
+    },
+    "problems": [
+      "\"BAC is moderately risky for a long-term investor, with historical Value at Risk values indicating potential lo\": 10%: period '10d' missing. Source says: \"BAC 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 9.69% of value\""
+    ]
+  },
+  "revisions": [
+    "risk",
+    "writer"
+  ],
+  "report": "# Research note: BAC\n**Question:** How risky is BAC for a long-term investor, and what does its 10-K flag?\n\n*Generated 2026-10-22 21:18 by FinAgent \u00b7 3 specialist agents \u00b7 models `nemotron-3-nano:4b-cpu` / `nemotron-3-nano:4b-cpu`*\n\n> This note was generated by AI agents for educational purposes. It is general information, not personal financial advice or a recommendation to buy or sell any security. Figures come from public data (SEC EDGAR, US Treasury, Yahoo Finance) and may contain errors; verify before relying on them.\n\n*(revised after fact-check)*\n\n## Answer  \nBAC is moderately risky for a long-term investor, with historical Value at Risk values indicating potential losses exceeding 10% in short periods [R1]. \u26a0 10%: period '10d' missing The 10-K flags that Economic Value of Equity (EVE) is used to measure interest rate sensitivity and its impact on Tier 1 capital, with limits established for EVE [D1].  \n\n## Strengths  \n- BAC P/E (trailing 12 months): 10.53 [F2]  \n- BAC price-to-book: 1.18 [F2]  \n- BAC market cap: $354.11bn at $50.64 per share (2026-10-20 close) [F2]  \n\n## Risks  \n- BAC 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 9.69% of value [R1]  \n- BAC 95% 10-day expected shortfall, historical: 12.55% [R1]  \n- BAC in the 2020 COVID crash (2020-02-19 to 2020-03-23): -47.59% vs SPY -33.72% [R3]  \n\n## What to watch  \n- BAC 3-year beta vs SPY: 0.91; a 20% SPY fall implies about -18.15% [R3]  \n- BAC in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -34.22% vs SPY -24.5% [R3]\n\n## Specialist findings\n### Risk Analyst *(revised after fact-check)*\n*Focus: Value at Risk and expected shortfall to quantify downside potential*\n\nBAC 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 9.69% of value [R1]  \nBAC 95% 10-day expected shortfall, historical: 12.55% [R1]  \nBAC 95% 10-day Value at Risk, filtered historical simulation scaled to current volatility: 7.61% [R1]  \nBAC 95% 10-day expected shortfall, filtered historical simulation: 10.35% [R1]  \nBAC in the 2018 Q4 sell-off (2018-09-20 to 2018-12-24): -26.72% vs SPY -19.35% [R3]  \nBAC in the 2020 COVID crash (2020-02-19 to 2020-03-23): -47.59% vs SPY -33.72% [R3]  \nBAC in the 2022 rate-hike bear market (2022-01-03 to 2022-10-12): -34.22% vs SPY -24.5% [R3]  \nBAC 3-year beta vs SPY: 0.91; a 20% SPY fall implies about -18.15% [R3]  \n\nBAC exhibits significant downside risk with historical Value at Risk and expected shortfall values indicating potential losses exceeding 10% in short periods. \u26a0 numbers without a citation\n\n### Fundamentals Analyst\n*Focus: cash flow stability and debt levels affecting long-term risk*\n\n- BAC FY ending 2025-12-31: net income $30.51bn, diluted EPS $3.81 [F1]  \n- BAC FY ending 2025-12-31: return on equity 10.22% (net income over average stockholders' equity) [F1]  \n- BAC market cap: $354.11bn at $50.64 per share (2026-10-20 close) [F2]  \n- BAC P/E (trailing 12 months): 10.53 [F2]  \n- BAC price-to-book: 1.18 (book value $301.09bn, stockholders' equity at 2026-06-30) [F2]  \n\nBAC demonstrates strong cash flow generation and manageable valuation multiples.\n\n### Filings Analyst\n*Focus: 10-K risk disclosures related to interest rate sensitivity and credit risk*\n\n- The 10-K states that Economic Value of Equity (EVE) is used to measure interest rate sensitivity and its impact on Tier 1 capital, with limits established for EVE [D1]  \n- Interest rate sensitivity is managed through securities, residential mortgages, and derivatives, with sensitivity analysis assuming no action in response to rate shocks [D1]  \n- Credit risk is managed using risk ratings, collateral, and concentration limits, with capital and allowance adjustments based on risk ratings [D2]  \n- Issuer credit risk is monitored for changes in credit spreads, defaults, and migration, with hedging instruments like CDS used to mitigate exposure [D2]\n\n## Key figures (generated from tool outputs, not by a model)\n\n| Metric | BAC |\n|---|---|\n| Market cap ($bn) | 354.11 [F2] |\n| P/E (TTM) | 10.53x [F2] |\n| Price / book | 1.18x [F2] |\n| 10-day VaR 95% (historical) | 9.69% [R2] |\n| 10-day VaR 95% (filtered historical simulation) | 7.61% [R2] |\n| Revenue, latest FY ($bn) | 113.10 [F1] |\n| Revenue growth, latest FY | 6.84% [F1] |\n| Operating margin, latest FY | n/a [F1] |\n\n## Evidence ledger\n\n| ID | Agent | Tool call | Chosen by | Source | Data retrieved |\n|---|---|---|---|---|---|\n| R1 | risk | `value_at_risk(tickers=['BAC'], confidence=0.95, horizon_days=10)` | model | computed from 5y daily prices | 2026-10-22 06:15:33 UTC |\n| R2 | risk | `value_at_risk(tickers=['BAC'], confidence=0.95, horizon_days=10, weights=[1])` | model | computed from 5y daily prices | 2026-10-22 06:15:33 UTC |\n| R3 | risk | `stress_test(tickers=['BAC'])` | coverage check | computed from 10y daily prices | 2026-10-22 06:15:27 UTC |\n| F1 | fundamentals | `financial_statements(ticker=BAC, years=5)` | model | SEC EDGAR XBRL company facts | 2026-10-21 21:15:59 UTC |\n| F2 | fundamentals | `valuation_snapshot(ticker=BAC)` | coverage check | SEC EDGAR XBRL + Yahoo Finance price | 2026-10-21 21:15:59 UTC |\n| D1 | filings | `search_10k(ticker=BAC, query=interest rate sensitivity)` | model | https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-20251231.htm | 2026-10-21 21:15:59 UTC |\n| D2 | filings | `search_10k(ticker=BAC, query=credit risk)` | model | https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-20251231.htm | 2026-10-21 21:15:59 UTC |\n\n## How this note was produced\n\n- **Number provenance:** 42 of 42 numbers trace back to a tool result the agent received (100%).\n- **Claim attribution:** 26 of 28 cited claims match their source (company, period, metric, direction; 10-K points by wording) (93%); 2 flagged \u26a0.\n- **Agents:** planner \u2192 risk, fundamentals, filings \u2192 fact-check \u2192 2 revision(s) \u2192 lead analyst.\n- **Tool calls:** 7 (5 chosen by the models, 2 added by coverage checks).\n- **Data:** 8 sources, all fetched or cached within their freshness window. Retrieval times are in the evidence ledger.\n- **Language model:** 12 calls, 11,783 prompt + 2,553 completion tokens, 166.2 s of model time; 166.3 s end to end.\n- **Compute:** risk simulation on CPU (NumPy); 10-K retrieval: BM25; endpoint `http://127.0.0.1:11434/v1`.\n",
+  "stats": {
+    "llm_calls": 12,
+    "prompt_tokens": 11783,
+    "completion_tokens": 2553,
+    "model_seconds": 166.2,
+    "wall_seconds": 166.3,
+    "tool_calls": 7,
+    "tool_calls_chosen_by_model": 5,
+    "revisions": 2,
+    "risk_backend": "CPU (NumPy)",
+    "retrieval": "BM25",
+    "data_sources": 8,
+    "stale_sources": [],
+    "dropped_params": [],
+    "ablations": [],
+    "endpoint": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "quality": {
+      "numbers_checked": 42,
+      "numbers_traced": 42,
+      "number_provenance": 1.0,
+      "claims_checked": 28,
+      "claims_supported": 26,
+      "claim_attribution": 0.929,
+      "claim_issues": [
+        "risk: BAC exhibits significant downside risk with historical Value at Risk and expecte -> numbers without a citation",
+        "writer: BAC is moderately risky for a long-term investor, with historical Value at Risk  -> 10%: period '10d' missing"
+      ]
+    },
+    "provenance": {
+      "checked": 42,
+      "verified": 42,
+      "score": 1.0,
+      "unverified": []
+    },
+    "promissory_phrases": []
+  },
+  "eval": {
+    "ticker": "BAC",
+    "question": "risk",
+    "variant": "full",
+    "version": "0.3.0"
+  },
+  "events": [
+    {
+      "t": 1792664123.66,
+      "event": "guard",
+      "allowed": true,
+      "personal_advice": false,
+      "rail": "rules"
+    },
+    {
+      "t": 1792664128.37,
+      "event": "plan",
+      "tasks": [
+        {
+          "agent": "risk",
+          "focus": "Value at Risk and expected shortfall to quantify downside potential"
+        },
+        {
+          "agent": "fundamentals",
+          "focus": "cash flow stability and debt levels affecting long-term risk"
+        },
+        {
+          "agent": "filings",
+          "focus": "10-K risk disclosures related to interest rate sensitivity and credit risk"
+        }
+      ],
+      "source": "model"
+    },
+    {
+      "t": 1792664128.37,
+      "event": "agent_start",
+      "agent": "risk",
+      "title": "Risk Analyst",
+      "focus": "Value at Risk and expected shortfall to quantify downside potential"
+    },
+    {
+      "t": 1792664128.37,
+      "event": "agent_start",
+      "agent": "fundamentals",
+      "title": "Fundamentals Analyst",
+      "focus": "cash flow stability and debt levels affecting long-term risk"
+    },
+    {
+      "t": 1792664128.37,
+      "event": "agent_start",
+      "agent": "filings",
+      "title": "Filings Analyst",
+      "focus": "10-K risk disclosures related to interest rate sensitivity and credit risk"
+    },
+    {
+      "t": 1792664137.39,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [
+        "value_at_risk",
+        "value_at_risk"
+      ],
+      "latency_s": 9.02,
+      "prompt_tokens": 671,
+      "completion_tokens": 121
+    },
+    {
+      "t": 1792664137.44,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R1",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "BAC"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10
+      },
+      "seconds": 0.04,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792664137.46,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R2",
+      "tool": "value_at_risk",
+      "args": {
+        "tickers": [
+          "BAC"
+        ],
+        "confidence": 0.95,
+        "horizon_days": 10,
+        "weights": [
+          1
+        ]
+      },
+      "seconds": 0.03,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792664143.1,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [
+        "financial_statements"
+      ],
+      "latency_s": 5.71,
+      "prompt_tokens": 684,
+      "completion_tokens": 38
+    },
+    {
+      "t": 1792664143.21,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F1",
+      "tool": "financial_statements",
+      "args": {
+        "ticker": "BAC",
+        "years": 5
+      },
+      "seconds": 0.11,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792664148.55,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [
+        "search_10k",
+        "search_10k"
+      ],
+      "latency_s": 5.45,
+      "prompt_tokens": 455,
+      "completion_tokens": 79
+    },
+    {
+      "t": 1792664150.78,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D1",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "BAC",
+        "query": "interest rate sensitivity"
+      },
+      "seconds": 2.23,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792664150.78,
+      "event": "tool",
+      "agent": "filings",
+      "id": "D2",
+      "tool": "search_10k",
+      "args": {
+        "ticker": "BAC",
+        "query": "credit risk"
+      },
+      "seconds": 0.0,
+      "chosen_by": "model",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792664164.17,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 15.62,
+      "prompt_tokens": 1303,
+      "completion_tokens": 207
+    },
+    {
+      "t": 1792664164.19,
+      "event": "tool",
+      "agent": "risk",
+      "id": "R3",
+      "tool": "stress_test",
+      "args": {
+        "tickers": [
+          "BAC"
+        ]
+      },
+      "seconds": 0.02,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792664179.03,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 14.85,
+      "prompt_tokens": 1165,
+      "completion_tokens": 207
+    },
+    {
+      "t": 1792664179.12,
+      "event": "tool",
+      "agent": "fundamentals",
+      "id": "F2",
+      "tool": "valuation_snapshot",
+      "args": {
+        "ticker": "BAC"
+      },
+      "seconds": 0.09,
+      "chosen_by": "coverage check",
+      "error": null,
+      "stale": false
+    },
+    {
+      "t": 1792664193.13,
+      "event": "llm",
+      "agent": "filings",
+      "tool_calls": [],
+      "latency_s": 14.11,
+      "prompt_tokens": 1503,
+      "completion_tokens": 141
+    },
+    {
+      "t": 1792664193.13,
+      "event": "agent_done",
+      "agent": "filings",
+      "seconds": 64.8
+    },
+    {
+      "t": 1792664209.61,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "latency_s": 16.47,
+      "prompt_tokens": 1122,
+      "completion_tokens": 258
+    },
+    {
+      "t": 1792664209.61,
+      "event": "agent_done",
+      "agent": "risk",
+      "seconds": 81.2
+    },
+    {
+      "t": 1792664223.48,
+      "event": "llm",
+      "agent": "fundamentals",
+      "tool_calls": [],
+      "latency_s": 13.87,
+      "prompt_tokens": 877,
+      "completion_tokens": 211
+    },
+    {
+      "t": 1792664223.48,
+      "event": "agent_done",
+      "agent": "fundamentals",
+      "seconds": 95.1
+    },
+    {
+      "t": 1792664223.51,
+      "event": "verify",
+      "agent": "risk",
+      "checked": 12,
+      "verified": 12,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 6,
+      "claims_supported": 5,
+      "claim_issues": [
+        "BAC exhibits significant downside risk with historical Value at Risk and expecte -> numbers without a citation"
+      ]
+    },
+    {
+      "t": 1792664223.51,
+      "event": "verify",
+      "agent": "fundamentals",
+      "checked": 8,
+      "verified": 8,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 5,
+      "claims_supported": 5,
+      "claim_issues": []
+    },
+    {
+      "t": 1792664223.51,
+      "event": "verify",
+      "agent": "filings",
+      "checked": 0,
+      "verified": 0,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 4,
+      "claims_supported": 4,
+      "claim_issues": []
+    },
+    {
+      "t": 1792664223.52,
+      "event": "revise",
+      "agent": "risk",
+      "problems": [
+        "\"BAC exhibits significant downside risk with historical Value at Risk and expected shortfall values indicating \": numbers without a citation."
+      ]
+    },
+    {
+      "t": 1792664245.27,
+      "event": "llm",
+      "agent": "risk",
+      "tool_calls": [],
+      "revision": true,
+      "latency_s": 21.75,
+      "prompt_tokens": 1126,
+      "completion_tokens": 383
+    },
+    {
+      "t": 1792664245.28,
+      "event": "verify",
+      "agent": "risk",
+      "checked": 18,
+      "verified": 18,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 9,
+      "claims_supported": 8,
+      "claim_issues": [
+        "BAC exhibits significant downside risk with historical Value at Risk and expecte -> numbers without a citation"
+      ],
+      "after_revision": true
+    },
+    {
+      "t": 1792664245.28,
+      "event": "agent_start",
+      "agent": "writer",
+      "title": "Lead Analyst",
+      "focus": "summary"
+    },
+    {
+      "t": 1792664266.87,
+      "event": "llm",
+      "agent": "writer",
+      "tool_calls": [],
+      "latency_s": 21.59,
+      "prompt_tokens": 1024,
+      "completion_tokens": 416
+    },
+    {
+      "t": 1792664266.88,
+      "event": "verify",
+      "agent": "writer",
+      "checked": 16,
+      "verified": 16,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 10,
+      "claims_supported": 9,
+      "claim_issues": [
+        "BAC is moderately risky for a long-term investor, with historical Value at Risk  -> 10%: period '10d' missing; 10%: says expected shortfall but the source says value at risk"
+      ]
+    },
+    {
+      "t": 1792664266.88,
+      "event": "revise",
+      "agent": "writer",
+      "problems": [
+        "\"BAC is moderately risky for a long-term investor, with historical Value at Risk and expected shortfall values \": 10%: period '10d' missing; 10%: says expected shortfall but the source says value at risk. Source says: \"BAC 95% 10-day Value at Risk, historical (based on 1252 trading days of returns): 9.69% of value\""
+      ]
+    },
+    {
+      "t": 1792664289.96,
+      "event": "llm",
+      "agent": "writer",
+      "tool_calls": [],
+      "revision": true,
+      "latency_s": 23.08,
+      "prompt_tokens": 1594,
+      "completion_tokens": 412
+    },
+    {
+      "t": 1792664289.97,
+      "event": "verify",
+      "agent": "writer",
+      "checked": 16,
+      "verified": 16,
+      "score": 1.0,
+      "unverified": [],
+      "miscited": [],
+      "claims_checked": 10,
+      "claims_supported": 9,
+      "claim_issues": [
+        "BAC is moderately risky for a long-term investor, with historical Value at Risk  -> 10%: period '10d' missing"
+      ],
+      "after_revision": true
+    },
+    {
+      "t": 1792664290.02,
+      "event": "done",
+      "stats": {
+        "llm_calls": 12,
+        "prompt_tokens": 11783,
+        "completion_tokens": 2553,
+        "model_seconds": 166.2,
+        "wall_seconds": 166.3,
+        "tool_calls": 7,
+        "tool_calls_chosen_by_model": 5,
+        "revisions": 2,
+        "risk_backend": "CPU (NumPy)",
+        "retrieval": "BM25",
+        "data_sources": 8,
+        "stale_sources": [],
+        "dropped_params": [],
+        "ablations": [],
+        "endpoint": "http://127.0.0.1:11434/v1",
+        "orchestrator_model": "nemotron-3-nano:4b-cpu",
+        "specialist_model": "nemotron-3-nano:4b-cpu",
+        "quality": {
+          "numbers_checked": 42,
+          "numbers_traced": 42,
+          "number_provenance": 1.0,
+          "claims_checked": 28,
+          "claims_supported": 26,
+          "claim_attribution": 0.929,
+          "claim_issues": [
+            "risk: BAC exhibits significant downside risk with historical Value at Risk and expecte -> numbers without a citation",
+            "writer: BAC is moderately risky for a long-term investor, with historical Value at Risk  -> 10%: period '10d' missing"
+          ]
+        },
+        "provenance": {
+          "checked": 42,
+          "verified": 42,
+          "score": 1.0,
+          "unverified": []
+        },
+        "promissory_phrases": []
+      }
+    }
+  ],
+  "settings": {
+    "profile": "local",
+    "base_url": "http://127.0.0.1:11434/v1",
+    "orchestrator_model": "nemotron-3-nano:4b-cpu",
+    "specialist_model": "nemotron-3-nano:4b-cpu",
+    "temperature": 0.0,
+    "reasoning": false,
+    "ablate": []
+  }
+}
